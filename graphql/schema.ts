@@ -15,7 +15,7 @@ const Event = objectType({
 const Query = queryType({
   definition(t) {
     t.list.field('getUsers', {
-      type: User,
+      type: User!,
       args: {
       },
       resolve: async () => {
@@ -24,17 +24,17 @@ const Query = queryType({
     })
 
     t.field('getOneUser', {
-      type: User,
+      type: User!,
       args: {
         id: nonNull(stringArg())
       },
       resolve: async () => {
-       return []
+       return {id:1}
       }
     })
 
      t.field('getOneEvent', {
-      type: Event,
+      type: Event!,
       args: {
         id: nonNull(stringArg())
       },
@@ -47,6 +47,7 @@ const Query = queryType({
 export const schema = makeSchema({
   types: [User, Query, Event],
   outputs: {
+    schema: path.join(process.cwd(), 'schema.graphql'),
     typegen: path.join(process.cwd(), 'graphql/generated/nexus.d.ts'),
   },
   contextType: {

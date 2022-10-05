@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.yml",
     "generate:nexus": "nodemon --exec 'ts-node --transpile-only -P nexus.tsconfig.json pages/api/graphql' --ext 'ts' --watch '*/graphql/**/*.ts'",
-    "generate": "concurrently \"npm run generate:nexus\""
+    "generate": "concurrently \"npm run generate:nexus\" \"npm run codegen\""
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
@@ -20,6 +21,7 @@
     "@paljs/plugins": "^4.1.0",
     "@prisma/client": "^4.4.0",
     "apollo-server-core": "^3.10.2",
+    "codegen": "^0.1.0",
     "graphql": "^16.6.0",
     "graphql-scalars": "^1.18.0",
     "next": "12.3.1",
@@ -31,6 +33,10 @@
   },
   "devDependencies": {
     "@genql/cli": "^2.10.0",
+    "@graphql-codegen/cli": "^2.13.3",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-operations": "^2.5.3",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.3",
     "@types/node": "^15.12.2",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
