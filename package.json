@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "generate:nexus": "nodemon --exec 'ts-node --transpile-only -P nexus.tsconfig.json pages/api/graphql' --ext 'ts' --watch '*/graphql/**/*.ts'",
-    "generate:genql": "nodemon --exec 'genql --schema ./graphql/schema.graphql --output ./graphql/generated/genql'  --watch 'graphql/schema.graphql'",
-    "generate": "concurrently \"npm run generate:nexus\" \"npm run generate:genql\""
+    "generate": "concurrently \"npm run generate:nexus\""
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
