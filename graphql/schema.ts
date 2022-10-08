@@ -1,5 +1,6 @@
 import path from "path";
 import { makeSchema, queryType, objectType, arg, nonNull, stringArg, idArg} from "nexus";
+import * as Tips from"../Tips/graphql/types"
 const User = objectType({
   name: 'User',
   definition(t) {
@@ -45,7 +46,7 @@ const Query = queryType({
   }
 })
 export const schema = makeSchema({
-  types: [User, Query, Event],
+  types: [User, Query, Event, Tips],
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),
     typegen: path.join(process.cwd(), 'nexus.d.ts'),
