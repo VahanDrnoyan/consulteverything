@@ -10,6 +10,8 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import {useRouter} from "next/router";
 import {Toast, ToastProps} from 'primereact/toast';
+import Image from 'next/image'
+import heroPic from "../public/galaxy.jpeg"
 interface LoginFormValues {
    email: string;
  }
@@ -80,8 +82,10 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <Toast ref={toast}></Toast>
-            <div className={styles.galaxyImage + ' grid grid-nogutter surface-0 min-h-screen text-800'}>
-                <div className="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+            <div className="relative grid grid-nogutter surface-0 min-h-screen text-800">
+                <Image className="w-full h-full"
+        src={heroPic} layout="fill"></Image>
+                <div className="relative col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
                     <section className="flex align-content-start flex-column">
                         <span className="bg-white-alpha-40 p-2 block text-900 text-5xl font-bold mb-2">consulteverything<i
                             className="pi pi-circle text-3xl"></i>com</span>
