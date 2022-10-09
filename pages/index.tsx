@@ -12,15 +12,12 @@ import {useRouter} from "next/router";
 import {Toast, ToastProps} from 'primereact/toast';
 import Image from 'next/image'
 import heroPic from "../public/galaxy.jpeg"
-interface LoginFormValues {
-   email: string;
- }
+import Logo from "../components/Logo";
+import LoginModal from "../components/LoginModal";
 const Home: NextPage = () => {
     const router = useRouter();
-    const [showLoginRequiredMessage, setShowLoginRequiredMessage] = useState(false)
-    const [showModal, setShowModal] = useState(false);
-     const [showMessage, setShowMessage] = useState(false);
-    const [formData, setFormData] = useState({});
+   const [showModal, setShowModal] = useState(false);
+
     const endBlock = useRef<HTMLDivElement | null>(null)
      const toast = useRef<Toast>(null)
     useEffect(()=>{
@@ -36,42 +33,13 @@ const Home: NextPage = () => {
             endBlock.current.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
         }
     }
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-        },
-        validate: (data) => {
-            let errors :FormikErrors<LoginFormValues> = {};
-
-            if (!data.email) {
-                errors.email = 'Email is required.';
-            }
-            else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-                errors.email = 'Invalid email address.';
-            }
-
-            return errors;
-        },
-        onSubmit: (data) => {
-            setFormData(data);
-            setShowMessage(true);
-            //send email link
-            console.log(formik.values.email)
-            formik.resetForm();
-        }
-    });
-    const isFormFieldValid = (name :string) => !!(formik.touched[name as keyof LoginFormValues] && formik.errors[ name as keyof LoginFormValues]);
-    const getFormErrorMessage = (name:string) => {
-        return isFormFieldValid(name) && <small className="p-error">{formik.errors[name as keyof LoginFormValues]}</small>;
-    };
-    const showCaptchaResponse = (response: string) => {
-//call to a backend to verify against recaptcha with private key
-    }
-    const hideModalhandler = () => {
-        setShowModal(false);
-    }
     const showModalhandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setShowModal(true);
+    }
+    const navigateToConsultancies = ()=> {
+        router.push({
+            pathname: '/consultancies'
+        })
     }
     return (
         <div>
@@ -81,19 +49,18 @@ const Home: NextPage = () => {
                             necessary and highly qualified answers to all of your questions!"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Toast ref={toast}></Toast>
+            <Toast ref={toast} className="absolute z-1"></Toast>
             <div className="relative grid grid-nogutter surface-0 min-h-screen text-800">
-                <Image className="w-full h-full"
+                <Image className={"w-full h-full " + styles.objectCover}
         src={heroPic} layout="fill"></Image>
-                <div className="relative col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
+                <div className="relative col-12 md:col-6 md:p-3 sm:p-1 lg:p-4 text-center md:text-left flex align-items-center ">
                     <section className="flex align-content-start flex-column">
-                        <span className="bg-white-alpha-40 p-2 block text-900 text-5xl font-bold mb-2">consulteverything<i
-                            className="pi pi-circle text-3xl"></i>com</span>
+                        <Logo />
                         <div className="bg-white-alpha-40 p-2 text-l text-900 font-normal mb-2">Push your boundaries to
                             horizons!
                         </div>
                         <div className="text-right mt-8 bg-white-alpha-40 p-2"
-                        ><Button label="Browse consultancies" type="button" className="min-w-full mr-3"/>
+                        ><Button label="Browse consultancies" type="button" onClick={navigateToConsultancies} className="min-w-full mr-3"/>
 
                         </div>
                         <Button icon="pi pi-arrow-down" onClick={handleScrolltobottom}
@@ -104,7 +71,7 @@ const Home: NextPage = () => {
             </div>
             <div className="surface-200 text-left p-6">
                 <div className="grid">
-                    <div className="col">
+                    <div className={styles.extra_s_12 + " col md:col-6 lg:col-6 sm:col-12 "}>
                         <div className="text-900 font-bold text-xl mb-2"><i className="pi pi-home text-xl pr-2 "></i>Our
                             mission
                         </div>
@@ -121,7 +88,7 @@ const Home: NextPage = () => {
 
                         </div>
                     </div>
-                    <div className="col">
+                    <div className="col md:col-6 lg:col-6 sm:col-12 ">
 
                         <div className="text-900 font-bold text-xl mb-2"><i
                             className="pi pi-arrow-right text-xl pr-2 "></i>Start solving your everyday problems...
@@ -205,23 +172,7 @@ Turn free social traffic into a consistent source of income!
                     Powered by &copy;consulteverything.com
                 </a>
             </footer>
-            <Dialog onHide={hideModalhandler} visible={showModal}
-                    style={{width: '24vw'}}>
-                <h2 className="text-center text-600 text-primary-600 text-xl mt-0 pt-0 mb-2">Sign In</h2>
-                <div className="text-sm mb-4 text-500 text-center">We will send the sign in link to your email.</div>
-                <form onSubmit={formik.handleSubmit} className="p-fluid">
-                <div className="field">
-                            <span className="p-float-label p-input-icon-right">
-                                <i className="pi pi-envelope" />
-                                <InputText id="email" name="email" value={formik.values.email} onChange={formik.handleChange} className={ classNames({ 'p-invalid': isFormFieldValid('email') })} />
-                                <label htmlFor="email" className={'text-500 '+ classNames({ 'p-error': isFormFieldValid('email') })}>Your email*</label>
-                            </span>
-                            {getFormErrorMessage('email')}
-                        </div>
-                     <Button type="submit" label="Send" className="mt-2" />
-                    </form>
-                <div className="flex align-items-center justify-content-center mt-4"><Captcha siteKey="YOUR_SITE_KEY"  onResponse={showCaptchaResponse}></Captcha></div>
-            </Dialog>
+            <LoginModal show={showModal} setShow={setShowModal}/>
         </div>
     )
 }

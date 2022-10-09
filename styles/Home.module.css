@@ -1,6 +1,10 @@
-.galaxyImage {
-    background-image: url("public/galaxy.jpeg");
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
+.objectCover {
+    object-fit:cover;
+}
+@media screen and (max-width: 500px) {
+    .extra_s_12 {
+        flex: 0 0 auto;
+        padding: 0.5rem;
+        width: 100%;
+    }
 }
