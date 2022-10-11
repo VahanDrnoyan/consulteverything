@@ -9,6 +9,7 @@ import {Button} from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import {useRouter} from "next/router";
+import Link from 'next/link'
 import {Toast, ToastProps} from 'primereact/toast';
 import Image from 'next/image'
 import heroPic from "../public/galaxy.jpeg"
@@ -36,11 +37,7 @@ const Home: NextPage = () => {
     const showModalhandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setShowModal(true);
     }
-    const navigateToConsultancies = ()=> {
-        router.push({
-            pathname: '/consultancies'
-        })
-    }
+
     return (
         <div>
             <Head>
@@ -53,23 +50,22 @@ const Home: NextPage = () => {
             <div className="relative grid grid-nogutter surface-0 min-h-screen text-800">
                 <Image className={"w-full h-full " + styles.objectCover}
         src={heroPic} layout="fill"></Image>
-                <div className="relative col-12 md:col-6 md:p-3 sm:p-1 lg:p-4 text-center md:text-left flex align-items-center ">
-                    <section className="flex align-content-start flex-column">
-                        <Logo />
-                        <div className="bg-white-alpha-40 p-2 text-l text-900 font-normal mb-2">Push your boundaries to
+                <div className="relative w-full text-center md:text-left flex align-items-center  justify-content-center">
+                    <section className="flex flex-column align-items-center">
+                        <Logo  color="text-white"/>
+                        <div className=" p-2 text-2xl text-white font-normal mt-6">Push your boundaries to
                             horizons!
                         </div>
-                        <div className="text-right mt-8 bg-white-alpha-40 p-2"
-                        ><Button label="Browse consultancies" type="button" onClick={navigateToConsultancies} className="min-w-full mr-3"/>
+                        <div className="text-right mt-2  w-full"
+                        ><Link href="/consultancies/search"><Button label="Browse consultancies" type="button" className="min-w-full mr-3 p-button-outlined text-white"/></Link>
 
                         </div>
                         <Button icon="pi pi-arrow-down" onClick={handleScrolltobottom}
-                                className="mt-4 text-white-alpha-70 align-self-center p-button-rounded  p-button-primary p-button-icon-only p-button-text"/>
+                                className="mt-4 text-white-alpha-70 align-self-center p-button-rounded  p-button-primary p-button-icon-only p-button-outlined"/>
                     </section>
                 </div>
-                x
             </div>
-            <div className="surface-200 text-left p-6">
+            <div className="surface-200 text-left p-4 md:p-6 lg:p-8">
                 <div className="grid">
                     <div className={styles.extra_s_12 + " col md:col-6 lg:col-6 sm:col-12 "}>
                         <div className="text-900 font-bold text-xl mb-2"><i className="pi pi-home text-xl pr-2 "></i>Our
@@ -110,7 +106,7 @@ const Home: NextPage = () => {
             </div>
             <br/>
             <div className="surface-0 text-center">
-                <div className="p-6">
+                <div className="p-4 md:p-6 lg:p-8">
                     <div className="mb-8 font-bold text-2xl">
                         <span className="text-700">Consult Everything provides the following features: </span>
                     </div>

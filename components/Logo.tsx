@@ -1,7 +1,12 @@
 import React from "react";
+import {useRouter} from "next/router";
+import Link from 'next/link'
+interface Props {
+    color: string
+}
+const Logo: React.FC<Props> = ({color}) => {
 
-const Logo: React.FC = () => {
-    return (<span className="bg-white-alpha-40 p-2 block text-900 lg:text-3xl sm:text-3xl font-bold mb-2">consulteverything<i
-        className="pi pi-circle lg:text-2xl sm:text-2xl"></i>com</span>)
+    return (<Link  href="/"><span className="text-center relative inline-flex mb-2 cursor-pointer border-0 outline-none  p-2 text-900 lg:text-3xl sm:text-3xl font-bold "><i
+        className={color + " pi pi-circle lg:text-6xl sm:text-6xl font-bold"}></i></span></Link>)
 }
 export default Logo;
