@@ -23,7 +23,7 @@ const ConsultancyCard: React.FC = ()=> {
                 <Chip label="SEO Optimisations" className="text-xs mt-1 ml-1"/>
                 <Chip label="GA Metrics" className="text-xs mt-1 ml-1" />
             </div>
-            <Button label="Schedule consultancy" className="w-full text-xs bg-bluegray-500 border-bluegray-600" icon="pi pi-calendar"/>
+            <Button label="Schedule consultancy" className="w-full text-xs p-button-outlined text-bluegray-600" icon="pi pi-calendar"/>
         </span>
     );
 

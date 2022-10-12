@@ -3,16 +3,16 @@ import React from 'react';
 import { useRouter } from "next/router";
 
 
-export const DashboardAuth: ({children}: { children: any }) => (JSX.Element) = ({ children }) => {
+export const AdminAuth: ({children}: { children: any }) => (JSX.Element) = ({ children }) => {
   const router = useRouter();
   const { status } = useSession({ required: true ,
   onUnauthenticated() {
-      router.push({
-        pathname: '/',
-        query: {
-          loginRequired: true
-        }
-      })
+       router.push({
+         pathname: '/',
+         query: {
+           loginRequired: true
+         }
+       } )
     },})
 
   if (status === "loading") {

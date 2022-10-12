@@ -15,7 +15,7 @@ import Image from 'next/image'
 import heroPic from "../public/galaxy.jpeg"
 import Logo from "../components/Logo";
 import LoginModal from "../components/LoginModal";
-const Home: NextPage = () => {
+const Home = () => {
     const router = useRouter();
    const [showModal, setShowModal] = useState(false);
 
@@ -172,5 +172,7 @@ Turn free social traffic into a consistent source of income!
         </div>
     )
 }
-
+Home.auth = {
+    role: 'guest'
+}
 export default Home

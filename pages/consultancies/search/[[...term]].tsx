@@ -15,7 +15,7 @@ import ConsultancyCard from "../../../components/ConsultancyCard";
 import SearchForm from "../../../components/SearchForm";
 import {MenuItem, MenuItemCommandParams} from "primereact/menuitem";
 
-const Consultancies: NextPage = () => {
+const Consultancies = () => {
     const {data: session} = useSession()
     const [showModal, setShowModal] = useState(false);
     const [showSearchModal, setShowSearchModal] = useState(false);
@@ -96,5 +96,8 @@ const Consultancies: NextPage = () => {
             <SearchForm show={showSearchModal} setShow={setShowSearchModal}/>
         </div>
     )
+}
+Consultancies.auth = {
+    role: 'guest'
 }
 export default Consultancies

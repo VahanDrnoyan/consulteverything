@@ -13,5 +13,7 @@ const ConsultanciesHome = ()=>{
     }, []);
 
 }
-
+ConsultanciesHome.auth ={
+    role: 'guest'
+}
 export default ConsultanciesHome

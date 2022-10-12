@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react"
- const ConsultancyDashboard = ()=> {
+const  ModeratorDashboard = ()=>{
   const { data: session } = useSession()
   // session is always non-null inside this page, all the way down the React tree.
-  return "Some super secret dashboard"
+  return "Some super secret dashboard for Moderators"
 }
 
-ConsultancyDashboard.auth = {
-  role: 'USER'
+ModeratorDashboard.auth = {
+  role: 'MODERATOR'
 }
-export default ConsultancyDashboard;
+export default ModeratorDashboard

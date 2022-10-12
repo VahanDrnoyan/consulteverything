@@ -1,4 +1,4 @@
-import NextAuth, {Session, User} from "next-auth"
+import NextAuth, {DefaultSession, Session, User} from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import {prisma} from "../../../lib/prisma"
@@ -6,14 +6,9 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import {AppProps} from "next/app";
 import {ISODateString} from "next-auth/core/types";
 import {JWT} from "next-auth/jwt";
-export interface CustomSession extends Session {
-    user?: {
-        name?: string | null;
-        email?: string | null;
-        image?: string | null;
-        role?: string | null | unknown
-    };
-}
+import {Role, User as PrismaUser} from "@prisma/client";
+
+
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -52,7 +47,7 @@ export default NextAuth({
        })
   ],
   callbacks: {
-  async session({ session, token, user }:{session: CustomSession, token: JWT, user: User}) {
+  async session({ session, token, user}) {
     if(session && session.user) {
       session.user.role = user.role;
     }
