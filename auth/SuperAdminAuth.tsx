@@ -5,15 +5,17 @@ import { useRouter } from "next/router";
 
 export const SuperAdminAuth: ({children}: { children: any }) => (JSX.Element) = ({ children }) => {
   const router = useRouter();
-  const { status } = useSession({ required: true ,
-  onUnauthenticated() {
-       router.push({
-         pathname: '/',
-         query: {
-           loginRequired: true
-         }
-       } )
-    },})
+  const { status, data } = useSession({ required: true})
+  
+  if(data?.user?.role === 'USER' || data?.user?.role === 'MODERATOR' || data?.user?.role === 'ADMIN'){
+      router.push({
+        pathname: '/dashboard',
+        query: {
+          loginRequired: true
+        }
+      } )
+  }
+
 
   if (status === "loading") {
     return <div>Loading...</div>

@@ -3,8 +3,10 @@ import {classNames} from "primereact/utils";
 import {Button} from "primereact/button";
 import {Captcha} from "primereact/captcha";
 import {Dialog} from "primereact/dialog";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {FormikErrors, useFormik} from "formik";
+import { signIn } from "next-auth/react"
+import { Messages } from 'primereact/messages';
 interface LoginFormValues {
    email: string;
  }
@@ -18,6 +20,7 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
 
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
+    const messages = useRef<Messages>(null)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -37,8 +40,23 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
         onSubmit: (data) => {
             setFormData(data);
             setShowMessage(true);
-            //send email link
-            console.log(formik.values.email)
+            signIn("email", { redirect: false, email: formik.values.email}).then(()=>{
+               if(messages && messages.current){
+                    messages.current.show({ severity: 'success', summary: 'Please sheck your email.' });
+               }
+                    
+                const timeout = setTimeout(()=> {
+            
+                    setShowMessage(false)
+                }, 3000)
+            }).catch((error)=>{
+                if(messages && messages.current){
+                    messages.current.show({ severity: 'error', summary: error });
+               }
+                const timeout = setTimeout(()=> {
+                    setShowMessage(false)
+                }, 3000)
+            })
             formik.resetForm();
         }
     });
@@ -56,6 +74,7 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
     return (
         <Dialog onHide={hideModalhandler} visible={show} dismissableMask={true}
                      closable={false} draggable={false}>
+                        <Messages ref={messages}></Messages>
                 <h2 className="text-center text-600 text-primary-600 text-xl mt-0 pt-0 mb-2">Sign In</h2>
                 <div className="text-sm mb-4 text-500 text-center">We will send the sign in link to your email.</div>
                 <form onSubmit={formik.handleSubmit} className="p-fluid">

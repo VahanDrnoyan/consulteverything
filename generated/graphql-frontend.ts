@@ -15,9 +15,27 @@ export type Scalars = {
   Float: number;
 };
 
+/** this is acccount */
+export type Account = {
+  __typename?: 'Account';
+  id: Scalars['ID'];
+  session_state?: Maybe<Scalars['String']>;
+  user: User;
+};
+
 export type Event = {
   __typename?: 'Event';
   id: Scalars['ID'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createUser: User;
+};
+
+
+export type MutationCreateUserArgs = {
+  email: Scalars['String'];
 };
 
 export type Query = {
@@ -48,8 +66,11 @@ export type Tip = {
   id: Scalars['ID'];
 };
 
+/** this is User */
 export type User = {
   __typename?: 'User';
+  accounts: Array<Account>;
+  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 

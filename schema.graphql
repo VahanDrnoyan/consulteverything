@@ -2,21 +2,28 @@
 ### Do not make changes to this file directly
 
 
+"""this is acccount"""
+type Account {
+  id: ID!
+  session_state: String
+  user: User!
+}
+
 type Event {
   id: ID!
 }
 
+type Mutation {
+  createUser(email: String!): User!
+}
+
 type Query {
-  getOneEvent(id: String!): Event
-  getOneUser(id: String!): User
-  getTip(id: String!): Tip
-  getUsers: [User]
+  ok: Boolean!
 }
 
-type Tip {
-  id: ID!
-}
-
+"""this is User"""
 type User {
+  accounts: [Account!]!
+  email: String
   id: ID!
 }

@@ -4,7 +4,7 @@
  */
 
 
-import type { Context } from "./graphql/context"
+import type { MainContext } from "./graphql/context"
 
 
 
@@ -28,14 +28,17 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Account: { // root type
+    id: string; // ID!
+    session_state?: string | null; // String
+  }
   Event: { // root type
     id: string; // ID!
   }
+  Mutation: {};
   Query: {};
-  Tip: { // root type
-    id: string; // ID!
-  }
   User: { // root type
+    email?: string | null; // String
     id: string; // ID!
   }
 }
@@ -51,51 +54,53 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Account: { // field return type
+    id: string; // ID!
+    session_state: string | null; // String
+    user: NexusGenRootTypes['User']; // User!
+  }
   Event: { // field return type
     id: string; // ID!
   }
-  Query: { // field return type
-    getOneEvent: NexusGenRootTypes['Event'] | null; // Event
-    getOneUser: NexusGenRootTypes['User'] | null; // User
-    getTip: NexusGenRootTypes['Tip'] | null; // Tip
-    getUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+  Mutation: { // field return type
+    createUser: NexusGenRootTypes['User']; // User!
   }
-  Tip: { // field return type
-    id: string; // ID!
+  Query: { // field return type
+    ok: boolean; // Boolean!
   }
   User: { // field return type
+    accounts: NexusGenRootTypes['Account'][]; // [Account!]!
+    email: string | null; // String
     id: string; // ID!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  Account: { // field return type name
+    id: 'ID'
+    session_state: 'String'
+    user: 'User'
+  }
   Event: { // field return type name
     id: 'ID'
   }
-  Query: { // field return type name
-    getOneEvent: 'Event'
-    getOneUser: 'User'
-    getTip: 'Tip'
-    getUsers: 'User'
+  Mutation: { // field return type name
+    createUser: 'User'
   }
-  Tip: { // field return type name
-    id: 'ID'
+  Query: { // field return type name
+    ok: 'Boolean'
   }
   User: { // field return type name
+    accounts: 'Account'
+    email: 'String'
     id: 'ID'
   }
 }
 
 export interface NexusGenArgTypes {
-  Query: {
-    getOneEvent: { // args
-      id: string; // String!
-    }
-    getOneUser: { // args
-      id: string; // String!
-    }
-    getTip: { // args
-      id: string; // String!
+  Mutation: {
+    createUser: { // args
+      email: string; // String!
     }
   }
 }
@@ -131,7 +136,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
+  context: MainContext;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;
