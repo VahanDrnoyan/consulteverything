@@ -66,13 +66,13 @@ const Home: NextPageWithAuth = (props) => {
                                 </div>
                             
                                 <Card.Body>
-                                <p>Are you a specialist or a beginner seeking knowledge
+                                <p style={{marginTop: 0}}>Are you a specialist or a beginner seeking knowledge
                                     development in your field of activity?</p>
-                                <p>Are you in need of consulting in various institutions such as embassies, universities,
+                                <p style={{marginTop: 0}}>Are you in need of consulting in various institutions such as embassies, universities,
                                     medical and
                                     municipal companies in rather overloaded situations?
                                 </p>
-                                <p>In this ever-changing world, it can be rather
+                                <p style={{marginTop: 0}}>In this ever-changing world, it can be rather
                                     time-consuming and tiresome.
                                 </p>
 
@@ -98,12 +98,12 @@ const Home: NextPageWithAuth = (props) => {
                                 </div>
                                 
                                 <Card.Body>
-                                <p>This platform is designed to receive and provide consulting services for beginners and
+                                <p style={{marginTop: 0}}>This platform is designed to receive and provide consulting services for beginners and
                                     professionals
                                     from around the world.</p>
-                                <p>It appears to be a boundless consulting company with constantly
+                                <p style={{marginTop: 0}}>It appears to be a boundless consulting company with constantly
                                     growing information stream... </p>
-                                <p>So don’t hesitate to take a chance and join the community.</p>
+                                <p style={{marginTop: 0}}>So don’t hesitate to take a chance and join the community.</p>
 
                             </Card.Body>
                             
@@ -131,7 +131,7 @@ const Home: NextPageWithAuth = (props) => {
 
                         
                                 <Card.Body>
-                                <p>
+                                <p style={{marginTop: 0}}>
                                     To make the communication process more accurate and productive the platform enables you to create and fill a custom form.
                                 </p>
                             </Card.Body>
@@ -146,7 +146,7 @@ const Home: NextPageWithAuth = (props) => {
                                 </div>
                                 
                                 <Card.Body>
-                                <p>Contact the experts in person and ask your questions. This approach makes the communication more dynamic and productive and contributes to building strong business relationships.</p>
+                                <p style={{marginTop: 0}}>Contact the experts in person and ask your questions. </p><p style={{marginTop: 0}}>This approach makes the communication more dynamic and productive and contributes to building strong business relationships.</p>
                             </Card.Body>
                         </Card>
                     </Grid>
@@ -155,11 +155,11 @@ const Home: NextPageWithAuth = (props) => {
                             
                                 <div className={styles.homeIcons}>
                                     <Avatar size="lg" color={"primary"} icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faMoneyBill1} />} />
-                                    <Text css={{ ml: 10 }} h4>Get paid for info</Text>
+                                    <Text css={{ mb: 0 }}  h4>Get paid for info</Text>
                                 </div>
                                 
                                 <Card.Body>
-                                <p>Our subscribers are enabled to establish the fee for their work considering a range of factors, such as time, difficulty, etc.</p>
+                                <p style={{marginTop: 0}}>Our subscribers are enabled to establish the fee for their work considering a range of factors, such as time, difficulty, etc.</p>
                             </Card.Body>
                         </Card>
                     </Grid>
@@ -176,8 +176,9 @@ const Home: NextPageWithAuth = (props) => {
                                 
                                 
                                 <Card.Body>
-                                    <p>
-                                    Your live discussion will be recoded so later it will be available as a reference. Come back at any time to refresh your memory, sort out and highlight the key points of the consultancy.
+                                    <p style={{marginTop: 0}}>
+                                    Your live discussion will be recoded so later it will be available as a reference. </p>
+                                    <p style={{marginTop: 0}}>Come back at any time to refresh your memory, sort out and highlight the key points of the consultancy.
                                 </p>
                             </Card.Body>
                         </Card>
@@ -191,7 +192,7 @@ const Home: NextPageWithAuth = (props) => {
                                 </div>
                                 
                                 <Card.Body>
-                                <p>
+                                <p style={{marginTop: 0}}>
                                     The E-mail notifications and calendar inserted into the website to help you plan and implement your arrangements and online meetings.
                                 </p>
                             </Card.Body>
@@ -206,9 +207,12 @@ const Home: NextPageWithAuth = (props) => {
                                 </div>
                                
                                 <Card.Body>
-                                <p>
+                                <p style={{marginTop: 0}}>
                                     Get the shareable link of your form and place it on your social media to engage more requests for your consulting services.
+                                    </p>
+                                    <p style={{marginTop: 0}}>
                                     Turn free social traffic into a consistent source of income!
+                                    
                                 </p>
                             </Card.Body>
                         </Card>
