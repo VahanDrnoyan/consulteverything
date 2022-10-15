@@ -2,19 +2,14 @@ import '../styles/globals.css'
 import type {AppProps} from 'next/app'
 import {SessionProvider} from "next-auth/react"
 import {Session} from "next-auth";
-import PrimeReact from 'primereact/api';
-import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
-import "primereact/resources/primereact.min.css";                  //core css
-import "primeicons/primeicons.css";
-import "primeflex/primeflex.css"
 import {DashboardAuth} from "../auth/DashboardAuth";
 import type {NextComponentType} from 'next'
 import {ModeratorAuth} from "../auth/ModeratorAuth";
 import {AdminAuth} from "../auth/AdminAuth";
 import {SuperAdminAuth} from "../auth/SuperAdminAuth";
 import {Role} from "@prisma/client";
-PrimeReact.ripple = true;
-
+import '../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
+import { NextUIProvider } from '@nextui-org/react';
 
 interface CustomAppProps {
     Component: NextComponentType & { auth: { role: Role } },
@@ -25,22 +20,24 @@ interface CustomAppProps {
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: CustomAppProps) {
     return (
+        
         <SessionProvider session={session}>
             {Component.auth?.role === 'USER' ? (
                 <DashboardAuth>
-                    <Component {...pageProps} />
+                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
+                    
                 </DashboardAuth>
             ) : Component.auth?.role === 'MODERATOR' ? (
                 <ModeratorAuth>
-                    <Component {...pageProps} />
+                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
                 </ModeratorAuth>
             ) : Component.auth?.role === 'ADMIN' ? (
                 <AdminAuth>
-                    <Component {...pageProps} />
+                    <NextUIProvider><Component {...pageProps} /></NextUIProvider>
                 </AdminAuth>
             ) : Component.auth?.role === 'SUPERADMIN'?(
                 <SuperAdminAuth>
-                    <Component {...pageProps} />
+                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
                 </SuperAdminAuth>
                 ): (
                 <Component {...pageProps} />

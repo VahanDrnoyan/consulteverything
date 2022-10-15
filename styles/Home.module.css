@@ -8,3 +8,31 @@
         width: 100%;
     }
 }
+.logoConatiner {
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-between;
+}
+.relative-p {
+    position: relative;
+}
+.homeIcons {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top:12px;
+}
+.homeTopIcons {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    margin-top:12px;
+}
+.footer {
+padding: 20px 0;
+text-align: center;
+}
+.bottomConatiner {
+}
