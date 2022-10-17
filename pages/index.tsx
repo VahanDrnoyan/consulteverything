@@ -6,22 +6,32 @@ import { useRouter } from "next/router";
 import heroPic from "../public/galaxy_cropped.jpg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faListAlt, faFileVideo, faMoneyBill1, faEdit, faCalendar, faUser } from '@fortawesome/free-regular-svg-icons'
-import { Image, Text, Avatar, Grid, Container, Card, Row, Button } from "@nextui-org/react";
+import { Text, Avatar, Grid, Container, Card, Row, Button } from "@nextui-org/react";
+import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react';
 import { faArrowRight, faHome, faHomeAlt, faHomeLg, faSearch, faShare, faSubscript } from '@fortawesome/free-solid-svg-icons';
 import LoginModal from '../components/LoginModal';
 import { PressEvent} from '@react-types/shared';
+
 type NextPageWithAuth = NextPage & {
     auth?: {
         role: string
     }
 };
-const Home: NextPageWithAuth = (props) => {
+const Home: NextPageWithAuth = (_props) => {
     const { status } = useSession()
+    const router = useRouter()
+
     const [showModal, setShowModal] = useState(false);
-    const showModalhandler = (event: PressEvent) => {
+    const showModalhandler = (_event: PressEvent) => {
         setShowModal(true);
+    }
+    const handleNavigateToConsultancies= (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+       
+        router.push({
+            pathname: '/consultancies/search'
+        })
     }
     return (
         <div>
@@ -32,16 +42,16 @@ const Home: NextPageWithAuth = (props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div style={{ minHeight: '700px', position: 'relative', 'display': 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ 'position': 'absolute', 'width': '100%' }}>
+            <div style={{ height: '700px', position: 'relative', 'display': 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className={styles.heroImage}>
                     <Image
-                        showSkeleton
-                        width={"100%"}
+                    
+                        width={"2000px"}
                         height={"700px"}
-                        maxDelay={10000}
                         src={heroPic.src}
                         alt="Consult Everything"
-                        objectFit="cover"
+                        layout='fill'
+                        style={{filter: 'blur(0.02rem)'}}
                     />
                 </div>
                 <div className={styles.logoConatiner}>
@@ -56,8 +66,8 @@ const Home: NextPageWithAuth = (props) => {
             <div className={styles.bottomConatiner}>
             <Container css={{marginTop: '-100px'}}>
     
-                <Grid.Container gap={2} justify="center">
-                    <Grid xs={6}>
+                <Grid.Container gap={2} justify="center" css={{p:0}}>
+                    <Grid xs={12} md={6}>
                         <Card variant='shadow' isHoverable>
                            
                                 <div className={styles.homeTopIcons}>
@@ -83,13 +93,13 @@ const Home: NextPageWithAuth = (props) => {
                             <Card.Footer>
                                 <Row justify="flex-end">
 
-                                    <Button light color={"secondary"}>But not anymore!</Button>
-                                    <Button shadow css={{minWidth: '50%'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />} color="gradient">Browse consultancies</Button>
+                                    <Button css={{minWidth: '50%'}}light color={"secondary"}>But not anymore!</Button>
+                                    <Button onClick={handleNavigateToConsultancies} shadow css={{minWidth: '50%'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />} color="gradient">Browse consultancies</Button>
                                 </Row>
                             </Card.Footer>
                         </Card>
                     </Grid>
-                    <Grid xs={6}>
+                    <Grid xs={12} md={6}>
                         <Card variant='shadow' isHoverable>
                             
                                 <div className={styles.homeTopIcons}>
@@ -120,7 +130,7 @@ const Home: NextPageWithAuth = (props) => {
                 </Grid.Container>
                 <Text h2 css={{width: '100%', textAlign: 'center', marginTop: '40px'}}>Consult Everything provides the following features:</Text>
                 
-                <Grid.Container gap={2} justify="center">
+                <Grid.Container gap={2} justify="center" css={{p: 0}}>
                     <Grid xs={12} md={4} lg={4}>
                         <Card variant='flat' isHoverable>
                             
@@ -165,7 +175,7 @@ const Home: NextPageWithAuth = (props) => {
                     </Grid>
 
                 </Grid.Container>
-                <Grid.Container gap={4} justify="center">
+                <Grid.Container gap={2} justify="center" css={{p:0, mt:12}}>
                     <Grid xs={12} md={4} lg={4}>
                         <Card variant='flat' isHoverable>
                             
