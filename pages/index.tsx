@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import { faArrowRight, faHome, faHomeAlt, faHomeLg, faSearch, faShare, faSubscript } from '@fortawesome/free-solid-svg-icons';
 import LoginModal from '../components/LoginModal';
 import { PressEvent} from '@react-types/shared';
+import Logo from '../components/Logo';
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -51,11 +52,13 @@ const Home: NextPageWithAuth = (_props) => {
                         src={heroPic.src}
                         alt="Consult Everything"
                         layout='fill'
-                        style={{filter: 'blur(0.02rem)'}}
+                        style={{minHeight: '700px',
+                        maxHeight:'700px'
+                    }}
                     />
                 </div>
                 <div className={styles.logoConatiner}>
-                    <FontAwesomeIcon size={"6x"} color="#ffffff" icon={faCircle} />
+                    <Logo color="#fff" size='6x'/>
                     <Text h3 color="#fff" css={{ mt: 100, mb: 0 }}>Push your boundaries to horizons!</Text>
                     
 
@@ -67,7 +70,7 @@ const Home: NextPageWithAuth = (_props) => {
             <Container css={{marginTop: '-100px'}}>
     
                 <Grid.Container gap={2} justify="center" css={{p:0}}>
-                    <Grid xs={12} md={6}>
+                    <Grid xs={12} sm={6}>
                         <Card variant='shadow' isHoverable>
                            
                                 <div className={styles.homeTopIcons}>
@@ -91,7 +94,7 @@ const Home: NextPageWithAuth = (_props) => {
                             </Card.Body>
                             
                             <Card.Footer>
-                                <Row justify="flex-end">
+                                <Row justify="flex-end" css={{'@xs':{flexDirection:'column', alignItems: 'flex-end'}, '@md': {flexDirection: 'row'}}} >
 
                                     <Button css={{minWidth: '50%'}}light color={"secondary"}>But not anymore!</Button>
                                     <Button onClick={handleNavigateToConsultancies} shadow css={{minWidth: '50%'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />} color="gradient">Browse consultancies</Button>
@@ -99,7 +102,7 @@ const Home: NextPageWithAuth = (_props) => {
                             </Card.Footer>
                         </Card>
                     </Grid>
-                    <Grid xs={12} md={6}>
+                    <Grid xs={12} sm={6} >
                         <Card variant='shadow' isHoverable>
                             
                                 <div className={styles.homeTopIcons}>
@@ -118,7 +121,11 @@ const Home: NextPageWithAuth = (_props) => {
                             </Card.Body>
                             
                             <Card.Footer>
-                                <Row justify="flex-end">
+                                <Row justify="flex-end" css={{
+                        xs: {
+                            flexDirection:'column'
+                        }
+                    }}>
                                     {status === 'authenticated' ? (
                                         <Button css={{minWidth: '50%'}} icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />} shadow color={"gradient"}>Go to dashboard</Button>
                                     ) : (<Button css={{minWidth: '50%'}} onPress={showModalhandler} icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />} shadow color={"gradient"}>Enter with email

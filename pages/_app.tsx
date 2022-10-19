@@ -10,6 +10,7 @@ import {SuperAdminAuth} from "../auth/SuperAdminAuth";
 import {Role} from "@prisma/client";
 import '../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
 import { NextUIProvider } from '@nextui-org/react';
+import Layout from '../components/Layout';
 
 interface CustomAppProps {
     Component: NextComponentType & { auth: { role: Role } },
@@ -18,29 +19,29 @@ interface CustomAppProps {
     }
 }
 
-function MyApp({Component, pageProps: {session, ...pageProps}}: CustomAppProps) {
+function MyApp({Component, pageProps: {session, ...pageProps}}:CustomAppProps) {
     return (
         
         <SessionProvider session={session}>
             {Component.auth?.role === 'USER' ? (
                 <DashboardAuth>
-                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
+                     <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
                     
                 </DashboardAuth>
             ) : Component.auth?.role === 'MODERATOR' ? (
                 <ModeratorAuth>
-                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
+                    <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
                 </ModeratorAuth>
             ) : Component.auth?.role === 'ADMIN' ? (
                 <AdminAuth>
-                    <NextUIProvider><Component {...pageProps} /></NextUIProvider>
+                    <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
                 </AdminAuth>
             ) : Component.auth?.role === 'SUPERADMIN'?(
                 <SuperAdminAuth>
-                     <NextUIProvider><Component {...pageProps} /></NextUIProvider>
+                    <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
                 </SuperAdminAuth>
                 ): (
-                <Component {...pageProps} />
+                <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
             )}
         </SessionProvider>
     )
