@@ -11,6 +11,7 @@ type NavItems = {
     id:string;
     name:string;
     url: string;
+    routename?: string
 }
 export default function Navigation() {
     const { data: session } = useSession()
@@ -18,14 +19,15 @@ export default function Navigation() {
     const responsiveNavItems = useMemo(()=>{
         let navItems:NavItems[]  = []
         let allNavItems:NavItems[] = [
-            {id: 'home', name:"Home",url:'/'},
-            {id: 'browse', name:"Browse",url:'consultancies/search'}
+            {id: 'home', name:"Home",url:'/', routename:'/'},
+            {id: 'browse', name:"Browse",url: router.pathname === '/consultancies/search/[[...term]]'? '': '/consultancies/search', routename: '/consultancies/search/[[...term]]' }
         ];
         if(session && session.user){
             navItems = allNavItems.concat([
-                {id: 'myConsultancies', name:"My consultancy", url: '#'},
-                {id: 'schedule', name:"Schedule", url: '#'},
-                {id: 'chatHistory', name:"Chat history", url: '#'},
+                {id: 'myConsultancies', name:"My consultancy", url: '/dashboard/my-consultancy', routename: '/dashboard/my-consultancy'},
+                {id: 'myRequests', name:"My request", url: '#', routename: ''},
+                {id: 'schedule', name:"Schedule", url: '#', routename:''},
+                {id: 'chatHistory', name:"Chat history", url: '#', routename:''},
         ])
     }
         return navItems
@@ -33,7 +35,7 @@ export default function Navigation() {
     
     return (
 
-        <Navbar variant="sticky">
+        <Navbar isCompact variant="sticky">
             <Navbar.Brand>
                 <Navbar.Toggle css={{
                     '@sm': {
@@ -53,12 +55,15 @@ export default function Navigation() {
             </Navbar.Brand>
             {session && session?.user ? (
                 <Navbar.Content enableCursorHighlight hideIn="sm" variant="underline-rounded">
-                    <Navbar.Item isActive ={router.pathname === '/consultancies/search/[[...term]]'? true: false }><Link href={'consultancies/search'}>Browse</Link></Navbar.Item>
-                    <Navbar.Item>
-                        My consultancy
+                    {responsiveNavItems.map((item, index) => (
+                    <Navbar.Item isActive={router.pathname === item.routename} key={item.id}>
+                        <Link
+                            href={item.url}
+                        >
+                            {item.name}
+                        </Link>
                     </Navbar.Item>
-                    <Navbar.Item>Schedule</Navbar.Item>
-                    <Navbar.Item>Chat history</Navbar.Item>
+                ))}
                 </Navbar.Content>
             ) : ('')}
             <Navbar.Content>

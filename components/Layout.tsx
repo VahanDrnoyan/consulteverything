@@ -1,13 +1,13 @@
 import Navigation from './Navbar'
 import React from 'react';
-const Layout:({children}: { children: any }) => (JSX.Element) = ({ children })=> {
+const Layout: ({ children }: { children: any }) => (JSX.Element) = ({ children }) => {
     return (
-      <>
-        <Navigation />
-        <main>{children}</main>
-        
-      </>
-    )
-  }
+        <>
+            <Navigation />
+            {children}
 
-  export default Layout
+        </>
+    )
+}
+
+export default Layout

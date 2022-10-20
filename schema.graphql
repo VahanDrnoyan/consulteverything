@@ -9,11 +9,35 @@ type Account {
   user: User!
 }
 
+type Consultancy {
+  allow_age_check: Field!
+  allow_email_check: Field!
+  allow_enable_video_by_requester: Boolean!
+  allow_expectations_check: Field!
+  allow_expertise_in_problem_field_check: Field!
+  allow_gender_check: Field!
+  allow_name_surneame: Field!
+  allow_ongoing_support_check: Field!
+  allow_prefession_check: Field!
+  allow_previous_consulancy_experience_check: Field!
+  allow_time_spent_issue_resolution_check: Field!
+  enable_video_by_provider: Boolean!
+  id: ID!
+}
+
 type Event {
   id: ID!
 }
 
+"""User Roles"""
+enum Field {
+  EXCLUDE
+  INCLUDE
+  REQUIRED
+}
+
 type Mutation {
+  createConsultancy(allow_age_check: Field!, allow_email_check: Field!, allow_enable_video_by_requester: Boolean!, allow_expectations_check: Field!, allow_expertise_in_problem_field_check: Field!, allow_gender_check: Field!, allow_name_surneame: Field!, allow_ongoing_support_check: Field!, allow_prefession_check: Field!, allow_previous_consulancy_experience_check: Field!, allow_time_spent_issue_resolution_check: Field!, enable_video_by_provider: Boolean!, long_dscription: String, max_attachment_count: Int!, max_time_minuets: Int!, short_description: String!, title: String!): Consultancy!
   createUser(email: String!): User!
 }
 
@@ -21,9 +45,18 @@ type Query {
   ok: Boolean!
 }
 
+"""User Roles"""
+enum Role {
+  ADMIN
+  MODERATOR
+  SUPERADMIN
+  USER
+}
+
 """this is User"""
 type User {
   accounts: [Account!]!
   email: String
   id: ID!
+  role: Role!
 }

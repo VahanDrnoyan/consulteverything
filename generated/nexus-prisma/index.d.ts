@@ -1430,6 +1430,58 @@ export interface User {
      */
     resolve: NexusCore.FieldResolver<'User', 'sessions'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.consultancies`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   consultancies  Consultancy
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.consultancies)
+    *   }
+    * })
+    */
+  consultancies: {
+    /**
+     * The name of this field.
+     */
+    name: 'consultancies'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Consultancy' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Consultancy'> | NexusCore.NexusNonNullDef<'Consultancy'>)
+    : 'Warning/Error: The type \'Consultancy\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Consultancy\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'consultancies'>
+  }
 }
 
 /**
@@ -1611,6 +1663,1081 @@ export interface VerificationToken {
   }
 }
 
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `Consultancy`.
+  *
+  * ### ️⚠️ You have not writen documentation for model Consultancy
+  *
+  * Replace this default advisory JSDoc with your own documentation about model Consultancy
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model Consultancy {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { Consultancy } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: Consultancy.$name
+  *   description: Consultancy.$description
+  *   definition(t) {
+  *     t.field(Consultancy.id)
+  *   }
+  * })
+  */
+export interface Consultancy {
+  $name: 'Consultancy'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'ID'>
+    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.title`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   title  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.title)
+    *   }
+    * })
+    */
+  title: {
+    /**
+     * The name of this field.
+     */
+    name: 'title'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'title'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.short_description`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   short_description  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.short_description)
+    *   }
+    * })
+    */
+  short_description: {
+    /**
+     * The name of this field.
+     */
+    name: 'short_description'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'short_description'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.long_dscription`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   long_dscription  String?
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.long_dscription)
+    *   }
+    * })
+    */
+  long_dscription: {
+    /**
+     * The name of this field.
+     */
+    name: 'long_dscription'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'long_dscription'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.max_time_minuets`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   max_time_minuets  Int
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.max_time_minuets)
+    *   }
+    * })
+    */
+  max_time_minuets: {
+    /**
+     * The name of this field.
+     */
+    name: 'max_time_minuets'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'max_time_minuets'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.max_attachment_count`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   max_attachment_count  Int
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.max_attachment_count)
+    *   }
+    * })
+    */
+  max_attachment_count: {
+    /**
+     * The name of this field.
+     */
+    name: 'max_attachment_count'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'max_attachment_count'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.enable_video_by_provider`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   enable_video_by_provider  Boolean
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.enable_video_by_provider)
+    *   }
+    * })
+    */
+  enable_video_by_provider: {
+    /**
+     * The name of this field.
+     */
+    name: 'enable_video_by_provider'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Boolean' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Boolean'>
+    : 'Warning/Error: The type \'Boolean\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Boolean\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'enable_video_by_provider'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_enable_video_by_requester`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_enable_video_by_requester  Boolean
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_enable_video_by_requester)
+    *   }
+    * })
+    */
+  allow_enable_video_by_requester: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_enable_video_by_requester'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Boolean' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Boolean'>
+    : 'Warning/Error: The type \'Boolean\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Boolean\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_enable_video_by_requester'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_name_surneame`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_name_surneame  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_name_surneame)
+    *   }
+    * })
+    */
+  allow_name_surneame: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_name_surneame'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_name_surneame'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_prefession_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_prefession_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_prefession_check)
+    *   }
+    * })
+    */
+  allow_prefession_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_prefession_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_prefession_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_age_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_age_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_age_check)
+    *   }
+    * })
+    */
+  allow_age_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_age_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_age_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_gender_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_gender_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_gender_check)
+    *   }
+    * })
+    */
+  allow_gender_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_gender_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_gender_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_previous_consulancy_experience_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_previous_consulancy_experience_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_previous_consulancy_experience_check)
+    *   }
+    * })
+    */
+  allow_previous_consulancy_experience_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_previous_consulancy_experience_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_previous_consulancy_experience_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_email_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_email_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_email_check)
+    *   }
+    * })
+    */
+  allow_email_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_email_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_email_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_ongoing_support_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_ongoing_support_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_ongoing_support_check)
+    *   }
+    * })
+    */
+  allow_ongoing_support_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_ongoing_support_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_ongoing_support_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_expectations_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_expectations_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_expectations_check)
+    *   }
+    * })
+    */
+  allow_expectations_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_expectations_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_expectations_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_time_spent_issue_resolution_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_time_spent_issue_resolution_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_time_spent_issue_resolution_check)
+    *   }
+    * })
+    */
+  allow_time_spent_issue_resolution_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_time_spent_issue_resolution_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_time_spent_issue_resolution_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_expertise_in_problem_field_check`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   allow_expertise_in_problem_field_check  Field
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.allow_expertise_in_problem_field_check)
+    *   }
+    * })
+    */
+  allow_expertise_in_problem_field_check: {
+    /**
+     * The name of this field.
+     */
+    name: 'allow_expertise_in_problem_field_check'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Field' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Field'>
+    : 'Warning/Error: The type \'Field\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Field\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_expertise_in_problem_field_check'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'userId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.User`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   User  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.User)
+    *   }
+    * })
+    */
+  User: {
+    /**
+     * The name of this field.
+     */
+    name: 'User'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'User'>
+  }
+}
+
 // Enums
 
 /**
@@ -1648,6 +2775,26 @@ export interface Role {
   members: ['USER', 'MODERATOR', 'ADMIN', 'SUPERADMIN']
 }
 
+/**
+  * Generated Nexus `enumType` configuration based on your Prisma schema's enum `Field`.
+  *
+  * enum Field
+  *
+  * Contains these members: INCLUDE, EXCLUDE, REQUIRED
+  *
+  * @example
+  *
+  * import { enumType } from 'nexus'
+  * import { Field } from 'nexus-prisma'
+  *
+  * enumType(Field)
+  */
+export interface Field {
+  name: 'Field'
+  description: string
+  members: ['INCLUDE', 'EXCLUDE', 'REQUIRED']
+}
+
 
 //
 //
@@ -1675,6 +2822,8 @@ export const User: User
 
 export const VerificationToken: VerificationToken
 
+export const Consultancy: Consultancy
+
 //
 //
 // EXPORTS: PRISMA ENUMS
@@ -1685,6 +2834,8 @@ export const VerificationToken: VerificationToken
 //
 
 export const Role: Role
+
+export const Field: Field
 
 //
 //

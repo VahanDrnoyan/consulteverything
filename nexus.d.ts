@@ -17,6 +17,8 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Field: "EXCLUDE" | "INCLUDE" | "REQUIRED"
+  Role: "ADMIN" | "MODERATOR" | "SUPERADMIN" | "USER"
 }
 
 export interface NexusGenScalars {
@@ -32,6 +34,21 @@ export interface NexusGenObjects {
     id: string; // ID!
     session_state?: string | null; // String
   }
+  Consultancy: { // root type
+    allow_age_check: NexusGenEnums['Field']; // Field!
+    allow_email_check: NexusGenEnums['Field']; // Field!
+    allow_enable_video_by_requester: boolean; // Boolean!
+    allow_expectations_check: NexusGenEnums['Field']; // Field!
+    allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
+    allow_gender_check: NexusGenEnums['Field']; // Field!
+    allow_name_surneame: NexusGenEnums['Field']; // Field!
+    allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
+    allow_prefession_check: NexusGenEnums['Field']; // Field!
+    allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    enable_video_by_provider: boolean; // Boolean!
+    id: string; // ID!
+  }
   Event: { // root type
     id: string; // ID!
   }
@@ -40,6 +57,7 @@ export interface NexusGenObjects {
   User: { // root type
     email?: string | null; // String
     id: string; // ID!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
@@ -51,7 +69,7 @@ export interface NexusGenUnions {
 
 export type NexusGenRootTypes = NexusGenObjects
 
-export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
+export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
   Account: { // field return type
@@ -59,10 +77,26 @@ export interface NexusGenFieldTypes {
     session_state: string | null; // String
     user: NexusGenRootTypes['User']; // User!
   }
+  Consultancy: { // field return type
+    allow_age_check: NexusGenEnums['Field']; // Field!
+    allow_email_check: NexusGenEnums['Field']; // Field!
+    allow_enable_video_by_requester: boolean; // Boolean!
+    allow_expectations_check: NexusGenEnums['Field']; // Field!
+    allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
+    allow_gender_check: NexusGenEnums['Field']; // Field!
+    allow_name_surneame: NexusGenEnums['Field']; // Field!
+    allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
+    allow_prefession_check: NexusGenEnums['Field']; // Field!
+    allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    enable_video_by_provider: boolean; // Boolean!
+    id: string; // ID!
+  }
   Event: { // field return type
     id: string; // ID!
   }
   Mutation: { // field return type
+    createConsultancy: NexusGenRootTypes['Consultancy']; // Consultancy!
     createUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
@@ -72,6 +106,7 @@ export interface NexusGenFieldTypes {
     accounts: NexusGenRootTypes['Account'][]; // [Account!]!
     email: string | null; // String
     id: string; // ID!
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
@@ -81,10 +116,26 @@ export interface NexusGenFieldTypeNames {
     session_state: 'String'
     user: 'User'
   }
+  Consultancy: { // field return type name
+    allow_age_check: 'Field'
+    allow_email_check: 'Field'
+    allow_enable_video_by_requester: 'Boolean'
+    allow_expectations_check: 'Field'
+    allow_expertise_in_problem_field_check: 'Field'
+    allow_gender_check: 'Field'
+    allow_name_surneame: 'Field'
+    allow_ongoing_support_check: 'Field'
+    allow_prefession_check: 'Field'
+    allow_previous_consulancy_experience_check: 'Field'
+    allow_time_spent_issue_resolution_check: 'Field'
+    enable_video_by_provider: 'Boolean'
+    id: 'ID'
+  }
   Event: { // field return type name
     id: 'ID'
   }
   Mutation: { // field return type name
+    createConsultancy: 'Consultancy'
     createUser: 'User'
   }
   Query: { // field return type name
@@ -94,11 +145,31 @@ export interface NexusGenFieldTypeNames {
     accounts: 'Account'
     email: 'String'
     id: 'ID'
+    role: 'Role'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createConsultancy: { // args
+      allow_age_check: NexusGenEnums['Field']; // Field!
+      allow_email_check: NexusGenEnums['Field']; // Field!
+      allow_enable_video_by_requester: boolean; // Boolean!
+      allow_expectations_check: NexusGenEnums['Field']; // Field!
+      allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
+      allow_gender_check: NexusGenEnums['Field']; // Field!
+      allow_name_surneame: NexusGenEnums['Field']; // Field!
+      allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
+      allow_prefession_check: NexusGenEnums['Field']; // Field!
+      allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
+      allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+      enable_video_by_provider: boolean; // Boolean!
+      long_dscription?: string | null; // String
+      max_attachment_count: number; // Int!
+      max_time_minuets: number; // Int!
+      short_description: string; // String!
+      title: string; // String!
+    }
     createUser: { // args
       email: string; // String!
     }
@@ -115,7 +186,7 @@ export type NexusGenObjectNames = keyof NexusGenObjects;
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = keyof NexusGenEnums;
 
 export type NexusGenInterfaceNames = never;
 

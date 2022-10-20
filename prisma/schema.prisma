@@ -46,14 +46,15 @@ model Session {
 
 /// this is User
 model User {
-  id            String    @id @default(cuid())
+  id            String        @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?       @unique
   emailVerified DateTime?
   image         String?
-  role          Role      @default(USER)
+  role          Role          @default(USER)
   accounts      Account[]
   sessions      Session[]
+  consultancies Consultancy[]
 }
 
 /// Lorem ipsum dolor sit amet.
@@ -71,3 +72,35 @@ enum Role {
   ADMIN
   SUPERADMIN
 }
+/// enum Field
+enum Field {
+  INCLUDE
+  EXCLUDE
+  REQUIRED
+}
+// Consultancy
+
+model Consultancy {
+  id                                         String  @id @default(cuid())
+  title                                      String
+  short_description                          String
+  long_dscription                            String? @db.Text
+  max_time_minuets                           Int     @default(20)
+  max_attachment_count                       Int     @default(3)
+  enable_video_by_provider                   Boolean @default(true)
+  allow_enable_video_by_requester            Boolean @default(true)
+  allow_name_surneame                        Field   @default(INCLUDE)
+  allow_prefession_check                     Field   @default(INCLUDE)
+  allow_age_check                            Field   @default(INCLUDE)
+  allow_gender_check                         Field   @default(INCLUDE)
+  allow_previous_consulancy_experience_check Field   @default(INCLUDE)
+  allow_email_check                          Field   @default(INCLUDE)
+  allow_ongoing_support_check                Field   @default(INCLUDE)
+  allow_expectations_check                   Field   @default(INCLUDE)
+  allow_time_spent_issue_resolution_check    Field   @default(INCLUDE)
+  allow_expertise_in_problem_field_check     Field   @default(INCLUDE)
+  userId                                     String
+
+  User User @relation(fields: [userId], references: [id])
+}
+
