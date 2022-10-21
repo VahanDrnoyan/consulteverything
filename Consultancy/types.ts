@@ -1,4 +1,4 @@
-import { objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, extendType, mutationField, list, extendInputType } from "nexus";
+import { objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, extendType, mutationField, list, extendInputType, idArg } from "nexus";
 import { User, Account, Consultancy, Field, Tag } from '../generated/nexus-prisma'
 import { Prisma } from '@prisma/client'
 import { string } from "prop-types";
@@ -68,27 +68,15 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
         const tags= args.tags.map((item)=>{
                 return {name: item as string}
         })
-      
-        const consultancyParams: Prisma.ConsultancyCreateArgs = {
+        console.log(user, 222)
+
+        const consultancyParams: Prisma.ConsultancyCreateArgs= {
             data: {
-                title: args.title,
-                short_description: args.short_description,
-                long_dscription: args.long_dscription,
-                max_time_minuets: args.max_time_minuets,
-                max_attachment_count: args.max_attachment_count,
-                enable_video_by_provider: args.enable_video_by_provider,
-                allow_enable_video_by_requester: args.allow_enable_video_by_requester,
-                allow_name_surneame: args.allow_name_surneame,
-                allow_prefession_check: args.allow_prefession_check,
-                allow_age_check: args.allow_age_check,
-                allow_gender_check: args.allow_gender_check,
-                allow_previous_consulancy_experience_check: args.allow_previous_consulancy_experience_check,
-                allow_email_check: args.allow_email_check,
-                allow_ongoing_support_check: args.allow_ongoing_support_check,
-                allow_expectations_check: args.allow_expectations_check,
-                allow_time_spent_issue_resolution_check: args.allow_time_spent_issue_resolution_check,
-                allow_expertise_in_problem_field_check: args.allow_expertise_in_problem_field_check,
-                User: user,
+                ...args,
+
+                User:{ 
+                    connect: {id: user.id}
+                },
                 tags:{
                     createMany: {
                         data: tags

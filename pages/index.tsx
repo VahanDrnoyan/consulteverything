@@ -35,7 +35,7 @@ const Home: NextPageWithAuth = (_props) => {
         })
     }
     return (
-        <div style={{backgroundColor: 'var(--nextui-colors-blue400)'}}>
+        <div style={{backgroundColor: 'var(--nextui-colors-blue800)'}}>
             <Head>
                 <title>Consult Everything | Home</title>
                 <meta name="description" content="Someone in the world is ready to provide the
@@ -54,7 +54,7 @@ const Home: NextPageWithAuth = (_props) => {
                         layout='fill'
                         style={{minHeight: '700px',
                         maxHeight:'700px',
-                        filter: 'grayscale(60%)'
+                        opacity: 0.4,
                         }}
                     />
                 </div>
@@ -136,7 +136,7 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                 </Grid.Container>
-                <Text h2 css={{width: '100%', textAlign: 'center', marginTop: '40px'}}>Consult Everything provides the following features:</Text>
+                <Text h3 css={{color:'$accents2',width: '100%', textAlign: 'center', 'my': '40px'}}>Consult Everything provides the following features:</Text>
                 
                 <Grid.Container gap={2} justify="center" css={{p: 0}}>
                     <Grid xs={12} md={4} lg={4}>

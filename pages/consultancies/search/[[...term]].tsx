@@ -26,7 +26,7 @@ const Consultancies:NextPageWithAuth = (_props) => {
         setShowSearchModal(true)
     }
     return (
-        <div style={{backgroundColor: 'var(--nextui-colors-blue400)'}}>
+        <div style={{backgroundColor: 'var(--nextui-colors-blue800)'}}>
             <Head>
                 <title>Consult Everything | Consultanices</title>
                 <meta name="description" content="Consultancies list"/>

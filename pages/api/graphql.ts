@@ -13,9 +13,6 @@ const server = createServer<
   {
     req: NextApiRequest;
     res: NextApiResponse;
-  },
-    {
-    pubSub: any;
   }
 >({
   context,

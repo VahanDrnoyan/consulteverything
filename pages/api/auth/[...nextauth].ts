@@ -29,6 +29,7 @@ export default NextAuth({
   async session({ session, token, user}) {
     if(session && session.user) {
       session.user.role = user.role;
+      session.user.id = user.id;
     }
     return session;
   }

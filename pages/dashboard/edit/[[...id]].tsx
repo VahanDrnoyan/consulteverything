@@ -4,14 +4,7 @@ import { useState } from "react";
 import { Consultancy, Role, Field} from "../../../generated/graphql-frontend";
 
 const ConsultancyEdit: NextPage = (props) =>{
-    const initialvalues: Consultancy = {
-        User: {
-            __typename: undefined,
-            accounts: [],
-            email: undefined,
-            id: "",
-            role: Role.User
-        },
+    const initialvalues: Omit<Consultancy, "User"> = {
         title: '',
         allow_age_check: Field.Exclude,
         allow_email_check: Field.Exclude,
@@ -31,7 +24,7 @@ const ConsultancyEdit: NextPage = (props) =>{
         max_time_minuets: 0,
         short_description: ""
     }
-    const [values, setValues] = useState<Consultancy>(initialvalues);
+    const [values, setValues] = useState<Omit<Consultancy, "User">>(initialvalues);
     return <div><Container>test</Container></div>
 }
 export default ConsultancyEdit

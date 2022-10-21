@@ -120,6 +120,30 @@ export type User = {
   role: Role;
 };
 
+export type CreateConsultancyMutationVariables = Exact<{
+  title: Scalars['String'];
+  short_description: Scalars['String'];
+  long_dscription?: InputMaybe<Scalars['String']>;
+  max_time_minuets: Scalars['Int'];
+  max_attachment_count: Scalars['Int'];
+  enable_video_by_provider: Scalars['Boolean'];
+  allow_enable_video_by_requester: Scalars['Boolean'];
+  allow_name_surneame: Field;
+  allow_prefession_check: Field;
+  allow_age_check: Field;
+  allow_gender_check: Field;
+  allow_previous_consulancy_experience_check: Field;
+  allow_email_check: Field;
+  allow_ongoing_support_check: Field;
+  allow_expectations_check: Field;
+  allow_time_spent_issue_resolution_check: Field;
+  allow_expertise_in_problem_field_check: Field;
+  tags: Array<Scalars['String']> | Scalars['String'];
+}>;
+
+
+export type CreateConsultancyMutation = { __typename?: 'Mutation', createConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
+
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -128,6 +152,76 @@ export type CreateUserMutationVariables = Exact<{
 export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', email?: string | null, id: string } };
 
 
+export const CreateConsultancyDocument = gql`
+    mutation CreateConsultancy($title: String!, $short_description: String!, $long_dscription: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surneame: Field!, $allow_prefession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consulancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $tags: [String!]!) {
+  createConsultancy(
+    title: $title
+    short_description: $short_description
+    long_dscription: $long_dscription
+    max_time_minuets: $max_time_minuets
+    max_attachment_count: $max_attachment_count
+    enable_video_by_provider: $enable_video_by_provider
+    allow_enable_video_by_requester: $allow_enable_video_by_requester
+    allow_name_surneame: $allow_name_surneame
+    allow_prefession_check: $allow_prefession_check
+    allow_age_check: $allow_age_check
+    allow_gender_check: $allow_gender_check
+    allow_previous_consulancy_experience_check: $allow_previous_consulancy_experience_check
+    allow_email_check: $allow_email_check
+    allow_ongoing_support_check: $allow_ongoing_support_check
+    allow_expectations_check: $allow_expectations_check
+    allow_time_spent_issue_resolution_check: $allow_time_spent_issue_resolution_check
+    allow_expertise_in_problem_field_check: $allow_expertise_in_problem_field_check
+    tags: $tags
+  ) {
+    id
+    title
+  }
+}
+    `;
+export type CreateConsultancyMutationFn = Apollo.MutationFunction<CreateConsultancyMutation, CreateConsultancyMutationVariables>;
+
+/**
+ * __useCreateConsultancyMutation__
+ *
+ * To run a mutation, you first call `useCreateConsultancyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateConsultancyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createConsultancyMutation, { data, loading, error }] = useCreateConsultancyMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      short_description: // value for 'short_description'
+ *      long_dscription: // value for 'long_dscription'
+ *      max_time_minuets: // value for 'max_time_minuets'
+ *      max_attachment_count: // value for 'max_attachment_count'
+ *      enable_video_by_provider: // value for 'enable_video_by_provider'
+ *      allow_enable_video_by_requester: // value for 'allow_enable_video_by_requester'
+ *      allow_name_surneame: // value for 'allow_name_surneame'
+ *      allow_prefession_check: // value for 'allow_prefession_check'
+ *      allow_age_check: // value for 'allow_age_check'
+ *      allow_gender_check: // value for 'allow_gender_check'
+ *      allow_previous_consulancy_experience_check: // value for 'allow_previous_consulancy_experience_check'
+ *      allow_email_check: // value for 'allow_email_check'
+ *      allow_ongoing_support_check: // value for 'allow_ongoing_support_check'
+ *      allow_expectations_check: // value for 'allow_expectations_check'
+ *      allow_time_spent_issue_resolution_check: // value for 'allow_time_spent_issue_resolution_check'
+ *      allow_expertise_in_problem_field_check: // value for 'allow_expertise_in_problem_field_check'
+ *      tags: // value for 'tags'
+ *   },
+ * });
+ */
+export function useCreateConsultancyMutation(baseOptions?: Apollo.MutationHookOptions<CreateConsultancyMutation, CreateConsultancyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateConsultancyMutation, CreateConsultancyMutationVariables>(CreateConsultancyDocument, options);
+      }
+export type CreateConsultancyMutationHookResult = ReturnType<typeof useCreateConsultancyMutation>;
+export type CreateConsultancyMutationResult = Apollo.MutationResult<CreateConsultancyMutation>;
+export type CreateConsultancyMutationOptions = Apollo.BaseMutationOptions<CreateConsultancyMutation, CreateConsultancyMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!) {
   createUser(email: $email) {
