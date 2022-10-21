@@ -10,7 +10,7 @@ interface Props {
 }
 const ConsultancyCard: React.FC = ()=> {
     return (
-        <Card isHoverable>
+        <Card variant='flat' css={{'bg': '$blue100'}}>
           <Card.Header css={{flexDirection:'column', justifyConetnt: 'flex-start', alignItems: 'start'}}>
           <Avatar
           css={{alignSelf: 'center', mb: 10}}
@@ -20,7 +20,7 @@ const ConsultancyCard: React.FC = ()=> {
           bordered
         />
             <Text b>Google Analytics setup</Text>
-            <Text css={{mb:0}} >SEO team lead at Ajax Consulting Inc.</Text>
+            <Text css={{mb:0, 'color': '$accents8'}} >SEO team lead at Ajax Consulting Inc.</Text>
           </Card.Header>
          
           <Card.Body css={{ py: "$0" }}>
@@ -33,20 +33,20 @@ const ConsultancyCard: React.FC = ()=> {
           <Card.Footer>
             <Row css={{flexDirection: 'column'}}>
                 <div>
-            <Badge css={{m: '$1'}}variant="flat">
+            <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
             Google Analytics
         </Badge>
-        <Badge css={{m: '$1'}}variant="flat">
+        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8', 'border': 'none'}}>
           SEO
         </Badge>
-        <Badge css={{m: '$1'}}variant="flat">
+        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
         SEO Optimisations
         </Badge>
-        <Badge css={{m: '$1'}}variant="flat">
+        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
         GA Metrics
         </Badge>
         </div>
-              <Button color="gradient"size="md" css={{width: '100%', mt: '$1'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faCalendar} />} >Schedule consultancy</Button>
+              <Button color="warning"size="md" css={{'bg': '$blue300', 'color': '$accents9',width: '100%', mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
             </Row>
           </Card.Footer>
         </Card>

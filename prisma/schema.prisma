@@ -78,7 +78,7 @@ enum Field {
   EXCLUDE
   REQUIRED
 }
-// Consultancy
+// /Consultancy
 
 model Consultancy {
   id                                         String  @id @default(cuid())
@@ -100,7 +100,14 @@ model Consultancy {
   allow_time_spent_issue_resolution_check    Field   @default(INCLUDE)
   allow_expertise_in_problem_field_check     Field   @default(INCLUDE)
   userId                                     String
-
+  tags     Tag[]
   User User @relation(fields: [userId], references: [id])
+}
+/// Tag
+model Tag {
+  id                                         Int  @id @default(autoincrement())
+  name                                      String
+  consultant   Consultancy @relation(fields: [consultantId], references: [id])
+  consultantId String
 }
 

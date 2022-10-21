@@ -48,12 +48,20 @@ export interface NexusGenObjects {
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
+    long_dscription?: string | null; // String
+    max_attachment_count: number; // Int!
+    max_time_minuets: number; // Int!
+    short_description: string; // String!
+    title: string; // String!
   }
   Event: { // root type
     id: string; // ID!
   }
   Mutation: {};
   Query: {};
+  Tag: { // root type
+    name: string; // String!
+  }
   User: { // root type
     email?: string | null; // String
     id: string; // ID!
@@ -78,6 +86,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Consultancy: { // field return type
+    User: NexusGenRootTypes['User']; // User!
     allow_age_check: NexusGenEnums['Field']; // Field!
     allow_email_check: NexusGenEnums['Field']; // Field!
     allow_enable_video_by_requester: boolean; // Boolean!
@@ -91,16 +100,25 @@ export interface NexusGenFieldTypes {
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
+    long_dscription: string | null; // String
+    max_attachment_count: number; // Int!
+    max_time_minuets: number; // Int!
+    short_description: string; // String!
+    tags: NexusGenRootTypes['Tag'][]; // [Tag!]!
+    title: string; // String!
   }
   Event: { // field return type
     id: string; // ID!
   }
   Mutation: { // field return type
-    createConsultancy: NexusGenRootTypes['Consultancy']; // Consultancy!
+    createConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     createUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
+  }
+  Tag: { // field return type
+    name: string; // String!
   }
   User: { // field return type
     accounts: NexusGenRootTypes['Account'][]; // [Account!]!
@@ -117,6 +135,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Consultancy: { // field return type name
+    User: 'User'
     allow_age_check: 'Field'
     allow_email_check: 'Field'
     allow_enable_video_by_requester: 'Boolean'
@@ -130,6 +149,12 @@ export interface NexusGenFieldTypeNames {
     allow_time_spent_issue_resolution_check: 'Field'
     enable_video_by_provider: 'Boolean'
     id: 'ID'
+    long_dscription: 'String'
+    max_attachment_count: 'Int'
+    max_time_minuets: 'Int'
+    short_description: 'String'
+    tags: 'Tag'
+    title: 'String'
   }
   Event: { // field return type name
     id: 'ID'
@@ -140,6 +165,9 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     ok: 'Boolean'
+  }
+  Tag: { // field return type name
+    name: 'String'
   }
   User: { // field return type name
     accounts: 'Account'
@@ -168,6 +196,7 @@ export interface NexusGenArgTypes {
       max_attachment_count: number; // Int!
       max_time_minuets: number; // Int!
       short_description: string; // String!
+      tags: string[]; // [String!]!
       title: string; // String!
     }
     createUser: { // args

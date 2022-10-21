@@ -35,7 +35,7 @@ const Home: NextPageWithAuth = (_props) => {
         })
     }
     return (
-        <div>
+        <div style={{backgroundColor: 'var(--nextui-colors-blue400)'}}>
             <Head>
                 <title>Consult Everything | Home</title>
                 <meta name="description" content="Someone in the world is ready to provide the
@@ -53,8 +53,9 @@ const Home: NextPageWithAuth = (_props) => {
                         alt="Consult Everything"
                         layout='fill'
                         style={{minHeight: '700px',
-                        maxHeight:'700px'
-                    }}
+                        maxHeight:'700px',
+                        filter: 'grayscale(60%)'
+                        }}
                     />
                 </div>
                 <div className={styles.logoConatiner}>
@@ -71,10 +72,10 @@ const Home: NextPageWithAuth = (_props) => {
     
                 <Grid.Container gap={2} justify="center" css={{p:0}}>
                     <Grid xs={12} sm={6}>
-                        <Card variant='shadow' isHoverable>
+                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                            
                                 <div className={styles.homeTopIcons}>
-                                    <Avatar color="primary" size="lg" icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faCircle} />} />
+                                    <Avatar squared color="default" size="lg" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faCircle} />} />
                                     <Text css={{ ml: 12 }} h4>Our mission</Text>
                                 </div>
                             
@@ -97,16 +98,16 @@ const Home: NextPageWithAuth = (_props) => {
                                 <Row justify="flex-end" css={{'@xs':{flexDirection:'column', alignItems: 'flex-end'}, '@md': {flexDirection: 'row'}}} >
 
                                     <Button css={{minWidth: '50%'}}light color={"secondary"}>But not anymore!</Button>
-                                    <Button onClick={handleNavigateToConsultancies} shadow css={{minWidth: '50%'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />} color="gradient">Browse consultancies</Button>
+                                    <Button onClick={handleNavigateToConsultancies} css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faSearch} />}>Browse consultancies</Button>
                                 </Row>
                             </Card.Footer>
                         </Card>
                     </Grid>
                     <Grid xs={12} sm={6} >
-                        <Card variant='shadow' isHoverable>
+                        <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
                             
                                 <div className={styles.homeTopIcons}>
-                                    <Avatar size="lg" color={"primary"} icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faArrowRight} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faArrowRight} />} />
                                     <Text css={{ml: 12}} h4>Start solving your everyday problems...</Text>
                                 </div>
                                 
@@ -127,8 +128,8 @@ const Home: NextPageWithAuth = (_props) => {
                         }
                     }}>
                                     {status === 'authenticated' ? (
-                                        <Button css={{minWidth: '50%'}} icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />} shadow color={"gradient"}>Go to dashboard</Button>
-                                    ) : (<Button css={{minWidth: '50%'}} onPress={showModalhandler} icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />} shadow color={"gradient"}>Enter with email
+                                        <Button css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}} icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faUser} />}>Go to dashboard</Button>
+                                    ) : (<Button css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}} onPress={showModalhandler} icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faUser} />}>Enter with email
                                     </Button>)}
                                 </Row>
                             </Card.Footer>
@@ -139,10 +140,10 @@ const Home: NextPageWithAuth = (_props) => {
                 
                 <Grid.Container gap={2} justify="center" css={{p: 0}}>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' isHoverable>
+                        <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" color="primary" icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faListAlt} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faListAlt} />} />
                                     <Text h4 css={{ mb: 0 }}>Custom form creation</Text>
                                 </div>
 
@@ -155,10 +156,10 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' isHoverable>
+                        <Card css={{'bg': '$blue100'}}  variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" color={"primary"} icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faFileVideo} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faFileVideo} />} />
                                     <Text css={{ mb: 0 }} h4>Video call consulting</Text>
                                 </div>
                                 
@@ -168,10 +169,10 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' isHoverable>
+                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" color={"primary"} icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faMoneyBill1} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faMoneyBill1} />} />
                                     <Text css={{ mb: 0 }}  h4>Get paid for info</Text>
                                 </div>
                                 
@@ -184,10 +185,10 @@ const Home: NextPageWithAuth = (_props) => {
                 </Grid.Container>
                 <Grid.Container gap={2} justify="center" css={{p:0, mt:12}}>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' isHoverable>
+                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar color="primary" size="lg" icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faEdit} />} />
+                                    <Avatar squared color="default" size="lg" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faEdit} />} />
                                     <Text css={{ mb: 0 }} h4>Consultancy transcription recording</Text>
                                 </div>
                                 
@@ -201,10 +202,10 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' isHoverable>
+                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" color="primary" icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faCalendar} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faCalendar} />} />
                                     <Text css={{ mb: 0 }} h4>Time negotiations</Text>
                                 </div>
                                 
@@ -216,10 +217,10 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' css={{ $$cardColor: '$colors$pimary' }} isHoverable>
+                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                            
                                 <div className={styles.homeIcons}>
-                                    <Avatar color="primary" size="lg" icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faShare} />} />
+                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faShare} />} />
                                     <Text css={{ mb: 0 }} h4>Sharable consultancy</Text>
                                 </div>
                                

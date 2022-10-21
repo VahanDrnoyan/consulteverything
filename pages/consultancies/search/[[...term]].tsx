@@ -26,13 +26,13 @@ const Consultancies:NextPageWithAuth = (_props) => {
         setShowSearchModal(true)
     }
     return (
-        <div>
+        <div style={{backgroundColor: 'var(--nextui-colors-blue400)'}}>
             <Head>
                 <title>Consult Everything | Consultanices</title>
                 <meta name="description" content="Consultancies list"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-            <Container css={{mt: 20}}>
+            <Container css={{pt: 20}}>
 <ResponsiveMasonry
                 columnsCountBreakPoints={{350: 1, 750: 2, 1200: 3, 1400: 4, 2000: 5}}
             >

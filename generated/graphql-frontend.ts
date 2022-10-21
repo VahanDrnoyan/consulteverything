@@ -25,7 +25,26 @@ export type Account = {
 
 export type Consultancy = {
   __typename?: 'Consultancy';
+  User: User;
+  allow_age_check: Field;
+  allow_email_check: Field;
+  allow_enable_video_by_requester: Scalars['Boolean'];
+  allow_expectations_check: Field;
+  allow_expertise_in_problem_field_check: Field;
+  allow_gender_check: Field;
+  allow_name_surneame: Field;
+  allow_ongoing_support_check: Field;
+  allow_prefession_check: Field;
+  allow_previous_consulancy_experience_check: Field;
+  allow_time_spent_issue_resolution_check: Field;
+  enable_video_by_provider: Scalars['Boolean'];
   id: Scalars['ID'];
+  long_dscription?: Maybe<Scalars['String']>;
+  max_attachment_count: Scalars['Int'];
+  max_time_minuets: Scalars['Int'];
+  short_description: Scalars['String'];
+  tags: Array<Tag>;
+  title: Scalars['String'];
 };
 
 export type Event = {
@@ -33,14 +52,38 @@ export type Event = {
   id: Scalars['ID'];
 };
 
+/** User Roles */
+export enum Field {
+  Exclude = 'EXCLUDE',
+  Include = 'INCLUDE',
+  Required = 'REQUIRED'
+}
+
 export type Mutation = {
   __typename?: 'Mutation';
-  createConsultanicy: Consultancy;
+  createConsultancy?: Maybe<Consultancy>;
   createUser: User;
 };
 
 
-export type MutationCreateConsultanicyArgs = {
+export type MutationCreateConsultancyArgs = {
+  allow_age_check: Field;
+  allow_email_check: Field;
+  allow_enable_video_by_requester: Scalars['Boolean'];
+  allow_expectations_check: Field;
+  allow_expertise_in_problem_field_check: Field;
+  allow_gender_check: Field;
+  allow_name_surneame: Field;
+  allow_ongoing_support_check: Field;
+  allow_prefession_check: Field;
+  allow_previous_consulancy_experience_check: Field;
+  allow_time_spent_issue_resolution_check: Field;
+  enable_video_by_provider: Scalars['Boolean'];
+  long_dscription?: InputMaybe<Scalars['String']>;
+  max_attachment_count: Scalars['Int'];
+  max_time_minuets: Scalars['Int'];
+  short_description: Scalars['String'];
+  tags: Array<Scalars['String']>;
   title: Scalars['String'];
 };
 
@@ -54,12 +97,27 @@ export type Query = {
   ok: Scalars['Boolean'];
 };
 
+/** User Roles */
+export enum Role {
+  Admin = 'ADMIN',
+  Moderator = 'MODERATOR',
+  Superadmin = 'SUPERADMIN',
+  User = 'USER'
+}
+
+/** Tag */
+export type Tag = {
+  __typename?: 'Tag';
+  name: Scalars['String'];
+};
+
 /** this is User */
 export type User = {
   __typename?: 'User';
   accounts: Array<Account>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  role: Role;
 };
 
 export type CreateUserMutationVariables = Exact<{

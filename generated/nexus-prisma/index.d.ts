@@ -2685,6 +2685,58 @@ export interface Consultancy {
     resolve: NexusCore.FieldResolver<'Consultancy', 'userId'>
   }
   /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.tags`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   tags  Tag
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.tags)
+    *   }
+    * })
+    */
+  tags: {
+    /**
+     * The name of this field.
+     */
+    name: 'tags'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Tag' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Tag'> | NexusCore.NexusNonNullDef<'Tag'>)
+    : 'Warning/Error: The type \'Tag\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Tag\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'tags'>
+  }
+  /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.User`.
     *
     * ### ️⚠️ You have not writen documentation for model Consultancy
@@ -2735,6 +2787,237 @@ export interface Consultancy {
      * The resolver of this field
      */
     resolve: NexusCore.FieldResolver<'Consultancy', 'User'>
+  }
+}
+
+/**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `Tag`.
+  *
+  * Tag
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { Tag } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: Tag.$name
+  *   description: Tag.$description
+  *   definition(t) {
+  *     t.field(Tag.id)
+  *   }
+  * })
+  */
+export interface Tag {
+  $name: 'Tag'
+  $description: string
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Tag
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Tag
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Tag {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  Int
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Tag } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Tag.$name
+    *   description: Tag.$description
+    *   definition(t) {
+    *     t.field(Tag.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Tag', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.name`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Tag
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Tag
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Tag {
+    *   /// Lorem ipsum dolor sit amet.
+    *   name  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Tag } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Tag.$name
+    *   description: Tag.$description
+    *   definition(t) {
+    *     t.field(Tag.name)
+    *   }
+    * })
+    */
+  name: {
+    /**
+     * The name of this field.
+     */
+    name: 'name'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Tag', 'name'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultant`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Tag
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Tag
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Tag {
+    *   /// Lorem ipsum dolor sit amet.
+    *   consultant  Consultancy
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Tag } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Tag.$name
+    *   description: Tag.$description
+    *   definition(t) {
+    *     t.field(Tag.consultant)
+    *   }
+    * })
+    */
+  consultant: {
+    /**
+     * The name of this field.
+     */
+    name: 'consultant'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Consultancy' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Consultancy'>
+    : 'Warning/Error: The type \'Consultancy\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Consultancy\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Tag', 'consultant'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultantId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Tag
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Tag
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Tag {
+    *   /// Lorem ipsum dolor sit amet.
+    *   consultantId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Tag } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Tag.$name
+    *   description: Tag.$description
+    *   definition(t) {
+    *     t.field(Tag.consultantId)
+    *   }
+    * })
+    */
+  consultantId: {
+    /**
+     * The name of this field.
+     */
+    name: 'consultantId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Tag', 'consultantId'>
   }
 }
 
@@ -2823,6 +3106,8 @@ export const User: User
 export const VerificationToken: VerificationToken
 
 export const Consultancy: Consultancy
+
+export const Tag: Tag
 
 //
 //
