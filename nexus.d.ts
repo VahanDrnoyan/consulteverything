@@ -14,6 +14,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  TagInputType: { // input type
+    name: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -196,7 +199,7 @@ export interface NexusGenArgTypes {
       max_attachment_count: number; // Int!
       max_time_minuets: number; // Int!
       short_description: string; // String!
-      tags: string[]; // [String!]!
+      tags: NexusGenInputs['TagInputType'][]; // [TagInputType!]!
       title: string; // String!
     }
     createUser: { // args
@@ -213,7 +216,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = keyof NexusGenEnums;
 

@@ -44,7 +44,7 @@ enum Field {
 }
 
 type Mutation {
-  createConsultancy(allow_age_check: Field!, allow_email_check: Field!, allow_enable_video_by_requester: Boolean!, allow_expectations_check: Field!, allow_expertise_in_problem_field_check: Field!, allow_gender_check: Field!, allow_name_surneame: Field!, allow_ongoing_support_check: Field!, allow_prefession_check: Field!, allow_previous_consulancy_experience_check: Field!, allow_time_spent_issue_resolution_check: Field!, enable_video_by_provider: Boolean!, long_dscription: String, max_attachment_count: Int!, max_time_minuets: Int!, short_description: String!, tags: [String!]!, title: String!): Consultancy
+  createConsultancy(allow_age_check: Field!, allow_email_check: Field!, allow_enable_video_by_requester: Boolean!, allow_expectations_check: Field!, allow_expertise_in_problem_field_check: Field!, allow_gender_check: Field!, allow_name_surneame: Field!, allow_ongoing_support_check: Field!, allow_prefession_check: Field!, allow_previous_consulancy_experience_check: Field!, allow_time_spent_issue_resolution_check: Field!, enable_video_by_provider: Boolean!, long_dscription: String, max_attachment_count: Int!, max_time_minuets: Int!, short_description: String!, tags: [TagInputType!]!, title: String!): Consultancy
   createUser(email: String!): User!
 }
 
@@ -62,6 +62,10 @@ enum Role {
 
 """Tag"""
 type Tag {
+  name: String!
+}
+
+input TagInputType {
   name: String!
 }
 

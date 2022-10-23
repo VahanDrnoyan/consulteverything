@@ -41,6 +41,12 @@ export const TagsType= objectType({
        t.field(Tag.name)
     },
 });
+export const TagInputType = extendInputType({
+    type: 'TagInputType',
+    definition(t) {
+        t.field(Tag.name)
+    },
+})
 export const ConsultanciyInput = {
     title: nonNull(stringArg()),
         short_description: nonNull(stringArg()),
@@ -59,7 +65,7 @@ export const ConsultanciyInput = {
         allow_expectations_check: nonNull(FiledEnum),
         allow_time_spent_issue_resolution_check: nonNull(FiledEnum),
         allow_expertise_in_problem_field_check: nonNull(FiledEnum),
-        tags: nonNull(list(nonNull(stringArg()))),
+        tags: nonNull(list(nonNull('TagInputType'))),
 }
 export const ConsultancyResolver = mutationField('createConsultancy', {
     type: ConsultancyType,
@@ -67,9 +73,7 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
         ...ConsultanciyInput
     },
     resolve: async (_root, args, { prisma, user }) => {
-        const tags= args.tags.map((item)=>{
-                return {name: item as string}
-        })
+    
 
         const consultancyParams: Prisma.ConsultancyCreateArgs= {
             data: {
@@ -80,7 +84,7 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
                 },
                 tags:{
                     createMany: {
-                        data: tags
+                        data: args.tags
                         
                     }
                 },
