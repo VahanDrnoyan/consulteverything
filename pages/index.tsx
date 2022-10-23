@@ -25,10 +25,6 @@ const Home: NextPageWithAuth = (_props) => {
     const { status } = useSession()
     const router = useRouter()
 
-    const [showModal, setShowModal] = useState(false);
-    const showModalhandler = (_event: PressEvent) => {
-        setShowModal(true);
-    }
     const handleNavigateToConsultancies= (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
        
         router.push({
@@ -129,8 +125,7 @@ const Home: NextPageWithAuth = (_props) => {
                     }}>
                                     {status === 'authenticated' ? (
                                         <Button css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}} icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faUser} />}>Go to dashboard</Button>
-                                    ) : (<Button css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}} onPress={showModalhandler} icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faUser} />}>Enter with email
-                                    </Button>)}
+                                    ) : ('')}
                                 </Row>
                             </Card.Footer>
                         </Card>
@@ -239,7 +234,6 @@ const Home: NextPageWithAuth = (_props) => {
                 <Footer />
             </Container>
             </div>
-            <LoginModal show={showModal} setShow={setShowModal}/>
         </div>)
 }
 Home.auth = {

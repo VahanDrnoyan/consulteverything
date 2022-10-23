@@ -2,59 +2,34 @@ import React, {useRef, useState} from "react";
 import { Modal, Input, Row, Checkbox, Button, Text, useInput, FormElement, Grid } from "@nextui-org/react";
 import { Mail } from "../components/icons/Mail";
 import { signIn } from "next-auth/react";
-import * as yup from "yup";
-const schema = yup.object().shape({
-  email: yup.string().email().required(),
-});
+import { useLoginFormValidator } from "../Validators/LoginFormValidators";
 
-interface LoginFormValues {
-    email: string;
-  }
+
+
 interface Props {
     show: boolean,
      setShow:  React.Dispatch<React.SetStateAction<boolean>>
 
  }
 const LoginModal: React.FC<Props> = ({show, setShow})=> {
-  const { value, reset, bindings } = useInput("");
-  const [isValitEmail, setIsValidEmail] = useState(false)
-  const [visible, setVisible] = React.useState(false);
-  const handler = () => setVisible(true);
-  const [email, setEmail] = useState('')
   const closeHandler = () => {
     setShow(false)
   };
-  const handleInputChange = (e: React.ChangeEvent<FormElement>)=> {
-        
-  }
-  const validateEmail = (value:string) => {
-    schema.validate({ email: value}).then(()=> setIsValidEmail(true)).catch(()=> setIsValidEmail(false));
-  };
-  const helper = React.useMemo(() => {
-   
-    if (!value)
-      return {
-        text: "",
-        color: "",
-      };
-   validateEmail(value);
-    if(isValitEmail)  {
-      setEmail(value)
-    }
-    return {
-      text: isValitEmail ? "" : "Enter a valid email",
-      color: isValitEmail ? "default" : "error",
-    };
-  }, [value]);
+  const [errors, email, onChange, setEmail, helper] = useLoginFormValidator()
+  
   const handleFormSubmit = (e:React.FormEvent)=> {
     e.preventDefault()
 
-    isValitEmail && signIn("email", { redirect: false, email: email}).then(()=>{
-      setEmail('')  
+    !errors && signIn("email", { redirect: false, email: email}).then(()=>{
+      setEmail(()=>{
+        return ''
+      })
       closeHandler()
         
      }).catch((error)=>{
-      setEmail('')
+      setEmail(()=>{
+        return ''
+      })
         closeHandler()
      })
   }
@@ -80,16 +55,14 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
         <Grid.Container css={{minWidth: '100%'}}gap={2}>
       <Grid css={{minWidth: '100%'}}>
           <Input
-          {...bindings}
           clearable
           value={email}
           shadow={false}
-          onClearClick={reset}
           status={helper.color as "default" | "error"}
           color={helper.color as "default" | "error"}
           helperColor={helper.color as "default" | "error"}
-          helperText={helper.text}
-          type="email"
+          helperText={errors}
+          onChange={onChange}
           fullWidth
           labelPlaceholder="Your Email"
             contentLeft={<Mail fill="currentColor" />}

@@ -38,9 +38,9 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             return { ...state, ...{ [id]: e.target.value } }
         })
     }
-    const removeTagItem = (e: PressEvent) => {
+    const removeTagItem = (e: MouseEvent<HTMLButtonElement>) => {
 
-        const tag = e.target.id
+        const tag = (e.target as HTMLButtonElement).name
 
         setValues((state) => {
             const tags = state.tags.filter((item) => {
@@ -219,8 +219,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                             return (<Badge isSquared size={"xs"} key={key} css={{ m: '$1','pl': 10, 'mt': '$4', 'bg': '$accents4', 'color': '$accents8', 'border': 'none' }}>
                                 {item}
                                 <Button
-                                    id={item}
-                                    onPress={removeTagItem}
+                                    name={item}
+                                        onClick={removeTagItem}
 
                                     auto
                                     css={{ 'd': 'inline-flex', 'minWidth': '24px', maxHeight: 18 }}

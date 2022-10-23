@@ -6,7 +6,8 @@ import { useSession } from "next-auth/react";
 import { Dropdown, Avatar, Grid } from "@nextui-org/react";
 import Logo from "./Logo";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import LoginModal from "./LoginModal";
 type NavItems = {
     id:string;
     name:string;
@@ -14,8 +15,12 @@ type NavItems = {
     routename?: string
 }
 export default function Navigation() {
+    const [showModal, setShowModal] = useState(false);
     const { data: session } = useSession()
     const router = useRouter()
+    const showModalhandler = () => {
+        setShowModal(true);
+    }
     const responsiveNavItems = useMemo(()=>{
         let navItems:NavItems[]  = []
         let allNavItems:NavItems[] = [
@@ -34,7 +39,7 @@ export default function Navigation() {
     
     return (
 
-        <Navbar disableBlur isCompact shouldHideOnScroll variant="sticky" containerCss={{'bg': '$blue100'}} css={{'bg': '$blue100'}}>
+        <><Navbar disableBlur isCompact shouldHideOnScroll variant="sticky" containerCss={{ 'bg': '$blue100' }} css={{ 'bg': '$blue100' }}>
             <Navbar.Brand>
                 <Navbar.Toggle css={{
                     '@sm': {
@@ -45,108 +50,107 @@ export default function Navigation() {
 
                 <Logo color="var(--nextui-colors-primary)" size="2x" />
                 <Input
-                status="primary"
+                    status="primary"
                     css={{
                         ml: 10
                     }}
                     labelRight={<FontAwesomeIcon size={"1x"} fill="currentColor" icon={faSearch} />}
-                    placeholder="Search"
-                />
+                    placeholder="Search" />
             </Navbar.Brand>
             {session && session?.user ? (
                 <Navbar.Content enableCursorHighlight hideIn="sm" variant="underline-rounded">
                     <>{responsiveNavItems.map((item, index) => (
-                    <Navbar.Item isActive={router.pathname === item.routename} key={item.id}>
+                        <Navbar.Item isActive={router.pathname === item.routename} key={item.id}>
                             <Link
                                 href={item.url}
                             >
                                 {item.name}
                             </Link>
-                            
+
                         </Navbar.Item>
-                            
-                ))}<Dropdown>
-                                <Navbar.Item>
-                                    <Dropdown.Button
-                                        auto
-                                        light
-                                        css={{
-                                            px: 0,
-                                            dflex: "center",
-                                            svg: { pe: "none" },
-                                        }}
-                                    
-                                        ripple={false}
-                                    >
-                                        My consultancy
-                                    </Dropdown.Button>
-                                </Navbar.Item>
-                                <Dropdown.Menu
-                                    aria-label="ACME features"
+
+                    ))}<Dropdown>
+                            <Navbar.Item>
+                                <Dropdown.Button
+                                    auto
+                                    light
                                     css={{
-                                        $$dropdownMenuWidth: "340px",
-                                        $$dropdownItemHeight: "70px",
-                                        "& .nextui-dropdown-item": {
-                                            py: "$4",
-                                            // dropdown item left icon
-                                            svg: {
-                                                color: "$secondary",
-                                                mr: "$4",
-                                            },
-                                            // dropdown item title
-                                            "& .nextui-dropdown-item-content": {
-                                                w: "100%",
-                                                fontWeight: "$semibold",
-                                            },
-                                        },
+                                        px: 0,
+                                        dflex: "center",
+                                        svg: { pe: "none" },
                                     }}
+
+                                    ripple={false}
                                 >
-                                    <Dropdown.Item
-                                        key="autoscaling"
-                                        showFullDescription
-                                        description="ACME scales apps to meet user demand, automagically, based on load."
-                                        
-                                    >
-                                        Autoscaling
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        key="usage_metrics"
-                                        showFullDescription
-                                        description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
-                                        
-                                    >
-                                        Usage Metrics
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        key="production_ready"
-                                        showFullDescription
-                                        description="ACME runs on ACME, join us and others serving requests at web scale."
-                                        
-                                    >
-                                        Production Ready
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        key="99_uptime"
-                                        showFullDescription
-                                        description="Applications stay on the grid with high availability and high uptime guarantees."
-                                        
-                                    >
-                                        +99% Uptime
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        key="supreme_support"
-                                        showFullDescription
-                                        description="Overcome any challenge with a supporting team ready to respond."
-                                    >
-                                        +Supreme Support
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown></>
-        
-                    
-                
+                                    My consultancy
+                                </Dropdown.Button>
+                            </Navbar.Item>
+                            <Dropdown.Menu
+                                aria-label="consultanices"
+                                css={{
+                                    $$dropdownMenuWidth: "340px",
+                                    $$dropdownItemHeight: "70px",
+                                    "& .nextui-dropdown-item": {
+                                        py: "$4",
+                                        // dropdown item left icon
+                                        svg: {
+                                            color: "$secondary",
+                                            mr: "$4",
+                                        },
+                                        // dropdown item title
+                                        "& .nextui-dropdown-item-content": {
+                                            w: "100%",
+                                            fontWeight: "$semibold",
+                                        },
+                                    },
+                                }}
+                            >
+                                <Dropdown.Item
+                                    key="autoscaling"
+                                    showFullDescription
+                                    description="ACME scales apps to meet user demand, automagically, based on load."
+
+                                >
+                                    Autoscaling
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    key="usage_metrics"
+                                    showFullDescription
+                                    description="Real-time metrics to debug issues. Slow query added? We’ll show you exactly where."
+
+                                >
+                                    Usage Metrics
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    key="production_ready"
+                                    showFullDescription
+                                    description="ACME runs on ACME, join us and others serving requests at web scale."
+
+                                >
+                                    Production Ready
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    key="99_uptime"
+                                    showFullDescription
+                                    description="Applications stay on the grid with high availability and high uptime guarantees."
+
+                                >
+                                    +99% Uptime
+                                </Dropdown.Item>
+                                <Dropdown.Item
+                                    key="supreme_support"
+                                    showFullDescription
+                                    description="Overcome any challenge with a supporting team ready to respond."
+                                >
+                                    +Supreme Support
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown></>
+
+
+
                 </Navbar.Content>
-                
+
             ) : ('')}
             <Navbar.Content>
                 {session && session?.user ? (
@@ -159,8 +163,7 @@ export default function Navigation() {
                                         size="lg"
                                         as="button"
                                         color="primary"
-                                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                                    />
+                                        src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
                                     <Dropdown.Item key="profile" css={{ height: "$18" }}>
@@ -191,13 +194,13 @@ export default function Navigation() {
                         </Grid>
                     </Grid.Container>
                 ) : (<Navbar.Item>
-                    <Button auto flat href="#">
-                        Sign Up
+                    <Button auto flat href="#" onClick={showModalhandler}>
+                        Enter with email
                     </Button>
                 </Navbar.Item>)}
 
             </Navbar.Content>
-            <Navbar.Collapse >
+            <Navbar.Collapse>
                 {responsiveNavItems.map((item, index) => (
                     <Navbar.CollapseItem key={item.id}>
                         <Link
@@ -208,6 +211,6 @@ export default function Navigation() {
                     </Navbar.CollapseItem>
                 ))}
             </Navbar.Collapse>
-        </Navbar>
+        </Navbar><LoginModal show={showModal} setShow={setShowModal} /></>
     )
 }
