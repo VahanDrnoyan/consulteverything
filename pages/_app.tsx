@@ -11,6 +11,8 @@ import {Role} from "@prisma/client";
 import '../node_modules/@fortawesome/fontawesome-svg-core/styles.css'
 import { NextUIProvider } from '@nextui-org/react';
 import Layout from '../components/Layout';
+import { useApollo } from '../lib/client';
+import { ApolloProvider } from '@apollo/client';
 
 interface CustomAppProps {
     Component: NextComponentType & { auth: { role: Role } },
@@ -20,8 +22,9 @@ interface CustomAppProps {
 }
 
 function MyApp({Component, pageProps: {session, ...pageProps}}:CustomAppProps) {
+    const apolloClient = useApollo({});
     return (
-        
+        <ApolloProvider client={apolloClient}>
         <SessionProvider session={session}>
             {Component.auth?.role === 'USER' ? (
                 <DashboardAuth>
@@ -44,6 +47,7 @@ function MyApp({Component, pageProps: {session, ...pageProps}}:CustomAppProps) {
                 <NextUIProvider><Layout><Component {...pageProps} /></Layout></NextUIProvider>
             )}
         </SessionProvider>
+        </ApolloProvider>
     )
 }
 

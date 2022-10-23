@@ -10,6 +10,7 @@ import Link from "next/link";
 import ConsultancyCard from "../../../components/ConsultancyCard";
 import { Container } from "@nextui-org/react";
 import { NextPage } from "next";
+import Footer from "../../../components/Footer";
 type NextPageWithAuth = NextPage & {
     auth?: {
         role: string
@@ -26,7 +27,7 @@ const Consultancies:NextPageWithAuth = (_props) => {
         setShowSearchModal(true)
     }
     return (
-        <div style={{backgroundColor: 'var(--nextui-colors-blue800)'}}>
+        <div>
             <Head>
                 <title>Consult Everything | Consultanices</title>
                 <meta name="description" content="Consultancies list"/>
@@ -60,6 +61,7 @@ const Consultancies:NextPageWithAuth = (_props) => {
                 </Masonry>
             </ResponsiveMasonry>
             </Container>
+            <Footer/>
         </div>
     )
 }

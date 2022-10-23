@@ -5,8 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button, Container, Grid, Text } from "@nextui-org/react"
 import { useRouter } from "next/router"
 import { NextPage } from "next/types"
-
-const MyConsultancy:NextPage = (props)=> {
+type NextPageWithAuth = NextPage & {
+  auth?: {
+      role: string
+  }
+};
+const MyConsultancy:NextPageWithAuth = (props)=> {
   const router = useRouter()
   const navigateToEdit = ()=> {
     router.push('/dashboard/edit')
@@ -18,7 +22,7 @@ const MyConsultancy:NextPage = (props)=> {
         <Text h2>My Consultancies</Text>
       </Grid>
       <Grid css={{alignItems: 'center', d: 'flex', justifyContent: 'flex-end'}}>
-        <Button onClick={navigateToEdit}color="gradient" css={{ 'bg': '$blue300', 'color': '$accents9'}} auto icon={<FontAwesomeIcon size={"xl"} color="#fff" icon={faAdd} />}>
+        <Button onClick={navigateToEdit}color="gradient" css={{ 'bg': '$blue300', 'color': '$accents9'}} auto icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-accents9)" icon={faAdd} />}>
           Create new Consultancy
         </Button>
       </Grid>

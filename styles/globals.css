@@ -25,3 +25,18 @@ a {
     background: black;
   }
 }
+.ql-toolbar.ql-snow {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-width:2px !important;
+  border-color: rgb(213, 213, 213) !important;
+}
+.ql-container.ql-snow {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border-width:2px !important;
+  border-color: rgb(213, 213, 213) !important;
+}
+.ql-container, .ql-toolbar.ql-snow {
+  font-family: inherit !important;
+}
