@@ -8,7 +8,9 @@ import Editor from "../../../components/Editor";
 import Footer from "../../../components/Footer";
 import { PressEvent } from '@react-types/shared';
 
-import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs } from "../../../generated/graphql-frontend";
+import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType } from "../../../generated/graphql-frontend";
+import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTitleValidator";
+import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -19,6 +21,31 @@ type NextPageWithAuth = NextPage & {
 
 
 const ConsultancyEdit: NextPageWithAuth = (props) => {
+    const initialvalues: Omit<MutationCreateConsultancyArgs, "User" | "id"> = {
+        title: '',
+        allow_age_check: Field.Exclude,
+        allow_email_check: Field.Exclude,
+        allow_enable_video_by_requester: false,
+        allow_expectations_check: Field.Exclude,
+        allow_expertise_in_problem_field_check: Field.Exclude,
+        allow_gender_check: Field.Exclude,
+        allow_name_surneame: Field.Exclude,
+        allow_ongoing_support_check: Field.Exclude,
+        allow_prefession_check: Field.Exclude,
+        allow_previous_consulancy_experience_check: Field.Exclude,
+        allow_time_spent_issue_resolution_check: Field.Exclude,
+        enable_video_by_provider: false,
+
+        max_attachment_count: 0,
+        max_time_minuets: 0,
+        short_description: "",
+        long_dscription: '',
+        tags: []
+    }
+    const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialvalues);
+    const { errors: consultancyTagErrors, invalidTags, runTagsValidation } = useConsultancyTagValidator()
+
+
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
         onCompleted: (data) => {
             console.log(data, 88888)
@@ -26,10 +53,11 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     });
 
     const handleFormSubmit = async (e: React.FormEvent) => {
-        console.log(values, 'values', 2222)
 
         e.preventDefault()
-        await createConsultancy({ variables: { ...values } })
+        if ((values.title && !consultancyTitleErrors) &&(values.tags && !consultancyTagErrors)) {
+            await createConsultancy({ variables: { ...values } })
+        }
 
     }
     const handleInputChange = (e: ChangeEvent<FormElement>) => {
@@ -43,19 +71,24 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         const tag = (e.target as HTMLButtonElement).name
 
         setValues((state) => {
-            const tags = state.tags.filter((item) => {
-                return item !== tag
-            });
+            const tags = [...state.tags.filter((item) => {
+                return item.name !== tag
+            })];
             return { ...state, ...{ tags: tags } }
         })
+
     }
+    useEffect(() => {
+        runTagsValidation(values.tags)
+
+    }, [values.tags])
     const handleTagsChange = (e: ChangeEvent<FormElement>) => {
         const hasCommat = e.target.value.endsWith(',')
 
         setValues((state) => {
             if (hasCommat) {
-                const tags = state.tags;
-                tags.push(e.target.value.slice(0, -1))
+                const tags = [...state.tags];
+                tags.push({ name: e.target.value.slice(0, -1) })
                 e.target.value = ''
                 return { ...state, ...{ tags } }
             }
@@ -148,33 +181,13 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             return { ...state, ...{ enable_video_by_provider: checked } }
         })
     }
-    const initialvalues: Omit<MutationCreateConsultancyArgs, "User" | "id"> = {
-        title: '',
-        allow_age_check: Field.Exclude,
-        allow_email_check: Field.Exclude,
-        allow_enable_video_by_requester: false,
-        allow_expectations_check: Field.Exclude,
-        allow_expertise_in_problem_field_check: Field.Exclude,
-        allow_gender_check: Field.Exclude,
-        allow_name_surneame: Field.Exclude,
-        allow_ongoing_support_check: Field.Exclude,
-        allow_prefession_check: Field.Exclude,
-        allow_previous_consulancy_experience_check: Field.Exclude,
-        allow_time_spent_issue_resolution_check: Field.Exclude,
-        enable_video_by_provider: false,
 
-        max_attachment_count: 0,
-        max_time_minuets: 0,
-        short_description: "",
-        long_dscription: '',
-        tags: []
-    }
     const RadioOptions = () => {
         return (
             <><Radio value="INCLUDE">Include</Radio><Radio value="EXCLUDE">Exclude</Radio><Radio value="REQUIRED">Required</Radio></>
         )
     }
-    const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialvalues);
+    const { errors: consultancyTitleErrors, helper: consultancyTitleHelper } = useConsultancyTitleValidator(values.title)
     const [editorValue, setEditorValue] = useState('')
     useEffect(() => {
         setValues((state) => {
@@ -190,9 +203,11 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Input
                         css={{ 'mt': 40 }}
                         labelPlaceholder="Title"
-                        status="primary"
+                        status={consultancyTitleHelper.color as "default" | "error"}
+                        color={consultancyTitleHelper.color as "default" | "error"}
+                        helperColor={consultancyTitleHelper.color as "default" | "error"}
                         required
-                        bordered
+                        helperText={consultancyTitleErrors}
                         clearable
                         animated
                         value={values.title}
@@ -204,36 +219,37 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Input
                         css={{ 'mt': 40 }}
                         labelPlaceholder="Tags"
-                        status="primary"
-                        required
-                        bordered
+                        status="default"
+                        helperText={"Comma separated list of tags"}
                         type="text"
                         clearable
                         animated
                         fullWidth
-                        helperText="Comma separated list of tags"
                         onChange={handleTagsChange}
                     />
-                    {values.tags.length > 0 ? values.tags.map((item: string, key) => {
-                        if (item) {
-                            return (<Badge isSquared size={"xs"} key={key} css={{ m: '$1','pl': 10, 'mt': '$4', 'bg': '$accents4', 'color': '$accents8', 'border': 'none' }}>
-                                {item}
-                                <Button
-                                    name={item}
+                    <div style={{ marginTop: '20px' }}>
+                        {values.tags.length > 0 ? values.tags.map((item: TagInputType, key) => {
+                            if (item.name) {
+                                return (<Badge color={invalidTags.includes(item.name) ? 'error' : 'default'} isSquared size={"xs"} key={key} css={{ m: '$1', 'pl': 10, 'border': 'none' }}>
+                                    {item.name}
+                                    <Button
+                                        name={item.name}
                                         onClick={removeTagItem}
 
-                                    auto
-                                    css={{ 'd': 'inline-flex', 'minWidth': '24px', maxHeight: 18 }}
-                                    light
-                                    size={'xs'}
+                                        auto
+                                        css={{ 'd': 'inline-flex', 'minWidth': '24px', maxHeight: 18 }}
+                                        light
+                                        size={'xs'}
 
-                                    icon={<FontAwesomeIcon size={'1x'} color="#fff" icon={faRemove} />}
-                                />
-                            </Badge>)
-                        }
-                        return '';
-                    }) : ''}
-                    <Input type="hidden" name="tags" value={values.tags}/>
+                                        icon={<FontAwesomeIcon size={'1x'} color="#fff" icon={faRemove} />}
+                                    />
+                                </Badge>)
+                            }
+                            return '';
+                        }) : ''}
+                        {consultancyTagErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6 }}>{consultancyTagErrors}</Text>)}
+                    </div>
+
                     <Textarea
                         css={{ 'mt': 40 }}
                         labelPlaceholder="Short description"
@@ -259,7 +275,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         animated
                         fullWidth
                         name="max_attachment_count"
-                        value={values.max_attachment_count}
+                        value={values.max_attachment_count === 0 ? '' : values.max_attachment_count}
                         onChange={handleNumberInputChange}
                     />
                     <Input
@@ -274,7 +290,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         animated
                         name="max_time_minuets"
                         fullWidth
-                        value={values.max_time_minuets}
+                        value={values.max_time_minuets === 0 ? '' : values.max_time_minuets}
                         onChange={handleNumberInputChange}
                     />
                     <Checkbox css={{ 'my': 20 }} onChange={handeleEnableVideoByProvider} color="primary" isSelected={values.enable_video_by_provider} defaultSelected={values.enable_video_by_provider}>
