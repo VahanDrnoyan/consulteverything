@@ -39,7 +39,7 @@ export default function Navigation() {
     
     return (
 
-        <><Navbar disableBlur isCompact shouldHideOnScroll variant="sticky" containerCss={{ 'bg': '$blue100' }} css={{ 'bg': '$blue100' }}>
+        <><Navbar    variant="sticky" containerCss={{ 'bg': '$white' }} css={{ 'bg': '$white' }}>
             <Navbar.Brand>
                 <Navbar.Toggle css={{
                     '@sm': {

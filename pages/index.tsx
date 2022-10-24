@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState, useRef, useEffect} from 'react';
 import { useRouter } from "next/router";
-import heroPic from "../public/galaxy_cropped.jpg"
+import heroPic from "../public/khustup1.jpeg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faListAlt, faFileVideo, faMoneyBill1, faEdit, faCalendar, faUser } from '@fortawesome/free-regular-svg-icons'
 import { Text, Avatar, Grid, Container, Card, Row, Button } from "@nextui-org/react";
@@ -40,17 +40,17 @@ const Home: NextPageWithAuth = (_props) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div style={{ height: '700px', position: 'relative', 'display': 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ height: '550px', position: 'relative', 'display': 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div className={styles.heroImage}>
                     <Image
                     
                         width={"2000px"}
-                        height={"700px"}
+                        height={"550px"}
                         src={heroPic.src}
                         alt="Consult Everything"
                         layout='fill'
-                        style={{minHeight: '700px',
-                        maxHeight:'700px',
+                        style={{minHeight: '550px',
+                        maxHeight:'550px',
                         }}
                     />
                 </div>
@@ -64,15 +64,15 @@ const Home: NextPageWithAuth = (_props) => {
 
             </div>
             <div className={styles.bottomConatiner}>
-            <Container css={{marginTop: '-100px'}}>
+            <Container css={{marginTop: '-80px'}}>
     
                 <Grid.Container gap={2} justify="center" css={{p:0}}>
                     <Grid xs={12} sm={6}>
                         <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                            
-                                <div className={styles.homeTopIcons}>
-                                    <Avatar squared color="default" size="lg" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faCircle} />} />
-                                    <Text css={{ ml: 12 }} h4>Our mission</Text>
+                                <div  style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:20}}>
+                                    <span style={{display:'block', width: '30px', height:'30px'}}><img src="/mission.svg" /></span>
+                                    <Text css={{ m:0,ml: 12,  color: '#9B63BC', fontWeight: 'normal'}} h4>Our mission</Text>
                                 </div>
                             
                                 <Card.Body>
@@ -102,9 +102,9 @@ const Home: NextPageWithAuth = (_props) => {
                     <Grid xs={12} sm={6} >
                         <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
                             
-                                <div className={styles.homeTopIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faArrowRight} />} />
-                                    <Text css={{ml: 12}} h4>Start solving your everyday problems...</Text>
+                                <div style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:' 20px'}}>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/start.svg" /></span>
+                                    <Text css={{m:0,ml: 12, color: '#9B63BC', fontWeight: 'normal'}} h4>Start solving your everyday problems...</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -138,8 +138,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faListAlt} />} />
-                                    <Text h4 css={{ mb: 0 }}>Custom form creation</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/form.svg" /></span>
+                                    <Text h4 css={{ mb: 0 , mt: 10, color: '#9B63BC', fontWeight: 'normal'}}>Custom form creation</Text>
                                 </div>
 
                         
@@ -154,8 +154,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card css={{'bg': '$blue100'}}  variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faFileVideo} />} />
-                                    <Text css={{ mb: 0 }} h4>Video call consulting</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/video.svg" /></span>
+                                    <Text css={{ mb: 0, mt : 10, color: '#9B63BC', fontWeight: 'normal' }} h4>Video call consulting</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -167,8 +167,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faMoneyBill1} />} />
-                                    <Text css={{ mb: 0 }}  h4>Get paid for info</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/paid.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10 , color: '#9B63BC', fontWeight: 'normal'}}  h4>Get paid for info</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -183,8 +183,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar squared color="default" size="lg" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faEdit} />} />
-                                    <Text css={{ mb: 0 }} h4>Consultancy transcription recording</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/recording.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10 , color: '#9B63BC', fontWeight: 'normal'}} h4>Consultancy transcription recording</Text>
                                 </div>
                                 
                                 
@@ -200,8 +200,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faCalendar} />} />
-                                    <Text css={{ mb: 0 }} h4>Time negotiations</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/time.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10, color: '#9B63BC', fontWeight: 'normal'}} h4>Time negotiations</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -215,8 +215,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
                            
                                 <div className={styles.homeIcons}>
-                                    <Avatar size="lg" squared color="default" icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-primary)" icon={faShare} />} />
-                                    <Text css={{ mb: 0 }} h4>Sharable consultancy</Text>
+                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/sharable.svg" /></span>
+                                    <Text css={{ mb: 0 , mt: 10, color: '#9B63BC', fontWeight: 'normal'}} h4>Sharable consultancy</Text>
                                 </div>
                                
                                 <Card.Body>
