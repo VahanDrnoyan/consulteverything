@@ -16,7 +16,7 @@ $allow_ongoing_support_check: Field!
 $allow_expectations_check: Field!
 $allow_time_spent_issue_resolution_check: Field!
 $allow_expertise_in_problem_field_check: Field!
-$tags: [String!]!){
+$tags: [TagInputType!]!){
   createConsultancy(
     title: $title,
 short_description: $short_description,

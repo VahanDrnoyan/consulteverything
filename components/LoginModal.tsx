@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import { Modal, Input, Row, Checkbox, Button, Text, useInput, FormElement, Grid } from "@nextui-org/react";
 import { Mail } from "../components/icons/Mail";
 import { signIn } from "next-auth/react";
-import { useLoginFormValidator } from "../Validators/LoginFormValidators";
+import { useLoginFormValidator } from "../Validators/LoginFormValidator";
 
 
 
