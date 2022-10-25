@@ -39,7 +39,6 @@ export type Consultancy = {
   allow_time_spent_issue_resolution_check: Field;
   enable_video_by_provider: Scalars['Boolean'];
   id: Scalars['ID'];
-  long_dscription?: Maybe<Scalars['String']>;
   max_attachment_count: Scalars['Int'];
   max_time_minuets: Scalars['Int'];
   short_description: Scalars['String'];
@@ -79,7 +78,7 @@ export type MutationCreateConsultancyArgs = {
   allow_previous_consulancy_experience_check: Field;
   allow_time_spent_issue_resolution_check: Field;
   enable_video_by_provider: Scalars['Boolean'];
-  long_dscription?: InputMaybe<Scalars['String']>;
+  long_description?: InputMaybe<Scalars['String']>;
   max_attachment_count: Scalars['Int'];
   max_time_minuets: Scalars['Int'];
   short_description: Scalars['String'];
@@ -127,7 +126,7 @@ export type User = {
 export type CreateConsultancyMutationVariables = Exact<{
   title: Scalars['String'];
   short_description: Scalars['String'];
-  long_dscription?: InputMaybe<Scalars['String']>;
+  long_description?: InputMaybe<Scalars['String']>;
   max_time_minuets: Scalars['Int'];
   max_attachment_count: Scalars['Int'];
   enable_video_by_provider: Scalars['Boolean'];
@@ -157,11 +156,11 @@ export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __type
 
 
 export const CreateConsultancyDocument = gql`
-    mutation CreateConsultancy($title: String!, $short_description: String!, $long_dscription: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surneame: Field!, $allow_prefession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consulancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $tags: [TagInputType!]!) {
+    mutation CreateConsultancy($title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surneame: Field!, $allow_prefession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consulancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $tags: [TagInputType!]!) {
   createConsultancy(
     title: $title
     short_description: $short_description
-    long_dscription: $long_dscription
+    long_description: $long_description
     max_time_minuets: $max_time_minuets
     max_attachment_count: $max_attachment_count
     enable_video_by_provider: $enable_video_by_provider
@@ -200,7 +199,7 @@ export type CreateConsultancyMutationFn = Apollo.MutationFunction<CreateConsulta
  *   variables: {
  *      title: // value for 'title'
  *      short_description: // value for 'short_description'
- *      long_dscription: // value for 'long_dscription'
+ *      long_description: // value for 'long_description'
  *      max_time_minuets: // value for 'max_time_minuets'
  *      max_attachment_count: // value for 'max_attachment_count'
  *      enable_video_by_provider: // value for 'enable_video_by_provider'

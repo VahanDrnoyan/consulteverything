@@ -1853,7 +1853,7 @@ export interface Consultancy {
     resolve: NexusCore.FieldResolver<'Consultancy', 'short_description'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.long_dscription`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.long_description`.
     *
     * ### ️⚠️ You have not writen documentation for model Consultancy
     *
@@ -1862,7 +1862,7 @@ export interface Consultancy {
     * ```prisma
     * model Consultancy {
     *   /// Lorem ipsum dolor sit amet.
-    *   long_dscription  String?
+    *   long_description  String?
     * }
     * ```
     *
@@ -1877,15 +1877,15 @@ export interface Consultancy {
     *   name: Consultancy.$name
     *   description: Consultancy.$description
     *   definition(t) {
-    *     t.field(Consultancy.long_dscription)
+    *     t.field(Consultancy.long_description)
     *   }
     * })
     */
-  long_dscription: {
+  long_description: {
     /**
      * The name of this field.
      */
-    name: 'long_dscription'
+    name: 'long_description'
   
     /**
      * The type of this field.
@@ -1902,7 +1902,7 @@ export interface Consultancy {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Consultancy', 'long_dscription'>
+    resolve: NexusCore.FieldResolver<'Consultancy', 'long_description'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.max_time_minuets`.

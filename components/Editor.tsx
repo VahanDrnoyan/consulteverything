@@ -49,7 +49,7 @@ const modules = {
   ]
 const Editor: React.FC<Props> = ({setValue, placeholder, value})=> {
     return (
-    <QuillNoSSRWrapper value={value} modules={modules} id="long_dscription"  formats={formats} placeholder={placeholder}theme="snow" onChange={setValue}/>
+    <QuillNoSSRWrapper value={value} modules={modules} id="long_description"  formats={formats} placeholder={placeholder}theme="snow" onChange={setValue}/>
     )
 }
 export default Editor

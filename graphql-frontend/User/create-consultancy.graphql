@@ -1,7 +1,7 @@
 mutation CreateConsultancy(
 $title: String!,
 $short_description: String!
-$long_dscription: String
+$long_description: String
 $max_time_minuets: Int!
 $max_attachment_count: Int!
 $enable_video_by_provider: Boolean!
@@ -20,7 +20,7 @@ $tags: [TagInputType!]!){
   createConsultancy(
     title: $title,
 short_description: $short_description,
-long_dscription: $long_dscription,
+long_description: $long_description,
 max_time_minuets: $max_time_minuets,
 max_attachment_count: $max_attachment_count,
 enable_video_by_provider: $enable_video_by_provider

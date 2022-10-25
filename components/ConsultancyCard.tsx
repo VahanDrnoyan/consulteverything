@@ -10,7 +10,7 @@ interface Props {
 }
 const ConsultancyCard: React.FC = ()=> {
     return (
-        <Card variant='flat' css={{'bg': '$blue100'}}>
+        <Card >
           <Card.Header css={{flexDirection:'column', justifyConetnt: 'flex-start', alignItems: 'start'}}>
           <Avatar
           css={{alignSelf: 'center', mb: 10}}

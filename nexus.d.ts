@@ -51,7 +51,7 @@ export interface NexusGenObjects {
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
-    long_dscription?: string | null; // String
+    long_description?: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
     short_description: string; // String!
@@ -103,7 +103,7 @@ export interface NexusGenFieldTypes {
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
-    long_dscription: string | null; // String
+    long_description: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
     short_description: string; // String!
@@ -152,7 +152,7 @@ export interface NexusGenFieldTypeNames {
     allow_time_spent_issue_resolution_check: 'Field'
     enable_video_by_provider: 'Boolean'
     id: 'ID'
-    long_dscription: 'String'
+    long_description: 'String'
     max_attachment_count: 'Int'
     max_time_minuets: 'Int'
     short_description: 'String'
@@ -195,7 +195,7 @@ export interface NexusGenArgTypes {
       allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
       allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
       enable_video_by_provider: boolean; // Boolean!
-      long_dscription?: string | null; // String
+      long_description?: string | null; // String
       max_attachment_count: number; // Int!
       max_time_minuets: number; // Int!
       short_description: string; // String!

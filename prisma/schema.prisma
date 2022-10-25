@@ -84,7 +84,7 @@ model Consultancy {
   id                                         String  @id @default(cuid())
   title                                      String
   short_description                          String
-  long_dscription                            String? @db.Text
+  long_description                            String? @db.Text
   max_time_minuets                           Int     @default(20)
   max_attachment_count                       Int     @default(3)
   enable_video_by_provider                   Boolean @default(true)

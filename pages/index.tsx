@@ -68,7 +68,7 @@ const Home: NextPageWithAuth = (_props) => {
     
                 <Grid.Container gap={2} justify="center" css={{p:0}}>
                     <Grid xs={12} sm={6}>
-                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
+                        <Card isHoverable>
                            
                                 <div  style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:20}}>
                                     <span style={{display:'block', width: '30px', height:'30px'}}><img src="/mission.svg" /></span>
@@ -94,13 +94,13 @@ const Home: NextPageWithAuth = (_props) => {
                                 <Row justify="flex-end" css={{'@xs':{flexDirection:'column', alignItems: 'flex-end'}, '@md': {flexDirection: 'row'}}} >
 
                                     <Button css={{minWidth: '50%'}}light color={"secondary"}>But not anymore!</Button>
-                                    <Button onClick={handleNavigateToConsultancies} css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faSearch} />}>Browse consultancies</Button>
+                                    <Button onClick={handleNavigateToConsultancies} css={{ 'bg': '$accents9', 'color': '$white'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />}>See consultancies</Button>
                                 </Row>
                             </Card.Footer>
                         </Card>
                     </Grid>
                     <Grid xs={12} sm={6} >
-                        <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
+                        <Card isHoverable>
                             
                                 <div style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:' 20px'}}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/start.svg" /></span>
@@ -124,7 +124,7 @@ const Home: NextPageWithAuth = (_props) => {
                         }
                     }}>
                                     {status === 'authenticated' ? (
-                                        <Button css={{minWidth: '50%', 'bg': '$blue300', 'color': '$accents9'}} icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-primary)" icon={faUser} />}>Go to dashboard</Button>
+                                        <Button css={{ 'bg': '$accents9', 'color': '$white'}} icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />}>Go to dashboard</Button>
                                     ) : ('')}
                                 </Row>
                             </Card.Footer>
@@ -135,7 +135,7 @@ const Home: NextPageWithAuth = (_props) => {
                 
                 <Grid.Container gap={2} justify="center" css={{p: 0}}>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card variant='flat' css={{'bg': '$blue100'}} isHoverable>
+                        <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/form.svg" /></span>
@@ -151,7 +151,7 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card css={{'bg': '$blue100'}}  variant='flat' isHoverable>
+                        <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/video.svg" /></span>
@@ -164,7 +164,7 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
+                        <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/paid.svg" /></span>
@@ -180,7 +180,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Grid.Container>
                 <Grid.Container gap={2} justify="center" css={{p:0, mt:12}}>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
+                        <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/recording.svg" /></span>
@@ -197,7 +197,7 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
+                        <Card  isHoverable>
                             
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/time.svg" /></span>
@@ -212,7 +212,7 @@ const Home: NextPageWithAuth = (_props) => {
                         </Card>
                     </Grid>
                     <Grid xs={12} md={4} lg={4}>
-                        <Card css={{'bg': '$blue100'}} variant='flat' isHoverable>
+                        <Card isHoverable>
                            
                                 <div className={styles.homeIcons}>
                                 <span style={{display:'block', width: '30px', height:'30px'}}><img src="/sharable.svg" /></span>

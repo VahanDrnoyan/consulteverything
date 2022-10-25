@@ -14,7 +14,7 @@ const ConsultancyType = objectType({
     definition(t) {
         t.field(Consultancy.title)
         t.field(Consultancy.short_description)
-        t.field(Consultancy.long_dscription)
+        t.field(Consultancy.long_description)
         t.field(Consultancy.max_attachment_count)
         t.field(Consultancy.max_time_minuets)
         t.field(Consultancy.id)
@@ -50,7 +50,7 @@ export const TagInputType = extendInputType({
 export const ConsultanciyInput = {
     title: nonNull(stringArg()),
         short_description: nonNull(stringArg()),
-        long_dscription: nullable(stringArg()),
+        long_description: nullable(stringArg()),
         max_time_minuets: nonNull(intArg()),
         max_attachment_count: nonNull(intArg()),
         enable_video_by_provider: nonNull(booleanArg()),

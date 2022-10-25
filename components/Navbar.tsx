@@ -48,9 +48,10 @@ export default function Navigation() {
                 }}
                     aria-label="toggle navigation" />
 
-                <Logo color="var(--nextui-colors-primary)" size="2x" />
+                <Logo color="#000" size="2x" />
                 <Input
-                    status="primary"
+                    status="default"
+                    bordered
                     css={{
                         ml: 10
                     }}
@@ -162,7 +163,7 @@ export default function Navigation() {
                                         bordered
                                         size="lg"
                                         as="button"
-                                        color="primary"
+                                        color="default"
                                         src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
                                 </Dropdown.Trigger>
                                 <Dropdown.Menu color="secondary" aria-label="Avatar Actions">

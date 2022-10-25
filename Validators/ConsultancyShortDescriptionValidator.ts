@@ -2,13 +2,13 @@ import { useInput } from "@nextui-org/react";
 import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
-export const useConsultancyTitleValidator = (title:string) => {
+export const useConsultancyShortDescriptionValidator = (description:string ) => {
     const [errors, setErrors] = useState("")
     const schema = yup.object().shape({
-        title: yup.string().min(3, "Title should have at least 3 caharacters length.").max(100, "Title should have at most 100 characters length.").required(),
+        short_description: yup.string().min(50, "Short description should have at least 50 caharacters length.").max(250, "Short description should have at most 250 characters length.").required(),
     });
-    const validateTitle = (value: string) => {
-        schema.validate({ title: value }).then(() => 
+    const validateShortDescribtion = (value: string) => {
+        schema.validate({ short_description: value }).then(() => 
         {
             setErrors("")
         }).catch((err) => {
@@ -19,14 +19,14 @@ export const useConsultancyTitleValidator = (title:string) => {
    
     const helper = React.useMemo(() => {
 
-        if (title.length === 0)
+        if (description.length === 0)
             return {
                 color: "",
             };
-        validateTitle(title);
+            validateShortDescribtion(description);
         return {
             color: errors.length > 0 ? "error" : "default",
         };
-    }, [title]);
+    }, [description]);
     return {errors, helper}  as const
 }

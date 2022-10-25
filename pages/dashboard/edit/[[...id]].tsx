@@ -11,6 +11,8 @@ import { PressEvent } from '@react-types/shared';
 import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType } from "../../../generated/graphql-frontend";
 import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTitleValidator";
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
+import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
+import { useConsultancyLongDescriptionValidator } from "../../../Validators/ConsultancyLongDescriptionValidator";
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -39,7 +41,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         max_attachment_count: 0,
         max_time_minuets: 0,
         short_description: "",
-        long_dscription: '',
+        long_description: '',
         tags: []
     }
     const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialvalues);
@@ -55,7 +57,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
-        if ((values.title && !consultancyTitleErrors) &&(values.tags && !consultancyTagErrors)) {
+        if ((values.title && !consultancyTitleErrors) &&(values.tags && !consultancyTagErrors)
+        && (values.short_description && !consultancyShortDescriptionErrors)) {
             await createConsultancy({ variables: { ...values } })
         }
 
@@ -178,7 +181,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const handeleEnableVideoByProvider = (checked: boolean) => {
         setValues((state) => {
-            return { ...state, ...{ enable_video_by_provider: checked } }
+            return { ...state, ...{ enable_video_by_provider: checked } }          
         })
     }
 
@@ -188,10 +191,12 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         )
     }
     const { errors: consultancyTitleErrors, helper: consultancyTitleHelper } = useConsultancyTitleValidator(values.title)
+    const {errors: consultancyShortDescriptionErrors, helper: consultancyShortDescriptionHelper} = useConsultancyShortDescriptionValidator(values.short_description);
+    const{errors: consultancyLongDescriptionErrors}  = useConsultancyLongDescriptionValidator(values.long_description);
     const [editorValue, setEditorValue] = useState('')
     useEffect(() => {
         setValues((state) => {
-            return { ...state, ...{ long_dscription: editorValue } }
+            return { ...state, ...{ long_description: editorValue } }
         })
     }, [editorValue])
     return (<div>
@@ -253,9 +258,11 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Textarea
                         css={{ 'mt': 40 }}
                         labelPlaceholder="Short description"
-                        status="primary"
+                        status={consultancyShortDescriptionHelper.color as "default" | "error"}
+                        color={consultancyShortDescriptionHelper.color as "default" | "error"}
+                        helperColor={consultancyShortDescriptionHelper.color as "default" | "error"}
                         required
-                        bordered
+                        helperText={consultancyShortDescriptionErrors}
                         animated
                         value={values.short_description}
                         name="short_description"
@@ -263,7 +270,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         onChange={handleInputChange}
                     />
                     <Text css={{ 'mt': 40, 'color': '$primary', 'fontSize': 14 }}>Long description</Text>
-                    <Editor value={values.long_dscription as Value} placeholder="(optional)" setValue={setEditorValue} />
+                    <Editor value={values.long_description as Value} placeholder="(optional)" setValue={setEditorValue} />
+                    {consultancyLongDescriptionErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6 }}>{consultancyLongDescriptionErrors}</Text>)}
                     <Input
                         labelPlaceholder="Max attachments count"
                         type="number"
