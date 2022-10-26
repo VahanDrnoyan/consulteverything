@@ -8,7 +8,7 @@ import Editor from "../../../components/Editor";
 import Footer from "../../../components/Footer";
 import { PressEvent } from '@react-types/shared';
 
-import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType } from "../../../generated/graphql-frontend";
+import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType, ConsultancyDataType } from "../../../generated/graphql-frontend";
 import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTitleValidator";
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
@@ -26,29 +26,31 @@ type NextPageWithAuth = NextPage & {
 
 
 const ConsultancyEdit: NextPageWithAuth = (props) => {
-    const initialValues: Omit<MutationCreateConsultancyArgs, "User" | "id"> = {
-        title: '',
-        allow_age_check: Field.Exclude,
-        allow_email_check: Field.Exclude,
-        allow_enable_video_by_requester: false,
-        allow_expectations_check: Field.Exclude,
-        allow_expertise_in_problem_field_check: Field.Exclude,
-        allow_gender_check: Field.Exclude,
-        allow_name_surname: Field.Exclude,
-        allow_ongoing_support_check: Field.Exclude,
-        allow_profession_check: Field.Exclude,
-        allow_previous_consultancy_experience_check: Field.Exclude,
-        allow_time_spent_issue_resolution_check: Field.Exclude,
-        enable_video_by_provider: false,
+    const initialValues: ConsultancyDataType = {
+    
+            title: '',
+            allow_age_check: Field.Exclude,
+            allow_email_check: Field.Exclude,
+            allow_enable_video_by_requester: false,
+            allow_expectations_check: Field.Exclude,
+            allow_expertise_in_problem_field_check: Field.Exclude,
+            allow_gender_check: Field.Exclude,
+            allow_name_surname: Field.Exclude,
+            allow_ongoing_support_check: Field.Exclude,
+            allow_profession_check: Field.Exclude,
+            allow_previous_consultancy_experience_check: Field.Exclude,
+            allow_time_spent_issue_resolution_check: Field.Exclude,
+            enable_video_by_provider: false,
 
-        max_attachment_count: 0,
-        max_time_minuets: 0,
-        short_description: "",
-        long_description: '',
-        tags: []
+            max_attachment_count: 0,
+            max_time_minuets: 0,
+            short_description: "",
+            long_description: '',
+            tags: []
+    
     }
-    const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialValues);
-    const { errors: consultancyTagErrors, invalidTags } = useConsultancyTagValidator(values.tags)
+    const [values, setValues] = useState<ConsultancyDataType>(initialValues);
+    const { errors: consultancyTagErrors } = useConsultancyTagValidator(values.tags)
 
 
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
@@ -216,7 +218,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                 <form onSubmit={handleFormSubmit}>
                     <Input
                         css={{ 'mt': 40 }}
-                        label="Title"
+                        label="Title *"
                         status={consultancyTitleHelper.color as "default" | "error"}
                         color={consultancyTitleHelper.color as "default" | "error"}
                         helperColor={consultancyTitleHelper.color as "default" | "error"}
@@ -232,7 +234,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
                     <Input
                         css={{ 'mt': 20 }}
-                        label="Tags"
+                        label="Tags *"
                         status="default"
                         helperText={"Comma separated list of tags"}
                         type="text"
@@ -244,7 +246,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <div style={{ marginTop: '20px' }}>
                         {values.tags.length > 0 ? values.tags.map((item: TagInputType, key) => {
                             if (item.name) {
-                                return (<Badge color={invalidTags.includes(item.name) ? 'error' : 'default'} isSquared size={"xs"} key={key} css={{ m: '$1', 'pl': 10, 'border': 'none' }}>
+                                return (<Badge color={'default'} isSquared size={"xs"} key={key} css={{ m: '$1', 'pl': 10, 'border': 'none' }}>
                                     {item.name}
                                     <Button
                                         name={item.name}
@@ -266,7 +268,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
                     <Textarea
                         css={{ 'mt': 20 }}
-                        label="Short description"
+                        label="Short description *"
                         status={consultancyShortDescriptionHelper.color as "default" | "error"}
                         color={consultancyShortDescriptionHelper.color as "default" | "error"}
                         helperColor={consultancyShortDescriptionHelper.color as "default" | "error"}
@@ -282,7 +284,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Editor bgColor={consultancyLongDescriptionErrors ? 'rgb(253,216,229)' : 'rgb(241, 243, 245)'} value={values.long_description as Value} placeholder="(optional)" setValue={setEditorValue} />
                     {consultancyLongDescriptionErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6 }}>{consultancyLongDescriptionErrors}</Text>)}
                     <Input
-                        label="Max attachments count"
+                        label="Max attachments count *"
                         type="number"
                         min={0}
                         defaultValue={0}
@@ -299,7 +301,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         onChange={handleNumberInputChange}
                     />
                     <Input
-                        label="Max time in minutes"
+                        label="Max time in minutes *"
                         type="number"
                         status={maxTimeInMinutesHelper.color as "default" | "error"}
                         color={maxTimeInMinutesHelper.color as "default" | "error"}
@@ -320,7 +322,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         color={enableVideoHelper.color as "default" | "error"}
                         css={{ 'mt': 40 }} onChange={handeleEnableVideoByProvider}
                         isSelected={values.enable_video_by_provider}
-            
+
                         defaultSelected={values.enable_video_by_provider}>
                         <span style={enableVideoErrors ? { ...{ fontSize: '14px', color: 'var(--nextui--inputHelperColor)' } } : { fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
                             {enableVideoErrors || 'Allow live video'}

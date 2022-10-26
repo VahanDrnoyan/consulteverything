@@ -13,7 +13,7 @@ export const useMaxTimeInMinutesValidator = (count:number) => {
         {
             setErrors("")
         }).catch((err) => {
-            console.log(err)
+            
             setErrors(err.message)
         });
     };
@@ -27,7 +27,7 @@ export const useMaxTimeInMinutesValidator = (count:number) => {
             };
         }
         validateCount(count);
-        console.log(count, errors)
+        
         return {
             color: errors ? "error" : "default",
         };

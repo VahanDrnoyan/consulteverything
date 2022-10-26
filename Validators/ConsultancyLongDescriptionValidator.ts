@@ -9,11 +9,11 @@ export  const LongDescriptionSchema = yup.object().shape({
 export const useConsultancyLongDescriptionValidator = (description: InputMaybe<string>  | undefined) => {
     const [errors, setErrors] = useState("")
    
-    const validateLongDescribtion = (value: string) => {
+    const validateLongDescription = (value: string) => {
         LongDescriptionSchema.validate({ long_description: value }).then(() => {
             setErrors("")
         }).catch((err) => {
-            console.log(err)
+           
             setErrors(err.message)
         });
     };
@@ -21,7 +21,7 @@ export const useConsultancyLongDescriptionValidator = (description: InputMaybe<s
     const helper = React.useMemo(() => {
 
         if (description) {
-            validateLongDescribtion(description);
+            validateLongDescription(description);
 
         }
 

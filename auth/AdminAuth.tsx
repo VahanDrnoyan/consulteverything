@@ -9,7 +9,7 @@ export const AdminAuth: ({children}: { children: any }) => (JSX.Element) = ({ ch
 
 
   if(data?.user?.role === 'USER' || data?.user?.role === 'MODERATOR'){
-    console.log(1111)
+   
     router.push({
       pathname: '/dashboard',
     } )

@@ -57,7 +57,7 @@ type Event {
   id: ID!
 }
 
-"""User Roles"""
+"""Form fields types"""
 enum Field {
   EXCLUDE
   INCLUDE

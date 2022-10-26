@@ -73,7 +73,7 @@ export type Event = {
   id: Scalars['ID'];
 };
 
-/** User Roles */
+/** Form fields types */
 export enum Field {
   Exclude = 'EXCLUDE',
   Include = 'INCLUDE',
