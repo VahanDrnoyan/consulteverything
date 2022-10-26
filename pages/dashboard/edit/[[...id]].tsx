@@ -13,6 +13,9 @@ import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTit
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
 import { useConsultancyLongDescriptionValidator } from "../../../Validators/ConsultancyLongDescriptionValidator";
+import { useMaxAttacmentCountValidator } from "../../../Validators/MaxAttachmentCountValidator";
+import { useMaxTimeInMinutesValidator } from "../../../Validators/MaxTimeInMinutesValidator";
+import { useCheckboxValidator } from "../../../Validators/CheckboxValidator";
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -45,7 +48,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         tags: []
     }
     const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialvalues);
-    const { errors: consultancyTagErrors, invalidTags, runTagsValidation } = useConsultancyTagValidator()
+    const { errors: consultancyTagErrors, invalidTags } = useConsultancyTagValidator(values.tags)
 
 
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
@@ -57,8 +60,11 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
-        if ((values.title && !consultancyTitleErrors) &&(values.tags && !consultancyTagErrors)
-        && (values.short_description && !consultancyShortDescriptionErrors)) {
+        if ((values.title && !consultancyTitleErrors) && (values.tags && !consultancyTagErrors)
+            && (values.short_description && !consultancyShortDescriptionErrors)
+            && !consultancyLongDescriptionErrors
+            && (values.max_attachment_count && !maxAttachmentsCountErrors)
+            && (values.max_time_minuets && !maxTimeInMinutesErrors)) {
             await createConsultancy({ variables: { ...values } })
         }
 
@@ -81,10 +87,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         })
 
     }
-    useEffect(() => {
-        runTagsValidation(values.tags)
 
-    }, [values.tags])
     const handleTagsChange = (e: ChangeEvent<FormElement>) => {
         const hasCommat = e.target.value.endsWith(',')
 
@@ -100,6 +103,9 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const handleNumberInputChange = (e: ChangeEvent<FormElement>) => {
         const id = e.target.name
+        if (e.target.value === '') {
+            e.target.value = "0"
+        }
         setValues((state) => {
             return { ...state, ...{ [id]: parseInt(e.target.value) } }
         })
@@ -181,7 +187,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const handeleEnableVideoByProvider = (checked: boolean) => {
         setValues((state) => {
-            return { ...state, ...{ enable_video_by_provider: checked } }          
+            return { ...state, ...{ enable_video_by_provider: checked } }
         })
     }
 
@@ -191,9 +197,12 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         )
     }
     const { errors: consultancyTitleErrors, helper: consultancyTitleHelper } = useConsultancyTitleValidator(values.title)
-    const {errors: consultancyShortDescriptionErrors, helper: consultancyShortDescriptionHelper} = useConsultancyShortDescriptionValidator(values.short_description);
-    const{errors: consultancyLongDescriptionErrors}  = useConsultancyLongDescriptionValidator(values.long_description);
+    const { errors: consultancyShortDescriptionErrors, helper: consultancyShortDescriptionHelper } = useConsultancyShortDescriptionValidator(values.short_description);
+    const { errors: consultancyLongDescriptionErrors } = useConsultancyLongDescriptionValidator(values.long_description);
     const [editorValue, setEditorValue] = useState('')
+    const { errors: maxAttachmentsCountErrors, helper: maxAttachmentsCountHelper } = useMaxAttacmentCountValidator(values.max_attachment_count)
+    const { errors: maxTimeInMinutesErrors, helper: maxTimeInMinutesHelper } = useMaxTimeInMinutesValidator(values.max_time_minuets)
+    const { errors: enableVideoErrors, helper: enableVideoHelper } = useCheckboxValidator(values.enable_video_by_provider)
     useEffect(() => {
         setValues((state) => {
             return { ...state, ...{ long_description: editorValue } }
@@ -207,7 +216,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                 <form onSubmit={handleFormSubmit}>
                     <Input
                         css={{ 'mt': 40 }}
-                        labelPlaceholder="Title"
+                        label="Title"
                         status={consultancyTitleHelper.color as "default" | "error"}
                         color={consultancyTitleHelper.color as "default" | "error"}
                         helperColor={consultancyTitleHelper.color as "default" | "error"}
@@ -222,8 +231,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     />
 
                     <Input
-                        css={{ 'mt': 40 }}
-                        labelPlaceholder="Tags"
+                        css={{ 'mt': 20 }}
+                        label="Tags"
                         status="default"
                         helperText={"Comma separated list of tags"}
                         type="text"
@@ -256,8 +265,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     </div>
 
                     <Textarea
-                        css={{ 'mt': 40 }}
-                        labelPlaceholder="Short description"
+                        css={{ 'mt': 20 }}
+                        label="Short description"
                         status={consultancyShortDescriptionHelper.color as "default" | "error"}
                         color={consultancyShortDescriptionHelper.color as "default" | "error"}
                         helperColor={consultancyShortDescriptionHelper.color as "default" | "error"}
@@ -269,41 +278,52 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         fullWidth
                         onChange={handleInputChange}
                     />
-                    <Text css={{ 'mt': 40, 'color': '$primary', 'fontSize': 14 }}>Long description</Text>
-                    <Editor value={values.long_description as Value} placeholder="(optional)" setValue={setEditorValue} />
+                    <Text css={{ 'mt': 20, 'color': '$accents9', 'fontSize': 14 }}>Long description</Text>
+                    <Editor bgColor={consultancyLongDescriptionErrors ? 'rgb(253,216,229)' : 'rgb(241, 243, 245)'} value={values.long_description as Value} placeholder="(optional)" setValue={setEditorValue} />
                     {consultancyLongDescriptionErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6 }}>{consultancyLongDescriptionErrors}</Text>)}
                     <Input
-                        labelPlaceholder="Max attachments count"
+                        label="Max attachments count"
                         type="number"
-                        required
                         min={0}
-                        css={{ 'mt': 40 }}
-                        bordered
-                        status="primary"
+                        defaultValue={0}
+                        css={{ 'mt': 20 }}
+                        status={maxAttachmentsCountHelper.color as "default" | "error"}
+                        color={maxAttachmentsCountHelper.color as "default" | "error"}
+                        helperColor={maxAttachmentsCountHelper.color as "default" | "error"}
+                        required
+                        helperText={maxAttachmentsCountErrors}
                         animated
                         fullWidth
                         name="max_attachment_count"
-                        value={values.max_attachment_count === 0 ? '' : values.max_attachment_count}
+                        value={values.max_attachment_count}
                         onChange={handleNumberInputChange}
                     />
                     <Input
-                        labelPlaceholder="Max time in minutes"
+                        label="Max time in minutes"
                         type="number"
+                        status={maxTimeInMinutesHelper.color as "default" | "error"}
+                        color={maxTimeInMinutesHelper.color as "default" | "error"}
+                        helperColor={maxTimeInMinutesHelper.color as "default" | "error"}
                         required
+                        helperText={maxTimeInMinutesErrors}
                         min={0}
                         step={5}
-                        css={{ 'mt': 40 }}
-                        bordered
-                        status="primary"
+                        css={{ 'mt': 30 }}
                         animated
                         name="max_time_minuets"
                         fullWidth
-                        value={values.max_time_minuets === 0 ? '' : values.max_time_minuets}
+                        value={values.max_time_minuets}
                         onChange={handleNumberInputChange}
                     />
-                    <Checkbox css={{ 'my': 20 }} onChange={handeleEnableVideoByProvider} color="primary" isSelected={values.enable_video_by_provider} defaultSelected={values.enable_video_by_provider}>
-                        <span style={{ fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
-                            Allow live video
+                    <Checkbox
+
+                        color={enableVideoHelper.color as "default" | "error"}
+                        css={{ 'mt': 40 }} onChange={handeleEnableVideoByProvider}
+                        isSelected={values.enable_video_by_provider}
+            
+                        defaultSelected={values.enable_video_by_provider}>
+                        <span style={enableVideoErrors ? { ...{ fontSize: '14px', color: 'var(--nextui--inputHelperColor)' } } : { fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
+                            {enableVideoErrors || 'Allow live video'}
                         </span>
                     </Checkbox>
                     <Text css={{ 'mt': 20 }} h3>Request form options</Text>

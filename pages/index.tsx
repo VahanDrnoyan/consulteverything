@@ -71,8 +71,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                            
                                 <div  style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:20}}>
-                                    <span style={{display:'block', width: '30px', height:'30px'}}><img src="/mission.svg" /></span>
-                                    <Text css={{ m:0,ml: 12,  color: '#9B63BC', fontWeight: 'normal'}} h4>Our mission</Text>
+                                    <span style={{display:'block', width: '40px', height:'40px'}}><img src="/mission.svg" /></span>
+                                    <Text css={{ m:0,ml: 12, fontWeight: 'normal'}} h4>Our mission</Text>
                                 </div>
                             
                                 <Card.Body>
@@ -103,8 +103,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                             
                                 <div style={{display:'flex', alignItems:'center', justifyContent:'center', marginTop:' 20px'}}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/start.svg" /></span>
-                                    <Text css={{m:0,ml: 12, color: '#9B63BC', fontWeight: 'normal'}} h4>Start solving your everyday problems...</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/start.svg" /></span>
+                                    <Text css={{m:0,ml: 12, fontWeight: 'normal'}} h4>Start solving your everyday problems...</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -138,8 +138,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/form.svg" /></span>
-                                    <Text h4 css={{ mb: 0 , mt: 10, color: '#9B63BC', fontWeight: 'normal'}}>Custom form creation</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/form.svg" /></span>
+                                    <Text h4 css={{ mb: 0 , mt: 10, fontWeight: 'normal'}}>Custom form creation</Text>
                                 </div>
 
                         
@@ -154,8 +154,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/video.svg" /></span>
-                                    <Text css={{ mb: 0, mt : 10, color: '#9B63BC', fontWeight: 'normal' }} h4>Video call consulting</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/video.svg" /></span>
+                                    <Text css={{ mb: 0, mt : 10, fontWeight: 'normal' }} h4>Video call consulting</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -167,8 +167,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/paid.svg" /></span>
-                                    <Text css={{ mb: 0, mt: 10 , color: '#9B63BC', fontWeight: 'normal'}}  h4>Get paid for info</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/paid.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10 , fontWeight: 'normal'}}  h4>Get paid for info</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -183,8 +183,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/recording.svg" /></span>
-                                    <Text css={{ mb: 0, mt: 10 , color: '#9B63BC', fontWeight: 'normal'}} h4>Consultancy transcription recording</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/recording.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10, fontWeight: 'normal'}} h4>Consultancy transcription recording</Text>
                                 </div>
                                 
                                 
@@ -200,8 +200,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card  isHoverable>
                             
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/time.svg" /></span>
-                                    <Text css={{ mb: 0, mt: 10, color: '#9B63BC', fontWeight: 'normal'}} h4>Time negotiations</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/time.svg" /></span>
+                                    <Text css={{ mb: 0, mt: 10, fontWeight: 'normal'}} h4>Time negotiations</Text>
                                 </div>
                                 
                                 <Card.Body>
@@ -215,8 +215,8 @@ const Home: NextPageWithAuth = (_props) => {
                         <Card isHoverable>
                            
                                 <div className={styles.homeIcons}>
-                                <span style={{display:'block', width: '30px', height:'30px'}}><img src="/sharable.svg" /></span>
-                                    <Text css={{ mb: 0 , mt: 10, color: '#9B63BC', fontWeight: 'normal'}} h4>Sharable consultancy</Text>
+                                <span style={{display:'block', width: '40px', height:'40px'}}><img src="/sharable.svg" /></span>
+                                    <Text css={{ mb: 0 , mt: 10, fontWeight: 'normal'}} h4>Sharable consultancy</Text>
                                 </div>
                                
                                 <Card.Body>

@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW X7 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2.056in" height="1.78191in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 604 524"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="54.4088mm" height="47.1227mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 12037 10425"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str0 {stroke:#9B63BC;stroke-width:16.3214}
-    .str1 {stroke:#9B63BC;stroke-width:0.881361}
+    .str0 {stroke:#11181C;stroke-width:312.17}
+    .str1 {stroke:#11181C;stroke-width:16.8573}
     .fil0 {fill:none}
-    .fil1 {fill:#373435;fill-rule:nonzero}
+    .fil1 {fill:#11181C;fill-rule:nonzero}
    ]]>
   </style>
  </defs>
  <g id="Слой_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <circle class="fil0 str0" cx="262" cy="262" r="78"/>
-  <circle class="fil0 str0" cx="262" cy="262" r="135"/>
-  <circle class="fil0 str0" cx="262" cy="262" r="193"/>
-  <circle class="fil0 str0" cx="262" cy="262" r="254"/>
-  <g id="_850931728">
-   <path class="fil1 str1" d="M547 60l-278 202c-3,1 -5,-1 -2,-3l278 -203c2,-1 4,1 2,4z"/>
-   <path class="fil1 str1" d="M532 66l11 -31 1 -1 34 -25c1,-1 3,0 3,1l1 22 20 8c1,1 2,3 1,4l-34 24 -1 0 -34 0 -2 0 0 -2zm15 -29l-10 27 30 0 31 -21 -19 -7 -1 -1 0 -1 -1 -20 -30 23z"/>
+  <g id="_3243753565520">
+   <circle class="fil0 str0" cx="5212" cy="5212" r="1548"/>
+   <circle class="fil0 str0" cx="5212" cy="5212" r="2687"/>
+   <circle class="fil0 str0" cx="5212" cy="5212" r="3856"/>
+   <circle class="fil0 str0" cx="5212" cy="5212" r="5056"/>
+   <g>
+    <path class="fil1 str1" d="M10901 1181l-5545 4041c-66,23 -91,-16 -48,-65l5545 -4041c52,-16 88,20 48,65z"/>
+    <path class="fil1 str1" d="M10611 1302l212 -618 15 -20 674 -495c26,-13 60,1 64,31l22 438 405 158c23,8 38,57 11,78l-674 474 -23 7 -668 0 -57 0 19 -53zm285 -580l-190 552 598 0 608 -427 -368 -143 -25 -9 -1 -27 -19 -389 -603 443z"/>
+   </g>
   </g>
  </g>
 </svg>

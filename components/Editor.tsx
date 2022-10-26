@@ -10,7 +10,8 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 type Props = {
     setValue: Dispatch<SetStateAction<string>>;
     placeholder: string,
-    value: Value
+    value: Value,
+    bgColor: string
 }
 const modules = {
     toolbar: [
@@ -47,9 +48,9 @@ const modules = {
     'indent',
     'link',
   ]
-const Editor: React.FC<Props> = ({setValue, placeholder, value})=> {
+const Editor: React.FC<Props> = ({setValue, placeholder, value, bgColor})=> {
     return (
-    <QuillNoSSRWrapper value={value} modules={modules} id="long_description"  formats={formats} placeholder={placeholder}theme="snow" onChange={setValue}/>
+    <QuillNoSSRWrapper style={{backgroundColor: bgColor, borderRadius:'12px'}} value={value} modules={modules} id="long_description"  formats={formats} placeholder={placeholder}theme="snow" onChange={setValue}/>
     )
 }
 export default Editor

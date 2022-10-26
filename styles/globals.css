@@ -29,15 +29,15 @@ a {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   border-width:2px !important;
-  border-color: rgb(243, 241, 245) !important;
-  background-color: rgb(243, 241, 245) !important;
+  border-color: transparent !important;
+ 
 }
 .ql-container.ql-snow {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   border-width:2px !important;
-  border-color: rgb(243, 241, 245) !important;
-  background-color: rgb(241, 243, 245) !important;
+  border-color: transparent !important;
+  
 }
 .ql-container, .ql-toolbar.ql-snow {
   font-family: inherit !important;

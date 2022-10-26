@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Creator: CorelDRAW X7 -->
-<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1.88541in" height="1.53562in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
-viewBox="0 0 12109 9862"
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="48.7045mm" height="44.6804mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 527 483"
  xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
    <![CDATA[
-    .str0 {stroke:#9B63BC;stroke-width:356.789}
-    .str2 {stroke:#9B63BC;stroke-width:133.78}
-    .str1 {stroke:#9B63BC;stroke-width:19.2667}
+    .str0 {stroke:#11181C;stroke-width:15.2683}
+    .str1 {stroke:#11181C;stroke-width:5.72493}
     .fil0 {fill:none}
-    .fil2 {fill:#9B63BC}
-    .fil1 {fill:#9B63BC;fill-rule:nonzero}
+    .fil2 {fill:#11181C}
+    .fil1 {fill:#11181C;fill-rule:nonzero}
    ]]>
   </style>
  </defs>
  <g id="Слой_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <g id="_863219936">
-   <circle class="fil0 str0" cx="4265" cy="3582" r="1769"/>
-   <path class="fil0 str0" d="M7555 7523c0,-1193 -1311,-2058 -3191,-2058 -1881,0 -3232,1050 -3232,2058l6423 0z"/>
+  <g id="_3243753567024">
+   <circle class="fil0 str0" cx="214" cy="173" r="78"/>
+   <path class="fil0 str0" d="M356 347c0,-52 -58,-91 -141,-91 -83,0 -143,47 -143,91l284 0z"/>
+   <polyline class="fil0 str0" points="259,39 8,39 8,415 427,415 427,161 "/>
+   <line class="fil0 str0" x1="218" y1="422" x2="218" y2= "470" />
+   <path class="fil1" d="M19 466c131,0 261,0 392,0 12,0 12,17 0,17 -131,0 -261,0 -392,0 -11,0 -12,-17 0,-17z"/>
+   <path class="fil2 str1" d="M327 11c20,0 40,0 61,0 73,0 68,-7 68,23l0 62c-1,15 0,16 -14,16 -21,1 -41,1 -62,0 -76,0 -68,7 -68,-23 0,-10 0,-21 0,-31 0,-45 -5,-46 15,-47zm189 86l-1 9 -13 -6 -37 -16 0 -45 50 -21 1 79zm-213 -77l0 5 0 6 0 5 0 6 0 5 0 6 0 5 0 6 0 5 0 6 0 5 0 6 0 5 0 6c1,10 0,15 6,20 6,5 13,4 22,4 18,0 36,-1 53,0 18,0 36,0 53,0 11,0 16,1 22,-5 7,-7 5,-11 5,-21 8,-1 54,25 59,21 2,-2 1,-17 1,-24l0 -7 0 -4 0 -7 0 -4 0 -7 0 -4 0 -7 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -3c0,-3 -1,-4 -3,-4 -10,1 -51,20 -57,22 0,-13 2,-25 -18,-26l-4 0 -7 0 -4 0 -7 0 -4 0 -7 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0 -6 0 -5 0c-10,0 -16,6 -17,17z"/>
   </g>
-  <polyline class="fil0 str0" points="5216,956 178,956 178,8490 8582,8490 8582,4178 "/>
-  <line class="fil0 str0" x1="4380" y1="8667" x2="4380" y2= "9577" />
-  <path class="fil1 str1" d="M409 9503c2612,0 5224,0 7836,0 247,0 241,350 0,350 -2612,0 -5224,0 -7836,0 -231,0 -250,-350 0,-350z"/>
-  <path class="fil2 str2" d="M7014 280c511,-8 1030,-4 1543,-4 1885,3 1743,-175 1744,596l-6 1571c-5,377 11,420 -349,421 -523,1 -1047,3 -1570,0 -1938,-14 -1755,169 -1754,-601 0,-262 -3,-525 -1,-787 9,-1148 -120,-1188 393,-1196zm4808 2190l-12 228 -332 -147 -956 -411 3 -1147 1297 -544 0 2021zm-5412 -1970l-5 119 -2 163 0 119 0 163 0 119 0 163 0 119 0 163 0 114 0 168 0 114 2 168 1 114 1 168c7,245 -8,376 145,504 159,132 330,90 576,92 449,2 899,-3 1349,-1 449,2 899,2 1348,0 265,-1 395,48 556,-112 175,-172 118,-278 137,-549 196,-22 1362,643 1488,541 50,-37 33,-440 34,-616l-1 -168 1 -114 -1 -168 1 -114 0 -163 0 -119 0 -163 0 -119 0 -163 0 -119 0 -163 0 -119 0 -163 0 -118 0 -92c1,-70 -26,-108 -81,-100 -251,36 -1297,517 -1440,563 -3,-338 45,-636 -463,-661l-119 0 -163 0 -119 -1 -163 0 -118 -2 -164 0 -118 0 -164 0 -120 0 -159 0 -123 0 -159 0 -123 0 -159 0 -123 0 -159 0 -123 0 -159 0 -123 0 -158 0 -121 2 -164 3 -118 3c-268,4 -421,154 -427,425z"/>
  </g>
 </svg>

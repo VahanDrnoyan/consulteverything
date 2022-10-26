@@ -2,14 +2,15 @@ import { useInput } from "@nextui-org/react";
 import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
+export const EmailSChema = yup.object().shape({
+    email: yup.string().email("Email is not valid.").required(),
+});
 export const useLoginFormValidator = () => {
     const [ email, setEmail ] = useState("");
     const [errors, setErrors] = useState("")
-    const schema = yup.object().shape({
-        email: yup.string().email("Email is not valid.").required(),
-    });
+    
     const validateEmail = (value: string) => {
-        schema.validate({ email: value }).then(() => 
+        EmailSChema.validate({ email: value }).then(() => 
         {
             setErrors("")
         }).catch((err) => {
@@ -30,6 +31,6 @@ export const useLoginFormValidator = () => {
         return {
             color: errors.length > 0 ? "error" : "default",
         };
-    }, [email]);
+    }, [email, errors]);
     return [errors, email, onChange, setEmail, helper]  as const
 }
