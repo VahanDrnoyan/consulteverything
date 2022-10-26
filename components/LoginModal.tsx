@@ -65,11 +65,10 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
           onChange={onChange}
           fullWidth
           labelPlaceholder="Your Email"
-            contentLeft={<Mail fill="currentColor" />}
           />
           </Grid>
           <Grid css={{width: '100%'}}>
-          <Button color={"gradient"} css={{width: '100%'}} type="submit">
+          <Button color={"default"} css={{width: '100%', 'bg': '$accents9'}} type="submit">
             Send
           </Button>
           </Grid>

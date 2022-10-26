@@ -93,7 +93,7 @@ const Home: NextPageWithAuth = (_props) => {
                             <Card.Footer>
                                 <Row justify="flex-end" css={{'@xs':{flexDirection:'column', alignItems: 'flex-end'}, '@md': {flexDirection: 'row'}}} >
 
-                                    <Button css={{minWidth: '50%'}}light color={"secondary"}>But not anymore!</Button>
+                                    <Button css={{minWidth: '50%'}}light color={"default"}>But not anymore!</Button>
                                     <Button onClick={handleNavigateToConsultancies} css={{ 'bg': '$accents9', 'color': '$white'}}icon={<FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />}>See consultancies</Button>
                                 </Row>
                             </Card.Footer>

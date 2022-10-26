@@ -2,7 +2,7 @@ import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, strin
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
-import {FiledEnum, ConsultancyResolver, TagsType, TagInputType} from "../Consultancy/types"
+import {FiledEnum, ConsultancyResolver, TagsType, TagInputType, ConsultancyDataType} from "../Consultancy/types"
 const RoleEnum = enumType({
   name: 'Role',
   members: [Role.members[0], Role.members[1], Role.members[2], Role.members[3]],
@@ -110,6 +110,7 @@ export const schema = makeSchema({
     ConsultancyResolver,
     TagInputType,
     TagsType,
+    ConsultancyDataType,
     FiledEnum],
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),

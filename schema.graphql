@@ -17,10 +17,10 @@ type Consultancy {
   allow_expectations_check: Field!
   allow_expertise_in_problem_field_check: Field!
   allow_gender_check: Field!
-  allow_name_surneame: Field!
+  allow_name_surname: Field!
   allow_ongoing_support_check: Field!
-  allow_prefession_check: Field!
-  allow_previous_consulancy_experience_check: Field!
+  allow_previous_consultancy_experience_check: Field!
+  allow_profession_check: Field!
   allow_time_spent_issue_resolution_check: Field!
   enable_video_by_provider: Boolean!
   id: ID!
@@ -29,6 +29,27 @@ type Consultancy {
   max_time_minuets: Int!
   short_description: String!
   tags: [Tag!]!
+  title: String!
+}
+
+input ConsultancyDataType {
+  allow_age_check: Field!
+  allow_email_check: Field!
+  allow_enable_video_by_requester: Boolean!
+  allow_expectations_check: Field!
+  allow_expertise_in_problem_field_check: Field!
+  allow_gender_check: Field!
+  allow_name_surname: Field!
+  allow_ongoing_support_check: Field!
+  allow_previous_consultancy_experience_check: Field!
+  allow_profession_check: Field!
+  allow_time_spent_issue_resolution_check: Field!
+  enable_video_by_provider: Boolean!
+  long_description: String
+  max_attachment_count: Int!
+  max_time_minuets: Int!
+  short_description: String!
+  tags: [TagInputType!]!
   title: String!
 }
 
@@ -44,7 +65,7 @@ enum Field {
 }
 
 type Mutation {
-  createConsultancy(allow_age_check: Field!, allow_email_check: Field!, allow_enable_video_by_requester: Boolean!, allow_expectations_check: Field!, allow_expertise_in_problem_field_check: Field!, allow_gender_check: Field!, allow_name_surneame: Field!, allow_ongoing_support_check: Field!, allow_prefession_check: Field!, allow_previous_consulancy_experience_check: Field!, allow_time_spent_issue_resolution_check: Field!, enable_video_by_provider: Boolean!, long_description: String, max_attachment_count: Int!, max_time_minuets: Int!, short_description: String!, tags: [TagInputType!]!, title: String!): Consultancy
+  createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
 }
 

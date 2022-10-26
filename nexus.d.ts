@@ -14,6 +14,26 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  ConsultancyDataType: { // input type
+    allow_age_check: NexusGenEnums['Field']; // Field!
+    allow_email_check: NexusGenEnums['Field']; // Field!
+    allow_enable_video_by_requester: boolean; // Boolean!
+    allow_expectations_check: NexusGenEnums['Field']; // Field!
+    allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
+    allow_gender_check: NexusGenEnums['Field']; // Field!
+    allow_name_surname: NexusGenEnums['Field']; // Field!
+    allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
+    allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_profession_check: NexusGenEnums['Field']; // Field!
+    allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    enable_video_by_provider: boolean; // Boolean!
+    long_description?: string | null; // String
+    max_attachment_count: number; // Int!
+    max_time_minuets: number; // Int!
+    short_description: string; // String!
+    tags: NexusGenInputs['TagInputType'][]; // [TagInputType!]!
+    title: string; // String!
+  }
   TagInputType: { // input type
     name: string; // String!
   }
@@ -44,10 +64,10 @@ export interface NexusGenObjects {
     allow_expectations_check: NexusGenEnums['Field']; // Field!
     allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
     allow_gender_check: NexusGenEnums['Field']; // Field!
-    allow_name_surneame: NexusGenEnums['Field']; // Field!
+    allow_name_surname: NexusGenEnums['Field']; // Field!
     allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
-    allow_prefession_check: NexusGenEnums['Field']; // Field!
-    allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_profession_check: NexusGenEnums['Field']; // Field!
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
@@ -96,10 +116,10 @@ export interface NexusGenFieldTypes {
     allow_expectations_check: NexusGenEnums['Field']; // Field!
     allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
     allow_gender_check: NexusGenEnums['Field']; // Field!
-    allow_name_surneame: NexusGenEnums['Field']; // Field!
+    allow_name_surname: NexusGenEnums['Field']; // Field!
     allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
-    allow_prefession_check: NexusGenEnums['Field']; // Field!
-    allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
+    allow_profession_check: NexusGenEnums['Field']; // Field!
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
@@ -145,10 +165,10 @@ export interface NexusGenFieldTypeNames {
     allow_expectations_check: 'Field'
     allow_expertise_in_problem_field_check: 'Field'
     allow_gender_check: 'Field'
-    allow_name_surneame: 'Field'
+    allow_name_surname: 'Field'
     allow_ongoing_support_check: 'Field'
-    allow_prefession_check: 'Field'
-    allow_previous_consulancy_experience_check: 'Field'
+    allow_previous_consultancy_experience_check: 'Field'
+    allow_profession_check: 'Field'
     allow_time_spent_issue_resolution_check: 'Field'
     enable_video_by_provider: 'Boolean'
     id: 'ID'
@@ -183,24 +203,7 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     createConsultancy: { // args
-      allow_age_check: NexusGenEnums['Field']; // Field!
-      allow_email_check: NexusGenEnums['Field']; // Field!
-      allow_enable_video_by_requester: boolean; // Boolean!
-      allow_expectations_check: NexusGenEnums['Field']; // Field!
-      allow_expertise_in_problem_field_check: NexusGenEnums['Field']; // Field!
-      allow_gender_check: NexusGenEnums['Field']; // Field!
-      allow_name_surneame: NexusGenEnums['Field']; // Field!
-      allow_ongoing_support_check: NexusGenEnums['Field']; // Field!
-      allow_prefession_check: NexusGenEnums['Field']; // Field!
-      allow_previous_consulancy_experience_check: NexusGenEnums['Field']; // Field!
-      allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
-      enable_video_by_provider: boolean; // Boolean!
-      long_description?: string | null; // String
-      max_attachment_count: number; // Int!
-      max_time_minuets: number; // Int!
-      short_description: string; // String!
-      tags: NexusGenInputs['TagInputType'][]; // [TagInputType!]!
-      title: string; // String!
+      data: NexusGenInputs['ConsultancyDataType']; // ConsultancyDataType!
     }
     createUser: { // args
       email: string; // String!

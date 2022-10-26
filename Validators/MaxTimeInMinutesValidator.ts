@@ -20,10 +20,12 @@ export const useMaxTimeInMinutesValidator = (count:number) => {
    
     const helper = React.useMemo(() => {
 
-        if (count === 0)
+        if (count === 0){
+            setErrors("")
             return {
                 color: "default",
             };
+        }
         validateCount(count);
         console.log(count, errors)
         return {

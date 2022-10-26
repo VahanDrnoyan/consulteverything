@@ -23,10 +23,12 @@ export const useLoginFormValidator = () => {
     }
     const helper = React.useMemo(() => {
 
-        if (email.length === 0)
+        if (email.length === 0){
+            setErrors("")
             return {
                 color: "",
             };
+        }
         validateEmail(email);
         return {
             color: errors.length > 0 ? "error" : "default",

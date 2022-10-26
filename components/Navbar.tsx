@@ -173,7 +173,7 @@ export default function Navigation() {
                                         </Text>
                                     </Dropdown.Item>
                                     <Dropdown.Item key="dashboard">
-                                        <Link href={'/dashboard'}>
+                                        <Link style={{display: 'block',width:'100%'}} href={'/dashboard'}>
 
                                             Dashboard
 
@@ -195,7 +195,7 @@ export default function Navigation() {
                         </Grid>
                     </Grid.Container>
                 ) : (<Navbar.Item>
-                    <Button auto flat href="#" onClick={showModalhandler}>
+                    <Button color={"default"} css={{'bg': '$accents9'}} href="#" onClick={showModalhandler}>
                         Enter with email
                     </Button>
                 </Navbar.Item>)}

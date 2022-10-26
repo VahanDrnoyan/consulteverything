@@ -13,7 +13,7 @@ import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTit
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
 import { useConsultancyLongDescriptionValidator } from "../../../Validators/ConsultancyLongDescriptionValidator";
-import { useMaxAttacmentCountValidator } from "../../../Validators/MaxAttachmentCountValidator";
+import { useMaxAttachmentCountValidator } from "../../../Validators/MaxAttachmentCountValidator";
 import { useMaxTimeInMinutesValidator } from "../../../Validators/MaxTimeInMinutesValidator";
 import { useCheckboxValidator } from "../../../Validators/CheckboxValidator";
 
@@ -26,7 +26,7 @@ type NextPageWithAuth = NextPage & {
 
 
 const ConsultancyEdit: NextPageWithAuth = (props) => {
-    const initialvalues: Omit<MutationCreateConsultancyArgs, "User" | "id"> = {
+    const initialValues: Omit<MutationCreateConsultancyArgs, "User" | "id"> = {
         title: '',
         allow_age_check: Field.Exclude,
         allow_email_check: Field.Exclude,
@@ -34,10 +34,10 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         allow_expectations_check: Field.Exclude,
         allow_expertise_in_problem_field_check: Field.Exclude,
         allow_gender_check: Field.Exclude,
-        allow_name_surneame: Field.Exclude,
+        allow_name_surname: Field.Exclude,
         allow_ongoing_support_check: Field.Exclude,
-        allow_prefession_check: Field.Exclude,
-        allow_previous_consulancy_experience_check: Field.Exclude,
+        allow_profession_check: Field.Exclude,
+        allow_previous_consultancy_experience_check: Field.Exclude,
         allow_time_spent_issue_resolution_check: Field.Exclude,
         enable_video_by_provider: false,
 
@@ -47,7 +47,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         long_description: '',
         tags: []
     }
-    const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialvalues);
+    const [values, setValues] = useState<Omit<MutationCreateConsultancyArgs, "User" | "id">>(initialValues);
     const { errors: consultancyTagErrors, invalidTags } = useConsultancyTagValidator(values.tags)
 
 
@@ -178,7 +178,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             })
         }
     }
-    const handle_allow_name_surneame: (value: string) => void = (value) => {
+    const handle_allow_name_surname: (value: string) => void = (value) => {
         if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
             setValues((state) => {
                 return { ...state, ...{ allow_name_surneame: value } }
@@ -200,7 +200,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     const { errors: consultancyShortDescriptionErrors, helper: consultancyShortDescriptionHelper } = useConsultancyShortDescriptionValidator(values.short_description);
     const { errors: consultancyLongDescriptionErrors } = useConsultancyLongDescriptionValidator(values.long_description);
     const [editorValue, setEditorValue] = useState('')
-    const { errors: maxAttachmentsCountErrors, helper: maxAttachmentsCountHelper } = useMaxAttacmentCountValidator(values.max_attachment_count)
+    const { errors: maxAttachmentsCountErrors, helper: maxAttachmentsCountHelper } = useMaxAttachmentCountValidator(values.max_attachment_count)
     const { errors: maxTimeInMinutesErrors, helper: maxTimeInMinutesHelper } = useMaxTimeInMinutesValidator(values.max_time_minuets)
     const { errors: enableVideoErrors, helper: enableVideoHelper } = useCheckboxValidator(values.enable_video_by_provider)
     useEffect(() => {
@@ -329,7 +329,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Text css={{ 'mt': 20 }} h3>Request form options</Text>
                     <Text css={{ 'mt': 10 }} h6>The options which should be applied to form of consultancy. The form will be filled by consultancy requesting users.</Text>
                     <br />
-                    <Radio.Group value={values.allow_name_surneame} onChange={handle_allow_name_surneame} size="xs" css={{ 'mt': 20 }} label='Allow "Name-Surname"' defaultValue="EXCLUDE">
+                    <Radio.Group value={values.allow_name_surname} onChange={handle_allow_name_surname} size="xs" css={{ 'mt': 20 }} label='Allow "Name-Surname"' defaultValue="EXCLUDE">
                         {RadioOptions()}
                     </Radio.Group>
                     <br />
@@ -364,13 +364,13 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     </Radio.Group>
                     <br />
 
-                    <Radio.Group value={values.allow_prefession_check} onChange={handle_allow_prefession_check} size="xs" css={{ 'mt': 20 }} label='Allow "Your profession"' defaultValue="EXCLUDE">
+                    <Radio.Group value={values.allow_profession_check} onChange={handle_allow_prefession_check} size="xs" css={{ 'mt': 20 }} label='Allow "Your profession"' defaultValue="EXCLUDE">
                         {RadioOptions()}
                         <Radio value="REQUIRED">Required</Radio>
                     </Radio.Group>
                     <br />
 
-                    <Radio.Group value={values.allow_previous_consulancy_experience_check} onChange={handle_allow_previous_consulancy_experience_check} size="xs" css={{ 'mt': 20 }} label='Allow "Previous consultancy experience"' defaultValue="EXCLUDE">
+                    <Radio.Group value={values.allow_previous_consultancy_experience_check} onChange={handle_allow_previous_consulancy_experience_check} size="xs" css={{ 'mt': 20 }} label='Allow "Previous consultancy experience"' defaultValue="EXCLUDE">
                         {RadioOptions()}
                     </Radio.Group>
                     <br />

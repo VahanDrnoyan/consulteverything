@@ -2113,7 +2113,7 @@ export interface Consultancy {
     resolve: NexusCore.FieldResolver<'Consultancy', 'allow_enable_video_by_requester'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_name_surneame`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_name_surname`.
     *
     * ### ️⚠️ You have not writen documentation for model Consultancy
     *
@@ -2122,7 +2122,7 @@ export interface Consultancy {
     * ```prisma
     * model Consultancy {
     *   /// Lorem ipsum dolor sit amet.
-    *   allow_name_surneame  Field
+    *   allow_name_surname  Field
     * }
     * ```
     *
@@ -2137,15 +2137,15 @@ export interface Consultancy {
     *   name: Consultancy.$name
     *   description: Consultancy.$description
     *   definition(t) {
-    *     t.field(Consultancy.allow_name_surneame)
+    *     t.field(Consultancy.allow_name_surname)
     *   }
     * })
     */
-  allow_name_surneame: {
+  allow_name_surname: {
     /**
      * The name of this field.
      */
-    name: 'allow_name_surneame'
+    name: 'allow_name_surname'
   
     /**
      * The type of this field.
@@ -2162,10 +2162,10 @@ export interface Consultancy {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_name_surneame'>
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_name_surname'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_prefession_check`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_profession_check`.
     *
     * ### ️⚠️ You have not writen documentation for model Consultancy
     *
@@ -2174,7 +2174,7 @@ export interface Consultancy {
     * ```prisma
     * model Consultancy {
     *   /// Lorem ipsum dolor sit amet.
-    *   allow_prefession_check  Field
+    *   allow_profession_check  Field
     * }
     * ```
     *
@@ -2189,15 +2189,15 @@ export interface Consultancy {
     *   name: Consultancy.$name
     *   description: Consultancy.$description
     *   definition(t) {
-    *     t.field(Consultancy.allow_prefession_check)
+    *     t.field(Consultancy.allow_profession_check)
     *   }
     * })
     */
-  allow_prefession_check: {
+  allow_profession_check: {
     /**
      * The name of this field.
      */
-    name: 'allow_prefession_check'
+    name: 'allow_profession_check'
   
     /**
      * The type of this field.
@@ -2214,7 +2214,7 @@ export interface Consultancy {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_prefession_check'>
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_profession_check'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_age_check`.
@@ -2321,7 +2321,7 @@ export interface Consultancy {
     resolve: NexusCore.FieldResolver<'Consultancy', 'allow_gender_check'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_previous_consulancy_experience_check`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_previous_consultancy_experience_check`.
     *
     * ### ️⚠️ You have not writen documentation for model Consultancy
     *
@@ -2330,7 +2330,7 @@ export interface Consultancy {
     * ```prisma
     * model Consultancy {
     *   /// Lorem ipsum dolor sit amet.
-    *   allow_previous_consulancy_experience_check  Field
+    *   allow_previous_consultancy_experience_check  Field
     * }
     * ```
     *
@@ -2345,15 +2345,15 @@ export interface Consultancy {
     *   name: Consultancy.$name
     *   description: Consultancy.$description
     *   definition(t) {
-    *     t.field(Consultancy.allow_previous_consulancy_experience_check)
+    *     t.field(Consultancy.allow_previous_consultancy_experience_check)
     *   }
     * })
     */
-  allow_previous_consulancy_experience_check: {
+  allow_previous_consultancy_experience_check: {
     /**
      * The name of this field.
      */
-    name: 'allow_previous_consulancy_experience_check'
+    name: 'allow_previous_consultancy_experience_check'
   
     /**
      * The type of this field.
@@ -2370,7 +2370,7 @@ export interface Consultancy {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_previous_consulancy_experience_check'>
+    resolve: NexusCore.FieldResolver<'Consultancy', 'allow_previous_consultancy_experience_check'>
   }
   /**
     * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.allow_email_check`.
