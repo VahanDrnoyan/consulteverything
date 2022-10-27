@@ -1,5 +1,8 @@
 {
     "typescript.tsdk": "node_modules/typescript/lib",
     "WillLuke.nextjs.addTypesOnSave": true,
-    "WillLuke.nextjs.hasPrompted": true
+    "WillLuke.nextjs.hasPrompted": true,
+    "cSpell.words": [
+        "typegen"
+    ]
 }

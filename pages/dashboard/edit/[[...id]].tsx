@@ -27,30 +27,29 @@ type NextPageWithAuth = NextPage & {
 
 const ConsultancyEdit: NextPageWithAuth = (props) => {
     const initialValues: ConsultancyDataType = {
-    
-            title: '',
-            allow_age_check: Field.Exclude,
-            allow_email_check: Field.Exclude,
-            allow_enable_video_by_requester: false,
-            allow_expectations_check: Field.Exclude,
-            allow_expertise_in_problem_field_check: Field.Exclude,
-            allow_gender_check: Field.Exclude,
-            allow_name_surname: Field.Exclude,
-            allow_ongoing_support_check: Field.Exclude,
-            allow_profession_check: Field.Exclude,
-            allow_previous_consultancy_experience_check: Field.Exclude,
-            allow_time_spent_issue_resolution_check: Field.Exclude,
-            enable_video_by_provider: false,
+        title: '',
+        allow_age_check: Field.Exclude,
+        allow_email_check: Field.Exclude,
+        allow_enable_video_by_requester: false,
+        allow_expectations_check: Field.Exclude,
+        allow_expertise_in_problem_field_check: Field.Exclude,
+        allow_gender_check: Field.Exclude,
+        allow_name_surname: Field.Exclude,
+        allow_ongoing_support_check: Field.Exclude,
+        allow_profession_check: Field.Exclude,
+        allow_previous_consultancy_experience_check: Field.Exclude,
+        allow_time_spent_issue_resolution_check: Field.Exclude,
+        enable_video_by_provider: false,
 
-            max_attachment_count: 0,
-            max_time_minuets: 0,
-            short_description: "",
-            long_description: '',
-            tags: []
-    
+        max_attachment_count: 0,
+        max_time_minuets: 0,
+        short_description: "",
+        long_description: '',
+        tags: [],
+        isActive: false
     }
     const [values, setValues] = useState<ConsultancyDataType>(initialValues);
-    const { errors: consultancyTagErrors } = useConsultancyTagValidator(values.tags)
+    const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags})
 
 
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
@@ -187,9 +186,14 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             })
         }
     }
-    const handeleEnableVideoByProvider = (checked: boolean) => {
+    const handleEnableVideoByProvider = (checked: boolean) => {
         setValues((state) => {
             return { ...state, ...{ enable_video_by_provider: checked } }
+        })
+    }
+    const handleEnableActive = (checked: boolean) => {
+        setValues((state) => {
+            return { ...state, ...{ isActive: checked } }
         })
     }
 
@@ -320,12 +324,23 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Checkbox
 
                         color={enableVideoHelper.color as "default" | "error"}
-                        css={{ 'mt': 40 }} onChange={handeleEnableVideoByProvider}
+                        css={{ 'mt': 40 }} onChange={handleEnableVideoByProvider}
                         isSelected={values.enable_video_by_provider}
 
                         defaultSelected={values.enable_video_by_provider}>
-                        <span style={enableVideoErrors ? { ...{ fontSize: '14px', color: 'var(--nextui--inputHelperColor)' } } : { fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
+                        <span style={enableVideoErrors ? { ...{ fontSize: '14px', color: 'var(--nextui--inputHelperColor)' } } : { fontSize: '14px', color: 'var(--nextui-colors-default)' }}>
                             {enableVideoErrors || 'Allow live video'}
+                        </span>
+                    </Checkbox> <br />
+                    <Checkbox
+                        label=""
+                        color={"default"}
+                        css={{ 'mt': 40 }} onChange={handleEnableActive}
+                        isSelected={values.isActive}
+
+                        defaultSelected={values.isActive}>
+                             <span style={{ fontSize: '14px', color: 'var(--nextui-colors-default)' }}>
+                            {'Is active consultancy'}
                         </span>
                     </Checkbox>
                     <Text css={{ 'mt': 20 }} h3>Request form options</Text>

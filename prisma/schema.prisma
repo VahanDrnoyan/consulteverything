@@ -101,6 +101,8 @@ model Consultancy {
   allow_expectations_check                    Field   @default(INCLUDE)
   allow_time_spent_issue_resolution_check     Field   @default(INCLUDE)
   allow_expertise_in_problem_field_check      Field   @default(INCLUDE)
+  created_at                                  DateTime @default(now())
+  isActive                                    Boolean @default(true)
   userId                                      String
   tags                                        Tag[]
   User                                        User    @relation(fields: [userId], references: [id])

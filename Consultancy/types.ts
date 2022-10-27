@@ -29,6 +29,8 @@ const ConsultancyType = objectType({
         t.field(Consultancy.allow_name_surname)
         t.field(Consultancy.allow_ongoing_support_check)
         t.field(Consultancy.allow_profession_check)
+        t.field(Consultancy.isActive)
+        t.field('created_at', {type: 'Time'})
         t.field(Consultancy.allow_previous_consultancy_experience_check)
         t.field(Consultancy.allow_time_spent_issue_resolution_check)
         t.field(Consultancy.enable_video_by_provider)
@@ -69,6 +71,8 @@ export const ConsultancyDataType= extendInputType({
         t.field('allow_previous_consultancy_experience_check', {type:nonNull(FieldEnum)})
         t.field('allow_time_spent_issue_resolution_check',{type: nonNull(FieldEnum)})
         t.field(Consultancy.enable_video_by_provider)
+        t.field(Consultancy.isActive)
+        t.field('created_at', {type: 'Time'})
         t.field('tags', {
             type: nonNull(list(nonNull('TagInputType')))
         })

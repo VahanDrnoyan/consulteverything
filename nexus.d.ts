@@ -5,8 +5,23 @@
 
 
 import type { MainContext } from "./graphql/context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    Time<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "Time";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * Date custom scalar type
+     */
+    Time<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "Time";
+  }
+}
 
 
 declare global {
@@ -26,7 +41,9 @@ export interface NexusGenInputs {
     allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
     allow_profession_check: NexusGenEnums['Field']; // Field!
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    created_at?: NexusGenScalars['Time'] | null; // Time
     enable_video_by_provider: boolean; // Boolean!
+    isActive: boolean; // Boolean!
     long_description?: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
@@ -50,6 +67,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  Time: any
 }
 
 export interface NexusGenObjects {
@@ -69,8 +87,10 @@ export interface NexusGenObjects {
     allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
     allow_profession_check: NexusGenEnums['Field']; // Field!
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    created_at?: NexusGenScalars['Time'] | null; // Time
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
+    isActive: boolean; // Boolean!
     long_description?: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
@@ -121,8 +141,10 @@ export interface NexusGenFieldTypes {
     allow_previous_consultancy_experience_check: NexusGenEnums['Field']; // Field!
     allow_profession_check: NexusGenEnums['Field']; // Field!
     allow_time_spent_issue_resolution_check: NexusGenEnums['Field']; // Field!
+    created_at: NexusGenScalars['Time'] | null; // Time
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
+    isActive: boolean; // Boolean!
     long_description: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
@@ -170,8 +192,10 @@ export interface NexusGenFieldTypeNames {
     allow_previous_consultancy_experience_check: 'Field'
     allow_profession_check: 'Field'
     allow_time_spent_issue_resolution_check: 'Field'
+    created_at: 'Time'
     enable_video_by_provider: 'Boolean'
     id: 'ID'
+    isActive: 'Boolean'
     long_description: 'String'
     max_attachment_count: 'Int'
     max_time_minuets: 'Int'

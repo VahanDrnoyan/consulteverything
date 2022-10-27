@@ -22,8 +22,10 @@ type Consultancy {
   allow_previous_consultancy_experience_check: Field!
   allow_profession_check: Field!
   allow_time_spent_issue_resolution_check: Field!
+  created_at: Time
   enable_video_by_provider: Boolean!
   id: ID!
+  isActive: Boolean!
   long_description: String
   max_attachment_count: Int!
   max_time_minuets: Int!
@@ -44,7 +46,9 @@ input ConsultancyDataType {
   allow_previous_consultancy_experience_check: Field!
   allow_profession_check: Field!
   allow_time_spent_issue_resolution_check: Field!
+  created_at: Time
   enable_video_by_provider: Boolean!
+  isActive: Boolean!
   long_description: String
   max_attachment_count: Int!
   max_time_minuets: Int!
@@ -89,6 +93,9 @@ type Tag {
 input TagInputType {
   name: String!
 }
+
+"""Date custom scalar type"""
+scalar Time
 
 """this is User"""
 type User {

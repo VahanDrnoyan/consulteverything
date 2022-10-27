@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Time: any;
 };
 
 /** this is acccount */
@@ -37,8 +38,10 @@ export type Consultancy = {
   allow_previous_consultancy_experience_check: Field;
   allow_profession_check: Field;
   allow_time_spent_issue_resolution_check: Field;
+  created_at?: Maybe<Scalars['Time']>;
   enable_video_by_provider: Scalars['Boolean'];
   id: Scalars['ID'];
+  isActive: Scalars['Boolean'];
   long_description?: Maybe<Scalars['String']>;
   max_attachment_count: Scalars['Int'];
   max_time_minuets: Scalars['Int'];
@@ -59,7 +62,9 @@ export type ConsultancyDataType = {
   allow_previous_consultancy_experience_check: Field;
   allow_profession_check: Field;
   allow_time_spent_issue_resolution_check: Field;
+  created_at?: InputMaybe<Scalars['Time']>;
   enable_video_by_provider: Scalars['Boolean'];
+  isActive: Scalars['Boolean'];
   long_description?: InputMaybe<Scalars['String']>;
   max_attachment_count: Scalars['Int'];
   max_time_minuets: Scalars['Int'];
@@ -146,6 +151,7 @@ export type CreateConsultancyMutationVariables = Exact<{
   allow_expectations_check: Field;
   allow_time_spent_issue_resolution_check: Field;
   allow_expertise_in_problem_field_check: Field;
+  isActive: Scalars['Boolean'];
   tags: Array<TagInputType> | TagInputType;
 }>;
 
@@ -161,9 +167,9 @@ export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __type
 
 
 export const CreateConsultancyDocument = gql`
-    mutation CreateConsultancy($title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $tags: [TagInputType!]!) {
+    mutation CreateConsultancy($title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $isActive: Boolean!, $tags: [TagInputType!]!) {
   createConsultancy(
-    data: {title: $title, short_description: $short_description, long_description: $long_description, max_time_minuets: $max_time_minuets, max_attachment_count: $max_attachment_count, enable_video_by_provider: $enable_video_by_provider, allow_enable_video_by_requester: $allow_enable_video_by_requester, allow_name_surname: $allow_name_surname, allow_profession_check: $allow_profession_check, allow_age_check: $allow_age_check, allow_gender_check: $allow_gender_check, allow_previous_consultancy_experience_check: $allow_previous_consultancy_experience_check, allow_email_check: $allow_email_check, allow_ongoing_support_check: $allow_ongoing_support_check, allow_expectations_check: $allow_expectations_check, allow_time_spent_issue_resolution_check: $allow_time_spent_issue_resolution_check, allow_expertise_in_problem_field_check: $allow_expertise_in_problem_field_check, tags: $tags}
+    data: {title: $title, short_description: $short_description, long_description: $long_description, max_time_minuets: $max_time_minuets, max_attachment_count: $max_attachment_count, enable_video_by_provider: $enable_video_by_provider, allow_enable_video_by_requester: $allow_enable_video_by_requester, allow_name_surname: $allow_name_surname, allow_profession_check: $allow_profession_check, allow_age_check: $allow_age_check, allow_gender_check: $allow_gender_check, allow_previous_consultancy_experience_check: $allow_previous_consultancy_experience_check, allow_email_check: $allow_email_check, isActive: $isActive, allow_ongoing_support_check: $allow_ongoing_support_check, allow_expectations_check: $allow_expectations_check, allow_time_spent_issue_resolution_check: $allow_time_spent_issue_resolution_check, allow_expertise_in_problem_field_check: $allow_expertise_in_problem_field_check, tags: $tags}
   ) {
     id
     title
@@ -202,6 +208,7 @@ export type CreateConsultancyMutationFn = Apollo.MutationFunction<CreateConsulta
  *      allow_expectations_check: // value for 'allow_expectations_check'
  *      allow_time_spent_issue_resolution_check: // value for 'allow_time_spent_issue_resolution_check'
  *      allow_expertise_in_problem_field_check: // value for 'allow_expertise_in_problem_field_check'
+ *      isActive: // value for 'isActive'
  *      tags: // value for 'tags'
  *   },
  * });

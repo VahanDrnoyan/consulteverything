@@ -1,4 +1,4 @@
-import { ConsultancyDataType, CreateConsultancyMutationVariables, Exact, InputMaybe, Scalars, TagInputType } from "../../generated/graphql-frontend";
+import { ConsultancyDataType, Exact, InputMaybe, Scalars, TagInputType } from "../../generated/graphql-frontend";
 import { Consultancy } from "../../generated/nexus-prisma";
 import { CheckboxSchema } from "../CheckboxValidator";
 import { LongDescriptionSchema } from "../ConsultancyLongDescriptionValidator";
@@ -7,7 +7,7 @@ import { TagSchema } from "../ConsultancyTagValidator";
 import { TitleSchema } from "../ConsultancyTitleValidator";
 import { MaxAttachmentCountSchema } from "../MaxAttachmentCountValidator";
 import { MaxTimeInMinutesSchema } from "../MaxTimeInMinutesValidator";
-const Schema = TitleSchema.concat(ShortDescriptionSchema).concat(LongDescriptionSchema).concat(MaxAttachmentCountSchema)
+const Schema = TitleSchema.concat(ShortDescriptionSchema).concat(LongDescriptionSchema).concat(MaxAttachmentCountSchema).concat(TagSchema)
 .concat(MaxTimeInMinutesSchema)
  type CreateConsultancyMutationVariables = Exact<{
     title: Scalars['String'];
@@ -19,5 +19,4 @@ const Schema = TitleSchema.concat(ShortDescriptionSchema).concat(LongDescription
   }>;
 export const ConsultancyArgsValidator = async (data: CreateConsultancyMutationVariables) => {
     await Schema.validate(data, {abortEarly: false}) 
-    await TagSchema.validate(data, {abortEarly: false}) 
 }

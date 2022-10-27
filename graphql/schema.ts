@@ -1,8 +1,9 @@
-import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable } from "nexus";
+import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
-import {FiledEnum, ConsultancyResolver, TagsType, TagInputType, ConsultancyDataType, FieldEnum, EnumInputType} from "../Consultancy/types"
+import {ConsultancyResolver, TagsType, TagInputType, ConsultancyDataType, FieldEnum} from "../Consultancy/types"
+import { Kind } from "graphql";
 const RoleEnum = enumType({
   name: 'Role',
   members: [Role.members[0], Role.members[1], Role.members[2], Role.members[3]],
@@ -100,6 +101,25 @@ const Mutation = mutationType({
     })
   
   }});
+ export  const Time = scalarType({
+    name: "Time",
+    asNexusMethod: "Time",
+    description: "Date custom scalar type",
+    parseValue(value:any) {
+      const date = new Date(value);
+      return date.getTime();
+    },
+    serialize(value: any) {
+      return new Date(value);
+    },
+    parseLiteral(ast: any) {
+      if (ast.kind === Kind.INT) {
+        return new Date(ast.value);
+      }
+      return null;
+    },
+  });
+  
 export const schema = makeSchema({
   types: [
     UserType,
@@ -111,6 +131,7 @@ export const schema = makeSchema({
     TagInputType,
     TagsType,
     ConsultancyDataType,
+    Time,
     FieldEnum],
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),
@@ -128,4 +149,5 @@ export const schema = makeSchema({
       }
     ]
   }
+  
 })
