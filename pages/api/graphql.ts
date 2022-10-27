@@ -23,7 +23,9 @@ const server = createServer<
         "request.credentials": "include",
       },
     }),
-    ]
+    ],
+    maskedErrors: true
+    
 });
 
 export default server;

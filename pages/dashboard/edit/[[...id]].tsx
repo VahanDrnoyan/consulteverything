@@ -16,6 +16,7 @@ import { useConsultancyLongDescriptionValidator } from "../../../Validators/Cons
 import { useMaxAttachmentCountValidator } from "../../../Validators/MaxAttachmentCountValidator";
 import { useMaxTimeInMinutesValidator } from "../../../Validators/MaxTimeInMinutesValidator";
 import { useCheckboxValidator } from "../../../Validators/CheckboxValidator";
+import { GraphQLErrorExtensions } from "graphql";
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -49,15 +50,19 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         isActive: false
     }
     const [values, setValues] = useState<ConsultancyDataType>(initialValues);
-    const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags})
-
+    
+    const [serverErrors, setServerErrors] = useState<string[]>([])
+    const[tagInputChanged, setTagInputChanged] = useState(false)
+    const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags}, tagInputChanged)
 
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
         onCompleted: (data) => {
             console.log(data, 88888)
         },
     });
-
+    useEffect(()=>{
+        setServerErrors(error?.graphQLErrors[0].extensions as unknown as string[]);
+    }, [error])
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
@@ -66,8 +71,9 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             && !consultancyLongDescriptionErrors
             && (values.max_attachment_count && !maxAttachmentsCountErrors)
             && (values.max_time_minuets && !maxTimeInMinutesErrors)) {
-            await createConsultancy({ variables: { ...values } })
+                createConsultancy({ variables: { ...values } }).catch((err)=>{})
         }
+        
 
     }
     const handleInputChange = (e: ChangeEvent<FormElement>) => {
@@ -91,7 +97,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
     const handleTagsChange = (e: ChangeEvent<FormElement>) => {
         const hasCommat = e.target.value.endsWith(',')
-
+        setTagInputChanged(true)
         setValues((state) => {
             if (hasCommat) {
                 const tags = [...state.tags];
@@ -218,6 +224,9 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         <Container>
 
             <div style={{ width: '600px', margin: 'auto', marginTop: '20px' }}>
+                {serverErrors?.length > 0 && serverErrors.map((item, i)=> {
+                    return (<Text key={item + i}css={{ color: '$red600', fontSize: 12, mt: 6 }}>{item}</Text>)})}
+            
                 <Text css={{ 'mt': 20 }} h3>Add consultancy</Text>
                 <form onSubmit={handleFormSubmit}>
                     <Input

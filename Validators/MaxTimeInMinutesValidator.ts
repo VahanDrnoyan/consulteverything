@@ -3,13 +3,13 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 export const MaxTimeInMinutesSchema = yup.object().shape({
-    count: yup.number().required().integer().min(5,"Max time should be at least 5").max(120, "Max time should be at most 120")
+    max_time_minuets: yup.number().required("Max time is required field").integer().min(5,"Max time should be at least 5").max(120, "Max time should be at most 120")
 });
-export const useMaxTimeInMinutesValidator = (count:number) => {
+export const useMaxTimeInMinutesValidator = (max_time_minuets:number) => {
     const [errors, setErrors] = useState("")
     
-    const validateCount = (count: number) => {
-        MaxTimeInMinutesSchema.validate({ count }).then(() => 
+    const validateCount = (max_time_minuets: number) => {
+        MaxTimeInMinutesSchema.validate({ max_time_minuets }).then(() => 
         {
             setErrors("")
         }).catch((err) => {
@@ -20,17 +20,17 @@ export const useMaxTimeInMinutesValidator = (count:number) => {
    
     const helper = React.useMemo(() => {
 
-        if (count === 0){
+        if (max_time_minuets === 0){
             setErrors("")
             return {
                 color: "default",
             };
         }
-        validateCount(count);
+        validateCount(max_time_minuets);
         
         return {
             color: errors ? "error" : "default",
         };
-    }, [count, errors]);
+    }, [max_time_minuets, errors]);
     return {errors, helper}  as const
 }

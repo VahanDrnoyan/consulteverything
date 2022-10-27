@@ -3,13 +3,13 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 export const MaxAttachmentCountSchema = yup.object().shape({
-    count: yup.number().required().integer().min(0,"Attachments count should at least be 0").max(6, "Attachments count should at most be 6")
+    max_attachment_count: yup.number().integer().min(0,"Attachments count should at least be 0").max(6, "Attachments count should at most be 6")
 });
-export const useMaxAttachmentCountValidator = (count:number) => {
+export const useMaxAttachmentCountValidator = (max_attachment_count:number) => {
     const [errors, setErrors] = useState("")
     
-    const validateCount = (count: number) => {
-        MaxAttachmentCountSchema.validate({ count }).then(() => 
+    const validateCount = (max_attachment_count: number) => {
+        MaxAttachmentCountSchema.validate({ max_attachment_count }).then(() => 
         {
             setErrors("")
         }).catch((err) => {
@@ -20,17 +20,17 @@ export const useMaxAttachmentCountValidator = (count:number) => {
    
     const helper = React.useMemo(() => {
 
-        if (count === 0){
+        if (max_attachment_count === 0){
             setErrors("")
             return {
                 color: "default",
             };
         }
-        validateCount(count);
+        validateCount(max_attachment_count);
       
         return {
             color: errors ? "error" : "default",
         };
-    }, [count, errors]);
+    }, [max_attachment_count, errors]);
     return {errors, helper}  as const
 }

@@ -9,9 +9,9 @@ export const TagSchema =  yup.object({
         yup.object({name: yup.string()
             .min(3, "Tag should have at least 3 characters.")
             .max(25, "Tag should have at most 25 characters")
-        })).required().min(1, " ")});
+        })).required().min(1, "At least one tag is required")});
             
-export const useConsultancyTagValidator = (input: {tags: TagInputType[]}) => {
+export const useConsultancyTagValidator = (input: {tags: TagInputType[]}, tagInputChanged: boolean) => {
     const [errors, setErrors] = useState("")
     
     const validateTags = (input:  {tags: TagInputType[]}) => {
@@ -25,9 +25,11 @@ export const useConsultancyTagValidator = (input: {tags: TagInputType[]}) => {
        
     };
    useEffect(()=>{
+    if(tagInputChanged){
     validateTags(input);
+    }
     
-   },[input, errors])
+   },[input, errors, tagInputChanged])
     
     return {errors}  as const
 }

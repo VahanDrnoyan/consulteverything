@@ -2,8 +2,10 @@ import { objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationT
 import { User, Account, Consultancy, Field, Tag } from '../generated/nexus-prisma'
 import { Prisma } from '@prisma/client'
 import { string } from "prop-types";
-import { ValidationError } from "yup";
+
 import { ConsultancyArgsValidator } from "../Validators/BackendValidators/ConsultancyArgsValidator";
+import { UserInputError, ValidationError } from "apollo-server-errors";
+import { GraphQLYogaError } from "@graphql-yoga/node";
 
 export const FieldEnum = enumType({
     name: Field.name,
@@ -86,8 +88,10 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
         data: nonNull("ConsultancyDataType")
     },
     resolve: async (_root, args, { prisma, user }) => {
-    
-        await ConsultancyArgsValidator(args.data)
+        await ConsultancyArgsValidator(args.data).catch((err)=> {
+            
+            throw new GraphQLYogaError('User input error', err.errors)
+        })
         const consultancyParams: Prisma.ConsultancyCreateArgs= {
             data: {
                 ...args.data,
@@ -108,10 +112,10 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
                 title: true,
             }
         }
-
         return prisma.consultancy.create({
             ...consultancyParams
         })
+
     },
 
 });
