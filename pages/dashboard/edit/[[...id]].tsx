@@ -2,7 +2,7 @@ import { faCheck, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Container, Input, Textarea, Text, Checkbox, Radio, FormElement, Badge } from "@nextui-org/react"
 import { NextPage } from "next/types"
-import { ChangeEvent, useEffect, useState, MouseEvent } from "react";
+import { ChangeEvent, useEffect, useState, MouseEvent, useMemo } from "react";
 import { Value } from "react-quill";
 import Editor from "../../../components/Editor";
 import Footer from "../../../components/Footer";
@@ -17,6 +17,7 @@ import { useMaxAttachmentCountValidator } from "../../../Validators/MaxAttachmen
 import { useMaxTimeInMinutesValidator } from "../../../Validators/MaxTimeInMinutesValidator";
 import { useCheckboxValidator } from "../../../Validators/CheckboxValidator";
 import { GraphQLErrorExtensions } from "graphql";
+import { useRouter } from "next/router";
 
 type NextPageWithAuth = NextPage & {
     auth?: {
@@ -60,6 +61,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             console.log(data, 88888)
         },
     });
+    const router = useRouter()
     useEffect(()=>{
         setServerErrors(error?.graphQLErrors[0].extensions as unknown as string[]);
     }, [error])
@@ -69,13 +71,24 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         if ((values.title && !consultancyTitleErrors) && (values.tags && !consultancyTagErrors)
             && (values.short_description && !consultancyShortDescriptionErrors)
             && !consultancyLongDescriptionErrors
-            && (values.max_attachment_count && !maxAttachmentsCountErrors)
+            && (!maxAttachmentsCountErrors)
             && (values.max_time_minuets && !maxTimeInMinutesErrors)) {
-                createConsultancy({ variables: { ...values } }).catch((err)=>{})
+                createConsultancy({ variables: { ...values } }).then(()=>{
+                    setValues((state)=> {
+                        return {...initialValues}
+                    })
+                    setTagInputChanged(false)
+                    router.push(
+                        {
+                            pathname: '/dashboard'
+                        }
+                    )
+                }).catch((err)=>{})
         }
         
 
     }
+    
     const handleInputChange = (e: ChangeEvent<FormElement>) => {
         const id = e.target.name
         setValues((state) => {
@@ -208,18 +221,33 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             <><Radio value="INCLUDE">Include</Radio><Radio value="EXCLUDE">Exclude</Radio><Radio value="REQUIRED">Required</Radio></>
         )
     }
+   
     const { errors: consultancyTitleErrors, helper: consultancyTitleHelper } = useConsultancyTitleValidator(values.title)
     const { errors: consultancyShortDescriptionErrors, helper: consultancyShortDescriptionHelper } = useConsultancyShortDescriptionValidator(values.short_description);
     const { errors: consultancyLongDescriptionErrors } = useConsultancyLongDescriptionValidator(values.long_description);
-    const [editorValue, setEditorValue] = useState('')
+   
     const { errors: maxAttachmentsCountErrors, helper: maxAttachmentsCountHelper } = useMaxAttachmentCountValidator(values.max_attachment_count)
     const { errors: maxTimeInMinutesErrors, helper: maxTimeInMinutesHelper } = useMaxTimeInMinutesValidator(values.max_time_minuets)
     const { errors: enableVideoErrors, helper: enableVideoHelper } = useCheckboxValidator(values.enable_video_by_provider)
-    useEffect(() => {
+    
+    
+    const [editorValue, setEditorValue] = useState('')
+   useEffect(() => {
+    
         setValues((state) => {
             return { ...state, ...{ long_description: editorValue } }
         })
     }, [editorValue])
+    const submitIsDisabled = useMemo(()=>{
+        if ((values.title && !consultancyTitleErrors) && (values.tags && !consultancyTagErrors)
+        && (values.short_description && !consultancyShortDescriptionErrors)
+        && !consultancyLongDescriptionErrors
+        && (!maxAttachmentsCountErrors)
+        && (values.max_time_minuets && !maxTimeInMinutesErrors)) {
+            return false
+    }
+        return true
+    }, [values.title, values.tags, values.short_description, values.max_attachment_count, values.max_time_minuets, consultancyTitleErrors, consultancyTagErrors, consultancyShortDescriptionErrors, consultancyLongDescriptionErrors, maxAttachmentsCountErrors, maxTimeInMinutesErrors])
     return (<div>
         <Container>
 
@@ -297,7 +325,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Editor bgColor={consultancyLongDescriptionErrors ? 'rgb(253,216,229)' : 'rgb(241, 243, 245)'} value={values.long_description as Value} placeholder="(optional)" setValue={setEditorValue} />
                     {consultancyLongDescriptionErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6 }}>{consultancyLongDescriptionErrors}</Text>)}
                     <Input
-                        label="Max attachments count *"
+                        label="Max attachments count"
                         type="number"
                         min={0}
                         defaultValue={0}
@@ -411,7 +439,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     </Checkbox>
 
                     <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginTop: '20px' }}>
-                        <Button color={"primary"} type="submit" disabled={loading}>
+                        <Button disabled={submitIsDisabled || loading} color={"primary"} type="submit">
                             Save
                         </Button>
                     </div>
