@@ -46,7 +46,7 @@ const ConsultancyCard: React.FC = ()=> {
         GA Metrics
         </Badge>
         </div>
-              <Button color="warning"size="md" css={{'bg': '$blue300', 'color': '$accents9',width: '100%', mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
+              <Button color="warning"size="md" css={{'bg':'$accents7',width: '100%', mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
             </Row>
           </Card.Footer>
         </Card>

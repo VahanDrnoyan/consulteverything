@@ -103,7 +103,14 @@ export type MutationCreateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  ok: Scalars['Boolean'];
+  getMyConsultancies?: Maybe<Array<Maybe<Consultancy>>>;
+  totalConsultancies?: Maybe<TotalConsultanciesObject>;
+};
+
+
+export type QueryGetMyConsultanciesArgs = {
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
 };
 
 /** User Roles */
@@ -124,6 +131,11 @@ export type TagInputType = {
   name: Scalars['String'];
 };
 
+export type TotalConsultanciesObject = {
+  __typename?: 'TotalConsultanciesObject';
+  total?: Maybe<Scalars['Int']>;
+};
+
 /** this is User */
 export type User = {
   __typename?: 'User';
@@ -132,6 +144,13 @@ export type User = {
   id: Scalars['ID'];
   role: Role;
 };
+
+export type CreateUserMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', email?: string | null, id: string } };
 
 export type CreateConsultancyMutationVariables = Exact<{
   title: Scalars['String'];
@@ -158,14 +177,54 @@ export type CreateConsultancyMutationVariables = Exact<{
 
 export type CreateConsultancyMutation = { __typename?: 'Mutation', createConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
 
-export type CreateUserMutationVariables = Exact<{
-  email: Scalars['String'];
+export type GetMyConsultanciesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  offset: Scalars['Int'];
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', email?: string | null, id: string } };
+export type GetMyConsultanciesQuery = { __typename?: 'Query', getMyConsultancies?: Array<{ __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean, tags: Array<{ __typename?: 'Tag', name: string }> } | null> | null };
+
+export type TotalConsultanciesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
+export type TotalConsultanciesQuery = { __typename?: 'Query', totalConsultancies?: { __typename?: 'TotalConsultanciesObject', total?: number | null } | null };
+
+
+export const CreateUserDocument = gql`
+    mutation CreateUser($email: String!) {
+  createUser(email: $email) {
+    email
+    id
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const CreateConsultancyDocument = gql`
     mutation CreateConsultancy($title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $isActive: Boolean!, $tags: [TagInputType!]!) {
   createConsultancy(
@@ -220,37 +279,80 @@ export function useCreateConsultancyMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateConsultancyMutationHookResult = ReturnType<typeof useCreateConsultancyMutation>;
 export type CreateConsultancyMutationResult = Apollo.MutationResult<CreateConsultancyMutation>;
 export type CreateConsultancyMutationOptions = Apollo.BaseMutationOptions<CreateConsultancyMutation, CreateConsultancyMutationVariables>;
-export const CreateUserDocument = gql`
-    mutation CreateUser($email: String!) {
-  createUser(email: $email) {
-    email
+export const GetMyConsultanciesDocument = gql`
+    query GetMyConsultancies($limit: Int!, $offset: Int!) {
+  getMyConsultancies(offset: $offset, limit: $limit) {
     id
+    title
+    created_at
+    tags {
+      name
+    }
+    short_description
+    isActive
   }
 }
     `;
-export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
 
 /**
- * __useCreateUserMutation__
+ * __useGetMyConsultanciesQuery__
  *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
+ * To run a query within a React component, call `useGetMyConsultanciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyConsultanciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ * const { data, loading, error } = useGetMyConsultanciesQuery({
  *   variables: {
- *      email: // value for 'email'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
  *   },
  * });
  */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+export function useGetMyConsultanciesQuery(baseOptions: Apollo.QueryHookOptions<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+        return Apollo.useQuery<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>(GetMyConsultanciesDocument, options);
       }
-export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export function useGetMyConsultanciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>(GetMyConsultanciesDocument, options);
+        }
+export type GetMyConsultanciesQueryHookResult = ReturnType<typeof useGetMyConsultanciesQuery>;
+export type GetMyConsultanciesLazyQueryHookResult = ReturnType<typeof useGetMyConsultanciesLazyQuery>;
+export type GetMyConsultanciesQueryResult = Apollo.QueryResult<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>;
+export const TotalConsultanciesDocument = gql`
+    query TotalConsultancies {
+  totalConsultancies {
+    total
+  }
+}
+    `;
+
+/**
+ * __useTotalConsultanciesQuery__
+ *
+ * To run a query within a React component, call `useTotalConsultanciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTotalConsultanciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTotalConsultanciesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTotalConsultanciesQuery(baseOptions?: Apollo.QueryHookOptions<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>(TotalConsultanciesDocument, options);
+      }
+export function useTotalConsultanciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>(TotalConsultanciesDocument, options);
+        }
+export type TotalConsultanciesQueryHookResult = ReturnType<typeof useTotalConsultanciesQuery>;
+export type TotalConsultanciesLazyQueryHookResult = ReturnType<typeof useTotalConsultanciesLazyQuery>;
+export type TotalConsultanciesQueryResult = Apollo.QueryResult<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>;

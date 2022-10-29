@@ -74,7 +74,8 @@ type Mutation {
 }
 
 type Query {
-  ok: Boolean!
+  getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
+  totalConsultancies: TotalConsultanciesObject
 }
 
 """User Roles"""
@@ -96,6 +97,10 @@ input TagInputType {
 
 """Date custom scalar type"""
 scalar Time
+
+type TotalConsultanciesObject {
+  total: Int
+}
 
 """this is User"""
 type User {

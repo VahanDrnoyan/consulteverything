@@ -19,12 +19,10 @@ const MyConsultancy:NextPageWithAuth = (props)=> {
     <Container>
  <Grid.Container gap={2} css={{ justifyContent: 'space-between'}}>
       <Grid>
-        <Text h2>My Consultancies</Text>
+        <Text h2>Dashboard</Text>
       </Grid>
       <Grid css={{alignItems: 'center', d: 'flex', justifyContent: 'flex-end'}}>
-        <Button onClick={navigateToEdit}color="gradient" css={{ 'bg': '$blue300', 'color': '$accents9'}} auto icon={<FontAwesomeIcon size={"xl"} color="var(--nextui-colors-accents9)" icon={faAdd} />}>
-          Create new Consultancy
-        </Button>
+        
       </Grid>
       </Grid.Container>
  </Container>

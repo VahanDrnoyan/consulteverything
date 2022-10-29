@@ -80,7 +80,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     setTagInputChanged(false)
                     router.push(
                         {
-                            pathname: '/dashboard'
+                            pathname: '/dashboard/consultancies'
                         }
                     )
                 }).catch((err)=>{})

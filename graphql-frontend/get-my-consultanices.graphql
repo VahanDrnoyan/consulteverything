@@ -1,0 +1,10 @@
+query GetMyConsultancies($limit: Int!, $offset: Int!) {
+  getMyConsultancies(offset: $offset, limit: $limit) {
+    id
+    title
+    created_at
+    tags{name}
+    short_description
+    isActive
+  }
+}

@@ -105,6 +105,9 @@ export interface NexusGenObjects {
   Tag: { // root type
     name: string; // String!
   }
+  TotalConsultanciesObject: { // root type
+    total?: number | null; // Int
+  }
   User: { // root type
     email?: string | null; // String
     id: string; // ID!
@@ -160,10 +163,14 @@ export interface NexusGenFieldTypes {
     createUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
+    totalConsultancies: NexusGenRootTypes['TotalConsultanciesObject'] | null; // TotalConsultanciesObject
   }
   Tag: { // field return type
     name: string; // String!
+  }
+  TotalConsultanciesObject: { // field return type
+    total: number | null; // Int
   }
   User: { // field return type
     accounts: NexusGenRootTypes['Account'][]; // [Account!]!
@@ -211,10 +218,14 @@ export interface NexusGenFieldTypeNames {
     createUser: 'User'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    getMyConsultancies: 'Consultancy'
+    totalConsultancies: 'TotalConsultanciesObject'
   }
   Tag: { // field return type name
     name: 'String'
+  }
+  TotalConsultanciesObject: { // field return type name
+    total: 'Int'
   }
   User: { // field return type name
     accounts: 'Account'
@@ -231,6 +242,12 @@ export interface NexusGenArgTypes {
     }
     createUser: { // args
       email: string; // String!
+    }
+  }
+  Query: {
+    getMyConsultancies: { // args
+      limit: number; // Int!
+      offset: number; // Int!
     }
   }
 }
