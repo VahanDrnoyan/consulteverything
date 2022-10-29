@@ -3,17 +3,18 @@ import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid, Text, Button, Table, Row, Col, Tooltip, User, Pagination, Badge } from "@nextui-org/react";
 import router from "next/router";
-import { NextPage } from "next/types";
+import { GetServerSideProps, NextPage } from "next/types";
 import { StyledBadge } from "../../../components/icons/StyledBadge";
 import { IconButton } from "../../../components/icons/IconButton";
 import { EyeIcon } from "../../../components/icons/EyeIcon";
 import { EditIcon } from "../../../components/icons/EditIcon";
 import { DeleteIcon } from "../../../components/icons/DeleteIcon";
 import { Key, useEffect, useState } from "react";
-import { Consultancy, GetMyConsultanciesQuery, Tag, useGetMyConsultanciesQuery, useTotalConsultanciesQuery } from "../../../generated/graphql-frontend";
+import { Consultancy, GetMyConsultanciesDocument, GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables, Tag, TotalConsultanciesDocument, TotalConsultanciesQuery, TotalConsultanciesQueryVariables, useGetMyConsultanciesQuery, useTotalConsultanciesQuery } from "../../../generated/graphql-frontend";
+import { initializeApollo } from "../../../lib/client";
+import { InferGetServerSidePropsType } from "next";
 
-
-type NextPageWithAuth = NextPage & {
+export type NextPageWithAuth = NextPage & {
   auth?: {
     role: string
   }
@@ -33,7 +34,7 @@ type Column = {
   uid: string
 }
 
-const Consultancies: NextPageWithAuth = (props) => {
+const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const navigateToEdit = () => {
     router.push('/dashboard/edit')
   }
@@ -56,7 +57,7 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
   console.log(data?.getMyConsultancies, 5555)
   const columns: Column[] = [
     { name: "TITLE", uid: "title" },
-    { name: "CREATED AT", uid: "created_at" },
+    { name: "CREATED AT/TAGS", uid: "created_at" },
     { name: "DESCRIPTION", uid: "short_description" },
     { name: "ACTIONS", uid: "actions" },
   ];
@@ -184,4 +185,23 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
 Consultancies.auth = {
   role: 'USER'
 }
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id =
+    typeof context.params?.id === 'string'
+      ? parseInt(context.params.id, 10)
+      : NaN;
+  if (id) {
+    const apolloClient = initializeApollo();
+    await apolloClient.query<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>({
+      query: GetMyConsultanciesDocument,
+      variables: { offset: 0, limit: 4 },
+    });
+    await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
+      query: TotalConsultanciesDocument,
+      variables: { },
+    });
+    return { props: { initialApolloState: apolloClient.cache.extract() } };
+  }
+  return { props: {} };
+};
 export default Consultancies

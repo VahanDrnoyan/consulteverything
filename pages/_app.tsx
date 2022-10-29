@@ -3,7 +3,7 @@ import type {AppProps} from 'next/app'
 import {SessionProvider} from "next-auth/react"
 import {Session} from "next-auth";
 import {DashboardAuth} from "../auth/DashboardAuth";
-import type {NextComponentType} from 'next'
+import type {InferGetServerSidePropsType, NextComponentType, NextPage} from 'next'
 import {ModeratorAuth} from "../auth/ModeratorAuth";
 import {AdminAuth} from "../auth/AdminAuth";
 import {SuperAdminAuth} from "../auth/SuperAdminAuth";
@@ -13,16 +13,21 @@ import { NextUIProvider } from '@nextui-org/react';
 import Layout from '../components/Layout';
 import { useApollo } from '../lib/client';
 import { ApolloProvider } from '@apollo/client';
+import { getServerSideProps } from './dashboard/consultancies';
 
 interface CustomAppProps {
-    Component: NextComponentType & { auth: { role: Role } },
-    pageProps: AppProps["pageProps"] & {
-        session: Session
+    Component: NextPageWithAuth
+    pageProps: InferGetServerSidePropsType<typeof getServerSideProps> & {
+        session: Session,
     }
 }
-
-function MyApp({Component, pageProps: {session, ...pageProps}}:CustomAppProps) {
-    const apolloClient = useApollo({});
+export type NextPageWithAuth = NextPage & {
+    auth?: {
+        role?: string
+    }
+};
+function MyApp({Component, pageProps: {session, ...pageProps}}: CustomAppProps) {
+    const apolloClient = useApollo(pageProps.initialApolloState);
     return (
         <ApolloProvider client={apolloClient}>
         <SessionProvider session={session}>

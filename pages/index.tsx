@@ -15,12 +15,9 @@ import LoginModal from '../components/LoginModal';
 import { PressEvent} from '@react-types/shared';
 import Logo from '../components/Logo';
 import Footer from '../components/Footer';
+import { NextPageWithAuth } from './_app';
 
-type NextPageWithAuth = NextPage & {
-    auth?: {
-        role: string
-    }
-};
+
 const Home: NextPageWithAuth = (_props) => {
     const { status } = useSession()
     const router = useRouter()
