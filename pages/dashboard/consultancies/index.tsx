@@ -1,7 +1,7 @@
 
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Grid, Text, Button, Table, Row, Col, Tooltip, User, Pagination, Badge } from "@nextui-org/react";
+import { Container, Grid, Text, Button, Table, Row, Col, Tooltip, User, Pagination, Badge, Loading } from "@nextui-org/react";
 import router from "next/router";
 import { GetServerSideProps, NextPage } from "next/types";
 import { StyledBadge } from "../../../components/icons/StyledBadge";
@@ -13,6 +13,7 @@ import { Key, useEffect, useState } from "react";
 import { Consultancy, GetMyConsultanciesDocument, GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables, Tag, TotalConsultanciesDocument, TotalConsultanciesQuery, TotalConsultanciesQueryVariables, useGetMyConsultanciesQuery, useTotalConsultanciesQuery } from "../../../generated/graphql-frontend";
 import { initializeApollo } from "../../../lib/client";
 import { InferGetServerSidePropsType } from "next";
+import LastSeen from "../../../components/LastSeen";
 
 export type NextPageWithAuth = NextPage & {
   auth?: {
@@ -75,7 +76,7 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
         return (
           <Col>
             <Row>
-            <Text h6>{cellValue}</Text>
+            <LastSeen date={item.created_at} />
                           </Row>
             <Row css={{d: 'flex', alignItems: 'center'}}><Text h6 css={{d: 'inline', m: 0}}>Tags:</Text>
               {item.tags.map((tag: Tag, i: number)=>{
@@ -134,7 +135,7 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
         </Button>
       </Grid>
     </Grid.Container>
-    {!loading && (
+    {!loading && data && (
 
       <><Table
       compact
@@ -168,14 +169,14 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
        
       </Table>
       <div style={{marginTop: '25px', textAlign: 'center'}}>
-      <Pagination total={dataTotal && dataTotal.totalConsultancies && dataTotal.totalConsultancies.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit + 1): 0} initialPage={1} onChange={(page)=> {
+      <Pagination total={dataTotal && dataTotal.totalConsultancies && dataTotal.totalConsultancies.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit): 0} initialPage={1} onChange={(page)=> {
         setOffset(page * limit - limit)
         
       }}/>
       </div>
       </>
 
-    )}
+    )|| (<div style={{textAlign: 'center', marginTop: '100px'}}> <Loading type="spinner" size="lg" /></div>)}
 
 
   </Container>

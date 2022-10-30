@@ -14,6 +14,11 @@ import Layout from '../components/Layout';
 import { useApollo } from '../lib/client';
 import { ApolloProvider } from '@apollo/client';
 import { getServerSideProps } from './dashboard/consultancies';
+import TimeAgo from 'javascript-time-ago'
+
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en)
 
 interface CustomAppProps {
     Component: NextPageWithAuth
@@ -26,7 +31,7 @@ export type NextPageWithAuth = NextPage & {
         role?: string
     }
 };
-function MyApp({Component, pageProps: {session, ...pageProps}}: CustomAppProps) {
+function MyApp({Component, pageProps: {session, ...pageProps}}) {
     const apolloClient = useApollo(pageProps.initialApolloState);
     return (
         <ApolloProvider client={apolloClient}>
