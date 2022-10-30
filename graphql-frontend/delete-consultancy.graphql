@@ -1,0 +1,9 @@
+mutation DeleteConsultancy($id: ID!) {
+  deleteConsultancy(id: $id) {
+    id
+    title
+    created_at
+    short_description
+    isActive
+  }
+}

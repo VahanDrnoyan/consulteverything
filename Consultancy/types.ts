@@ -171,4 +171,38 @@ export const TotalConsultanciesObject = objectType({
    
     }});
 
+    export const DeleteConsultancy = extendType({
+        type: 'Mutation',
+        definition(t) {
+            t.field('deleteConsultancy', {
+                type: ConsultancyType,
+                args: {
+                    id: nonNull(idArg()),
+                },
+                resolve: async (_root, args, { prisma, user }) => {
+                    const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
+                        where: {
+                            id: args.id,
+                        }
+                    }
+                    const consultancy = await prisma.consultancy.findUnique(selectConsultancy)
+                    if (!consultancy) {
+                        throw new UserInputError('Could not find your consultancy.');
+                      }
+                      if(consultancy.userId !== user.id){
+                        throw new UserInputError('No permission');
+                      }
+                      const consultancyDeleteArgs: Prisma.ConsultancyDeleteArgs = {
+                        where: {
+                            id: consultancy.id
+                        }
+                      }
+                    await prisma.consultancy.delete({...consultancyDeleteArgs})
+                    return consultancy;
+                },
+    
+            })
+        },
+    })
+
 

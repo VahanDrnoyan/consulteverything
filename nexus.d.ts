@@ -161,6 +161,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     createUser: NexusGenRootTypes['User']; // User!
+    deleteConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
   }
   Query: { // field return type
     getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
@@ -216,6 +217,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createConsultancy: 'Consultancy'
     createUser: 'User'
+    deleteConsultancy: 'Consultancy'
   }
   Query: { // field return type name
     getMyConsultancies: 'Consultancy'
@@ -242,6 +244,9 @@ export interface NexusGenArgTypes {
     }
     createUser: { // args
       email: string; // String!
+    }
+    deleteConsultancy: { // args
+      id: string; // ID!
     }
   }
   Query: {

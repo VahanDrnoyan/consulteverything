@@ -64,7 +64,9 @@ const cache = new InMemoryCache({
           },
           keyArgs: ['id'],
           merge(existing, incoming, { args: { offset = 0 }}:{args:any}) {
-            console.log(offset, '111www')
+            if (!incoming && existing) {
+              return existing;
+            }
             const merged = existing ? existing.slice(0) : [];
             for (let i = 0; i < incoming.length; ++i) {
               merged[offset + i] = incoming[i];

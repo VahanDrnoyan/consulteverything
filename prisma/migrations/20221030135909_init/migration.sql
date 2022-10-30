@@ -71,6 +71,8 @@ CREATE TABLE `Consultancy` (
     `allow_expectations_check` ENUM('INCLUDE', 'EXCLUDE', 'REQUIRED') NOT NULL DEFAULT 'INCLUDE',
     `allow_time_spent_issue_resolution_check` ENUM('INCLUDE', 'EXCLUDE', 'REQUIRED') NOT NULL DEFAULT 'INCLUDE',
     `allow_expertise_in_problem_field_check` ENUM('INCLUDE', 'EXCLUDE', 'REQUIRED') NOT NULL DEFAULT 'INCLUDE',
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `isActive` BOOLEAN NOT NULL DEFAULT true,
     `userId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
@@ -80,7 +82,7 @@ CREATE TABLE `Consultancy` (
 CREATE TABLE `Tag` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `consultantId` VARCHAR(191) NOT NULL,
+    `consultancyId` VARCHAR(191) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -95,4 +97,4 @@ ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`
 ALTER TABLE `Consultancy` ADD CONSTRAINT `Consultancy_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Tag` ADD CONSTRAINT `Tag_consultantId_fkey` FOREIGN KEY (`consultantId`) REFERENCES `Consultancy`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Tag` ADD CONSTRAINT `Tag_consultancyId_fkey` FOREIGN KEY (`consultancyId`) REFERENCES `Consultancy`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;

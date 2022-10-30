@@ -142,10 +142,10 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             })
         }
     }
-    const handle_allow_previous_consulancy_experience_check: (value: string) => void = (value) => {
+    const handle_allow_previous_consultancy_experience_check: (value: string) => void = (value) => {
         if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
             setValues((state) => {
-                return { ...state, ...{ allow_previous_consulancy_experience_check: value } }
+                return { ...state, ...{ allow_previous_consultancy_experience_check: value } }
             })
         }
     }
@@ -201,7 +201,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     const handle_allow_name_surname: (value: string) => void = (value) => {
         if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
             setValues((state) => {
-                return { ...state, ...{ allow_name_surneame: value } }
+                return { ...state, ...{ allow_name_surname: value } }
             })
         }
     }
@@ -424,7 +424,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     </Radio.Group>
                     <br />
 
-                    <Radio.Group value={values.allow_previous_consultancy_experience_check} onChange={handle_allow_previous_consulancy_experience_check} size="xs" css={{ 'mt': 20 }} label='Allow "Previous consultancy experience"' defaultValue="EXCLUDE">
+                    <Radio.Group value={values.allow_previous_consultancy_experience_check} onChange={handle_allow_previous_consultancy_experience_check} size="xs" css={{ 'mt': 20 }} label='Allow "Previous consultancy experience"' defaultValue="EXCLUDE">
                         {RadioOptions()}
                     </Radio.Group>
                     <br />

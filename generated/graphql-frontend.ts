@@ -89,6 +89,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createConsultancy?: Maybe<Consultancy>;
   createUser: User;
+  deleteConsultancy?: Maybe<Consultancy>;
 };
 
 
@@ -99,6 +100,11 @@ export type MutationCreateConsultancyArgs = {
 
 export type MutationCreateUserArgs = {
   email: Scalars['String'];
+};
+
+
+export type MutationDeleteConsultancyArgs = {
+  id: Scalars['ID'];
 };
 
 export type Query = {
@@ -176,6 +182,13 @@ export type CreateConsultancyMutationVariables = Exact<{
 
 
 export type CreateConsultancyMutation = { __typename?: 'Mutation', createConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
+
+export type DeleteConsultancyMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteConsultancyMutation = { __typename?: 'Mutation', deleteConsultancy?: { __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean } | null };
 
 export type GetMyConsultanciesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -279,6 +292,43 @@ export function useCreateConsultancyMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateConsultancyMutationHookResult = ReturnType<typeof useCreateConsultancyMutation>;
 export type CreateConsultancyMutationResult = Apollo.MutationResult<CreateConsultancyMutation>;
 export type CreateConsultancyMutationOptions = Apollo.BaseMutationOptions<CreateConsultancyMutation, CreateConsultancyMutationVariables>;
+export const DeleteConsultancyDocument = gql`
+    mutation DeleteConsultancy($id: ID!) {
+  deleteConsultancy(id: $id) {
+    id
+    title
+    created_at
+    short_description
+    isActive
+  }
+}
+    `;
+export type DeleteConsultancyMutationFn = Apollo.MutationFunction<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>;
+
+/**
+ * __useDeleteConsultancyMutation__
+ *
+ * To run a mutation, you first call `useDeleteConsultancyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteConsultancyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteConsultancyMutation, { data, loading, error }] = useDeleteConsultancyMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteConsultancyMutation(baseOptions?: Apollo.MutationHookOptions<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>(DeleteConsultancyDocument, options);
+      }
+export type DeleteConsultancyMutationHookResult = ReturnType<typeof useDeleteConsultancyMutation>;
+export type DeleteConsultancyMutationResult = Apollo.MutationResult<DeleteConsultancyMutation>;
+export type DeleteConsultancyMutationOptions = Apollo.BaseMutationOptions<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>;
 export const GetMyConsultanciesDocument = gql`
     query GetMyConsultancies($limit: Int!, $offset: Int!) {
   getMyConsultancies(offset: $offset, limit: $limit) {

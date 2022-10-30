@@ -10,10 +10,11 @@ import { EyeIcon } from "../../../components/icons/EyeIcon";
 import { EditIcon } from "../../../components/icons/EditIcon";
 import { DeleteIcon } from "../../../components/icons/DeleteIcon";
 import { Key, useEffect, useState } from "react";
-import { Consultancy, GetMyConsultanciesDocument, GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables, Tag, TotalConsultanciesDocument, TotalConsultanciesQuery, TotalConsultanciesQueryVariables, useGetMyConsultanciesQuery, useTotalConsultanciesQuery } from "../../../generated/graphql-frontend";
+import { Consultancy, GetMyConsultanciesDocument, GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables, Tag, TotalConsultanciesDocument, TotalConsultanciesQuery, TotalConsultanciesQueryVariables, useDeleteConsultancyMutation, useGetMyConsultanciesQuery, useTotalConsultanciesQuery } from "../../../generated/graphql-frontend";
 import { initializeApollo } from "../../../lib/client";
 import { InferGetServerSidePropsType } from "next";
 import LastSeen from "../../../components/LastSeen";
+import { Reference } from "@apollo/client";
 
 export type NextPageWithAuth = NextPage & {
   auth?: {
@@ -39,92 +40,144 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
   const navigateToEdit = () => {
     router.push('/dashboard/edit')
   }
+  const [deleteErrors, setDeleteErrors] = useState<string>('')
   const limit = 4
-const[offset, setOffset] = useState(0)
-const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
+  const [offset, setOffset] = useState(0)
+  const { loading: loadingTotal, data: dataTotal, refetch: refetchTotal } = useTotalConsultanciesQuery()
   const { loading, data, fetchMore } = useGetMyConsultanciesQuery({
     variables: {
       offset: offset,
       limit: limit
     },
   });
-  useEffect(()=> {
+  useEffect(() => {
     fetchMore({
       variables: {
         offset: offset
       }
-    }).then((res)=>console.log(res))
+    }).then((res) => console.log(res))
   }, [offset])
-  console.log(data?.getMyConsultancies, 5555)
+
   const columns: Column[] = [
     { name: "TITLE", uid: "title" },
     { name: "CREATED AT/TAGS", uid: "created_at" },
     { name: "DESCRIPTION", uid: "short_description" },
     { name: "ACTIONS", uid: "actions" },
   ];
+  const [deleteConsultancy, { loading: deleteLoading, error: deleteError }] = useDeleteConsultancyMutation({
+    onCompleted: (data) => {
+      refetchTotal().then(() => {
+        fetchMore({
+          variables: {
+            offset: offset
+          }
+        })
+      })
 
-  const renderCell = (item: any, columnKey: Key) => {
-    if(item){
-    const cellValue = item[columnKey];
-    switch (columnKey) {
-      case "title":
-        return (
-        <><Text h4>{cellValue}</Text><Text b size={14} css={{ tt: "capitalize" }}>{item.isActive? (<Badge size="sm" color={"success"}>Active</Badge>): (<Badge color={"default"} size="sm">Inactive</Badge>)}</Text></>
 
-        );
-      case "created_at":
-        return (
-          <Col>
-            <Row>
-            <LastSeen date={item.created_at} />
-                          </Row>
-            <Row css={{d: 'flex', alignItems: 'center'}}><Text h6 css={{d: 'inline', m: 0}}>Tags:</Text>
-              {item.tags.map((tag: Tag, i: number)=>{
-                  return <Badge color={'default'} isSquared size={"xs"} key={tag.name + '_' + i} >{tag.name}</Badge>
-              })}
-            </Row>
-          </Col>
-        );
-      case "short_description":
-        return  <Text h6>{cellValue}</Text>
+    },
+  });
+  useEffect(()=>{
+    const errors = deleteError?.graphQLErrors[0].extensions.originalError
+    if(errors?.message){
+        setDeleteErrors(errors?.message);
 
-      case "actions":
-        return (
-          <Row justify="center" align="center">
-            <Col css={{ d: "flex" }}>
-              <Tooltip content="Details">
-                <Button color={"success"} css={{p: 4, height: 'auto', borderRadius: 4}} auto onClick={() => console.log("View user", item.id)}>
-                  <EyeIcon size={20} fill="#fff" />
-                </Button>
-              </Tooltip>
-            </Col>
-            <Col css={{ d: "flex" }}>
-              <Tooltip content="Edit user">
-                <Button auto color={"default"} css={{p: 4, height: 'auto', borderRadius: 4}} onClick={() => console.log("Edit user", item.id)}>
-                  <EditIcon size={20} fill="#fff" />
-                </Button>
-              </Tooltip>
-            </Col>
-            <Col css={{ d: "flex" }}>
-              <Tooltip
-                content="Delete user"
-                color="error"
-                onClick={() => console.log("Delete user", item.id)}
-              >
-                <Button auto css={{p: 4, height: 'auto', borderRadius: 4}} color={"error"}>
-                  <DeleteIcon size={20} fill="#fff" />
-                </Button>
-              </Tooltip>
-            </Col>
-          </Row>
-        );
-      default:
-        return cellValue;
     }
-  }
+    const timeout = window.setTimeout(()=> {
+      setDeleteErrors('');
+    }, 3000)
+    return ()=> {
+      return () => {
+        window.clearTimeout(timeout);
+      };
+    }
+}, [deleteError])
+  const renderCell = (item: any, columnKey: Key) => {
+    if (item) {
+      const cellValue = item[columnKey];
+      switch (columnKey) {
+        case "title":
+          return (
+            <><Text h4>{cellValue}</Text><Text b size={14} css={{ tt: "capitalize" }}>{item.isActive ? (<Badge size="sm" color={"success"}>Active</Badge>) : (<Badge color={"default"} size="sm">Inactive</Badge>)}</Text></>
+
+          );
+        case "created_at":
+          return (
+            <Col>
+              <Row>
+                <LastSeen date={new Date(item.created_at).getTime()} />
+              </Row>
+              <Row css={{ d: 'flex', alignItems: 'center' }}><Text h6 css={{ d: 'inline', m: 0 }}>Tags:</Text>
+                {item.tags.map((tag: Tag, i: number) => {
+                  return <Badge color={'default'} isSquared size={"xs"} key={tag.name + '_' + i} >{tag.name}</Badge>
+                })}
+              </Row>
+            </Col>
+          );
+        case "short_description":
+          return <Text h6>{cellValue}</Text>
+
+        case "actions":
+          return (
+            <Row justify="center" align="center">
+              <Col css={{ d: "flex" }}>
+                <Tooltip content="Details">
+                  <Button color={"success"} css={{ p: 4, height: 'auto', borderRadius: 4 }} auto onClick={() => console.log("View user", item.id)}>
+                    <EyeIcon size={20} fill="#fff" />
+                  </Button>
+                </Tooltip>
+              </Col>
+              <Col css={{ d: "flex" }}>
+                <Tooltip content="Edit user">
+                  <Button auto color={"default"} css={{ p: 4, height: 'auto', borderRadius: 4 }} onClick={() => console.log("Edit user", item.id)}>
+                    <EditIcon size={20} fill="#fff" />
+                  </Button>
+                </Tooltip>
+              </Col>
+              <Col css={{ d: "flex" }}>
+                <Tooltip
+                  content="Delete"
+                  color="error"
+                  
+                >
+                  <Button auto css={{ p: 4, height: 'auto', borderRadius: 4 }} color={"error"}
+                  onClick={()=> {
+                    deleteConsultancy({
+                      variables: {
+                        id: item.id
+                      },
+                      errorPolicy: 'all',
+                      update: (cache, result) => {
+                        const deleteConsultancy = result.data?.deleteConsultancy;
+                  
+                        if (deleteConsultancy) {
+                          cache.modify({
+                            fields: {
+                              getMyConsultancies(consultancyRefs: Reference[], { readField }) {
+                                return consultancyRefs.filter((consultancyRef) => {
+                                  return readField('id', consultancyRef) !== deleteConsultancy.id;
+                                });
+                              },
+                            },
+                          });
+                        }
+                      },
+                    }).catch(()=>{})
+                  }}
+                  >
+                    <DeleteIcon size={20} fill="#fff" />
+                  </Button>
+                </Tooltip>
+              </Col>
+            </Row>
+          );
+        default:
+          return cellValue;
+      }
+    }
   };
 
-  return (<div><Container>
+  return (<Container>
     <Grid.Container gap={2} css={{ justifyContent: 'space-between' }}>
       <Grid>
         <Text h2>My Consultancies</Text>
@@ -135,10 +188,12 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
         </Button>
       </Grid>
     </Grid.Container>
-    {!loading && data && (
+    {deleteErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6, textAlign: 'center' }}>{deleteErrors}</Text>)}
+     
+    {!loading && (
 
       <><Table
-      compact
+        compact
         aria-label="My consultancies"
         css={{
           height: "auto",
@@ -161,26 +216,25 @@ const { loading: loadingTotal, data: dataTotal } = useTotalConsultanciesQuery()
           {(item) => (
             <Table.Row>
               {(columnKey) => (
-                <Table.Cell css={{borderBottom: '1px solid $accents1'}}>{renderCell(item, columnKey)}</Table.Cell>
+                <Table.Cell css={{ borderBottom: '1px solid $accents1' }}>{renderCell(item, columnKey)}</Table.Cell>
               )}
             </Table.Row>
           )}
         </Table.Body>
-       
+
       </Table>
-      <div style={{marginTop: '25px', textAlign: 'center'}}>
-      <Pagination total={dataTotal && dataTotal.totalConsultancies && dataTotal.totalConsultancies.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit): 0} initialPage={1} onChange={(page)=> {
-        setOffset(page * limit - limit)
-        
-      }}/>
-      </div>
+        <div style={{ marginTop: '25px', textAlign: 'center' }}>
+          <Pagination total={dataTotal && dataTotal.totalConsultancies && dataTotal.totalConsultancies.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit) : 0} initialPage={1} onChange={(page) => {
+            setOffset(page * limit - limit)
+
+          }} />
+        </div>
       </>
 
-    )|| (<div style={{textAlign: 'center', marginTop: '100px'}}> <Loading type="spinner" size="lg" /></div>)}
+    ) || (<div style={{ textAlign: 'center', marginTop: '100px' }}> <Loading type="spinner" size="lg" /></div>)}
 
 
   </Container>
-  </div>
   )
 }
 Consultancies.auth = {
@@ -199,7 +253,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
     await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
       query: TotalConsultanciesDocument,
-      variables: { },
+      variables: {},
     });
     return { props: { initialApolloState: apolloClient.cache.extract() } };
   }

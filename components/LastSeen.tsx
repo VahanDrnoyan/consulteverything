@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactTimeAgo from 'react-time-ago'
 
-export default function LastSeen({ date }: {date:  Date}) {
+export default function LastSeen({ date }: {date:  number}) {
   return (
     <div>
-      Last seen: <ReactTimeAgo date={date} locale="en-US"/>
+     <ReactTimeAgo date={date} style={{fontSize: '12px'}} locale="en-US"/>
     </div>
   )
 }

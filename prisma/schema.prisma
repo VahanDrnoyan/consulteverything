@@ -112,6 +112,6 @@ model Consultancy {
 model Tag {
   id           Int         @id @default(autoincrement())
   name         String
-  consultant   Consultancy @relation(fields: [consultantId], references: [id])
-  consultantId String
+  consultancy   Consultancy @relation(fields: [consultancyId], references: [id], onDelete: Cascade)
+  consultancyId String
 }

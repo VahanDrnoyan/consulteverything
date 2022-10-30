@@ -71,6 +71,7 @@ enum Field {
 type Mutation {
   createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
+  deleteConsultancy(id: ID!): Consultancy
 }
 
 type Query {

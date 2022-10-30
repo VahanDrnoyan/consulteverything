@@ -3020,7 +3020,7 @@ export interface Tag {
     resolve: NexusCore.FieldResolver<'Tag', 'name'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultant`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultancy`.
     *
     * ### ️⚠️ You have not writen documentation for model Tag
     *
@@ -3029,7 +3029,7 @@ export interface Tag {
     * ```prisma
     * model Tag {
     *   /// Lorem ipsum dolor sit amet.
-    *   consultant  Consultancy
+    *   consultancy  Consultancy
     * }
     * ```
     *
@@ -3044,15 +3044,15 @@ export interface Tag {
     *   name: Tag.$name
     *   description: Tag.$description
     *   definition(t) {
-    *     t.field(Tag.consultant)
+    *     t.field(Tag.consultancy)
     *   }
     * })
     */
-  consultant: {
+  consultancy: {
     /**
      * The name of this field.
      */
-    name: 'consultant'
+    name: 'consultancy'
   
     /**
      * The type of this field.
@@ -3069,10 +3069,10 @@ export interface Tag {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Tag', 'consultant'>
+    resolve: NexusCore.FieldResolver<'Tag', 'consultancy'>
   }
   /**
-    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultantId`.
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Tag.consultancyId`.
     *
     * ### ️⚠️ You have not writen documentation for model Tag
     *
@@ -3081,7 +3081,7 @@ export interface Tag {
     * ```prisma
     * model Tag {
     *   /// Lorem ipsum dolor sit amet.
-    *   consultantId  String
+    *   consultancyId  String
     * }
     * ```
     *
@@ -3096,15 +3096,15 @@ export interface Tag {
     *   name: Tag.$name
     *   description: Tag.$description
     *   definition(t) {
-    *     t.field(Tag.consultantId)
+    *     t.field(Tag.consultancyId)
     *   }
     * })
     */
-  consultantId: {
+  consultancyId: {
     /**
      * The name of this field.
      */
-    name: 'consultantId'
+    name: 'consultancyId'
   
     /**
      * The type of this field.
@@ -3121,7 +3121,7 @@ export interface Tag {
     /**
      * The resolver of this field
      */
-    resolve: NexusCore.FieldResolver<'Tag', 'consultantId'>
+    resolve: NexusCore.FieldResolver<'Tag', 'consultancyId'>
   }
 }
 
