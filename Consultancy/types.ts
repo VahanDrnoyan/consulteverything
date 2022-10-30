@@ -88,8 +88,9 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
     },
     resolve: async (_root, args, { prisma, user }) => {
         await ConsultancyArgsValidator(args.data).catch((err) => {
-
-            throw new GraphQLYogaError('User input error', err.errors)
+            return Promise.reject(
+                new GraphQLYogaError('User input error', err.errors)
+            )
         })
         const consultancyParams: Prisma.ConsultancyCreateArgs = {
             data: {
@@ -187,10 +188,18 @@ export const TotalConsultanciesObject = objectType({
                     }
                     const consultancy = await prisma.consultancy.findUnique(selectConsultancy)
                     if (!consultancy) {
-                        throw new UserInputError('Could not find your consultancy.');
+                        return Promise.reject(
+                            new GraphQLYogaError(
+                              `Could not find consultancy.`
+                            )
+                          )
                       }
                       if(consultancy.userId !== user.id){
-                        throw new UserInputError('No permission');
+                        return Promise.reject(
+                            new GraphQLYogaError(
+                              `No permission`
+                            )
+                          )
                       }
                       const consultancyDeleteArgs: Prisma.ConsultancyDeleteArgs = {
                         where: {

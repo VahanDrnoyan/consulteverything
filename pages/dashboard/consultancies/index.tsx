@@ -77,21 +77,19 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
 
     },
   });
-  useEffect(()=>{
-    const errors = deleteError?.graphQLErrors[0].extensions.originalError
-    if(errors?.message){
-        setDeleteErrors(errors?.message);
-
-    }
-    const timeout = window.setTimeout(()=> {
+  useEffect(() => {
+   if(deleteError){
+      setDeleteErrors(deleteError?.message);
+  
+    const timeout = window.setTimeout(() => {
       setDeleteErrors('');
     }, 3000)
-    return ()=> {
-      return () => {
-        window.clearTimeout(timeout);
-      };
-    }
-}, [deleteError])
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }
+  }, [deleteError])
   const renderCell = (item: any, columnKey: Key) => {
     if (item) {
       const cellValue = item[columnKey];
@@ -138,32 +136,32 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
                 <Tooltip
                   content="Delete"
                   color="error"
-                  
+
                 >
                   <Button auto css={{ p: 4, height: 'auto', borderRadius: 4 }} color={"error"}
-                  onClick={()=> {
-                    deleteConsultancy({
-                      variables: {
-                        id: item.id
-                      },
-                      errorPolicy: 'all',
-                      update: (cache, result) => {
-                        const deleteConsultancy = result.data?.deleteConsultancy;
-                  
-                        if (deleteConsultancy) {
-                          cache.modify({
-                            fields: {
-                              getMyConsultancies(consultancyRefs: Reference[], { readField }) {
-                                return consultancyRefs.filter((consultancyRef) => {
-                                  return readField('id', consultancyRef) !== deleteConsultancy.id;
-                                });
+                    onClick={() => {
+                      deleteConsultancy({
+                        variables: {
+                          id: 'sFDSAFAFD'
+                        },
+                        errorPolicy: 'all',
+                        update: (cache, result) => {
+                          const deleteConsultancy = result.data?.deleteConsultancy;
+
+                          if (deleteConsultancy) {
+                            cache.modify({
+                              fields: {
+                                getMyConsultancies(consultancyRefs: Reference[], { readField }) {
+                                  return consultancyRefs.filter((consultancyRef) => {
+                                    return readField('id', consultancyRef) !== deleteConsultancy.id;
+                                  });
+                                },
                               },
-                            },
-                          });
-                        }
-                      },
-                    }).catch(()=>{})
-                  }}
+                            });
+                          }
+                        },
+                      }).catch(() => { })
+                    }}
                   >
                     <DeleteIcon size={20} fill="#fff" />
                   </Button>
@@ -189,7 +187,7 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
       </Grid>
     </Grid.Container>
     {deleteErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6, textAlign: 'center' }}>{deleteErrors}</Text>)}
-     
+
     {!loading && (
 
       <><Table

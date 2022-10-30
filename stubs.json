@@ -1,0 +1,25 @@
+{
+    "allow_age_check": "EXCLUDE",
+    "allow_email_check": "EXCLUDE",
+    "allow_enable_video_by_requester": false,
+    "allow_expectations_check": "EXCLUDE",
+    "allow_expertise_in_problem_field_check": "EXCLUDE",
+    "allow_gender_check": "EXCLUDE",
+    "allow_name_surname": "EXCLUDE",
+    "allow_ongoing_support_check": "EXCLUDE",
+    "allow_previous_consultancy_experience_check": "EXCLUDE",
+    "allow_profession_check": "EXCLUDE",
+    "allow_time_spent_issue_resolution_check": "EXCLUDE",
+    "enable_video_by_provider": true,
+    "isActive": true,
+    "long_description": "",
+    "max_attachment_count": 1,
+    "max_time_minuets": 5,
+    "short_description": "qertqet",
+    "tags": [
+      {
+        "name": "1111"
+      }
+    ],
+    "title": "q"
+  }

@@ -60,11 +60,12 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         onCompleted: (data) => {
             console.log(data, 88888)
         },
+        onError: (err)=>{
+            setServerErrors(err.graphQLErrors[0].extensions as unknown as string[]);
+        }
     });
     const router = useRouter()
-    useEffect(()=>{
-        setServerErrors(error?.graphQLErrors[0].extensions as unknown as string[]);
-    }, [error])
+   
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
@@ -84,7 +85,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         }
                     )
                 }).catch((err)=>{})
-        }
+            }
         
 
     }
@@ -239,6 +240,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         })
     }, [editorValue])
     const submitIsDisabled = useMemo(()=>{
+       
         if ((values.title && !consultancyTitleErrors) && (values.tags && !consultancyTagErrors)
         && (values.short_description && !consultancyShortDescriptionErrors)
         && !consultancyLongDescriptionErrors
