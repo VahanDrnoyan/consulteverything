@@ -50,6 +50,12 @@ export type Consultancy = {
   title: Scalars['String'];
 };
 
+export type ConsultancyById = {
+  __typename?: 'ConsultancyById';
+  data: Consultancy;
+  id: Scalars['String'];
+};
+
 export type ConsultancyDataType = {
   allow_age_check: Field;
   allow_email_check: Field;
@@ -90,6 +96,7 @@ export type Mutation = {
   createConsultancy?: Maybe<Consultancy>;
   createUser: User;
   deleteConsultancy?: Maybe<Consultancy>;
+  updateConsultancy?: Maybe<Consultancy>;
 };
 
 
@@ -107,10 +114,22 @@ export type MutationDeleteConsultancyArgs = {
   id: Scalars['ID'];
 };
 
+
+export type MutationUpdateConsultancyArgs = {
+  data: ConsultancyDataType;
+  id: Scalars['ID'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  getConsultancyById?: Maybe<ConsultancyById>;
   getMyConsultancies?: Maybe<Array<Maybe<Consultancy>>>;
   totalConsultancies?: Maybe<TotalConsultanciesObject>;
+};
+
+
+export type QueryGetConsultancyByIdArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -130,10 +149,12 @@ export enum Role {
 /** Tag */
 export type Tag = {
   __typename?: 'Tag';
+  id: Scalars['Int'];
   name: Scalars['String'];
 };
 
 export type TagInputType = {
+  id: Scalars['Int'];
   name: Scalars['String'];
 };
 
@@ -189,6 +210,13 @@ export type DeleteConsultancyMutationVariables = Exact<{
 
 
 export type DeleteConsultancyMutation = { __typename?: 'Mutation', deleteConsultancy?: { __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean } | null };
+
+export type GetConsultancyByIdQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetConsultancyByIdQuery = { __typename?: 'Query', getConsultancyById?: { __typename?: 'ConsultancyById', id: string, data: { __typename?: 'Consultancy', title: string, short_description: string, long_description?: string | null, isActive: boolean, max_time_minuets: number, max_attachment_count: number, allow_age_check: Field, allow_email_check: Field, allow_gender_check: Field, allow_name_surname: Field, allow_profession_check: Field, allow_expectations_check: Field, allow_ongoing_support_check: Field, allow_enable_video_by_requester: boolean, allow_expertise_in_problem_field_check: Field, allow_previous_consultancy_experience_check: Field, allow_time_spent_issue_resolution_check: Field, enable_video_by_provider: boolean, tags: Array<{ __typename?: 'Tag', name: string, id: number }> } } | null };
 
 export type GetMyConsultanciesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -329,6 +357,65 @@ export function useDeleteConsultancyMutation(baseOptions?: Apollo.MutationHookOp
 export type DeleteConsultancyMutationHookResult = ReturnType<typeof useDeleteConsultancyMutation>;
 export type DeleteConsultancyMutationResult = Apollo.MutationResult<DeleteConsultancyMutation>;
 export type DeleteConsultancyMutationOptions = Apollo.BaseMutationOptions<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>;
+export const GetConsultancyByIdDocument = gql`
+    query GetConsultancyById($id: ID!) {
+  getConsultancyById(id: $id) {
+    id
+    data {
+      title
+      short_description
+      long_description
+      isActive
+      max_time_minuets
+      max_attachment_count
+      allow_age_check
+      allow_email_check
+      allow_gender_check
+      allow_name_surname
+      allow_profession_check
+      allow_expectations_check
+      allow_ongoing_support_check
+      allow_enable_video_by_requester
+      allow_expertise_in_problem_field_check
+      allow_previous_consultancy_experience_check
+      allow_time_spent_issue_resolution_check
+      enable_video_by_provider
+      tags {
+        name
+        id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetConsultancyByIdQuery__
+ *
+ * To run a query within a React component, call `useGetConsultancyByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetConsultancyByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetConsultancyByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetConsultancyByIdQuery(baseOptions: Apollo.QueryHookOptions<GetConsultancyByIdQuery, GetConsultancyByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetConsultancyByIdQuery, GetConsultancyByIdQueryVariables>(GetConsultancyByIdDocument, options);
+      }
+export function useGetConsultancyByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetConsultancyByIdQuery, GetConsultancyByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetConsultancyByIdQuery, GetConsultancyByIdQueryVariables>(GetConsultancyByIdDocument, options);
+        }
+export type GetConsultancyByIdQueryHookResult = ReturnType<typeof useGetConsultancyByIdQuery>;
+export type GetConsultancyByIdLazyQueryHookResult = ReturnType<typeof useGetConsultancyByIdLazyQuery>;
+export type GetConsultancyByIdQueryResult = Apollo.QueryResult<GetConsultancyByIdQuery, GetConsultancyByIdQueryVariables>;
 export const GetMyConsultanciesDocument = gql`
     query GetMyConsultancies($limit: Int!, $offset: Int!) {
   getMyConsultancies(offset: $offset, limit: $limit) {

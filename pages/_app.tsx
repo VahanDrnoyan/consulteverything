@@ -21,17 +21,17 @@ import en from 'javascript-time-ago/locale/en.json'
 TimeAgo.addDefaultLocale(en)
 
 interface CustomAppProps {
-    Component: NextPageWithAuth
+    Component: NextPageWithAuth,
     pageProps: InferGetServerSidePropsType<typeof getServerSideProps> & {
-        session: Session,
-    }
+        session?: Session,
+    },
 }
 export type NextPageWithAuth = NextPage & {
     auth?: {
         role?: string
     }
 };
-function MyApp({Component, pageProps: {session, ...pageProps}}) {
+function MyApp({Component, pageProps: {session, ...pageProps}}: CustomAppProps) {
     const apolloClient = useApollo(pageProps.initialApolloState);
     return (
         <ApolloProvider client={apolloClient}>

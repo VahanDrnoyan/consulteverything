@@ -1,0 +1,29 @@
+query GetConsultancyById($id:ID!){
+  getConsultancyById(id: $id){
+  	id
+    data {
+      title
+      short_description
+      long_description
+      isActive
+      max_time_minuets
+      max_attachment_count
+      allow_age_check
+      allow_email_check
+      allow_gender_check
+      allow_name_surname
+      allow_profession_check
+      allow_expectations_check
+      allow_ongoing_support_check
+      allow_enable_video_by_requester
+      allow_expertise_in_problem_field_check
+      allow_previous_consultancy_experience_check
+      allow_time_spent_issue_resolution_check
+      enable_video_by_provider
+      tags{
+        name
+        id
+      }
+    } 
+  }
+}

@@ -52,6 +52,7 @@ export interface NexusGenInputs {
     title: string; // String!
   }
   TagInputType: { // input type
+    id: number; // Int!
     name: string; // String!
   }
 }
@@ -97,12 +98,17 @@ export interface NexusGenObjects {
     short_description: string; // String!
     title: string; // String!
   }
+  ConsultancyById: { // root type
+    data: NexusGenRootTypes['Consultancy']; // Consultancy!
+    id: string; // String!
+  }
   Event: { // root type
     id: string; // ID!
   }
   Mutation: {};
   Query: {};
   Tag: { // root type
+    id: number; // Int!
     name: string; // String!
   }
   TotalConsultanciesObject: { // root type
@@ -155,6 +161,10 @@ export interface NexusGenFieldTypes {
     tags: NexusGenRootTypes['Tag'][]; // [Tag!]!
     title: string; // String!
   }
+  ConsultancyById: { // field return type
+    data: NexusGenRootTypes['Consultancy']; // Consultancy!
+    id: string; // String!
+  }
   Event: { // field return type
     id: string; // ID!
   }
@@ -162,12 +172,15 @@ export interface NexusGenFieldTypes {
     createConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     createUser: NexusGenRootTypes['User']; // User!
     deleteConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
+    updateConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
   }
   Query: { // field return type
+    getConsultancyById: NexusGenRootTypes['ConsultancyById'] | null; // ConsultancyById
     getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
     totalConsultancies: NexusGenRootTypes['TotalConsultanciesObject'] | null; // TotalConsultanciesObject
   }
   Tag: { // field return type
+    id: number; // Int!
     name: string; // String!
   }
   TotalConsultanciesObject: { // field return type
@@ -211,6 +224,10 @@ export interface NexusGenFieldTypeNames {
     tags: 'Tag'
     title: 'String'
   }
+  ConsultancyById: { // field return type name
+    data: 'Consultancy'
+    id: 'String'
+  }
   Event: { // field return type name
     id: 'ID'
   }
@@ -218,12 +235,15 @@ export interface NexusGenFieldTypeNames {
     createConsultancy: 'Consultancy'
     createUser: 'User'
     deleteConsultancy: 'Consultancy'
+    updateConsultancy: 'Consultancy'
   }
   Query: { // field return type name
+    getConsultancyById: 'ConsultancyById'
     getMyConsultancies: 'Consultancy'
     totalConsultancies: 'TotalConsultanciesObject'
   }
   Tag: { // field return type name
+    id: 'Int'
     name: 'String'
   }
   TotalConsultanciesObject: { // field return type name
@@ -248,8 +268,15 @@ export interface NexusGenArgTypes {
     deleteConsultancy: { // args
       id: string; // ID!
     }
+    updateConsultancy: { // args
+      data: NexusGenInputs['ConsultancyDataType']; // ConsultancyDataType!
+      id: string; // ID!
+    }
   }
   Query: {
+    getConsultancyById: { // args
+      id: string; // ID!
+    }
     getMyConsultancies: { // args
       limit: number; // Int!
       offset: number; // Int!

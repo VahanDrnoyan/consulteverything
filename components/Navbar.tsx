@@ -49,7 +49,7 @@ export default function Navigation() {
                 }}
                     aria-label="toggle navigation" />
 
-                <Logo color="#000" size="2x" />
+                <Logo color="#000" size="50" />
                 <Input
                     status="default"
                     bordered

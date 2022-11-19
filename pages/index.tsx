@@ -3,7 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import React, { useState, useRef, useEffect} from 'react';
 import { useRouter } from "next/router";
-import heroPic from "../public/khustup1.jpeg"
+import heroPic from "../public/galaxy.jpeg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faListAlt, faFileVideo, faMoneyBill1, faEdit, faCalendar, faUser } from '@fortawesome/free-regular-svg-icons'
 import { Text, Avatar, Grid, Container, Card, Row, Button } from "@nextui-org/react";
@@ -52,8 +52,8 @@ const Home: NextPageWithAuth = (_props) => {
                     />
                 </div>
                 <div className={styles.logoConatiner}>
-                    <Logo color="#fff" size='6x'/>
-                    <Text h3 color="#fff" css={{ mt: 100, mb: 0 }}>Push your boundaries to horizons!</Text>
+                    <Logo color="#fff" size={100}/>
+                    <Text h3 color="#fff" css={{ mt: 100, mb: 0 }}>Push your boundaries, with consultancy!</Text>
                     
 
 

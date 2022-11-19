@@ -15,7 +15,7 @@ const Schema = TitleSchema.concat(ShortDescriptionSchema).concat(LongDescription
     long_description?: InputMaybe<Scalars['String']>;
     max_time_minuets: Scalars['Int'];
     max_attachment_count: Scalars['Int'];
-   tags: Array<TagInputType> | TagInputType;
+   tags?: Array<TagInputType> | TagInputType;
   }>;
 export const ConsultancyArgsValidator = async (data: CreateConsultancyMutationVariables) => {
     await Schema.validate(data, {abortEarly: false}) 

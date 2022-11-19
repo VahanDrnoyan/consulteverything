@@ -8,7 +8,7 @@ import Editor from "../../../components/Editor";
 import Footer from "../../../components/Footer";
 import { PressEvent } from '@react-types/shared';
 
-import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType, ConsultancyDataType } from "../../../generated/graphql-frontend";
+import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType, ConsultancyDataType, useGetConsultancyByIdQuery, useGetConsultancyByIdLazyQuery } from "../../../generated/graphql-frontend";
 import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTitleValidator";
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
@@ -51,7 +51,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         isActive: false
     }
     const [values, setValues] = useState<ConsultancyDataType>(initialValues);
-    
+    const [getByIdErrors, setGetByIdErrors] = useState<string>('')
+    const [id, setId] = useState<string>('')
     const [serverErrors, setServerErrors] = useState<string[]>([])
     const[tagInputChanged, setTagInputChanged] = useState(false)
     const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags}, tagInputChanged)
@@ -65,7 +66,22 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         }
     });
     const router = useRouter()
-   
+    useEffect(()=>{
+        if(router.query.id && router.query.id[0] !== undefined && typeof router.query.id[0] === 'string'){
+        getConsultancyById({variables: {id: router.query.id[0]}})
+        }
+    },[router.query.id])
+    const [ getConsultancyById ] = useGetConsultancyByIdLazyQuery(
+        {onCompleted:(data)=> {
+            if(data?.getConsultancyById?.data){
+            setValues(data?.getConsultancyById?.data)
+            setId(data?.getConsultancyById?.id);
+            }
+        },
+        onError: (err)=> {
+            setGetByIdErrors(err.message)
+        }
+    })
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
@@ -110,12 +126,15 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
 
     const handleTagsChange = (e: ChangeEvent<FormElement>) => {
-        const hasCommat = e.target.value.endsWith(',')
+        const hasComma = e.target.value.endsWith(',')
         setTagInputChanged(true)
         setValues((state) => {
-            if (hasCommat) {
+            if (hasComma) {
                 const tags = [...state.tags];
-                tags.push({ name: e.target.value.slice(0, -1) })
+                tags.push({
+                    name: e.target.value.slice(0, -1),
+                    id: 0
+                })
                 e.target.value = ''
                 return { ...state, ...{ tags } }
             }
@@ -124,9 +143,9 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const handleNumberInputChange = (e: ChangeEvent<FormElement>) => {
         const id = e.target.name
-        if (e.target.value === '') {
-            e.target.value = "0"
-        }
+        // if (e.target.value === '') {
+        //     e.target.value = "0"
+        // }
         setValues((state) => {
             return { ...state, ...{ [id]: parseInt(e.target.value) } }
         })
@@ -256,6 +275,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             <div style={{ width: '600px', margin: 'auto', marginTop: '20px' }}>
                 {serverErrors?.length > 0 && serverErrors.map((item, i)=> {
                     return (<Text key={item + i}css={{ color: '$red600', fontSize: 12, mt: 6 }}>{item}</Text>)})}
+    {getByIdErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6, textAlign: 'center' }}>{getByIdErrors}</Text>)}
             
                 <Text css={{ 'mt': 20 }} h3>Add consultancy</Text>
                 <form onSubmit={handleFormSubmit}>
@@ -355,6 +375,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         step={5}
                         css={{ 'mt': 30 }}
                         animated
+                        defaultValue={0}
                         name="max_time_minuets"
                         fullWidth
                         value={values.max_time_minuets}

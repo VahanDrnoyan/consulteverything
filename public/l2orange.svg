@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="13.6628mm" height="16.3497mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 248 297"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil3 {fill:url(#id0)}
+    .fil0 {fill:url(#id1)}
+    .fil1 {fill:url(#id2)}
+    .fil2 {fill:url(#id3)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="110.993" y1="176.825" x2="154.628" y2="130.406">
+   <stop offset="0" style="stop-opacity:1; stop-color:#FF9B79"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FFDE7F"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="109.828" y1="17.6245" x2="114.537" y2="99.6486">
+   <stop offset="0" style="stop-opacity:1; stop-color:#FF9178"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#FFD47F"/>
+  </linearGradient>
+  <linearGradient id="id2" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="51.372" y1="150.549" x2="95.0083" y2="196.968">
+  </linearGradient>
+  <linearGradient id="id3" gradientUnits="userSpaceOnUse" xlink:href="#id1" x1="159.885" y1="216.831" x2="164.597" y2="134.809">
+  </linearGradient>
+ </defs>
+ <g id="Слой_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2268328078416">
+   <path class="fil0" d="M36 180c-4,-12 -1,-25 5,-42 7,-17 38,-62 49,-81 25,-1 59,3 76,-4 17,-8 34,-26 32,-52l-126 -1c-19,0 -42,45 -64,80 -13,22 -9,33 2,53 7,14 21,37 26,47z"/>
+   <path class="fil1" d="M67 214c18,0 65,0 87,0 -1,-38 -25,-58 -63,-60 -12,-6 -23,-37 -30,-51 -6,9 -16,24 -20,35 -6,18 -9,24 -5,42 8,14 25,34 31,34z"/>
+   <path class="fil2" d="M212 117c4,12 1,25 -5,42 -7,17 -38,62 -49,80 -25,2 -59,-2 -76,5 -17,8 -34,26 -32,51l126 2c19,0 42,-45 64,-81 13,-21 9,-32 -2,-52 -7,-14 -21,-37 -26,-47z"/>
+   <path class="fil3" d="M181 83c-18,-1 -65,0 -87,0 1,38 25,58 63,59 12,7 23,37 30,52 6,-9 16,-25 20,-35 6,-18 9,-24 5,-42 -8,-14 -25,-34 -31,-34z"/>
+  </g>
+ </g>
+</svg>

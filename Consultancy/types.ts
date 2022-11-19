@@ -6,6 +6,7 @@ import { number, string } from "prop-types";
 import { ConsultancyArgsValidator } from "../Validators/BackendValidators/ConsultancyArgsValidator";
 import { UserInputError, ValidationError } from "apollo-server-errors";
 import { GraphQLYogaError } from "@graphql-yoga/node";
+import { TagInputType as TagType } from "../generated/graphql-frontend";
 
 export const FieldEnum = enumType({
     name: Field.name,
@@ -45,12 +46,14 @@ export const TagsType = objectType({
     description: Tag.$description,
     definition(t) {
         t.field(Tag.name)
+        t.field(Tag.id)
     },
 });
 export const TagInputType = extendInputType({
     type: "TagInputType",
     definition(t) {
         t.field(Tag.name)
+        t.nullable.field(Tag.id)
     },
 })
 export const ConsultancyDataType = extendInputType({
@@ -80,6 +83,7 @@ export const ConsultancyDataType = extendInputType({
         })
     },
 });
+
 
 export const ConsultancyResolver = mutationField('createConsultancy', {
     type: ConsultancyType,
@@ -116,6 +120,56 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
             ...consultancyParams
         })
 
+    },
+
+});
+export const ConsultancyUpdateResolver = mutationField('updateConsultancy', {
+    type: ConsultancyType,
+    args: {
+        id: nonNull(idArg()),
+        data: nonNull("ConsultancyDataType")
+    },
+    resolve: async (_root, args, { prisma, user }) => {
+        await ConsultancyArgsValidator(args.data).catch((err) => {
+            return Promise.reject(
+                new GraphQLYogaError('User input error', err.errors)
+            )
+        })
+        const tags = args.data.tags
+        const consultancyUpdateParams: Prisma.ConsultancyUpdateArgs = {
+            where: {
+                id: args.id
+            },
+
+            data: {
+                ...args.data,
+                tags: {
+
+                }
+            },
+            select: {
+                id: true,
+                title: true,
+            }
+        }
+        const consultancy = await prisma.consultancy.update({
+            ...consultancyUpdateParams
+        })
+        tags.map(async (tag: TagType)=> {
+            await prisma.tag.upsert({
+                where: {
+                  id: tag?.id,
+                },
+                update: {
+                  name: tag.name,
+                },
+                create: {
+                    consultancyId: consultancy.id,
+                    name: tag.name,
+                },
+              })
+        })
+        return consultancy;
     },
 
 });
@@ -165,12 +219,60 @@ export const TotalConsultancies = extendType({
         })
     },
 })
+export const GetConsultancyById = extendType({
+    type: 'Query',
+    definition(t) {
+        t.field('getConsultancyById', {
+            type: ConsultancyById,
+            args: {
+                id: nonNull(idArg()),
+            },
+            resolve: async (_root, args, { prisma, user }) => {
+                const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
+                    where: {
+                        id: args.id,
+                    }
+                }
+                console.log(args.id, 555555)
+                const consultancy = await prisma.consultancy.findUnique(selectConsultancy)
+                if (!consultancy) {
+                    return Promise.reject(
+                        new GraphQLYogaError(
+                          `Could not find consultancy.`
+                        )
+                      )
+                  }
+                  if(consultancy.userId !== user.id){
+                    return Promise.reject(
+                        new GraphQLYogaError(
+                          `No permission`
+                        )
+                      )
+                  }
+                  const consultancy_id = consultancy.id
+                  return {
+                        id: consultancy_id,
+                        data: consultancy
+                  }
+            },
+
+        })
+    },
+})
 export const TotalConsultanciesObject = objectType({
     name: 'TotalConsultanciesObject',
     definition(t) {
       t.int('total')
    
     }});
+
+    export const ConsultancyById = objectType({
+        name: 'ConsultancyById',
+        definition(t) {
+          t.nonNull.string('id')
+          t.field('data', {type: nonNull(ConsultancyType)})
+       
+        }});
 
     export const DeleteConsultancy = extendType({
         type: 'Mutation',

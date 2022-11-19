@@ -34,6 +34,11 @@ type Consultancy {
   title: String!
 }
 
+type ConsultancyById {
+  data: Consultancy!
+  id: String!
+}
+
 input ConsultancyDataType {
   allow_age_check: Field!
   allow_email_check: Field!
@@ -72,9 +77,11 @@ type Mutation {
   createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
   deleteConsultancy(id: ID!): Consultancy
+  updateConsultancy(data: ConsultancyDataType!, id: ID!): Consultancy
 }
 
 type Query {
+  getConsultancyById(id: ID!): ConsultancyById
   getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
   totalConsultancies: TotalConsultanciesObject
 }
@@ -89,10 +96,12 @@ enum Role {
 
 """Tag"""
 type Tag {
+  id: Int!
   name: String!
 }
 
 input TagInputType {
+  id: Int!
   name: String!
 }
 

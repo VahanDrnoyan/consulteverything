@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 export const MaxTimeInMinutesSchema = yup.object().shape({
-    max_time_minuets: yup.number().required("Max time is required field").integer().min(5,"Max time should be at least 5").max(120, "Max time should be at most 120")
+    max_time_minuets: yup.number().typeError('Must be a number').transform((value) => (isNaN(value) ? 0 : value)).required("Max time is required field").integer().min(5,"Max time should be at least 5").max(120, "Max time should be at most 120")
 });
 export const useMaxTimeInMinutesValidator = (max_time_minuets:number) => {
     const [errors, setErrors] = useState("")

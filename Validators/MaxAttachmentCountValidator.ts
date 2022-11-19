@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import * as yup from "yup";
 export const MaxAttachmentCountSchema = yup.object().shape({
-    max_attachment_count: yup.number().integer().min(0,"Attachments count should at least be 0").max(6, "Attachments count should at most be 6")
+    max_attachment_count: yup.number().typeError('Must be a number').transform((value) => (isNaN(value) ? 0 : value)).integer().min(0,"Attachments count should at least be 0").max(6, "Attachments count should at most be 6")
 });
 export const useMaxAttachmentCountValidator = (max_attachment_count:number) => {
     const [errors, setErrors] = useState("")

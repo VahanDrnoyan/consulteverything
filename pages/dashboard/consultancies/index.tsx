@@ -41,7 +41,7 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
     router.push('/dashboard/edit')
   }
   const [deleteErrors, setDeleteErrors] = useState<string>('')
-  const limit = 4
+  const limit = 1
   const [offset, setOffset] = useState(0)
   const { loading: loadingTotal, data: dataTotal, refetch: refetchTotal } = useTotalConsultanciesQuery()
   const { loading, data, fetchMore } = useGetMyConsultanciesQuery({
@@ -127,7 +127,12 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
               </Col>
               <Col css={{ d: "flex" }}>
                 <Tooltip content="Edit user">
-                  <Button auto color={"default"} css={{ p: 4, height: 'auto', borderRadius: 4 }} onClick={() => console.log("Edit user", item.id)}>
+                  <Button auto color={"default"} css={{ p: 4, height: 'auto', borderRadius: 4 }} onClick={() => {
+                    router.push({
+                      pathname: '/dashboard/edit/'+ item.id,
+                    
+                    })
+                  }}>
                     <EditIcon size={20} fill="#fff" />
                   </Button>
                 </Tooltip>
@@ -142,7 +147,7 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
                     onClick={() => {
                       deleteConsultancy({
                         variables: {
-                          id: 'sFDSAFAFD'
+                          id: item.id
                         },
                         errorPolicy: 'all',
                         update: (cache, result) => {
@@ -221,12 +226,16 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
         </Table.Body>
 
       </Table>
+      {dataTotal?.totalConsultancies?.total && dataTotal?.totalConsultancies?.total > limit ? (
         <div style={{ marginTop: '25px', textAlign: 'center' }}>
-          <Pagination total={dataTotal && dataTotal.totalConsultancies && dataTotal.totalConsultancies.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit) : 0} initialPage={1} onChange={(page) => {
+          <Pagination total={dataTotal?.totalConsultancies?.total ? Math.floor(dataTotal?.totalConsultancies?.total / limit) : 0} initialPage={1} onChange={(page) => {
             setOffset(page * limit - limit)
 
           }} />
         </div>
+
+      ): ''}
+        
       </>
 
     ) || (<div style={{ textAlign: 'center', marginTop: '100px' }}> <Loading type="spinner" size="lg" /></div>)}
