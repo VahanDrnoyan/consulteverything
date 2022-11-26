@@ -8,7 +8,7 @@ import Editor from "../../../components/Editor";
 import Footer from "../../../components/Footer";
 import { PressEvent } from '@react-types/shared';
 
-import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType, ConsultancyDataType, useGetConsultancyByIdQuery, useGetConsultancyByIdLazyQuery } from "../../../generated/graphql-frontend";
+import { Consultancy, Role, Field, useCreateConsultancyMutation, MutationCreateConsultancyArgs, TagInputType, ConsultancyDataType, useGetConsultancyByIdQuery, useGetConsultancyByIdLazyQuery, useUpdateConsultancyMutation } from "../../../generated/graphql-frontend";
 import { useConsultancyTitleValidator } from "../../../Validators/ConsultancyTitleValidator";
 import { useConsultancyTagValidator } from "../../../Validators/ConsultancyTagValidator";
 import { useConsultancyShortDescriptionValidator } from "../../../Validators/ConsultancyShortDescriptionValidator";
@@ -59,7 +59,13 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
     const [createConsultancy, { loading, error }] = useCreateConsultancyMutation({
         onCompleted: (data) => {
-            console.log(data, 88888)
+        },
+        onError: (err)=>{
+            setServerErrors(err.graphQLErrors[0].extensions as unknown as string[]);
+        }
+    });
+    const [updateConsultancy] = useUpdateConsultancyMutation({
+        onCompleted: (data) => {
         },
         onError: (err)=>{
             setServerErrors(err.graphQLErrors[0].extensions as unknown as string[]);
@@ -74,13 +80,19 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     const [ getConsultancyById ] = useGetConsultancyByIdLazyQuery(
         {onCompleted:(data)=> {
             if(data?.getConsultancyById?.data){
-            setValues(data?.getConsultancyById?.data)
+                const cleanedUpTags = data?.getConsultancyById?.data.tags.map((item)=> {
+                    
+                    return {name: item.name, id: item.id};
+                })
+                const allData = {...data?.getConsultancyById?.data, tags: [...cleanedUpTags]}
+            setValues(allData)
             setId(data?.getConsultancyById?.id);
             }
         },
         onError: (err)=> {
             setGetByIdErrors(err.message)
-        }
+        },
+        fetchPolicy: 'network-only'
     })
     const handleFormSubmit = async (e: React.FormEvent) => {
 
@@ -90,6 +102,19 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             && !consultancyLongDescriptionErrors
             && (!maxAttachmentsCountErrors)
             && (values.max_time_minuets && !maxTimeInMinutesErrors)) {
+                if(id) {
+                    updateConsultancy({ variables: { id, ...values } }).then(()=>{
+                        setValues((state)=> {
+                            return {...initialValues}
+                        })
+                        setTagInputChanged(false)
+                        router.push(
+                            {
+                                pathname: '/dashboard/consultancies'
+                            }
+                        )
+                    }).catch((err)=>{})
+                } else {
                 createConsultancy({ variables: { ...values } }).then(()=>{
                     setValues((state)=> {
                         return {...initialValues}
@@ -101,6 +126,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         }
                     )
                 }).catch((err)=>{})
+            }
             }
         
 
@@ -443,7 +469,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
                     <Radio.Group value={values.allow_profession_check} onChange={handle_allow_prefession_check} size="xs" css={{ 'mt': 20 }} label='Allow "Your profession"' defaultValue="EXCLUDE">
                         {RadioOptions()}
-                        <Radio value="REQUIRED">Required</Radio>
                     </Radio.Group>
                     <br />
 

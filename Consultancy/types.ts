@@ -123,56 +123,73 @@ export const ConsultancyResolver = mutationField('createConsultancy', {
     },
 
 });
-export const ConsultancyUpdateResolver = mutationField('updateConsultancy', {
-    type: ConsultancyType,
-    args: {
-        id: nonNull(idArg()),
-        data: nonNull("ConsultancyDataType")
-    },
-    resolve: async (_root, args, { prisma, user }) => {
-        await ConsultancyArgsValidator(args.data).catch((err) => {
-            return Promise.reject(
-                new GraphQLYogaError('User input error', err.errors)
-            )
-        })
-        const tags = args.data.tags
-        const consultancyUpdateParams: Prisma.ConsultancyUpdateArgs = {
-            where: {
-                id: args.id
+export const ConsultancyUpdateResolver = extendType({
+    type: 'Mutation',
+    definition(t) {
+        t.field('updateConsultancy', {
+            type: ConsultancyType,
+            args: {
+                id: nonNull(idArg()),
+                data: nonNull("ConsultancyDataType")
             },
-
-            data: {
-                ...args.data,
-                tags: {
-
+            resolve: async (_root, args, { prisma, user }) => {
+                await ConsultancyArgsValidator(args.data).catch((err) => {
+                    return Promise.reject(
+                        new GraphQLYogaError('User input error', err.errors)
+                    )
+                })
+                const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
+                    where: {
+                        id: args.id,
+                    }
                 }
-            },
-            select: {
-                id: true,
-                title: true,
+                const consultancyUnique = await prisma.consultancy.findUnique(selectConsultancy)
+                if (!consultancyUnique || consultancyUnique.userId !== user.id) {
+                    return Promise.reject(
+                        new GraphQLYogaError(
+                          `Could not find consultancy.`
+                        )
+                      )
+                  }
+                const tags = args.data.tags
+                const consultancyUpdateParams: Prisma.ConsultancyUpdateArgs = {
+                    where: {
+                        id: args.id,
+                    },
+        
+                    data: {
+                        ...args.data,
+                        tags: {
+        
+                        }
+                    },
+                    select: {
+                        id: true,
+                        title: true,
+                    }
+                }
+                const consultancy = await prisma.consultancy.update({
+                    ...consultancyUpdateParams
+                })
+                await prisma.tag.deleteMany({
+                    where: {
+                      consultancyId: consultancy?.id,
+                    },
+                })
+                tags.map(async (tag: TagType)=> {
+                   
+                    await prisma.tag.create({
+                        data: {
+                            name: tag.name,
+                            consultancyId: consultancy.id
+                        }
+                    });
+                })
+                return consultancy;
             }
-        }
-        const consultancy = await prisma.consultancy.update({
-            ...consultancyUpdateParams
         })
-        tags.map(async (tag: TagType)=> {
-            await prisma.tag.upsert({
-                where: {
-                  id: tag?.id,
-                },
-                update: {
-                  name: tag.name,
-                },
-                create: {
-                    consultancyId: consultancy.id,
-                    name: tag.name,
-                },
-              })
-        })
-        return consultancy;
     },
-
-});
+})
 export const GetMyConsultanciesResolver = extendType({
     type: 'Query',
     definition(t) {
@@ -233,7 +250,6 @@ export const GetConsultancyById = extendType({
                         id: args.id,
                     }
                 }
-                console.log(args.id, 555555)
                 const consultancy = await prisma.consultancy.findUnique(selectConsultancy)
                 if (!consultancy) {
                     return Promise.reject(

@@ -231,6 +231,32 @@ export type TotalConsultanciesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TotalConsultanciesQuery = { __typename?: 'Query', totalConsultancies?: { __typename?: 'TotalConsultanciesObject', total?: number | null } | null };
 
+export type UpdateConsultancyMutationVariables = Exact<{
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  short_description: Scalars['String'];
+  long_description?: InputMaybe<Scalars['String']>;
+  max_time_minuets: Scalars['Int'];
+  max_attachment_count: Scalars['Int'];
+  enable_video_by_provider: Scalars['Boolean'];
+  allow_enable_video_by_requester: Scalars['Boolean'];
+  allow_name_surname: Field;
+  allow_profession_check: Field;
+  allow_age_check: Field;
+  allow_gender_check: Field;
+  allow_previous_consultancy_experience_check: Field;
+  allow_email_check: Field;
+  allow_ongoing_support_check: Field;
+  allow_expectations_check: Field;
+  allow_time_spent_issue_resolution_check: Field;
+  allow_expertise_in_problem_field_check: Field;
+  isActive: Scalars['Boolean'];
+  tags: Array<TagInputType> | TagInputType;
+}>;
+
+
+export type UpdateConsultancyMutation = { __typename?: 'Mutation', updateConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
+
 
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!) {
@@ -493,3 +519,59 @@ export function useTotalConsultanciesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type TotalConsultanciesQueryHookResult = ReturnType<typeof useTotalConsultanciesQuery>;
 export type TotalConsultanciesLazyQueryHookResult = ReturnType<typeof useTotalConsultanciesLazyQuery>;
 export type TotalConsultanciesQueryResult = Apollo.QueryResult<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>;
+export const UpdateConsultancyDocument = gql`
+    mutation UpdateConsultancy($id: ID!, $title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $isActive: Boolean!, $tags: [TagInputType!]!) {
+  updateConsultancy(
+    id: $id
+    data: {title: $title, short_description: $short_description, long_description: $long_description, max_time_minuets: $max_time_minuets, max_attachment_count: $max_attachment_count, enable_video_by_provider: $enable_video_by_provider, allow_enable_video_by_requester: $allow_enable_video_by_requester, allow_name_surname: $allow_name_surname, allow_profession_check: $allow_profession_check, allow_age_check: $allow_age_check, allow_gender_check: $allow_gender_check, allow_previous_consultancy_experience_check: $allow_previous_consultancy_experience_check, allow_email_check: $allow_email_check, isActive: $isActive, allow_ongoing_support_check: $allow_ongoing_support_check, allow_expectations_check: $allow_expectations_check, allow_time_spent_issue_resolution_check: $allow_time_spent_issue_resolution_check, allow_expertise_in_problem_field_check: $allow_expertise_in_problem_field_check, tags: $tags}
+  ) {
+    id
+    title
+  }
+}
+    `;
+export type UpdateConsultancyMutationFn = Apollo.MutationFunction<UpdateConsultancyMutation, UpdateConsultancyMutationVariables>;
+
+/**
+ * __useUpdateConsultancyMutation__
+ *
+ * To run a mutation, you first call `useUpdateConsultancyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateConsultancyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateConsultancyMutation, { data, loading, error }] = useUpdateConsultancyMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      title: // value for 'title'
+ *      short_description: // value for 'short_description'
+ *      long_description: // value for 'long_description'
+ *      max_time_minuets: // value for 'max_time_minuets'
+ *      max_attachment_count: // value for 'max_attachment_count'
+ *      enable_video_by_provider: // value for 'enable_video_by_provider'
+ *      allow_enable_video_by_requester: // value for 'allow_enable_video_by_requester'
+ *      allow_name_surname: // value for 'allow_name_surname'
+ *      allow_profession_check: // value for 'allow_profession_check'
+ *      allow_age_check: // value for 'allow_age_check'
+ *      allow_gender_check: // value for 'allow_gender_check'
+ *      allow_previous_consultancy_experience_check: // value for 'allow_previous_consultancy_experience_check'
+ *      allow_email_check: // value for 'allow_email_check'
+ *      allow_ongoing_support_check: // value for 'allow_ongoing_support_check'
+ *      allow_expectations_check: // value for 'allow_expectations_check'
+ *      allow_time_spent_issue_resolution_check: // value for 'allow_time_spent_issue_resolution_check'
+ *      allow_expertise_in_problem_field_check: // value for 'allow_expertise_in_problem_field_check'
+ *      isActive: // value for 'isActive'
+ *      tags: // value for 'tags'
+ *   },
+ * });
+ */
+export function useUpdateConsultancyMutation(baseOptions?: Apollo.MutationHookOptions<UpdateConsultancyMutation, UpdateConsultancyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateConsultancyMutation, UpdateConsultancyMutationVariables>(UpdateConsultancyDocument, options);
+      }
+export type UpdateConsultancyMutationHookResult = ReturnType<typeof useUpdateConsultancyMutation>;
+export type UpdateConsultancyMutationResult = Apollo.MutationResult<UpdateConsultancyMutation>;
+export type UpdateConsultancyMutationOptions = Apollo.BaseMutationOptions<UpdateConsultancyMutation, UpdateConsultancyMutationVariables>;
