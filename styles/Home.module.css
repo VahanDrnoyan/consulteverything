@@ -14,6 +14,7 @@
     position: relative;
     justify-content: space-between;
     align-items: center;
+    height: 400px;
 }
 .relative-p {
     position: relative;
@@ -39,20 +40,21 @@ text-align: center;
 }
 @keyframes my-animation {
     from {
-        width:100%;
-        height: 100%;
+       transform: scale(0.8);
 
     }
     to {
-        width:110%;
-        height: 110%;
+       
+       transform: scale(1);
     }
    
   }
 .heroImage {
     /* animation properties */
-    animation: my-animation 20s ease-in-out ;
-    position: absolute;
+    animation: my-animation 8s ease-in-out ;
+border-radius: 50%;
+overflow: hidden;
+
   animation-direction: alternate;
   animation-delay: 0s;
   animation-iteration-count: infinite;

@@ -8,6 +8,9 @@ import Logo from "./Logo";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import LoginModal from "./LoginModal";
+import Image from "next/image"
+import logoSmall from "../public/logo_small.png"
+
 type NavItems = {
     id:string;
     name:string;
@@ -40,7 +43,7 @@ export default function Navigation() {
     
     return (
 
-        <><Navbar    variant="sticky" containerCss={{ 'bg': '$white' }} css={{ 'bg': '$white' }}>
+        <><Navbar    disableShadow={true} maxWidth="fluid" variant="sticky" containerCss={{ 'bg': '#2b224c !important', opacity: 1 }} css={{ 'bg': '#2b224c' }}>
             <Navbar.Brand>
                 <Navbar.Toggle css={{
                     '@sm': {
@@ -48,21 +51,20 @@ export default function Navigation() {
                     }
                 }}
                     aria-label="toggle navigation" />
-
-                <Logo color="#000" size="50" />
-                <Input
-                    status="default"
-                    bordered
-                    css={{
-                        ml: 10
-                    }}
-                    labelRight={<FontAwesomeIcon size={"1x"} fill="currentColor" icon={faSearch} />}
-                    placeholder="Search" />
+<Image
+  width={50}
+  height={50}  
+  src={logoSmall.src}
+  alt="Default Image"
+  objectFit="cover"
+  style={{ borderRadius: '50%' }}
+/>
+                {/* <Logo color="#000" size="50" /> */}
             </Navbar.Brand>
             {session && session?.user ? (
                 <Navbar.Content enableCursorHighlight hideIn="sm" variant="underline-rounded">
                     <>{responsiveNavItems.map((item, index) => (
-                        <Navbar.Item isActive={router.pathname === item.routename} key={item.id}>
+                        <Navbar.Item isActive={router.pathname === item.routename} key={item.id} css={{ color: '#fff'}}>
                             <Link
                                 href={item.url}
                             >

@@ -295,15 +295,15 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
         return true
     }, [values.title, values.tags, values.short_description, values.max_attachment_count, values.max_time_minuets, consultancyTitleErrors, consultancyTagErrors, consultancyShortDescriptionErrors, consultancyLongDescriptionErrors, maxAttachmentsCountErrors, maxTimeInMinutesErrors])
-    return (<div>
+    return (<div style={{ background: '#dedede', paddingTop: '20px' }}>
         <Container>
 
-            <div style={{ width: '600px', margin: 'auto', marginTop: '20px' }}>
+            <div style={{ width: '600px', margin: 'auto', backgroundColor: '#fff', padding: '12px', borderRadius: '5px' }}>
                 {serverErrors?.length > 0 && serverErrors.map((item, i)=> {
                     return (<Text key={item + i}css={{ color: '$red600', fontSize: 12, mt: 6 }}>{item}</Text>)})}
     {getByIdErrors && (<Text css={{ color: '$red600', fontSize: 12, mt: 6, textAlign: 'center' }}>{getByIdErrors}</Text>)}
             
-                <Text css={{ 'mt': 20 }} h3>Add consultancy</Text>
+                <Text h3>Add consultancy</Text>
                 <form onSubmit={handleFormSubmit}>
                     <Input
                         css={{ 'mt': 40 }}
@@ -482,7 +482,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <br />
                     <Checkbox size={"xs"} isSelected={values.allow_enable_video_by_requester} onChange={handle_allow_enable_video_by_requester} css={{ 'mt': 20 }} color="primary" defaultSelected={values.allow_enable_video_by_requester}>
                         <span style={{ fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
-                            Allow "Live video"
+                            Allow Live video
                         </span>
                     </Checkbox>
 

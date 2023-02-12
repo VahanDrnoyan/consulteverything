@@ -34,7 +34,6 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
      })
   }
   return (
-    <div>
       <Modal
         closeButton
         blur
@@ -76,7 +75,6 @@ const LoginModal: React.FC<Props> = ({show, setShow})=> {
         </Modal.Body>
         </form>
       </Modal>
-    </div>
   );
 }
 export default LoginModal

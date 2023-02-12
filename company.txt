@@ -1,0 +1,11 @@
+1) We are customer to customer business
+2)Our user provide to each other  consultancy
+(help peaople get easy targeted information, compatre those informations and make desicins)
+Consltancy can be provided to simple How to question as well as to Complex techtnical questions
+3) The main Idea to help people to make well thought desicions with the help of worldwide consultancy, 
+which they cannot do with Google or Facebook
+ you dont go to offices of people but solve your question in targeted way infront of your device.
+4) Technicall aspect(Stream IO, React, Nextjs Vercel, scalability)
+5)Sripe connect
+7)Features
+8) How much money we need and estimated time of going live
