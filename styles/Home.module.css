@@ -37,6 +37,7 @@ padding: 20px 0;
 text-align: center;
 }
 .bottomConatiner {
+    background-color: #fff;
 }
 @keyframes my-animation {
     from {
@@ -51,7 +52,7 @@ text-align: center;
   }
 .heroImage {
     /* animation properties */
-    animation: my-animation 8s ease-in-out ;
+    animation: my-animation 6s ease ;
 border-radius: 50%;
 overflow: hidden;
 
