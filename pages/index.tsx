@@ -95,11 +95,11 @@ const Home: NextPageWithAuth = (_props) => {
         </Text>
       </div>
       <div className={styles.bottomConatiner}>
-        <Container css={{ marginTop: "0" }}>
-          <Grid.Container gap={4} justify="center" css={{ p: 0 }}>
+        <Container css={{ marginTop: "0", maxWidth: 1600, alignItems: 'start' }}>
+          <Grid.Container gap={4} justify="center" css={{ p: 0 , alignItems: 'start'}}>
             <Grid xs={12} md={4} lg={4}>
               <Card isHoverable variant="bordered" css={{ p: 0 }}>
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
+                <Card.Body css={{ p: 0, width: '100%' }}>
                   <Text
                     css={{
                       clipPath: "polygon(0 0, 50% 100%, 100% 0)",
@@ -123,7 +123,7 @@ const Home: NextPageWithAuth = (_props) => {
                   <Card.Image
                     src={targetIcon.src}
                     alt="Target"
-                    css={{ maxHeight: "1000px", objectFit: "cover" }}
+                    css={{ objectFit: "cover" }}
                   />
                 </Card.Body>
 
@@ -181,7 +181,7 @@ const Home: NextPageWithAuth = (_props) => {
 
             <Grid xs={12} md={4} lg={4}>
               <Card isHoverable variant="bordered" css={{ p: 0 }}>
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
+                <Card.Body css={{ p: 0 }}>
                   <Text
                     css={{
                       clipPath:
@@ -206,7 +206,7 @@ const Home: NextPageWithAuth = (_props) => {
                   <Card.Image
                     src={playIcon.src}
                     alt="Target"
-                    css={{ maxHeight: "1000px", objectFit: "cover" }}
+                    css={{ objectFit: "cover" }}
                   />
                 </Card.Body>
 
@@ -261,7 +261,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid>
             <Grid xs={12} md={4} lg={4}>
               <Card isHoverable variant="bordered" css={{ p: 0 }}>
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
+                <Card.Body css={{ p: 0 }}>
                   <Text
                     css={{
                       clipPath: "polygon(0 0, 0% 100%, 100% 0)",
@@ -285,7 +285,7 @@ const Home: NextPageWithAuth = (_props) => {
                   <Card.Image
                     src={logoIcon.src}
                     alt="Community"
-                    css={{ maxHeight: "1000px", objectFit: "cover" }}
+                    css={{ objectFit: "cover" }}
                   />
                 </Card.Body>
                 <Card.Footer
@@ -302,7 +302,7 @@ const Home: NextPageWithAuth = (_props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <Row css={{ flexDirection: "column" }}>
+                  <Row css={{ flexDirection: "column", justifyContent: 'flex-start'}}>
                     <p
                       style={{
                         marginTop: 0,
@@ -340,7 +340,7 @@ const Home: NextPageWithAuth = (_props) => {
           </Grid.Container>
         </Container>
         <div style={{ paddingTop: "8rem", paddingBottom: "6rem" }}>
-          <Container>
+          <Container css={{ maxWidth: 1600}}>
             <Grid.Container gap={4}>
               <Grid
                 lg={4}
