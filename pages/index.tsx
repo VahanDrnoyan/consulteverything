@@ -77,24 +77,21 @@ const Home: NextPageWithAuth = (_props) => {
             textTransform: "uppercase",
             letterSpacing: 4,
             textAlign: "center",
-            py: "40px",
+            py: "250px",
             m: 0,
             backgroundColor: "#fff",
           }}
         >
-          Grow with online consultancy!
-        </Text>
-        <Text
-          h4
-          css={{
-            textAlign: "center",
-            width: "100%",
-            m: 0,
-            backgroundColor: "#fff",
-          }}
-        >
-          consulteverything.com <br />
-          <br />
+          Grow with online consultancy!<br />
+          <span
+   
+   style={{
+     fontSize:'12px',
+     backgroundColor: "#fff",
+   }}
+ >
+   consulteverything.com <br />
+ </span>
         </Text>
       </div>
       <div className={styles.bottomConatiner}>
@@ -105,7 +102,7 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
                     css={{
-                        clipPath: 'polygon(0 0, 50% 100%, 100% 0)',
+                      clipPath: "polygon(0 0, 50% 100%, 100% 0)",
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -113,13 +110,13 @@ const Home: NextPageWithAuth = (_props) => {
                       width: "100%",
                       height: "100%",
                       textAlign: "center",
-                    //   bgBlur: "#ffffff11",
-                    backgroundColor: 'rgba(255,255,255, 0.09)',
+                      //   bgBlur: "#ffffff11",
+                      backgroundColor: "rgba(255,255,255, 0.09)",
                       p: 20,
                       color: "#fff",
                       textTransform: "uppercase",
                     }}
-                    h2
+                    h4
                   >
                     Our mission...
                   </Text>
@@ -149,8 +146,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       Are you a specialist or a beginner seeking knowledge
@@ -159,8 +156,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       Are you in need of consulting in various institutions such
@@ -170,8 +167,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       In this ever-changing world, it can be rather
@@ -187,7 +184,8 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
                     css={{
-                        clipPath: 'polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 85% 100%, 15% 100%)',
+                      clipPath:
+                        "polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 85% 100%, 15% 100%)",
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -195,13 +193,13 @@ const Home: NextPageWithAuth = (_props) => {
                       width: "100%",
                       height: "100%",
                       textAlign: "center",
-                    //   bgBlur: "#ffffff11",
-                    backgroundColor: 'rgba(255,255,255, 0.09)',
+                      //   bgBlur: "#ffffff11",
+                      backgroundColor: "rgba(255,255,255, 0.09)",
                       p: 20,
                       color: "#fff",
                       textTransform: "uppercase",
                     }}
-                    h2
+                    h4
                   >
                     Start solving problems...
                   </Text>
@@ -230,8 +228,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       This platform is designed to receive and provide
@@ -241,8 +239,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       It appears to be a boundless consulting company with
@@ -251,8 +249,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       So don’t hesitate to take a chance and join the community.
@@ -266,7 +264,7 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
                     css={{
-                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                      clipPath: "polygon(0 0, 0% 100%, 100% 0)",
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -274,13 +272,13 @@ const Home: NextPageWithAuth = (_props) => {
                       width: "100%",
                       height: "100%",
                       textAlign: "center",
-                    //   bgBlur: "#ffffff11",
+                      //   bgBlur: "#ffffff11",
                       p: 20,
                       color: "#fff",
-                      backgroundColor: 'rgba(255,255,255, 0.09)',
+                      backgroundColor: "rgba(255,255,255, 0.09)",
                       textTransform: "uppercase",
                     }}
-                    h2
+                    h4
                   >
                     Benefit from global community...
                   </Text>
@@ -308,8 +306,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       This platform is designed to receive and provide
@@ -319,8 +317,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       It appears to be a boundless consulting company with
@@ -329,8 +327,8 @@ const Home: NextPageWithAuth = (_props) => {
                     <p
                       style={{
                         marginTop: 0,
-                        fontWeight: "bold",
-                        fontSize: "1.6rem",
+                        fontSize: "1.2rem",
+                        color: "rgba(0,0,0,0.6)",
                       }}
                     >
                       So don’t hesitate to take a chance and join the community.
@@ -383,22 +381,37 @@ const Home: NextPageWithAuth = (_props) => {
           </Container>
         </div>
         <Text
-   h6
-   css={{
-     width: "100%",
-     textTransform: "uppercase",
-     letterSpacing: 10,
-     textAlign: "center",
-    m: 0,
-    fontSize:"0.7rem",
-    
-     color: "#111",
-   }}
- >
-   Features
- </Text>
- <div style={{ position: "relative", backgroundColor: 'rgba(255,255,255,0.3)', display: "flex", flexDirection: 'column' }}>
-          <Container css={{ marginTop: "0", maxWidth: 1000, position: 'relative', zIndex: 100, my: 100}}>
+          h6
+          css={{
+            width: "100%",
+            textTransform: "uppercase",
+            letterSpacing: 10,
+            textAlign: "center",
+            m: 0,
+            fontSize: "0.7rem",
+
+            color: "#111",
+          }}
+        >
+          Features
+        </Text>
+        <div
+          style={{
+            position: "relative",
+            backgroundColor: "rgba(255,255,255,0.3)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Container
+            css={{
+              marginTop: "0",
+              maxWidth: 1000,
+              position: "relative",
+              zIndex: 100,
+              my: 100,
+            }}
+          >
             <Grid.Container gap={2}>
               <Grid lg={6}>
                 <Card isHoverable>
@@ -411,7 +424,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize:"0.8rem",
+                        fontSize: "0.8rem",
                         backgroundColor: "rgba(199,43,209, 0.2)",
                         color: "rgba(41,25,100,0.8)",
                       }}
@@ -421,10 +434,22 @@ const Home: NextPageWithAuth = (_props) => {
                   </div>
 
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Contact the experts in person and ask your questions.{" "}
                     </p>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       This approach makes the communication more dynamic and
                       productive and contributes to building strong business
                       relationships.
@@ -443,7 +468,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize:"0.8rem",
+                        fontSize: "0.8rem",
                         backgroundColor: "rgba(199,43,209, 0.3)",
                         color: "rgba(41,25,100,0.8)",
                       }}
@@ -453,7 +478,13 @@ const Home: NextPageWithAuth = (_props) => {
                   </div>
 
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Our subscribers are enabled to establish the fee for their
                       work considering a range of factors, such as time,
                       difficulty, etc.
@@ -474,7 +505,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize:"0.9rem",
+                        fontSize: "0.9rem",
                         backgroundColor: "rgba(199,43,209, 0.5)",
                         color: "rgba(41,25,100,0.7)",
                       }}
@@ -484,11 +515,23 @@ const Home: NextPageWithAuth = (_props) => {
                   </div>
 
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Your live discussion will be recoded so later it will be
                       available as a reference.{" "}
                     </p>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Come back at any time to refresh your memory, sort out and
                       highlight the key points of the consultancy.
                     </p>
@@ -496,7 +539,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable >
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
@@ -506,7 +549,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize:"0.9rem",
+                        fontSize: "0.9rem",
                         backgroundColor: "rgba(199,43,209, 0.5)",
                         color: "rgba(41,25,100,0.7)",
                       }}
@@ -516,7 +559,13 @@ const Home: NextPageWithAuth = (_props) => {
                   </div>
 
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       The E-mail notifications and calendar inserted into the
                       website to help you plan and implement your arrangements
                       and online meetings.
@@ -527,7 +576,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable >
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
@@ -537,7 +586,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize:"1rem",
+                        fontSize: "1rem",
                         backgroundColor: "rgba(199,43,209, 0.9)",
                         color: "#fff",
                       }}
@@ -546,7 +595,13 @@ const Home: NextPageWithAuth = (_props) => {
                     </Text>
                   </div>
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       To make the communication process more accurate and
                       productive the platform enables you to create and fill a
                       custom form.
@@ -555,13 +610,13 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable >
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
                       css={{
                         width: "100%",
-                        fontSize:"1rem",
+                        fontSize: "1rem",
                         textTransform: "uppercase",
                         letterSpacing: 10,
                         textAlign: "center",
@@ -574,12 +629,24 @@ const Home: NextPageWithAuth = (_props) => {
                     </Text>
                   </div>
                   <Card.Body>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Get the shareable link of your form and place it on your
                       social media to engage more requests for your consulting
                       services.
                     </p>
-                    <p style={{ marginTop: 0, fontSize: "1.4rem" }}>
+                    <p
+                      style={{
+                        marginTop: 0,
+                        fontSize: "1.1rem",
+                        color: "rgba(0,0,0,0.6)",
+                      }}
+                    >
                       Turn free social traffic into a consistent source of
                       income!
                     </p>
@@ -590,7 +657,7 @@ const Home: NextPageWithAuth = (_props) => {
           </Container>
         </div>
         <Footer />
-        </div>
+      </div>
     </div>
   )
 }
