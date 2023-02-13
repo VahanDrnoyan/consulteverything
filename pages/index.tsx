@@ -36,6 +36,7 @@ import {
   faHomeAlt,
   faHomeLg,
   faSearch,
+  faBlog,
   faShare,
   faSubscript,
 } from "@fortawesome/free-solid-svg-icons"
@@ -44,6 +45,7 @@ import { PressEvent } from "@react-types/shared"
 import Logo from "../components/Logo"
 import Footer from "../components/Footer"
 import { NextPageWithAuth } from "./_app"
+import { RGBA } from "graphql-scalars/mocks"
 
 const Home: NextPageWithAuth = (_props) => {
   const { status } = useSession()
@@ -99,24 +101,28 @@ const Home: NextPageWithAuth = (_props) => {
         <Container css={{ marginTop: "0" }}>
           <Grid.Container gap={4} justify="center" css={{ p: 0 }}>
             <Grid xs={12} md={4} lg={4}>
-              <Card isHoverable css={{ p: 0 }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    zIndex: 100,
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
+              <Card isHoverable variant="bordered" css={{ p: 0 }}>
+                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
-                    css={{ textAlign: "center", bgBlur: "#ffffff99", p: 20 }}
+                    css={{
+                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      zIndex: 100,
+                      width: "100%",
+                      height: "100%",
+                      textAlign: "center",
+                    //   bgBlur: "#ffffff11",
+                    backgroundColor: 'rgba(255,255,255, 0.09)',
+                      p: 20,
+                      color: "#fff",
+                      textTransform: "uppercase",
+                    }}
                     h2
                   >
-                    Our mission
+                    Our mission...
                   </Text>
-                </div>
-
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Card.Image
                     src={targetIcon.src}
                     alt="Target"
@@ -139,7 +145,7 @@ const Home: NextPageWithAuth = (_props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <Row css={{ flexDirection: "column", mb: 20 }}>
+                  <Row css={{ flexDirection: "column" }}>
                     <p
                       style={{
                         marginTop: 0,
@@ -172,36 +178,33 @@ const Home: NextPageWithAuth = (_props) => {
                       time-consuming and tiresome.
                     </p>
                   </Row>
-                  <Row
-                    css={{ alignItems: "flex-end", justifyContent: "flex-end" }}
-                  >
-                    <Button css={{ minWidth: "50%" }} light color={"default"}>
-                      But not anymore!
-                    </Button>
-                  </Row>
                 </Card.Footer>
               </Card>
             </Grid>
 
             <Grid xs={12} md={4} lg={4}>
-              <Card isHoverable css={{ p: 0 }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    zIndex: 100,
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
+              <Card isHoverable variant="bordered" css={{ p: 0 }}>
+                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
-                    css={{ textAlign: "center", bgBlur: "#ffffff99", p: 20 }}
+                    css={{
+                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      zIndex: 100,
+                      width: "100%",
+                      height: "100%",
+                      textAlign: "center",
+                    //   bgBlur: "#ffffff11",
+                    backgroundColor: 'rgba(255,255,255, 0.09)',
+                      p: 20,
+                      color: "#fff",
+                      textTransform: "uppercase",
+                    }}
                     h2
                   >
                     Start solving problems...
                   </Text>
-                </div>
-
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Card.Image
                     src={playIcon.src}
                     alt="Target"
@@ -223,7 +226,7 @@ const Home: NextPageWithAuth = (_props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <Row css={{ flexDirection: "column", mb: 20 }}>
+                  <Row css={{ flexDirection: "column" }}>
                     <p
                       style={{
                         marginTop: 0,
@@ -255,36 +258,32 @@ const Home: NextPageWithAuth = (_props) => {
                       So don’t hesitate to take a chance and join the community.
                     </p>
                   </Row>
-                  <Row
-                    justify="flex-end"
-                    css={{
-                      xs: {
-                        flexDirection: "column",
-                      },
-                    }}
-                  >
-                  </Row>
                 </Card.Footer>
               </Card>
             </Grid>
             <Grid xs={12} md={4} lg={4}>
-              <Card isHoverable css={{ p: 0 }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    zIndex: 100,
-                    width: "100%",
-                    textAlign: "center",
-                  }}
-                >
+              <Card isHoverable variant="bordered" css={{ p: 0 }}>
+                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
-                    css={{ textAlign: "center", bgBlur: "#ffffff99", p: 20 }}
+                    css={{
+                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                      position: "absolute",
+                      top: 0,
+                      bottom: 0,
+                      zIndex: 100,
+                      width: "100%",
+                      height: "100%",
+                      textAlign: "center",
+                    //   bgBlur: "#ffffff11",
+                      p: 20,
+                      color: "#fff",
+                      backgroundColor: 'rgba(255,255,255, 0.09)',
+                      textTransform: "uppercase",
+                    }}
                     h2
                   >
-                    Benefit from global community
+                    Benefit from global community...
                   </Text>
-                </div>
-                <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Card.Image
                     src={logoIcon.src}
                     alt="Community"
@@ -305,7 +304,7 @@ const Home: NextPageWithAuth = (_props) => {
                     justifyContent: "flex-start",
                   }}
                 >
-                  <Row css={{ flexDirection: "column", mb: 20 }}>
+                  <Row css={{ flexDirection: "column" }}>
                     <p
                       style={{
                         marginTop: 0,
@@ -337,55 +336,53 @@ const Home: NextPageWithAuth = (_props) => {
                       So don’t hesitate to take a chance and join the community.
                     </p>
                   </Row>
-                  <Row
-                    justify="flex-end"
-                    css={{
-                      xs: {
-                        flexDirection: "column",
-                      },
-                    }}
-                  ></Row>
                 </Card.Footer>
               </Card>
             </Grid>
           </Grid.Container>
         </Container>
-        <div style={{ paddingTop: '8rem', paddingBottom: '8rem'}}>
+        <div style={{ paddingTop: "8rem", paddingBottom: "6rem" }}>
           <Container>
             <Grid.Container gap={4}>
-            <Grid lg={4} css={{ alignItems: 'center', justifyContent: "center"}}>
+              <Grid
+                lg={4}
+                css={{ alignItems: "center", justifyContent: "center" }}
+              >
                 {status === "authenticated" ? (
-                  <Button
-                    color="success"
-                    icon={
-                      <FontAwesomeIcon size={"1x"} color="#fff" icon={faUser} />
-                    }
-                    size="xl"
-                  >
+                  <Button auto ghost shadow={true} color="success" size="xl">
                     Go to dashboard
                   </Button>
                 ) : (
                   ""
                 )}
               </Grid>
-              <Grid lg={4} css={{ alignItems: 'center', justifyContent: "center"}}></Grid>
-              <Grid lg={4} css={{ alignItems: 'center', justifyContent: "center"}}>
+              <Grid
+                lg={4}
+                css={{ alignItems: "center", justifyContent: "center" }}
+              >
+                <Button auto ghost shadow={true} size="xl">
+                  Read our blog
+                </Button>
+              </Grid>
+              <Grid
+                lg={4}
+                css={{ alignItems: "center", justifyContent: "center" }}
+              >
                 <Button
+                  auto
+                  ghost
+                  shadow={true}
                   onClick={handleNavigateToConsultancies}
-                  css={{ paddingLeft: 60 }}
                   color="secondary"
-                  icon={
-                    <FontAwesomeIcon size={"1x"} color="#fff" icon={faSearch} />
-                  }
                   size="xl"
                 >
-                Browse in all consultancies
+                  Browse in all consultancies
                 </Button>
               </Grid>
             </Grid.Container>
           </Container>
         </div>
-        <div style={{ backgroundColor: "#010101", paddingBottom: '60px'}}>
+        <div style={{ backgroundColor: "#010101", paddingBottom: "60px" }}>
           <Text
             h6
             css={{

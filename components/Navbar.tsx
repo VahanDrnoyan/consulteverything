@@ -72,13 +72,15 @@ export default function Navigation() {
             }}
             aria-label="toggle navigation"
           />
-          <Link  href="/">
+         
+          <Link href="/">
           <Image
-            width={60}
-            height={60}
+            width={80}
+            height={80}
             src={logoSmall.src}
             alt="Default Image"
             objectFit="cover"
+        
           />
           </Link>
           {/* <Logo color="#000" size="50" /> */}
