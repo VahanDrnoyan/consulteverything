@@ -105,7 +105,7 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
                     css={{
-                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                        clipPath: 'polygon(0 0, 50% 100%, 100% 0)',
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -187,7 +187,7 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, maxHeight: "1000px" }}>
                   <Text
                     css={{
-                        clipPath: 'polygon(0 0, 0% 100%, 100% 0)',
+                        clipPath: 'polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 85% 100%, 15% 100%)',
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -382,25 +382,26 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
           </Container>
         </div>
-        <div style={{ backgroundColor: "#010101", paddingBottom: "60px" }}>
-          <Text
-            h6
-            css={{
-              width: "100%",
-              textTransform: "uppercase",
-              letterSpacing: 10,
-              textAlign: "center",
-              py: "40px",
-              my: 80,
-              color: "#fff",
-            }}
-          >
-            Features
-          </Text>
-          <Container css={{ marginTop: "0", maxWidth: 1000 }}>
+        <Text
+   h6
+   css={{
+     width: "100%",
+     textTransform: "uppercase",
+     letterSpacing: 10,
+     textAlign: "center",
+    m: 0,
+    fontSize:"0.7rem",
+    
+     color: "#111",
+   }}
+ >
+   Features
+ </Text>
+ <div style={{ position: "relative", backgroundColor: 'rgba(255,255,255,0.3)', display: "flex", flexDirection: 'column' }}>
+          <Container css={{ marginTop: "0", maxWidth: 1000, position: 'relative', zIndex: 100, my: 100}}>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
@@ -410,9 +411,9 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-
-                        backgroundColor: "#444",
-                        color: "#fff",
+                        fontSize:"0.8rem",
+                        backgroundColor: "rgba(199,43,209, 0.2)",
+                        color: "rgba(41,25,100,0.8)",
                       }}
                     >
                       Video call consulting
@@ -432,7 +433,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
@@ -442,9 +443,9 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-
-                        backgroundColor: "#444",
-                        color: "#fff",
+                        fontSize:"0.8rem",
+                        backgroundColor: "rgba(199,43,209, 0.3)",
+                        color: "rgba(41,25,100,0.8)",
                       }}
                     >
                       Get paid for info
@@ -463,7 +464,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable>
                   <div>
                     <Text
                       h6
@@ -473,9 +474,9 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-
-                        backgroundColor: "#444",
-                        color: "#fff",
+                        fontSize:"0.9rem",
+                        backgroundColor: "rgba(199,43,209, 0.5)",
+                        color: "rgba(41,25,100,0.7)",
                       }}
                     >
                       Transcription recording
@@ -495,7 +496,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable >
                   <div>
                     <Text
                       h6
@@ -505,9 +506,9 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-
-                        backgroundColor: "#444",
-                        color: "#fff",
+                        fontSize:"0.9rem",
+                        backgroundColor: "rgba(199,43,209, 0.5)",
+                        color: "rgba(41,25,100,0.7)",
                       }}
                     >
                       Time negotiations
@@ -526,7 +527,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable >
                   <div>
                     <Text
                       h6
@@ -536,8 +537,8 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-
-                        backgroundColor: "#444",
+                        fontSize:"1rem",
+                        backgroundColor: "rgba(199,43,209, 0.9)",
                         color: "#fff",
                       }}
                     >
@@ -554,17 +555,18 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable variant="flat">
+                <Card isHoverable >
                   <div>
                     <Text
                       h6
                       css={{
                         width: "100%",
+                        fontSize:"1rem",
                         textTransform: "uppercase",
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        backgroundColor: "#444",
+                        backgroundColor: "rgba(199,43,209, 0.9)",
                         color: "#fff",
                       }}
                     >
@@ -588,7 +590,7 @@ const Home: NextPageWithAuth = (_props) => {
           </Container>
         </div>
         <Footer />
-      </div>
+        </div>
     </div>
   )
 }
