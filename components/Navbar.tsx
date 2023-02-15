@@ -74,14 +74,8 @@ export default function Navigation() {
           />
          
           <Link href="/">
-          <Image
-            width={80}
-            height={80}
-            src={logoSmall.src}
-            alt="Default Image"
-            objectFit="cover"
         
-          />
+        <Logo color="#fff" size={50} ></Logo>
           </Link>
           {/* <Logo color="#000" size="50" /> */}
         </Navbar.Brand>

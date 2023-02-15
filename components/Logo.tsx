@@ -8,10 +8,11 @@ interface Props {
     size: number;
 }
 const Logo: React.FC<Props> = ({color, size: X})=> {
-    return (<Link  href="/">
+    return (<div><Link  href="/">
    {/* <FontAwesomeIcon size={X} color={color} icon={faCircle} /> */}
-   <img width={X+ 'px'} className="logo" style={{transform: 'rotate(180deg)'}} height={X+ 'px'} src="/l3pink.svg" />
+   <img alt="logo" width={X+ 'px'} className="logo" style={{transform: 'rotate(180deg)'}} height={X+ 'px'} src="/l3pink.svg" />
   </Link>
+  </div>
     )
     
 }

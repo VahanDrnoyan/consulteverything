@@ -82,24 +82,31 @@ const Home: NextPageWithAuth = (_props) => {
             backgroundColor: "#fff",
           }}
         >
-          Grow with online consultancy!<br />
+          <Logo color="#fff" size={80}></Logo>
+          Grow with online consultancy!
+          <br />
           <span
-   
-   style={{
-     fontSize:'12px',
-     backgroundColor: "#fff",
-   }}
- >
-   consulteverything.com <br />
- </span>
+            style={{
+              fontSize: "12px",
+              backgroundColor: "#fff",
+            }}
+          >
+            consulteverything.com <br />
+          </span>
         </Text>
       </div>
       <div className={styles.bottomConatiner}>
-        <Container css={{ marginTop: "0", maxWidth: 1600, alignItems: 'start' }}>
-          <Grid.Container gap={4} justify="center" css={{ p: 0 , alignItems: 'start'}}>
+        <Container
+          css={{ marginTop: "0", maxWidth: 1600, alignItems: "start" }}
+        >
+          <Grid.Container
+            gap={4}
+            justify="center"
+            css={{ p: 0, alignItems: "start" }}
+          >
             <Grid xs={12} md={4} lg={4}>
               <Card isHoverable variant="bordered" css={{ p: 0 }}>
-                <Card.Body css={{ p: 0, width: '100%' }}>
+                <Card.Body css={{ p: 0, width: "100%" }}>
                   <Text
                     css={{
                       clipPath: "polygon(0 0, 50% 100%, 100% 0)",
@@ -137,6 +144,7 @@ const Home: NextPageWithAuth = (_props) => {
                       "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
                     bottom: 0,
                     zIndex: 1,
+                    p: 30,
                     flexDirection: "column",
                     alignItems: "flex-start",
                     justifyContent: "flex-start",
@@ -147,6 +155,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -157,6 +166,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -168,6 +178,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -219,6 +230,7 @@ const Home: NextPageWithAuth = (_props) => {
                     bottom: 0,
                     // top: '55%',
                     zIndex: 1,
+                    p: 30,
                     flexDirection: "column",
                     alignItems: "flex-start",
                     justifyContent: "flex-start",
@@ -229,6 +241,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -240,6 +253,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -250,6 +264,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -297,15 +312,22 @@ const Home: NextPageWithAuth = (_props) => {
                     bottom: 0,
                     // top: '55%',
                     zIndex: 1,
+                    p: 30,
                     flexDirection: "column",
                     alignItems: "flex-start",
                     justifyContent: "flex-start",
                   }}
                 >
-                  <Row css={{ flexDirection: "column", justifyContent: 'flex-start'}}>
+                  <Row
+                    css={{
+                      flexDirection: "column",
+                      justifyContent: "flex-start",
+                    }}
+                  >
                     <p
                       style={{
                         marginTop: 0,
+                        marginBottom: 20,
                         fontSize: "1.2rem",
                         color: "rgba(0,0,0,0.6)",
                       }}
@@ -318,6 +340,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -328,6 +351,7 @@ const Home: NextPageWithAuth = (_props) => {
                       style={{
                         marginTop: 0,
                         fontSize: "1.2rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -340,14 +364,21 @@ const Home: NextPageWithAuth = (_props) => {
           </Grid.Container>
         </Container>
         <div style={{ paddingTop: "8rem", paddingBottom: "6rem" }}>
-          <Container css={{ maxWidth: 1600}}>
+          <Container css={{ maxWidth: 1600 }}>
             <Grid.Container gap={4}>
               <Grid
                 lg={4}
                 css={{ alignItems: "center", justifyContent: "center" }}
               >
                 {status === "authenticated" ? (
-                  <Button auto ghost shadow={true} color="success" size="xl">
+                  <Button
+                    auto
+                    ghost
+                    shadow={true}
+                    css={{ borderRadius: "6px" }}
+                    color="secondary"
+                    size="xl"
+                  >
                     Go to dashboard
                   </Button>
                 ) : (
@@ -358,7 +389,14 @@ const Home: NextPageWithAuth = (_props) => {
                 lg={4}
                 css={{ alignItems: "center", justifyContent: "center" }}
               >
-                <Button auto ghost shadow={true} size="xl">
+                <Button
+                  auto
+                  ghost
+                  color="secondary"
+                  css={{ borderRadius: "6px" }}
+                  shadow={true}
+                  size="xl"
+                >
                   Read our blog
                 </Button>
               </Grid>
@@ -373,6 +411,7 @@ const Home: NextPageWithAuth = (_props) => {
                   onClick={handleNavigateToConsultancies}
                   color="secondary"
                   size="xl"
+                  css={{ borderRadius: "6px" }}
                 >
                   Browse in all consultancies
                 </Button>
@@ -388,7 +427,7 @@ const Home: NextPageWithAuth = (_props) => {
             letterSpacing: 10,
             textAlign: "center",
             m: 0,
-            fontSize: "0.7rem",
+            fontSize: "0.8rem",
 
             color: "#111",
           }}
@@ -433,11 +472,20 @@ const Home: NextPageWithAuth = (_props) => {
                     </Text>
                   </div>
 
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/video.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
                         fontSize: "1.1rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -477,7 +525,15 @@ const Home: NextPageWithAuth = (_props) => {
                     </Text>
                   </div>
 
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/paid.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
@@ -505,20 +561,29 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                         backgroundColor: "rgba(199,43,209, 0.5)",
-                        color: "rgba(41,25,100,0.7)",
+                        color: "rgba(41,25,100,0.8)",
                       }}
                     >
                       Transcription recording
                     </Text>
                   </div>
 
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/recording.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
                         fontSize: "1.1rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
@@ -549,16 +614,24 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize: "0.9rem",
+                        fontSize: "0.8rem",
                         backgroundColor: "rgba(199,43,209, 0.5)",
-                        color: "rgba(41,25,100,0.7)",
+                        color: "rgba(41,25,100,0.8)",
                       }}
                     >
                       Time negotiations
                     </Text>
                   </div>
 
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/time.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
@@ -586,7 +659,7 @@ const Home: NextPageWithAuth = (_props) => {
                         letterSpacing: 10,
                         textAlign: "center",
                         py: "20px",
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
                         backgroundColor: "rgba(199,43,209, 0.9)",
                         color: "#fff",
                       }}
@@ -594,7 +667,15 @@ const Home: NextPageWithAuth = (_props) => {
                       Custom form creation
                     </Text>
                   </div>
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/form.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
@@ -616,7 +697,7 @@ const Home: NextPageWithAuth = (_props) => {
                       h6
                       css={{
                         width: "100%",
-                        fontSize: "1rem",
+                        fontSize: "0.8rem",
                         textTransform: "uppercase",
                         letterSpacing: 10,
                         textAlign: "center",
@@ -628,11 +709,20 @@ const Home: NextPageWithAuth = (_props) => {
                       Sharable consultancy
                     </Text>
                   </div>
-                  <Card.Body>
+                  <Card.Body css={{ p: 25, pt: 10 }}>
+                    <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+                      <img
+                        alt="Video call"
+                        width={35 + "px"}
+                        height={35 + "px"}
+                        src="/sharable.svg"
+                      />
+                    </div>
                     <p
                       style={{
                         marginTop: 0,
                         fontSize: "1.1rem",
+                        marginBottom: 20,
                         color: "rgba(0,0,0,0.6)",
                       }}
                     >
