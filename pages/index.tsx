@@ -4,9 +4,9 @@ import styles from "../styles/Home.module.css"
 import React, { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/router"
 import heroPic from "../public/avatars.png"
-import targetIcon from "../public/target1.png"
-import playIcon from "../public/play1.png"
-import logoIcon from "../public/logo.png"
+import targetIcon from "../public/target1_pink.png"
+import playIcon from "../public/play1_pink.png"
+import logoIcon from "../public/logo1.png"
 import logoSmall from "../public/logo_small.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -77,7 +77,7 @@ const Home: NextPageWithAuth = (_props) => {
             textTransform: "uppercase",
             letterSpacing: 4,
             textAlign: "center",
-            py: "250px",
+            py: "240px",
             m: 0,
             backgroundColor: "#fff",
           }}
@@ -109,7 +109,7 @@ const Home: NextPageWithAuth = (_props) => {
                 <Card.Body css={{ p: 0, width: "100%" }}>
                   <Text
                     css={{
-                      clipPath: "polygon(0 0, 50% 100%, 100% 0)",
+                      clipPath: "polygon(0 0, 0% 100%, 100% 0)",
                       position: "absolute",
                       top: 0,
                       bottom: 0,
@@ -196,7 +196,7 @@ const Home: NextPageWithAuth = (_props) => {
                   <Text
                     css={{
                       clipPath:
-                        "polygon(0% 15%, 15% 0%, 85% 0%, 100% 15%, 85% 100%, 15% 100%)",
+                        "polygon(0 0, 0% 100%, 100% 0)",
                       position: "absolute",
                       top: 0,
                       bottom: 0,
