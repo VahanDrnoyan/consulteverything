@@ -73,10 +73,10 @@ export default function Navigation() {
             aria-label="toggle navigation"
           />
          
-          <Link href="/">
+         
         
         <Logo color="#fff" size={50} ></Logo>
-          </Link>
+         
           {/* <Logo color="#000" size="50" /> */}
         </Navbar.Brand>
         {session && session?.user ? (
