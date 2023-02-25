@@ -181,79 +181,10 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             return { ...state, ...{ allow_enable_video_by_requester: checked } }
         })
     }
-    const handle_allow_time_spent_issue_resolution_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_time_spent_issue_resolution_check: value } }
-            })
-        }
-    }
-    const handle_allow_previous_consultancy_experience_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_previous_consultancy_experience_check: value } }
-            })
-        }
-    }
-    const handle_allow_prefession_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_prefession_check: value } }
-            })
-        }
-    }
-    const handle_allow_ongoing_support_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_ongoing_support_check: value } }
-            })
-        }
-    }
-    const handle_allow_gender_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_gender_check: value } }
-            })
-        }
-    }
-    const handle_allow_expertise_in_problem_field_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_expertise_in_problem_field_check: value } }
-            })
-        }
-    }
-    const handle_allow_expectations_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_expectations_check: value } }
-            })
-        }
-    }
-    const handle_allow_email_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_email_check: value } }
-            })
-        }
-    }
-    const handle_allow_age_check: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_age_check: value } }
-            })
-        }
-    }
-    const handle_allow_name_surname: (value: string) => void = (value) => {
-        if (value === Field.Include || value === Field.Exclude || value === Field.Required) {
-            setValues((state) => {
-                return { ...state, ...{ allow_name_surname: value } }
-            })
-        }
-    }
-    const handleEnableVideoByProvider = (checked: boolean) => {
+    const handleCheckbox = (value: string, offsetName: string) => {
+        console.log(values, offsetName, 111)
         setValues((state) => {
-            return { ...state, ...{ enable_video_by_provider: checked } }
+            return { ...state, ...{ [offsetName]: value } }
         })
     }
     const handleEnableActive = (checked: boolean) => {
@@ -261,10 +192,16 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             return { ...state, ...{ isActive: checked } }
         })
     }
-
-    const RadioOptions = () => {
+    const handleEnableVideoByProvider = (checked: boolean) => {
+        setValues((state) => {
+            return { ...state, ...{ enable_video_by_provider: checked } }
+        })
+    }
+    const RadioOptions = (value: string, offsetName: string, label: string, defaultValue: string) => {
         return (
-            <><Radio value="INCLUDE">Include</Radio><Radio value="EXCLUDE">Exclude</Radio><Radio value="REQUIRED">Required</Radio></>
+            <Radio.Group value={value} onChange={(value:string)=> handleCheckbox(value, offsetName)} size="xs" css={{ 'mt': 20 }} label='Allow "Age"' defaultValue="EXCLUDE">
+                <Radio value="INCLUDE">Include</Radio><Radio value="EXCLUDE">Exclude</Radio><Radio value="REQUIRED">Required</Radio>
+                </Radio.Group>
         )
     }
    
@@ -297,7 +234,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }, [values.title, values.tags, values.short_description, values.max_attachment_count, values.max_time_minuets, consultancyTitleErrors, consultancyTagErrors, consultancyShortDescriptionErrors, consultancyLongDescriptionErrors, maxAttachmentsCountErrors, maxTimeInMinutesErrors])
     return (<div style={{ background: '#dedede', paddingTop: '20px' }}>
         <Container>
-
             <div style={{ width: '600px', margin: 'auto', backgroundColor: '#fff', padding: '12px', borderRadius: '5px' }}>
                 {serverErrors?.length > 0 && serverErrors.map((item, i)=> {
                     return (<Text key={item + i}css={{ color: '$red600', fontSize: 12, mt: 6 }}>{item}</Text>)})}
@@ -432,53 +368,33 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <Text css={{ 'mt': 20 }} h3>Request form options</Text>
                     <Text css={{ 'mt': 10 }} h6>The options which should be applied to form of consultancy. The form will be filled by consultancy requesting users.</Text>
                     <br />
-                    <Radio.Group value={values.allow_name_surname} onChange={handle_allow_name_surname} size="xs" css={{ 'mt': 20 }} label='Allow "Name-Surname"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                        {RadioOptions(values.allow_name_surname, 'allow_name_surname', 'Allow "Name-Surname"', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_age_check} onChange={handle_allow_age_check} size="xs" css={{ 'mt': 20 }} label='Allow "Age"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                        {RadioOptions(values.allow_age_check, 'allow_age_check', 'Allow "Age', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_email_check} onChange={handle_allow_email_check} size="xs" css={{ 'mt': 20 }} label='Allow "Email"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_email_check, 'allow_email_check', 'Allow Email', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_expectations_check} onChange={handle_allow_expectations_check} size="xs" css={{ 'mt': 20 }} label='Allow "Expectations"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_expectations_check, 'allow_expectations_check', 'Allow Expectations', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_expertise_in_problem_field_check} onChange={handle_allow_expertise_in_problem_field_check} size="xs" css={{ 'mt': 20 }} label='Allow "Expertise in filed"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_expertise_in_problem_field_check, 'allow_expertise_in_problem_field_check', 'Allow "Expertise in filed"', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_gender_check} onChange={handle_allow_gender_check} size="xs" css={{ 'mt': 20 }} label='Allow "Gender"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_gender_check, 'allow_gender_check', 'Allow Gender', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_ongoing_support_check} onChange={handle_allow_ongoing_support_check} size="xs" css={{ 'mt': 20 }} label='Allow "Ongoing support"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_ongoing_support_check, 'allow_ongoing_support_check', 'Allow "Ongoing support"', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_profession_check} onChange={handle_allow_prefession_check} size="xs" css={{ 'mt': 20 }} label='Allow "Your profession"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_profession_check, 'allow_profession_check', 'Allow "Your profession"', 'EXCLUDE')}
                     <br />
 
-                    <Radio.Group value={values.allow_previous_consultancy_experience_check} onChange={handle_allow_previous_consultancy_experience_check} size="xs" css={{ 'mt': 20 }} label='Allow "Previous consultancy experience"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_previous_consultancy_experience_check, 'allow_previous_consultancy_experience_check', 'Allow "Previous consultancy experience"', 'EXCLUDE')}
                     <br />
-                    <Radio.Group value={values.allow_time_spent_issue_resolution_check} size="xs" css={{ 'mt': 20 }} onChange={handle_allow_time_spent_issue_resolution_check} label=' Allow "Time spent on issue resolution"' defaultValue="EXCLUDE">
-                        {RadioOptions()}
-                    </Radio.Group>
+                    {RadioOptions(values.allow_time_spent_issue_resolution_check, 'allow_time_spent_issue_resolution_check', 'Allow "Time spent on issue resolution"', 'EXCLUDE')}
                     <br />
                     <Checkbox size={"xs"} isSelected={values.allow_enable_video_by_requester} onChange={handle_allow_enable_video_by_requester} css={{ 'mt': 20 }} color="primary" defaultSelected={values.allow_enable_video_by_requester}>
                         <span style={{ fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>

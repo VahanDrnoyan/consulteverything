@@ -374,7 +374,6 @@ const Home: NextPageWithAuth = (_props) => {
                   <Button
                     auto
                     ghost
-                    shadow={true}
                     css={{ borderRadius: "6px" }}
                     color="secondary"
                     size="xl"
@@ -394,7 +393,6 @@ const Home: NextPageWithAuth = (_props) => {
                   ghost
                   color="secondary"
                   css={{ borderRadius: "6px" }}
-                  shadow={true}
                   size="xl"
                 >
                   Read our blog
@@ -407,7 +405,6 @@ const Home: NextPageWithAuth = (_props) => {
                 <Button
                   auto
                   ghost
-                  shadow={true}
                   onClick={handleNavigateToConsultancies}
                   color="secondary"
                   size="xl"
@@ -453,7 +450,7 @@ const Home: NextPageWithAuth = (_props) => {
           >
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable  variant="bordered">
                   <div>
                     <Text
                       h6
@@ -506,7 +503,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable variant="bordered">
                   <div>
                     <Text
                       h6
@@ -551,7 +548,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable  variant="bordered">
                   <div>
                     <Text
                       h6
@@ -604,7 +601,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable  variant="bordered">
                   <div>
                     <Text
                       h6
@@ -649,7 +646,7 @@ const Home: NextPageWithAuth = (_props) => {
             </Grid.Container>
             <Grid.Container gap={2}>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable  variant="bordered">
                   <div>
                     <Text
                       h6
@@ -691,7 +688,7 @@ const Home: NextPageWithAuth = (_props) => {
                 </Card>
               </Grid>
               <Grid lg={6}>
-                <Card isHoverable>
+                <Card isHoverable  variant="bordered">
                   <div>
                     <Text
                       h6
