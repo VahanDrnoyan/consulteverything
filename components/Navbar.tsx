@@ -32,10 +32,10 @@ export default function Navigation() {
         id: "browse",
         name: "Browse",
         url:
-          router.pathname === "consultancies/search/[[...term]]"
+          router.pathname === "consultancies/"
             ? ""
-            : "/consultancies/search",
-        routename: "/consultancies/search/[[...term]]",
+            : "/consultancies/",
+        routename: "/consultancies/",
       },
     ]
     if (session && session.user) {

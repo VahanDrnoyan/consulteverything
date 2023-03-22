@@ -106,6 +106,7 @@ model Consultancy {
   userId                                      String
   tags                                        Tag[]
   User                                        User    @relation(fields: [userId], references: [id])
+  last_requested_at                           DateTime @default(now())
 }
 
 /// Tag

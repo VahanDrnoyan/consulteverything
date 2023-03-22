@@ -26,6 +26,7 @@ import {
   Card,
   Row,
   Button,
+  textTransforms,
 } from "@nextui-org/react"
 import Image from "next/image"
 import Link from "next/link"
@@ -59,7 +60,7 @@ const Home: NextPageWithAuth = (_props) => {
     })
   }
   return (
-    <div style={{ background: "#dedede" }}>
+    <div>
       <Head>
         <title>Consult Everything | Home</title>
         <meta
@@ -71,28 +72,47 @@ const Home: NextPageWithAuth = (_props) => {
       </Head>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Text
-          h1
+          h2
           css={{
             width: "100%",
             textTransform: "uppercase",
             letterSpacing: 4,
             textAlign: "center",
             py: "240px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: 'column',
             m: 0,
-            backgroundColor: "#fff",
+            
           }}
         >
           <Logo color="#fff" size={80}></Logo>
           Grow with online consultancy!
           <br />
+          
+          
+          
+          
+          
+          
+          
+          
+          
           <span
-            style={{
-              fontSize: "12px",
-              backgroundColor: "#fff",
-            }}
-          >
-            consulteverything.com <br />
-          </span>
+   style={{
+     fontSize: "1rem",
+     lineHeight: 1.6,
+     fontWeight: 'lighter',
+     maxWidth: '500px',
+     display: 'block',
+     textTransform: 'none',
+     
+   }}
+ >
+   We make tools and environment to effectively pass Information from Human to Human.<br />First go to AI then come back to us!
+ </span>
+ 
         </Text>
       </div>
       <div className={styles.bottomConatiner}>

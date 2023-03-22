@@ -2892,6 +2892,58 @@ export interface Consultancy {
      */
     resolve: NexusCore.FieldResolver<'Consultancy', 'User'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Consultancy.last_requested_at`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Consultancy
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Consultancy
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Consultancy {
+    *   /// Lorem ipsum dolor sit amet.
+    *   last_requested_at  DateTime
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Consultancy } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Consultancy.$name
+    *   description: Consultancy.$description
+    *   definition(t) {
+    *     t.field(Consultancy.last_requested_at)
+    *   }
+    * })
+    */
+  last_requested_at: {
+    /**
+     * The name of this field.
+     */
+    name: 'last_requested_at'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'DateTime' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'DateTime'>
+    : 'Warning/Error: The type \'DateTime\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'DateTime\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Consultancy', 'last_requested_at'>
+  }
 }
 
 /**

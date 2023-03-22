@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "seed": "ts-node prisma/seed.mjs",
+    "resetapp": "ts-node prisma/reset.mjs",
     "codegen": "graphql-codegen --config codegen.yml",
     "generate:nexus": "nodemon --exec 'ts-node --transpile-only -P nexus.tsconfig.json pages/api/graphql' --ext 'ts' --watch '*/graphql/**/*.ts'",
     "generate": "concurrently \"npm run generate:nexus\" \"npm run codegen\""
@@ -26,6 +28,7 @@
     "@prisma/client": "^3.5.0",
     "apollo-server-core": "^3.10.2",
     "codegen": "^0.1.0",
+    "faker": "^6.6.6",
     "formik": "^2.2.9",
     "graphql": "^16.6.0",
     "graphql-relay": "^0.10.0",
@@ -49,11 +52,13 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@genql/cli": "^2.10.0",
     "@graphql-codegen/cli": "^2.13.3",
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-operations": "^2.5.3",
     "@graphql-codegen/typescript-react-apollo": "^3.3.3",
+    "@types/faker": "^6.6.9",
     "@types/node": "^15.12.2",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",

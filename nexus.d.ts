@@ -51,6 +51,10 @@ export interface NexusGenInputs {
     tags: NexusGenInputs['TagInputType'][]; // [TagInputType!]!
     title: string; // String!
   }
+  ConsultancyPaginationInput: { // input type
+    cursor?: string | null; // String
+    limit: number; // Int!
+  }
   TagInputType: { // input type
     id: number; // Int!
     name: string; // String!
@@ -92,6 +96,7 @@ export interface NexusGenObjects {
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
     isActive: boolean; // Boolean!
+    last_requested_at?: NexusGenScalars['Time'] | null; // Time
     long_description?: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
@@ -102,10 +107,22 @@ export interface NexusGenObjects {
     data: NexusGenRootTypes['Consultancy']; // Consultancy!
     id: string; // String!
   }
+  ConsultancyConnection: { // root type
+    edges?: Array<NexusGenRootTypes['ConsultancyEdge'] | null> | null; // [ConsultancyEdge]
+    pageInfo?: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
+  ConsultancyEdge: { // root type
+    cursor?: string | null; // String
+    node?: NexusGenRootTypes['Consultancy'] | null; // Consultancy
+  }
   Event: { // root type
     id: string; // ID!
   }
   Mutation: {};
+  PageInfo: { // root type
+    endCursor?: string | null; // String
+    hasNextPage?: number | null; // Int
+  }
   Query: {};
   Tag: { // root type
     id: number; // Int!
@@ -117,6 +134,7 @@ export interface NexusGenObjects {
   User: { // root type
     email?: string | null; // String
     id: string; // ID!
+    name?: string | null; // String
     role: NexusGenEnums['Role']; // Role!
   }
 }
@@ -154,6 +172,7 @@ export interface NexusGenFieldTypes {
     enable_video_by_provider: boolean; // Boolean!
     id: string; // ID!
     isActive: boolean; // Boolean!
+    last_requested_at: NexusGenScalars['Time'] | null; // Time
     long_description: string | null; // String
     max_attachment_count: number; // Int!
     max_time_minuets: number; // Int!
@@ -165,6 +184,14 @@ export interface NexusGenFieldTypes {
     data: NexusGenRootTypes['Consultancy']; // Consultancy!
     id: string; // String!
   }
+  ConsultancyConnection: { // field return type
+    edges: Array<NexusGenRootTypes['ConsultancyEdge'] | null> | null; // [ConsultancyEdge]
+    pageInfo: NexusGenRootTypes['PageInfo'] | null; // PageInfo
+  }
+  ConsultancyEdge: { // field return type
+    cursor: string | null; // String
+    node: NexusGenRootTypes['Consultancy'] | null; // Consultancy
+  }
   Event: { // field return type
     id: string; // ID!
   }
@@ -174,7 +201,12 @@ export interface NexusGenFieldTypes {
     deleteConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     updateConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
   }
+  PageInfo: { // field return type
+    endCursor: string | null; // String
+    hasNextPage: number | null; // Int
+  }
   Query: { // field return type
+    consultancies: NexusGenRootTypes['ConsultancyConnection'] | null; // ConsultancyConnection
     getConsultancyById: NexusGenRootTypes['ConsultancyById'] | null; // ConsultancyById
     getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
     totalConsultancies: NexusGenRootTypes['TotalConsultanciesObject'] | null; // TotalConsultanciesObject
@@ -190,6 +222,7 @@ export interface NexusGenFieldTypes {
     accounts: NexusGenRootTypes['Account'][]; // [Account!]!
     email: string | null; // String
     id: string; // ID!
+    name: string | null; // String
     role: NexusGenEnums['Role']; // Role!
   }
 }
@@ -217,6 +250,7 @@ export interface NexusGenFieldTypeNames {
     enable_video_by_provider: 'Boolean'
     id: 'ID'
     isActive: 'Boolean'
+    last_requested_at: 'Time'
     long_description: 'String'
     max_attachment_count: 'Int'
     max_time_minuets: 'Int'
@@ -228,6 +262,14 @@ export interface NexusGenFieldTypeNames {
     data: 'Consultancy'
     id: 'String'
   }
+  ConsultancyConnection: { // field return type name
+    edges: 'ConsultancyEdge'
+    pageInfo: 'PageInfo'
+  }
+  ConsultancyEdge: { // field return type name
+    cursor: 'String'
+    node: 'Consultancy'
+  }
   Event: { // field return type name
     id: 'ID'
   }
@@ -237,7 +279,12 @@ export interface NexusGenFieldTypeNames {
     deleteConsultancy: 'Consultancy'
     updateConsultancy: 'Consultancy'
   }
+  PageInfo: { // field return type name
+    endCursor: 'String'
+    hasNextPage: 'Int'
+  }
   Query: { // field return type name
+    consultancies: 'ConsultancyConnection'
     getConsultancyById: 'ConsultancyById'
     getMyConsultancies: 'Consultancy'
     totalConsultancies: 'TotalConsultanciesObject'
@@ -253,6 +300,7 @@ export interface NexusGenFieldTypeNames {
     accounts: 'Account'
     email: 'String'
     id: 'ID'
+    name: 'String'
     role: 'Role'
   }
 }
@@ -274,6 +322,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    consultancies: { // args
+      pagination?: NexusGenInputs['ConsultancyPaginationInput'] | null; // ConsultancyPaginationInput
+    }
     getConsultancyById: { // args
       id: string; // ID!
     }

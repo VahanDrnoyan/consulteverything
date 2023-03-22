@@ -182,7 +182,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         })
     }
     const handleCheckbox = (value: string, offsetName: string) => {
-        console.log(values, offsetName, 111)
         setValues((state) => {
             return { ...state, ...{ [offsetName]: value } }
         })
@@ -312,7 +311,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         label="Max attachments count"
                         type="number"
                         min={0}
-                        defaultValue={0}
                         css={{ 'mt': 20 }}
                         status={maxAttachmentsCountHelper.color as "default" | "error"}
                         color={maxAttachmentsCountHelper.color as "default" | "error"}
@@ -337,7 +335,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         step={5}
                         css={{ 'mt': 30 }}
                         animated
-                        defaultValue={0}
                         name="max_time_minuets"
                         fullWidth
                         value={values.max_time_minuets}
@@ -347,9 +344,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
 
                         color={enableVideoHelper.color as "default" | "error"}
                         css={{ 'mt': 40 }} onChange={handleEnableVideoByProvider}
-                        isSelected={values.enable_video_by_provider}
-
-                        defaultSelected={values.enable_video_by_provider}>
+                        isSelected={values.enable_video_by_provider}>
                         <span style={enableVideoErrors ? { ...{ fontSize: '14px', color: 'var(--nextui--inputHelperColor)' } } : { fontSize: '14px', color: 'var(--nextui-colors-default)' }}>
                             {enableVideoErrors || 'Allow live video'}
                         </span>
@@ -358,9 +353,8 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                         label=""
                         color={"default"}
                         css={{ 'mt': 40 }} onChange={handleEnableActive}
-                        isSelected={values.isActive}
+                        isSelected={values.isActive}>
 
-                        defaultSelected={values.isActive}>
                              <span style={{ fontSize: '14px', color: 'var(--nextui-colors-default)' }}>
                             {'Is active consultancy'}
                         </span>
@@ -396,7 +390,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
                     <br />
                     {RadioOptions(values.allow_time_spent_issue_resolution_check, 'allow_time_spent_issue_resolution_check', 'Allow "Time spent on issue resolution"', 'EXCLUDE')}
                     <br />
-                    <Checkbox size={"xs"} isSelected={values.allow_enable_video_by_requester} onChange={handle_allow_enable_video_by_requester} css={{ 'mt': 20 }} color="primary" defaultSelected={values.allow_enable_video_by_requester}>
+                    <Checkbox size={"xs"} isSelected={values.allow_enable_video_by_requester} onChange={handle_allow_enable_video_by_requester} css={{ 'mt': 20 }} color="primary">
                         <span style={{ fontSize: '14px', color: 'var(--nextui-colors-primary)' }}>
                             Allow Live video
                         </span>

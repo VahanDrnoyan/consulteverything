@@ -1,19 +1,71 @@
-import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {useSession} from "next-auth/react";
 
-const ConsultanciesHome = (props)=>{
-    const router = useRouter()
-    useEffect(() => {
-        router.push({
-            pathname: '/consultancies/search'
-        })
-        return () => {
+import Head from "next/head";
+import React, {useState, useRef, useEffect} from "react";
 
-        };
-    }, []);
+import LoginModal from "../../components/LoginModal";
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
+import Link from "next/link";
+import ConsultancyCard from "../../components/ConsultancyCard";
+import { Container } from "@nextui-org/react";
+import { NextPage } from "next";
+import Footer from "../../components/Footer";
+type NextPageWithAuth = NextPage & {
+    auth?: {
+        role: string
+    }
+};
+const Consultancies:NextPageWithAuth = (_props) => {
+    const {data: session, status} = useSession()
+    const [showModal, setShowModal] = useState(false);
+    const [showSearchModal, setShowSearchModal] = useState(false);
+    const showModalhandler = () => {
+        setShowModal(true)
+    }
+    const showSearchFormHandler = ()=> {
+        setShowSearchModal(true)
+    }
+    return (
+        <div>
+            <Head>
+                <title>Consult Everything | Consultanices</title>
+                <meta name="description" content="Consultancies list"/>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
+            <Container css={{pt: 20}}>
+<ResponsiveMasonry
+                columnsCountBreakPoints={{350: 1, 750: 2, 1200: 3, 1400: 3, 2000: 3}}
+            >
+               
+                <Masonry columnsCount={3} gutter="35px">
+                   <ConsultancyCard />
+                    <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                     <ConsultancyCard />
+                </Masonry>
+            </ResponsiveMasonry>
+            </Container>
+            <Footer/>
+        </div>
+    )
 }
-ConsultanciesHome.auth ={
+Consultancies.auth = {
     role: 'guest'
 }
-export default ConsultanciesHome
+export default Consultancies

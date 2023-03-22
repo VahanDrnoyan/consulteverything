@@ -26,6 +26,7 @@ type Consultancy {
   enable_video_by_provider: Boolean!
   id: ID!
   isActive: Boolean!
+  last_requested_at: Time
   long_description: String
   max_attachment_count: Int!
   max_time_minuets: Int!
@@ -37,6 +38,11 @@ type Consultancy {
 type ConsultancyById {
   data: Consultancy!
   id: String!
+}
+
+type ConsultancyConnection {
+  edges: [ConsultancyEdge]
+  pageInfo: PageInfo
 }
 
 input ConsultancyDataType {
@@ -62,6 +68,16 @@ input ConsultancyDataType {
   title: String!
 }
 
+type ConsultancyEdge {
+  cursor: String
+  node: Consultancy
+}
+
+input ConsultancyPaginationInput {
+  cursor: String
+  limit: Int!
+}
+
 type Event {
   id: ID!
 }
@@ -80,7 +96,13 @@ type Mutation {
   updateConsultancy(data: ConsultancyDataType!, id: ID!): Consultancy
 }
 
+type PageInfo {
+  endCursor: String
+  hasNextPage: Int
+}
+
 type Query {
+  consultancies(pagination: ConsultancyPaginationInput): ConsultancyConnection
   getConsultancyById(id: ID!): ConsultancyById
   getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
   totalConsultancies: TotalConsultanciesObject
@@ -117,5 +139,6 @@ type User {
   accounts: [Account!]!
   email: String
   id: ID!
+  name: String
   role: Role!
 }

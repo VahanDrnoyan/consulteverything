@@ -1,4 +1,4 @@
-import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
+import { makeSchema, connectionPlugin, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
@@ -16,6 +16,7 @@ const UserType = objectType({
   definition(t) {
     t.field(User.id)
     t.field(User.email)
+    t.field(User.name)
     t.field(User.accounts)
     t.field(User.role)
   }
@@ -144,6 +145,6 @@ export const schema = makeSchema({
         alias: 'prisma'
       }
     ]
-  }
+  },
   
 })

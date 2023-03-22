@@ -42,6 +42,7 @@ export type Consultancy = {
   enable_video_by_provider: Scalars['Boolean'];
   id: Scalars['ID'];
   isActive: Scalars['Boolean'];
+  last_requested_at?: Maybe<Scalars['Time']>;
   long_description?: Maybe<Scalars['String']>;
   max_attachment_count: Scalars['Int'];
   max_time_minuets: Scalars['Int'];
@@ -54,6 +55,12 @@ export type ConsultancyById = {
   __typename?: 'ConsultancyById';
   data: Consultancy;
   id: Scalars['String'];
+};
+
+export type ConsultancyConnection = {
+  __typename?: 'ConsultancyConnection';
+  edges?: Maybe<Array<Maybe<ConsultancyEdge>>>;
+  pageInfo?: Maybe<PageInfo>;
 };
 
 export type ConsultancyDataType = {
@@ -77,6 +84,17 @@ export type ConsultancyDataType = {
   short_description: Scalars['String'];
   tags: Array<TagInputType>;
   title: Scalars['String'];
+};
+
+export type ConsultancyEdge = {
+  __typename?: 'ConsultancyEdge';
+  cursor?: Maybe<Scalars['String']>;
+  node?: Maybe<Consultancy>;
+};
+
+export type ConsultancyPaginationInput = {
+  cursor?: InputMaybe<Scalars['String']>;
+  limit: Scalars['Int'];
 };
 
 export type Event = {
@@ -120,11 +138,23 @@ export type MutationUpdateConsultancyArgs = {
   id: Scalars['ID'];
 };
 
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor?: Maybe<Scalars['String']>;
+  hasNextPage?: Maybe<Scalars['Int']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  consultancies?: Maybe<ConsultancyConnection>;
   getConsultancyById?: Maybe<ConsultancyById>;
   getMyConsultancies?: Maybe<Array<Maybe<Consultancy>>>;
   totalConsultancies?: Maybe<TotalConsultanciesObject>;
+};
+
+
+export type QueryConsultanciesArgs = {
+  pagination?: InputMaybe<ConsultancyPaginationInput>;
 };
 
 
@@ -169,6 +199,7 @@ export type User = {
   accounts: Array<Account>;
   email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
   role: Role;
 };
 
@@ -210,6 +241,14 @@ export type DeleteConsultancyMutationVariables = Exact<{
 
 
 export type DeleteConsultancyMutation = { __typename?: 'Mutation', deleteConsultancy?: { __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean } | null };
+
+export type ConsultanciesQueryVariables = Exact<{
+  cursor?: InputMaybe<Scalars['String']>;
+  limit: Scalars['Int'];
+}>;
+
+
+export type ConsultanciesQuery = { __typename?: 'Query', consultancies?: { __typename?: 'ConsultancyConnection', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: number | null, endCursor?: string | null } | null, edges?: Array<{ __typename?: 'ConsultancyEdge', node?: { __typename?: 'Consultancy', id: string, title: string, short_description: string, long_description?: string | null, max_time_minuets: number, created_at?: any | null, User: { __typename?: 'User', name?: string | null }, tags: Array<{ __typename?: 'Tag', id: number, name: string }> } | null } | null> | null } | null };
 
 export type GetConsultancyByIdQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -383,6 +422,62 @@ export function useDeleteConsultancyMutation(baseOptions?: Apollo.MutationHookOp
 export type DeleteConsultancyMutationHookResult = ReturnType<typeof useDeleteConsultancyMutation>;
 export type DeleteConsultancyMutationResult = Apollo.MutationResult<DeleteConsultancyMutation>;
 export type DeleteConsultancyMutationOptions = Apollo.BaseMutationOptions<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>;
+export const ConsultanciesDocument = gql`
+    query consultancies($cursor: String, $limit: Int!) {
+  consultancies(pagination: {cursor: $cursor, limit: $limit}) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        title
+        short_description
+        long_description
+        max_time_minuets
+        created_at
+        User {
+          name
+        }
+        tags {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useConsultanciesQuery__
+ *
+ * To run a query within a React component, call `useConsultanciesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useConsultanciesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useConsultanciesQuery({
+ *   variables: {
+ *      cursor: // value for 'cursor'
+ *      limit: // value for 'limit'
+ *   },
+ * });
+ */
+export function useConsultanciesQuery(baseOptions: Apollo.QueryHookOptions<ConsultanciesQuery, ConsultanciesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ConsultanciesQuery, ConsultanciesQueryVariables>(ConsultanciesDocument, options);
+      }
+export function useConsultanciesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ConsultanciesQuery, ConsultanciesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ConsultanciesQuery, ConsultanciesQueryVariables>(ConsultanciesDocument, options);
+        }
+export type ConsultanciesQueryHookResult = ReturnType<typeof useConsultanciesQuery>;
+export type ConsultanciesLazyQueryHookResult = ReturnType<typeof useConsultanciesLazyQuery>;
+export type ConsultanciesQueryResult = Apollo.QueryResult<ConsultanciesQuery, ConsultanciesQueryVariables>;
 export const GetConsultancyByIdDocument = gql`
     query GetConsultancyById($id: ID!) {
   getConsultancyById(id: $id) {

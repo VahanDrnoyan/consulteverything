@@ -1,0 +1,25 @@
+query consultancies($cursor: String, $limit: Int!) {
+    consultancies(pagination:{cursor: $cursor, limit: $limit}) {
+    pageInfo{
+    hasNextPage
+    endCursor
+    }
+    	edges{
+        node {
+          id
+          title
+          short_description
+          long_description
+          max_time_minuets
+          created_at
+          User{
+            name
+          }
+          tags {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
