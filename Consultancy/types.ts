@@ -161,9 +161,9 @@ export const consultancies = queryField("consultancies", {
       let query: Prisma.ConsultancyFindManyArgs = {
         skip: cursor ? 1 : 0,
         take: limit,
-        where: {
-          isActive: true,
-        },
+        // where: {
+        //   isActive: true,
+        // },
         orderBy: {
           last_requested_at: "desc",
         },

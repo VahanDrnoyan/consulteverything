@@ -1,7 +1,7 @@
 import { createServer, createPubSub, PubSub } from "@graphql-yoga/node";
 import {NextApiRequest, NextApiResponse, PageConfig} from "next";
-import {schema} from "../../graphql/schema"
-import {context} from "../../graphql/context";
+import {schema} from "../../lib/schema"
+import {context} from "../../lib/context";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 export const config: PageConfig = {
     api: {

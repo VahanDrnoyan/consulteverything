@@ -1,4 +1,4 @@
-import { makeSchema, connectionPlugin, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
+import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
@@ -120,7 +120,6 @@ const Mutation = mutationType({
       return null;
     },
   });
-  
 export const schema = makeSchema({
   types: [
     UserType,
@@ -135,7 +134,7 @@ export const schema = makeSchema({
     typegen: path.join(process.cwd(), 'nexus.d.ts'),
   },
   contextType: {
-    module: path.join(process.cwd(), 'graphql/context.ts'),
+    module: path.join(process.cwd(), 'lib/context.ts'),
     export: 'MainContext'
   },
   sourceTypes: {

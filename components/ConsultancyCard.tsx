@@ -4,11 +4,13 @@ import styles from '../styles/Card.module.css'
 import { Card, Grid, Text, Button, Row, Avatar, Badge } from "@nextui-org/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
+import { Consultancy } from '../generated/graphql-frontend'
 interface Props {
-    width:string,
-    height:string
+   consultancy?:Consultancy | null;
+   key?: string;
 }
-const ConsultancyCard: React.FC = ()=> {
+const ConsultancyCard: React.FC<Props> = ({consultancy})=> {
+  if(consultancy){
     return (
         <Card >
           <Card.Header css={{flexDirection:'column', justifyConetnt: 'flex-start', alignItems: 'start'}}>
@@ -19,38 +21,36 @@ const ConsultancyCard: React.FC = ()=> {
           color="primary"
           bordered
         />
-            <Text b>Google Analytics setup</Text>
-            <Text css={{mb:0, 'color': '$accents8'}} >SEO team lead at Ajax Consulting Inc.</Text>
+            <Text b>{consultancy.title}p</Text>
+            <Text css={{mb:0, 'color': '$accents8'}} >{consultancy.short_description}</Text>
           </Card.Header>
          
           <Card.Body css={{ py: "$0" }}>
             <Text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                     esse, cupiditate neque quas!
+            {consultancy.long_description}
+           
             </Text>
           </Card.Body>
           
           <Card.Footer>
             <Row css={{flexDirection: 'column'}}>
                 <div>
-            <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
-            Google Analytics
-        </Badge>
-        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8', 'border': 'none'}}>
-          SEO
-        </Badge>
-        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
-        SEO Optimisations
-        </Badge>
-        <Badge  css={{m: '$1', 'bg': '$accents4', 'color': '$accents8',  'border': 'none'}}>
-        GA Metrics
-        </Badge>
+                  {consultancy?.tags && consultancy?.tags?.map((tag)=>{
+                      return (<Badge  key={ tag.id } css={{  'bg': '$accents4', 'color': '$accents8',  'border': 'none'  }}>
+                     {tag.name}
+                  </Badge>)
+                  })}
+       
+       
+       
         </div>
-              <Button color="warning"size="md" css={{'bg':'$accents7',width: '100%', mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
+              <Button color="secondary"size="md" css={{ mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
             </Row>
           </Card.Footer>
         </Card>
     )
+                }
+                return null;
 
 }
 export default ConsultancyCard

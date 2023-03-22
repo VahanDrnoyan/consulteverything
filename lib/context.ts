@@ -1,5 +1,5 @@
 import {getSession} from "next-auth/react";
-import {prisma} from "../lib/prisma";
+import {prisma} from "./prisma";
 import {createPubSub} from "@graphql-yoga/node";
 import {NextApiRequest, NextApiResponse} from "next";
 
