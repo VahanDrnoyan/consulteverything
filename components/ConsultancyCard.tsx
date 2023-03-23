@@ -5,14 +5,15 @@ import { Card, Grid, Text, Button, Row, Avatar, Badge } from "@nextui-org/react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar } from '@fortawesome/free-regular-svg-icons';
 import { Consultancy } from '../generated/graphql-frontend'
+type ConsultancyInList = Pick<Consultancy, "short_description" | "title" | "long_description" | "tags">;
 interface Props {
-   consultancy?:Consultancy | null;
+   consultancy?:ConsultancyInList | null | undefined;
    key?: string;
 }
 const ConsultancyCard: React.FC<Props> = ({consultancy})=> {
   if(consultancy){
     return (
-        <Card >
+        <Card variant="bordered">
           <Card.Header css={{flexDirection:'column', justifyConetnt: 'flex-start', alignItems: 'start'}}>
           <Avatar
           css={{alignSelf: 'center', mb: 10}}
@@ -36,7 +37,7 @@ const ConsultancyCard: React.FC<Props> = ({consultancy})=> {
             <Row css={{flexDirection: 'column'}}>
                 <div>
                   {consultancy?.tags && consultancy?.tags?.map((tag)=>{
-                      return (<Badge  key={ tag.id } css={{  'bg': '$accents4', 'color': '$accents8',  'border': 'none'  }}>
+                      return (<Badge  key={ tag.id } css={{  'bg': '$accents4', 'color': '$accents8',  'border': 'none', mr: 4, mt: 4  }}>
                      {tag.name}
                   </Badge>)
                   })}
@@ -44,7 +45,7 @@ const ConsultancyCard: React.FC<Props> = ({consultancy})=> {
        
        
         </div>
-              <Button color="secondary"size="md" css={{ mt: '$2'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
+              <Button color="secondary"size="md" css={{ mt: '$4', minWidth: '100%'}}icon={<FontAwesomeIcon size={"1x"} color="var(--nextui-colors-accents9)" icon={faCalendar} />} >Schedule consultancy</Button>
             </Row>
           </Card.Footer>
         </Card>

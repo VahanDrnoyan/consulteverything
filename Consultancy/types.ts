@@ -24,11 +24,16 @@ import {
   Field,
   Tag,
 } from "../generated/nexus-prisma"
+import {
+  GraphQLDate,
+  GraphQLTime,
+  GraphQLDateTime
+} from 'graphql-iso-date';
 import { Prisma } from "@prisma/client"
+const { createError } = require('graphql-errors');
 import { number, string } from "prop-types"
 
 import { ConsultancyArgsValidator } from "../Validators/BackendValidators/ConsultancyArgsValidator"
-import { UserInputError, ValidationError } from "apollo-server-errors"
 import { GraphQLYogaError } from "@graphql-yoga/node"
 import { TagInputType as TagType } from "../generated/graphql-frontend"
 
@@ -37,7 +42,7 @@ export const FieldEnum = enumType({
   members: Field.members,
   description: "Form fields types",
 })
-const ConsultancyType = objectType({
+export const ConsultancyType = objectType({
   name: Consultancy.$name,
   description: Consultancy.$description,
   definition(t) {
@@ -146,7 +151,7 @@ export const ConsultancyPaginationInput = inputObjectType({
     t.string("cursor")
   },
 })
-//
+
 
 export const consultancies = queryField("consultancies", {
   type: ConsultancyConnection,
@@ -162,7 +167,7 @@ export const consultancies = queryField("consultancies", {
         skip: cursor ? 1 : 0,
         take: limit,
         // where: {
-        //   isActive: true,
+          // isActive: true,
         // },
         orderBy: {
           last_requested_at: "desc",
@@ -207,9 +212,9 @@ export const ConsultancyResolver = mutationField("createConsultancy", {
   },
   resolve: async (_root, args, { prisma, user }) => {
     await ConsultancyArgsValidator(args.data).catch((err) => {
-      return Promise.reject(
-        new GraphQLYogaError("User input error", err.errors)
-      )
+      
+        throw createError('User input error', 'ERROR_CODE');
+     
     })
     const consultancyParams: Prisma.ConsultancyCreateArgs = {
       data: {
@@ -245,9 +250,9 @@ export const ConsultancyUpdateResolver = extendType({
       },
       resolve: async (_root, args, { prisma, user }) => {
         await ConsultancyArgsValidator(args.data).catch((err) => {
-          return Promise.reject(
-            new GraphQLYogaError("User input error", err.errors)
-          )
+          
+          throw createError('User input error', 'ERROR_CODE');
+         
         })
         const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
           where: {
@@ -258,9 +263,8 @@ export const ConsultancyUpdateResolver = extendType({
           selectConsultancy
         )
         if (!consultancyUnique || consultancyUnique.userId !== user.id) {
-          return Promise.reject(
-            new GraphQLYogaError(`Could not find consultancy.`)
-          )
+          throw createError('Could not find consultancy.', 'ERROR_CODE');
+          
         }
         const tags = args.data.tags
         const consultancyUpdateParams: Prisma.ConsultancyUpdateArgs = {
@@ -358,12 +362,10 @@ export const GetConsultancyById = extendType({
           selectConsultancy
         )
         if (!consultancy) {
-          return Promise.reject(
-            new GraphQLYogaError(`Could not find consultancy.`)
-          )
+          throw createError('Could not find consultancy.', 'ERROR_CODE');         
         }
         if (consultancy.userId !== user.id) {
-          return Promise.reject(new GraphQLYogaError(`No permission`))
+          throw createError('No permission.', 'ERROR_CODE'); 
         }
         const consultancy_id = consultancy.id
         return {
@@ -388,7 +390,7 @@ export const ConsultancyById = objectType({
     t.field("data", { type: nonNull(ConsultancyType) })
   },
 })
-
+// 
 export const DeleteConsultancy = extendType({
   type: "Mutation",
   definition(t) {
@@ -407,12 +409,12 @@ export const DeleteConsultancy = extendType({
           selectConsultancy
         )
         if (!consultancy) {
-          return Promise.reject(
-            new GraphQLYogaError(`Could not find consultancy.`)
-          )
+          
+          throw createError('Could not find consultancy.', 'ERROR_CODE'); 
+         
         }
         if (consultancy.userId !== user.id) {
-          return Promise.reject(new GraphQLYogaError(`No permission`))
+          throw createError('No Permission', 'ERROR_CODE'); 
         }
         const consultancyDeleteArgs: Prisma.ConsultancyDeleteArgs = {
           where: {
@@ -425,3 +427,4 @@ export const DeleteConsultancy = extendType({
     })
   },
 })
+// 

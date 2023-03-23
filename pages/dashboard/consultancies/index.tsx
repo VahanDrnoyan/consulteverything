@@ -247,23 +247,21 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
 Consultancies.auth = {
   role: 'USER'
 }
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id =
-    typeof context.params?.id === 'string'
-      ? parseInt(context.params.id, 10)
-      : NaN;
-  if (id) {
-    const apolloClient = initializeApollo();
-    await apolloClient.query<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>({
-      query: GetMyConsultanciesDocument,
-      variables: { offset: 0, limit: 4 },
-    });
-    await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
-      query: TotalConsultanciesDocument,
-      variables: {},
-    });
-    return { props: { initialApolloState: apolloClient.cache.extract() } };
-  }
-  return { props: {} };
-};
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+  // const id =
+    // typeof context.params?.id === 'string'
+      // ? parseInt(context.params.id, 10)
+      // : NaN;
+  // 
+    // const apolloClient = initializeApollo();
+    // await apolloClient.query<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>({
+      // query: GetMyConsultanciesDocument,
+      // variables: { offset: 0, limit: 4 },
+    // });
+    // await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
+      // query: TotalConsultanciesDocument,
+      // variables: {},
+    // });
+    // return { props: { initialApolloState: apolloClient.cache.extract() } };
+// };
 export default Consultancies

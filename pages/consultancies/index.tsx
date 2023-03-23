@@ -45,7 +45,6 @@ const Consultancies: NextPageWithAuth = (
 
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
-
     if (scrollTop + windowHeight >= documentHeight) {
       setIsBottom(true);
     } else {
@@ -58,13 +57,36 @@ const Consultancies: NextPageWithAuth = (
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   useEffect(() => {
-    if (isBottom && data?.consultancies?.pageInfo?.hasNextPage) {
-      fetchMore({
-        variables: {
-          cursor: data?.consultancies?.pageInfo?.endCursor,
-          limit: 20,
-        },
-      }).then((res) => console.log(res))
+    if (isBottom && data?.consultancies?.pageInfo?.hasNextPage && data?.consultancies?.pageInfo?.endCursor) {
+      setIsBottom(false);
+      console.log(2222)
+      const fetch = fetchMore({
+       variables: {
+         cursor: data?.consultancies?.pageInfo?.endCursor,
+         limit: 20,
+       },
+       updateQuery: (prevResult, { fetchMoreResult }) => {
+        const newEdges = fetchMoreResult.consultancies?.edges;
+        const pageInfo = fetchMoreResult.consultancies?.pageInfo;
+        return newEdges?.length
+          ? {
+            consultancies: {
+                __typename: prevResult.consultancies?.__typename,
+                edges: [... prevResult.consultancies?.edges || [], ...newEdges],
+                pageInfo,
+              },
+            }
+          : prevResult;
+      },
+      }
+      )
+      
+      
+      fetch.then((res) => {
+       
+        console.log(res)
+      })
+      
     }
   }, [isBottom, data?.consultancies, fetchMore])
   const showSearchFormHandler = () => {
@@ -77,20 +99,21 @@ const Consultancies: NextPageWithAuth = (
         <meta name="description" content="Consultancies list" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container css={{ pt: 20 }}>
+      <Container css={{ pt: 20, mw: 960 }}>
         <ResponsiveMasonry
           columnsCountBreakPoints={{
             350: 1,
             750: 2,
-            1200: 3,
-            1400: 3,
-            2000: 3,
+            1200: 2,
+            1400: 2,
+            2000: 2,
           }}
         >
-          <Masonry columnsCount={3} gutter="35px">
+          <Masonry columnsCount={2} gutter="35px">
             {data?.consultancies && data.consultancies.edges?.map((consultancy)=>{
                 return (<ConsultancyCard key={consultancy?.node?.id} consultancy={consultancy?.node}/>)
             })}
+            {/* Children */}
           </Masonry>
         </ResponsiveMasonry>
       </Container>

@@ -1,4 +1,4 @@
-import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType } from "nexus";
+import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, stringArg, intArg, mutationType, nullable, scalarType, extendType } from "nexus";
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
@@ -36,47 +36,35 @@ const Event = objectType({
     t.nonNull.id('id')
   }
 })
-//onst Query = queryType({
-//definition(t) {
+// const Query = extendType({
+  // type: 'Query',
+// definition(t) {
 // t.list.field('getUsers', {
-//   type: UserType!,
-//   args: {
-//   },
-//   resolve: async (_parent, args, { prisma, select }) => {
-//     const userEmail: Prisma.UserFindManyArgs = {
-//       where:{
-//         email: {
-//           contains: 'e'
-//         }
-//       },
-//       include: {
-//         accounts: true
-//       }
-//     }
+  // type: UserType!,
+  // args: {
+  // },
+  // resolve: async (_parent, args, { prisma }) => {
+    // const userEmail: Prisma.UserFindManyArgs = {
+      // where:{
+        // email: {
+          // contains: 'e'
+        // }
+      // },
+      // include: {
+        // accounts: true
+      // }
+    // }
 
-//     // Use select object
-//     const usersObj = await prisma.user.findMany(userEmail)
-//     return usersObj
-//   }
+    //Use select object
+    // const usersObj = await prisma.user.findMany(userEmail)
+    // return usersObj
+  // }
+  // })
+// }});
+// 
+    
 
-// })
 
-// t.field('getOneUser', {
-//   type: UserType!,
-//   args: {
-//     id: nonNull(stringArg())
-//   },
-
-// })
-
-//  t.field('getOneEvent', {
-//   type: Event!,
-//   args: {
-//     id: nonNull(stringArg())
-//   },
-// })
-//   }
-// })
 const Mutation = mutationType({
   definition(t) {
     t.nonNull.field('createUser', {
@@ -102,7 +90,7 @@ const Mutation = mutationType({
     })
   
   }});
- export  const Time = scalarType({
+const Time = scalarType({
     name: "Time",
     asNexusMethod: "Time",
     description: "Date custom scalar type",
@@ -111,15 +99,20 @@ const Mutation = mutationType({
       return date.getTime();
     },
     serialize(value: any) {
-      return new Date(value);
+      return new Date(value).toString();
     },
     parseLiteral(ast: any) {
       if (ast.kind === Kind.INT) {
-        return new Date(ast.value);
+        return new Date(ast.value).toString();
       }
       return null;
     },
   });
+  // export const schema = makeSchema({types:[]});
+  
+  
+
+
 export const schema = makeSchema({
   types: [
     UserType,
@@ -128,7 +121,8 @@ export const schema = makeSchema({
     AccountType,
     RoleEnum,
    Time,
-  ConsultancyTypes],
+  ConsultancyTypes
+],
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),
     typegen: path.join(process.cwd(), 'nexus.d.ts'),
@@ -146,4 +140,5 @@ export const schema = makeSchema({
     ]
   },
   
-})
+});
+

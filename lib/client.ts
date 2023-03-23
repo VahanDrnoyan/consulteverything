@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { offsetLimitPagination } from '@apollo/client/utilities/policies/pagination';
-
+import { relayStylePagination } from "@apollo/client/utilities"
 
 type MyApolloCache = any;
 let apolloClient: ApolloClient<MyApolloCache> | undefined;
@@ -9,8 +9,8 @@ let apolloClient: ApolloClient<MyApolloCache> | undefined;
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
    const {prisma} =require("./prisma")
-    const { SchemaLink } = require('@apollo/client/link/schema')
-    const { schema } = require("./schema")
+    const {SchemaLink} =require('@apollo/client/link/schema')
+    const {schema} =require('./schema')
     return new SchemaLink({ schema, context: { prisma } });
   } else {
     const { HttpLink } = require('@apollo/client/link/http');
@@ -74,6 +74,9 @@ const cache = new InMemoryCache({
             return merged;
           },
         },
+        consultancies: relayStylePagination(),
+        },
+
       },
     },
-  }});
+  });
