@@ -68,7 +68,6 @@ export const ConsultancyType = objectType({
     t.field(Consultancy.enable_video_by_provider)
     t.field(Consultancy.User)
     t.field(Consultancy.tags)
-    t.field(Consultancy.User)
     t.field("last_requested_at", { type: "Time" })
   },
 })

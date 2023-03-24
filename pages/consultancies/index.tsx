@@ -8,22 +8,30 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 import Link from "next/link"
 import ConsultancyCard from "../../components/ConsultancyCard"
-import { Container } from "@nextui-org/react"
+import { Container, Text, Button } from "@nextui-org/react"
 import { GetServerSideProps, NextPage } from "next/types";
 import Footer from "../../components/Footer"
 import { initializeApollo } from "../../lib/client"
 import { InferGetServerSidePropsType } from "next";
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, Hits, ClearRefinements, RefinementList, Configure, Pagination } from 'react-instantsearch-dom';
+import 'react-instantsearch-theme-algolia/style.scss';
 import {
   ConsultanciesDocument,
   ConsultanciesQuery,
   ConsultanciesQueryVariables,
   useConsultanciesQuery,
 } from "../../generated/graphql-frontend"
+import BackToTopButton from "../../components/BackToTopButton"
+import SearchBox from "../../components/SearchBox"
+import Search from "../../components/Search"
 type NextPageWithAuth = NextPage & {
   auth?: {
     role: string
   }
 }
+
+
 const Consultancies: NextPageWithAuth = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
@@ -36,6 +44,14 @@ const Consultancies: NextPageWithAuth = (
       limit: 20,
     },
   })
+  let searchClient = null;
+  if(process.env.NEXT_PUBLIC_SEARCH_APP_ID && process.env.NEXT_PUBLIC_SEARCH_ONLY_API_KEY){
+   searchClient = algoliasearch(
+    process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+    process.env.NEXT_PUBLIC_SEARCH_ONLY_API_KEY
+  );
+  
+   }
   const handleScroll = () => {
     const scrollTop = Math.max(
       window.pageYOffset,
@@ -99,7 +115,13 @@ const Consultancies: NextPageWithAuth = (
         <meta name="description" content="Consultancies list" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container css={{ pt: 20, mw: 960 }}>
+      <Container css={{ py: 20, maxWidth:'100%', m: 0,px:0,zIndex:100, position: 'fixed', top: 75, left: 0, right:0, w: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: "$accents3"}}>
+        {searchClient && (<div style={{ display:'flex',maxWidth: '960px', width:'960px' }}><InstantSearch searchClient={searchClient} indexName="consulteverything">
+          <Search/>
+    </InstantSearch></div>)}
+    </Container>
+    <Container css={{ mt: 200,  mw: 960,}}>
+        <Text h2>Most recently requested:</Text>
         <ResponsiveMasonry
           columnsCountBreakPoints={{
             350: 1,
@@ -109,7 +131,7 @@ const Consultancies: NextPageWithAuth = (
             2000: 2,
           }}
         >
-          <Masonry columnsCount={2} gutter="35px">
+          <Masonry columnsCount={2} gutter="12px">
             {data?.consultancies && data.consultancies.edges?.map((consultancy)=>{
                 return (<ConsultancyCard key={consultancy?.node?.id} consultancy={consultancy?.node}/>)
             })}
@@ -117,6 +139,7 @@ const Consultancies: NextPageWithAuth = (
           </Masonry>
         </ResponsiveMasonry>
       </Container>
+      <BackToTopButton/>
       <Footer />
     </div>
   )
