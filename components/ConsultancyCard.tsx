@@ -27,10 +27,10 @@ const ConsultancyCard: React.FC<Props> = ({consultancy})=> {
           </Card.Header>
          
           <Card.Body css={{ py: "$0" }}>
-            <Text>
-            {consultancy.long_description}
+            
+              <div dangerouslySetInnerHTML={{ __html: consultancy.long_description|| '' }}></div>
            
-            </Text>
+            
           </Card.Body>
           
           <Card.Footer>

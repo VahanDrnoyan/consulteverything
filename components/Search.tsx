@@ -40,7 +40,7 @@ const CustomHits = ({ hits }: { hits: any }) => (
    icon={faLink}
  /></Link></div>
           <Text h6>{hit.short_description}</Text>
-          <Text>{hit.long_description}</Text>
+          <div dangerouslySetInnerHTML={{ __html: hit.long_description|| '' }}></div>
         </Card.Body>
         <Card.Footer>
           <div>

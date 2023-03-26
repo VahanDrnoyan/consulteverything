@@ -127,10 +127,6 @@ input TagInputType {
   name: String!
 }
 
-input TagsExculededId {
-  name: String!
-}
-
 """Date custom scalar type"""
 scalar Time
 

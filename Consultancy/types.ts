@@ -83,12 +83,6 @@ export const TagInputType = extendInputType({
     t.nullable.field(Tag.id)
   },
 })
-export const TagsExculededId = extendInputType({
-  type: "TagsExculededId",
-  definition(t) {
-    t.field(Tag.name)
-  },
-})
 export const ConsultancyDataType = extendInputType({
   type: "ConsultancyDataType",
   definition(t) {
@@ -180,6 +174,7 @@ export const consultancies = queryField("consultancies", {
               id: true,
             },
           },
+          tags: true
         },
       }
       if (cursor) {
@@ -330,6 +325,35 @@ export const ConsultancyUpdateResolver = extendType({
             },
           })
         })
+        const selectedConsultancy = await prisma.consultancy.findUnique({
+          where: { id: consultancy.id },
+          include: { tags: true, User: true },
+        })
+        if(selectedConsultancy){
+        const client = algoliasearch(
+          process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+          process.env.SEARCH_APP_ADMIN_KEY
+        )
+        const index = client.initIndex(process.env.SEARCH_APP_INDEX)
+  
+        index.partialUpdateObject({
+          objectID: consultancy.id,
+          id: selectedConsultancy.id,
+          title: selectedConsultancy.title,
+          long_description: selectedConsultancy.long_description,
+          short_description: selectedConsultancy.short_description,
+          tags: selectedConsultancy.tags,
+          user: selectedConsultancy.User,
+
+        }, (err:any, content:any) => {
+          //if (err) throw err;
+          //console.log(content);
+        });
+      }
+        
+        
+        
+        
         return consultancy
       },
     })
@@ -406,7 +430,7 @@ export const GetConsultancyById = extendType({
           )
     
         }
-        const consultancy_id = consultancy.id
+        const consultancy_id:string = consultancy.id
         return {
           id: consultancy_id,
           data: consultancy,
@@ -464,7 +488,19 @@ export const DeleteConsultancy = extendType({
             id: consultancy.id,
           },
         }
-        await prisma.consultancy.delete({ ...consultancyDeleteArgs })
+        const deletedConsultancy = await prisma.consultancy.delete({ ...consultancyDeleteArgs })
+        if(deletedConsultancy){
+        const client = algoliasearch(
+          process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+          process.env.SEARCH_APP_ADMIN_KEY
+        )
+        const index = client.initIndex(process.env.SEARCH_APP_INDEX)
+
+        index.deleteObject(deletedConsultancy.id, (err:any, content:any) => {
+          //if (err) throw err;
+          //console.log(content);
+        });
+      }
         return consultancy
       },
     })

@@ -47,6 +47,7 @@ const Consultancies: NextPageWithAuth = (
     variables: {
       limit: 20,
     },
+    fetchPolicy: 'cache-and-network'
   })
   let searchClient = null;
   if(process.env.NEXT_PUBLIC_SEARCH_APP_ID && process.env.NEXT_PUBLIC_SEARCH_ONLY_API_KEY){

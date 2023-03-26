@@ -72,11 +72,6 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
         }
     });
     const router = useRouter()
-    useEffect(()=>{
-        if(router.query.id && router.query.id[0] !== undefined && typeof router.query.id[0] === 'string'){
-        getConsultancyById({variables: {id: router.query.id[0]}})
-        }
-    },[router.query.id])
     const [ getConsultancyById ] = useGetConsultancyByIdLazyQuery(
         {onCompleted:(data)=> {
             if(data?.getConsultancyById?.data){
@@ -90,10 +85,16 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             }
         },
         onError: (err)=> {
-            setGetByIdErrors(err.message)
+            setGetByIdErrors(err.graphQLErrors[0].extensions.originalError.message)
         },
         fetchPolicy: 'network-only'
     })
+    useEffect(()=>{
+        if(router.query.id && router.query.id[0] !== undefined && typeof router.query.id[0] === 'string'){
+        getConsultancyById({variables: {id: router.query.id[0]}})
+        }
+    },[getConsultancyById, router.query.id])
+
     const handleFormSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
@@ -230,7 +231,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
             return false
     }
         return true
-    }, [values.title, values.tags, values.short_description, values.max_attachment_count, values.max_time_minuets, consultancyTitleErrors, consultancyTagErrors, consultancyShortDescriptionErrors, consultancyLongDescriptionErrors, maxAttachmentsCountErrors, maxTimeInMinutesErrors])
+    }, [values.title, values.tags, values.short_description, values.max_time_minuets, consultancyTitleErrors, consultancyTagErrors, consultancyShortDescriptionErrors, consultancyLongDescriptionErrors, maxAttachmentsCountErrors, maxTimeInMinutesErrors])
     return (<div style={{ background: '#dedede', paddingTop: '20px' }}>
         <Container>
             <div style={{ width: '600px', margin: 'auto', backgroundColor: '#fff', padding: '12px', borderRadius: '5px' }}>

@@ -59,9 +59,6 @@ export interface NexusGenInputs {
     id: number; // Int!
     name: string; // String!
   }
-  TagsExculededId: { // input type
-    name: string; // String!
-  }
 }
 
 export interface NexusGenEnums {
