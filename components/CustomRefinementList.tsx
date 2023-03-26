@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const cx = createClassNames('CustomRefinementList');
 
-const CustomRefinementList = styled(RefinementList).attrs(() => ({
-  className: cx('root'),
-}))`
+const CustomRefinementList = styled(RefinementList)`
   .ais-RefinementList-item {
     margin-bottom: 10px;
   }

@@ -6,6 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const consultancies = await prisma.consultancy.findMany({include:{User:{select:{id:true, name: true}}, tags:{select:{ id:true, name: true }}}});
   const selectedFields = consultancies.map(consultancy => ({
+    id:consultancy.id,
     title: consultancy.title,
     long_description: consultancy.long_description,
     short_description: consultancy.short_description,

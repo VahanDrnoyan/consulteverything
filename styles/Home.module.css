@@ -60,9 +60,20 @@ overflow: hidden;
   animation-delay: 0s;
   animation-iteration-count: infinite;
   
-    ;
   }
   .heroImage * {
     object-fit: cover !important;
   }
- 
+  .roundBox {
+    border-radius: 25px;
+    overflow:hidden;
+}
+.roundBox input {
+    border:none !important;
+    box-shadow: none;
+    padding: 15px 30px;
+    padding-left:40px;
+}
+.roundx .ais-SearchBox-form {
+    height:auto;
+}

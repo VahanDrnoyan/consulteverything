@@ -13,16 +13,16 @@ import { NextUIProvider } from '@nextui-org/react';
 import Layout from '../components/Layout';
 import { useApollo } from '../lib/client';
 import { ApolloProvider } from '@apollo/client';
-import { getServerSideProps } from './dashboard/consultancies';
 import TimeAgo from 'javascript-time-ago'
-
+import "../styles/Home.module.css"
+import { GetServerSideProps } from "next/types";
 import en from 'javascript-time-ago/locale/en.json'
 
 TimeAgo.addDefaultLocale(en)
 
 interface CustomAppProps {
     Component: NextPageWithAuth,
-    pageProps: InferGetServerSidePropsType<typeof getServerSideProps> & {
+    pageProps: InferGetServerSidePropsType< GetServerSideProps> & {
         session?: Session,
     },
 }

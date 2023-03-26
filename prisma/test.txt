@@ -1,0 +1,1 @@
+https://nidjn6uzef-3.algolianet.com/1/indexes/*/queries?x-algolia-agent=Algolia%20for%20JavaScript%20(4.16.0)%3B%20Browser%20(lite)%3B%20react%20(18.2.0)%3B%20react-instantsearch%20(6.39.1)%3B%20JS%20Helper%20(3.12.0)&x-algolia-api-key=58080840f9ccfd50623c2e30e16167b9&x-algolia-application-id=NIDJN6UZEF

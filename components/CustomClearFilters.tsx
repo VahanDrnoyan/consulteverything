@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const cx = createClassNames('CustomClearFilters');
 
-const CustomClearFilters = styled(ClearRefinements).attrs(() => ({
-  className: cx('root'),
-}))`
+const CustomClearFilters = styled(ClearRefinements)`
   button {
     background-color: #fff;
     color: #111;

@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const cx = createClassNames('CustomPagination');
 
-const CustomPagination = styled(Pagination).attrs(() => ({
-  className: cx('root'),
-}))`
+const CustomPagination = styled(Pagination)`
   display: flex;
   justify-content: center;
   align-items: center;

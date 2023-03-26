@@ -41,7 +41,7 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
     router.push('/dashboard/edit')
   }
   const [deleteErrors, setDeleteErrors] = useState<string>('')
-  const limit = 1
+  const limit = 10
   const [offset, setOffset] = useState(0)
   const { loading: loadingTotal, data: dataTotal, refetch: refetchTotal } = useTotalConsultanciesQuery()
   const { loading, data, fetchMore } = useGetMyConsultanciesQuery({
@@ -56,7 +56,7 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
         offset: offset
       }
     }).then((res) => console.log(res))
-  }, [offset])
+  }, [fetchMore, offset])
 
   const columns: Column[] = [
     { name: "TITLE", uid: "title" },

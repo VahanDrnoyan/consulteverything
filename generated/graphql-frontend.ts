@@ -188,6 +188,10 @@ export type TagInputType = {
   name: Scalars['String'];
 };
 
+export type TagsExculededId = {
+  name: Scalars['String'];
+};
+
 export type TotalConsultanciesObject = {
   __typename?: 'TotalConsultanciesObject';
   total?: Maybe<Scalars['Int']>;

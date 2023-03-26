@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const cx = createClassNames('CustomConfigure');
 
-const CustomConfigure = styled(Configure).attrs(() => ({
-  className: cx('root'),
-}))`
+const CustomConfigure = styled(Configure)`
   display: none;
 `;
 
