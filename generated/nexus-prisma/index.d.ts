@@ -1482,6 +1482,58 @@ export interface User {
      */
     resolve: NexusCore.FieldResolver<'User', 'consultancies'>
   }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `User.availability`.
+    *
+    * ### ️⚠️ You have not writen documentation for model User
+    *
+    * Replace this default advisory JSDoc with your own documentation about model User
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model User {
+    *   /// Lorem ipsum dolor sit amet.
+    *   availability  Availability
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { User } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: User.$name
+    *   description: User.$description
+    *   definition(t) {
+    *     t.field(User.availability)
+    *   }
+    * })
+    */
+  availability: {
+    /**
+     * The name of this field.
+     */
+    name: 'availability'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Availability' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? (NexusCore.NexusListDef<'Availability'> | NexusCore.NexusNonNullDef<'Availability'>)
+    : 'Warning/Error: The type \'Availability\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Availability\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'User', 'availability'>
+  }
 }
 
 /**
@@ -1706,7 +1758,7 @@ export interface Consultancy {
     * ```prisma
     * model Consultancy {
     *   /// Lorem ipsum dolor sit amet.
-    *   id  String
+    *   id  Int
     * }
     * ```
     *
@@ -1734,9 +1786,9 @@ export interface Consultancy {
     /**
      * The type of this field.
      */
-    type: 'ID' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'ID'>
-    : 'Warning/Error: The type \'ID\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'ID\' to your GraphQL API.'
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -2947,6 +2999,301 @@ export interface Consultancy {
 }
 
 /**
+  * Generated Nexus `objectType` configuration based on your Prisma schema's model `Availability`.
+  *
+  * ### ️⚠️ You have not writen documentation for model Availability
+  *
+  * Replace this default advisory JSDoc with your own documentation about model Availability
+  * by documenting it in your Prisma schema. For example:
+  *
+  * ```prisma
+  * /// Lorem ipsum dolor sit amet...
+  * model Availability {
+  *   foo  String
+  * }
+  * ```
+  *
+  * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+  *
+  * @example
+  *
+  * import { objectType } from 'nexus'
+  * import { Availability } from 'nexus-prisma'
+  *
+  * objectType({
+  *   name: Availability.$name
+  *   description: Availability.$description
+  *   definition(t) {
+  *     t.field(Availability.id)
+  *   }
+  * })
+  */
+export interface Availability {
+  $name: 'Availability'
+  $description: undefined
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Availability.id`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Availability
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Availability
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Availability {
+    *   /// Lorem ipsum dolor sit amet.
+    *   id  Int
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Availability } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Availability.$name
+    *   description: Availability.$description
+    *   definition(t) {
+    *     t.field(Availability.id)
+    *   }
+    * })
+    */
+  id: {
+    /**
+     * The name of this field.
+     */
+    name: 'id'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Availability', 'id'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Availability.userId`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Availability
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Availability
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Availability {
+    *   /// Lorem ipsum dolor sit amet.
+    *   userId  String
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Availability } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Availability.$name
+    *   description: Availability.$description
+    *   definition(t) {
+    *     t.field(Availability.userId)
+    *   }
+    * })
+    */
+  userId: {
+    /**
+     * The name of this field.
+     */
+    name: 'userId'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'String'>
+    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Availability', 'userId'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Availability.User`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Availability
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Availability
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Availability {
+    *   /// Lorem ipsum dolor sit amet.
+    *   User  User
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Availability } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Availability.$name
+    *   description: Availability.$description
+    *   definition(t) {
+    *     t.field(Availability.User)
+    *   }
+    * })
+    */
+  User: {
+    /**
+     * The name of this field.
+     */
+    name: 'User'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'User' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'User'>
+    : 'Warning/Error: The type \'User\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'User\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Availability', 'User'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Availability.start_data`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Availability
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Availability
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Availability {
+    *   /// Lorem ipsum dolor sit amet.
+    *   start_data  DateTime
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Availability } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Availability.$name
+    *   description: Availability.$description
+    *   definition(t) {
+    *     t.field(Availability.start_data)
+    *   }
+    * })
+    */
+  start_data: {
+    /**
+     * The name of this field.
+     */
+    name: 'start_data'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'DateTime' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'DateTime'>
+    : 'Warning/Error: The type \'DateTime\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'DateTime\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Availability', 'start_data'>
+  }
+  /**
+    * Generated Nexus `t.field` configuration based on your Prisma schema's model-field `Availability.is_reserved`.
+    *
+    * ### ️⚠️ You have not writen documentation for model Availability
+    *
+    * Replace this default advisory JSDoc with your own documentation about model Availability
+    * by documenting it in your Prisma schema. For example:
+    * ```prisma
+    * model Availability {
+    *   /// Lorem ipsum dolor sit amet.
+    *   is_reserved  Boolean
+    * }
+    * ```
+    *
+    * Learn more about documentation comments in Prisma schema files [here](https://www.prisma.io/docs/concepts/components/prisma-schema#comments).
+    *
+    * @example
+    *
+    * import { objectType } from 'nexus'
+    * import { Availability } from 'nexus-prisma'
+    *
+    * objectType({
+    *   name: Availability.$name
+    *   description: Availability.$description
+    *   definition(t) {
+    *     t.field(Availability.is_reserved)
+    *   }
+    * })
+    */
+  is_reserved: {
+    /**
+     * The name of this field.
+     */
+    name: 'is_reserved'
+  
+    /**
+     * The type of this field.
+     */
+    type: 'Boolean' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Boolean'>
+    : 'Warning/Error: The type \'Boolean\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Boolean\' to your GraphQL API.'
+  
+    /**
+     * The documentation of this field.
+     */
+    description: undefined
+  
+    /**
+     * The resolver of this field
+     */
+    resolve: NexusCore.FieldResolver<'Availability', 'is_reserved'>
+  }
+}
+
+/**
   * Generated Nexus `objectType` configuration based on your Prisma schema's model `Tag`.
   *
   * Tag
@@ -3133,7 +3480,7 @@ export interface Tag {
     * ```prisma
     * model Tag {
     *   /// Lorem ipsum dolor sit amet.
-    *   consultancyId  String
+    *   consultancyId  Int
     * }
     * ```
     *
@@ -3161,9 +3508,9 @@ export interface Tag {
     /**
      * The type of this field.
      */
-    type: 'String' extends NexusCore.GetGen<'allNamedTypes', string>
-    ? NexusCore.NexusNonNullDef<'String'>
-    : 'Warning/Error: The type \'String\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'String\' to your GraphQL API.'
+    type: 'Int' extends NexusCore.GetGen<'allNamedTypes', string>
+    ? NexusCore.NexusNonNullDef<'Int'>
+    : 'Warning/Error: The type \'Int\' is not amoung the union of GetGen<\'allNamedTypes\', string>. This means that either: 1) You need to run nexus typegen reflection. 2) You need to add the type \'Int\' to your GraphQL API.'
   
     /**
      * The documentation of this field.
@@ -3262,6 +3609,8 @@ export const User: User
 export const VerificationToken: VerificationToken
 
 export const Consultancy: Consultancy
+
+export const Availability: Availability
 
 export const Tag: Tag
 

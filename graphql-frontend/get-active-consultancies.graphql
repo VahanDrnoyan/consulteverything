@@ -1,4 +1,4 @@
-query consultancies($cursor: String, $limit: Int!) {
+query consultancies($cursor: Int, $limit: Int!) {
     consultancies(pagination:{cursor: $cursor, limit: $limit}) {
     pageInfo{
     hasNextPage

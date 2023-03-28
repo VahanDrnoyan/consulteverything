@@ -24,7 +24,7 @@ type Consultancy {
   allow_time_spent_issue_resolution_check: Field!
   created_at: Time
   enable_video_by_provider: Boolean!
-  id: ID!
+  id: Int!
   isActive: Boolean!
   last_requested_at: Time
   long_description: String
@@ -37,7 +37,7 @@ type Consultancy {
 
 type ConsultancyById {
   data: Consultancy!
-  id: String!
+  id: Int!
 }
 
 type ConsultancyConnection {
@@ -69,12 +69,12 @@ input ConsultancyDataType {
 }
 
 type ConsultancyEdge {
-  cursor: String
+  cursor: Int
   node: Consultancy
 }
 
 input ConsultancyPaginationInput {
-  cursor: String
+  cursor: Int
   limit: Int!
 }
 
@@ -92,18 +92,18 @@ enum Field {
 type Mutation {
   createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
-  deleteConsultancy(id: ID!): Consultancy
-  updateConsultancy(data: ConsultancyDataType!, id: ID!): Consultancy
+  deleteConsultancy(id: Int!): Consultancy
+  updateConsultancy(data: ConsultancyDataType!, id: Int!): Consultancy
 }
 
 type PageInfo {
-  endCursor: String
+  endCursor: Int
   hasNextPage: Int
 }
 
 type Query {
   consultancies(pagination: ConsultancyPaginationInput): ConsultancyConnection
-  getConsultancyById(id: ID!): ConsultancyById
+  getConsultancyById(id: Int!): ConsultancyById
   getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
   totalConsultancies: TotalConsultanciesObject
 }

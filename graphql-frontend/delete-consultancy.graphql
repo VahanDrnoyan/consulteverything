@@ -1,4 +1,4 @@
-mutation DeleteConsultancy($id: ID!) {
+mutation DeleteConsultancy($id: Int!) {
   deleteConsultancy(id: $id) {
     id
     title

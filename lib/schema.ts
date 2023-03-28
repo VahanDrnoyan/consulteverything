@@ -2,7 +2,7 @@ import { makeSchema, queryType, objectType, enumType, nonNull, booleanArg, strin
 import { Prisma } from '@prisma/client'
 import { User, Account, Consultancy, Field, Role } from '../generated/nexus-prisma'
 import path from "path";
-import * as ConsultancyTypes from "../Consultancy/types"
+import * as ConsultancyTypes from "../Consultancy/nexus_types"
 import { Kind } from "graphql";
 const RoleEnum = enumType({
   name: 'Role',

@@ -29,6 +29,7 @@ import BackToTopButton from "../../components/BackToTopButton"
 import SearchBox from "../../components/SearchBox"
 import Search from "../../components/Search"
 import { MultipleQueriesQuery } from "@algolia/client-search"
+import slugify from "react-slugify"
 type NextPageWithAuth = NextPage & {
   auth?: {
     role: string
@@ -138,7 +139,10 @@ const Consultancies: NextPageWithAuth = (
         >
           <Masonry columnsCount={2} gutter="12px">
             {data?.consultancies && data.consultancies.edges?.map((consultancy)=>{
-                return (<ConsultancyCard key={consultancy?.node?.id} consultancy={consultancy?.node}/>)
+              if(consultancy && consultancy.node){
+                let key = (consultancy?.node?.id).toString() + (consultancy?.node?.title);
+                return (<ConsultancyCard key={slugify(key)} consultancy={consultancy?.node}/>)
+              }
             })}
             {/* Children */}
           </Masonry>

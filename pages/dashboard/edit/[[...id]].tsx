@@ -52,7 +52,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const [values, setValues] = useState<ConsultancyDataType>(initialValues);
     const [getByIdErrors, setGetByIdErrors] = useState<string>('')
-    const [id, setId] = useState<string>('')
+    const [id, setId] = useState<Number>(0)
     const [serverErrors, setServerErrors] = useState<string[]>([])
     const[tagInputChanged, setTagInputChanged] = useState(false)
     const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags}, tagInputChanged)
@@ -91,7 +91,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     })
     useEffect(()=>{
         if(router.query.id && router.query.id[0] !== undefined && typeof router.query.id[0] === 'string'){
-        getConsultancyById({variables: {id: router.query.id[0]}})
+        getConsultancyById({variables: {id: parseInt(router.query.id[0])}})
         }
     },[getConsultancyById, router.query.id])
 

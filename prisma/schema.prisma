@@ -46,15 +46,16 @@ model Session {
 
 /// this is User
 model User {
-  id            String        @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  email         String?       @unique
+  email         String?        @unique
   emailVerified DateTime?
   image         String?
-  role          Role          @default(USER)
+  role          Role           @default(USER)
   accounts      Account[]
   sessions      Session[]
   consultancies Consultancy[]
+  availability  Availability[]
 }
 
 /// Lorem ipsum dolor sit amet.
@@ -83,36 +84,44 @@ enum Field {
 // /Consultancy
 
 model Consultancy {
-  id                                          String  @id @default(cuid())
+  id                                          Int      @id @default(autoincrement())
   title                                       String
   short_description                           String
-  long_description                            String? @db.Text
-  max_time_minuets                            Int     @default(20)
-  max_attachment_count                        Int     @default(3)
-  enable_video_by_provider                    Boolean @default(true)
-  allow_enable_video_by_requester             Boolean @default(true)
-  allow_name_surname                          Field   @default(INCLUDE)
-  allow_profession_check                      Field   @default(INCLUDE)
-  allow_age_check                             Field   @default(INCLUDE)
-  allow_gender_check                          Field   @default(INCLUDE)
-  allow_previous_consultancy_experience_check Field   @default(INCLUDE)
-  allow_email_check                           Field   @default(INCLUDE)
-  allow_ongoing_support_check                 Field   @default(INCLUDE)
-  allow_expectations_check                    Field   @default(INCLUDE)
-  allow_time_spent_issue_resolution_check     Field   @default(INCLUDE)
-  allow_expertise_in_problem_field_check      Field   @default(INCLUDE)
+  long_description                            String?  @db.Text
+  max_time_minuets                            Int      @default(20)
+  max_attachment_count                        Int      @default(3)
+  enable_video_by_provider                    Boolean  @default(true)
+  allow_enable_video_by_requester             Boolean  @default(true)
+  allow_name_surname                          Field    @default(INCLUDE)
+  allow_profession_check                      Field    @default(INCLUDE)
+  allow_age_check                             Field    @default(INCLUDE)
+  allow_gender_check                          Field    @default(INCLUDE)
+  allow_previous_consultancy_experience_check Field    @default(INCLUDE)
+  allow_email_check                           Field    @default(INCLUDE)
+  allow_ongoing_support_check                 Field    @default(INCLUDE)
+  allow_expectations_check                    Field    @default(INCLUDE)
+  allow_time_spent_issue_resolution_check     Field    @default(INCLUDE)
+  allow_expertise_in_problem_field_check      Field    @default(INCLUDE)
   created_at                                  DateTime @default(now())
-  isActive                                    Boolean @default(true)
+  isActive                                    Boolean  @default(true)
   userId                                      String
   tags                                        Tag[]
-  User                                        User    @relation(fields: [userId], references: [id])
+  User                                        User     @relation(fields: [userId], references: [id])
   last_requested_at                           DateTime @default(now())
+}
+
+model Availability {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  User        User     @relation(fields: [userId], references: [id])
+  start_data  DateTime
+  is_reserved Boolean  @default(true)
 }
 
 /// Tag
 model Tag {
-  id           Int         @id @default(autoincrement())
-  name         String
+  id            Int         @id @default(autoincrement())
+  name          String
   consultancy   Consultancy @relation(fields: [consultancyId], references: [id], onDelete: Cascade)
-  consultancyId String
+  consultancyId Int
 }

@@ -120,7 +120,7 @@ export const ConsultancyDataType = extendInputType({
 export const PageInfo = objectType({
   name: "PageInfo",
   definition(t) {
-    t.string("endCursor")
+    t.int("endCursor")
     t.int("hasNextPage")
   },
 })
@@ -128,7 +128,7 @@ export const PageInfo = objectType({
 export const ConsultancyEdge = objectType({
   name: "ConsultancyEdge",
   definition(t) {
-    t.string("cursor")
+    t.int("cursor")
     t.field("node", { type: ConsultancyType })
   },
 })
@@ -144,7 +144,7 @@ export const ConsultancyPaginationInput = inputObjectType({
   name: "ConsultancyPaginationInput",
   definition(t) {
     t.nonNull.int("limit")
-    t.string("cursor")
+    t.int("cursor")
   },
 })
 
@@ -270,7 +270,7 @@ export const ConsultancyUpdateResolver = extendType({
     t.field("updateConsultancy", {
       type: ConsultancyType,
       args: {
-        id: nonNull(idArg()),
+        id: nonNull(intArg()),
         data: nonNull("ConsultancyDataType"),
       },
       resolve: async (_root, args, { prisma, user }) => {
@@ -407,7 +407,7 @@ export const GetConsultancyById = extendType({
     t.field("getConsultancyById", {
       type: ConsultancyById,
       args: {
-        id: nonNull(idArg()),
+        id: nonNull(intArg()),
       },
       resolve: async (_root, args, { prisma, user }) => {
         const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
@@ -430,7 +430,7 @@ export const GetConsultancyById = extendType({
           )
     
         }
-        const consultancy_id:string = consultancy.id
+        const consultancy_id: Number = consultancy.id
         return {
           id: consultancy_id,
           data: consultancy,
@@ -449,7 +449,7 @@ export const TotalConsultanciesObject = objectType({
 export const ConsultancyById = objectType({
   name: "ConsultancyById",
   definition(t) {
-    t.nonNull.string("id")
+    t.nonNull.int("id")
     t.field("data", { type: nonNull(ConsultancyType) })
   },
 })
@@ -460,7 +460,7 @@ export const DeleteConsultancy = extendType({
     t.field("deleteConsultancy", {
       type: ConsultancyType,
       args: {
-        id: nonNull(idArg()),
+        id: nonNull(intArg()),
       },
       resolve: async (_root, args, { prisma, user }) => {
         const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {

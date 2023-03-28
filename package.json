@@ -53,6 +53,7 @@
     "react-instantsearch-theme-algolia": "^4.5.2",
     "react-quill": "^2.0.0",
     "react-responsive-masonry": "^2.1.6",
+    "react-slugify": "^3.0.2",
     "react-time-ago": "^7.2.1",
     "sass": "^1.60.0",
     "styled-components": "^5.3.9",

@@ -1,4 +1,4 @@
-query GetConsultancyById($id:ID!){
+query GetConsultancyById($id:Int!){
   getConsultancyById(id: $id){
   	id
     data {

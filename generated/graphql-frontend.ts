@@ -40,7 +40,7 @@ export type Consultancy = {
   allow_time_spent_issue_resolution_check: Field;
   created_at?: Maybe<Scalars['Time']>;
   enable_video_by_provider: Scalars['Boolean'];
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   isActive: Scalars['Boolean'];
   last_requested_at?: Maybe<Scalars['Time']>;
   long_description?: Maybe<Scalars['String']>;
@@ -54,7 +54,7 @@ export type Consultancy = {
 export type ConsultancyById = {
   __typename?: 'ConsultancyById';
   data: Consultancy;
-  id: Scalars['String'];
+  id: Scalars['Int'];
 };
 
 export type ConsultancyConnection = {
@@ -88,12 +88,12 @@ export type ConsultancyDataType = {
 
 export type ConsultancyEdge = {
   __typename?: 'ConsultancyEdge';
-  cursor?: Maybe<Scalars['String']>;
+  cursor?: Maybe<Scalars['Int']>;
   node?: Maybe<Consultancy>;
 };
 
 export type ConsultancyPaginationInput = {
-  cursor?: InputMaybe<Scalars['String']>;
+  cursor?: InputMaybe<Scalars['Int']>;
   limit: Scalars['Int'];
 };
 
@@ -129,18 +129,18 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationDeleteConsultancyArgs = {
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 };
 
 
 export type MutationUpdateConsultancyArgs = {
   data: ConsultancyDataType;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 };
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  endCursor?: Maybe<Scalars['String']>;
+  endCursor?: Maybe<Scalars['Int']>;
   hasNextPage?: Maybe<Scalars['Int']>;
 };
 
@@ -159,7 +159,7 @@ export type QueryConsultanciesArgs = {
 
 
 export type QueryGetConsultancyByIdArgs = {
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 };
 
 
@@ -185,10 +185,6 @@ export type Tag = {
 
 export type TagInputType = {
   id: Scalars['Int'];
-  name: Scalars['String'];
-};
-
-export type TagsExculededId = {
   name: Scalars['String'];
 };
 
@@ -237,29 +233,29 @@ export type CreateConsultancyMutationVariables = Exact<{
 }>;
 
 
-export type CreateConsultancyMutation = { __typename?: 'Mutation', createConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
+export type CreateConsultancyMutation = { __typename?: 'Mutation', createConsultancy?: { __typename?: 'Consultancy', id: number, title: string } | null };
 
 export type DeleteConsultancyMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 }>;
 
 
-export type DeleteConsultancyMutation = { __typename?: 'Mutation', deleteConsultancy?: { __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean } | null };
+export type DeleteConsultancyMutation = { __typename?: 'Mutation', deleteConsultancy?: { __typename?: 'Consultancy', id: number, title: string, created_at?: any | null, short_description: string, isActive: boolean } | null };
 
 export type ConsultanciesQueryVariables = Exact<{
-  cursor?: InputMaybe<Scalars['String']>;
+  cursor?: InputMaybe<Scalars['Int']>;
   limit: Scalars['Int'];
 }>;
 
 
-export type ConsultanciesQuery = { __typename?: 'Query', consultancies?: { __typename?: 'ConsultancyConnection', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: number | null, endCursor?: string | null } | null, edges?: Array<{ __typename?: 'ConsultancyEdge', node?: { __typename?: 'Consultancy', id: string, title: string, short_description: string, long_description?: string | null, max_time_minuets: number, created_at?: any | null, User: { __typename?: 'User', name?: string | null }, tags: Array<{ __typename?: 'Tag', id: number, name: string }> } | null } | null> | null } | null };
+export type ConsultanciesQuery = { __typename?: 'Query', consultancies?: { __typename?: 'ConsultancyConnection', pageInfo?: { __typename?: 'PageInfo', hasNextPage?: number | null, endCursor?: number | null } | null, edges?: Array<{ __typename?: 'ConsultancyEdge', node?: { __typename?: 'Consultancy', id: number, title: string, short_description: string, long_description?: string | null, max_time_minuets: number, created_at?: any | null, User: { __typename?: 'User', name?: string | null }, tags: Array<{ __typename?: 'Tag', id: number, name: string }> } | null } | null> | null } | null };
 
 export type GetConsultancyByIdQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 }>;
 
 
-export type GetConsultancyByIdQuery = { __typename?: 'Query', getConsultancyById?: { __typename?: 'ConsultancyById', id: string, data: { __typename?: 'Consultancy', title: string, short_description: string, long_description?: string | null, isActive: boolean, max_time_minuets: number, max_attachment_count: number, allow_age_check: Field, allow_email_check: Field, allow_gender_check: Field, allow_name_surname: Field, allow_profession_check: Field, allow_expectations_check: Field, allow_ongoing_support_check: Field, allow_enable_video_by_requester: boolean, allow_expertise_in_problem_field_check: Field, allow_previous_consultancy_experience_check: Field, allow_time_spent_issue_resolution_check: Field, enable_video_by_provider: boolean, tags: Array<{ __typename?: 'Tag', name: string, id: number }> } } | null };
+export type GetConsultancyByIdQuery = { __typename?: 'Query', getConsultancyById?: { __typename?: 'ConsultancyById', id: number, data: { __typename?: 'Consultancy', title: string, short_description: string, long_description?: string | null, isActive: boolean, max_time_minuets: number, max_attachment_count: number, allow_age_check: Field, allow_email_check: Field, allow_gender_check: Field, allow_name_surname: Field, allow_profession_check: Field, allow_expectations_check: Field, allow_ongoing_support_check: Field, allow_enable_video_by_requester: boolean, allow_expertise_in_problem_field_check: Field, allow_previous_consultancy_experience_check: Field, allow_time_spent_issue_resolution_check: Field, enable_video_by_provider: boolean, tags: Array<{ __typename?: 'Tag', name: string, id: number }> } } | null };
 
 export type GetMyConsultanciesQueryVariables = Exact<{
   limit: Scalars['Int'];
@@ -267,7 +263,7 @@ export type GetMyConsultanciesQueryVariables = Exact<{
 }>;
 
 
-export type GetMyConsultanciesQuery = { __typename?: 'Query', getMyConsultancies?: Array<{ __typename?: 'Consultancy', id: string, title: string, created_at?: any | null, short_description: string, isActive: boolean, tags: Array<{ __typename?: 'Tag', name: string }> } | null> | null };
+export type GetMyConsultanciesQuery = { __typename?: 'Query', getMyConsultancies?: Array<{ __typename?: 'Consultancy', id: number, title: string, created_at?: any | null, short_description: string, isActive: boolean, tags: Array<{ __typename?: 'Tag', name: string }> } | null> | null };
 
 export type TotalConsultanciesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -275,7 +271,7 @@ export type TotalConsultanciesQueryVariables = Exact<{ [key: string]: never; }>;
 export type TotalConsultanciesQuery = { __typename?: 'Query', totalConsultancies?: { __typename?: 'TotalConsultanciesObject', total?: number | null } | null };
 
 export type UpdateConsultancyMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   title: Scalars['String'];
   short_description: Scalars['String'];
   long_description?: InputMaybe<Scalars['String']>;
@@ -298,7 +294,7 @@ export type UpdateConsultancyMutationVariables = Exact<{
 }>;
 
 
-export type UpdateConsultancyMutation = { __typename?: 'Mutation', updateConsultancy?: { __typename?: 'Consultancy', id: string, title: string } | null };
+export type UpdateConsultancyMutation = { __typename?: 'Mutation', updateConsultancy?: { __typename?: 'Consultancy', id: number, title: string } | null };
 
 
 export const CreateUserDocument = gql`
@@ -390,7 +386,7 @@ export type CreateConsultancyMutationHookResult = ReturnType<typeof useCreateCon
 export type CreateConsultancyMutationResult = Apollo.MutationResult<CreateConsultancyMutation>;
 export type CreateConsultancyMutationOptions = Apollo.BaseMutationOptions<CreateConsultancyMutation, CreateConsultancyMutationVariables>;
 export const DeleteConsultancyDocument = gql`
-    mutation DeleteConsultancy($id: ID!) {
+    mutation DeleteConsultancy($id: Int!) {
   deleteConsultancy(id: $id) {
     id
     title
@@ -427,7 +423,7 @@ export type DeleteConsultancyMutationHookResult = ReturnType<typeof useDeleteCon
 export type DeleteConsultancyMutationResult = Apollo.MutationResult<DeleteConsultancyMutation>;
 export type DeleteConsultancyMutationOptions = Apollo.BaseMutationOptions<DeleteConsultancyMutation, DeleteConsultancyMutationVariables>;
 export const ConsultanciesDocument = gql`
-    query consultancies($cursor: String, $limit: Int!) {
+    query consultancies($cursor: Int, $limit: Int!) {
   consultancies(pagination: {cursor: $cursor, limit: $limit}) {
     pageInfo {
       hasNextPage
@@ -483,7 +479,7 @@ export type ConsultanciesQueryHookResult = ReturnType<typeof useConsultanciesQue
 export type ConsultanciesLazyQueryHookResult = ReturnType<typeof useConsultanciesLazyQuery>;
 export type ConsultanciesQueryResult = Apollo.QueryResult<ConsultanciesQuery, ConsultanciesQueryVariables>;
 export const GetConsultancyByIdDocument = gql`
-    query GetConsultancyById($id: ID!) {
+    query GetConsultancyById($id: Int!) {
   getConsultancyById(id: $id) {
     id
     data {
@@ -619,7 +615,7 @@ export type TotalConsultanciesQueryHookResult = ReturnType<typeof useTotalConsul
 export type TotalConsultanciesLazyQueryHookResult = ReturnType<typeof useTotalConsultanciesLazyQuery>;
 export type TotalConsultanciesQueryResult = Apollo.QueryResult<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>;
 export const UpdateConsultancyDocument = gql`
-    mutation UpdateConsultancy($id: ID!, $title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $isActive: Boolean!, $tags: [TagInputType!]!) {
+    mutation UpdateConsultancy($id: Int!, $title: String!, $short_description: String!, $long_description: String, $max_time_minuets: Int!, $max_attachment_count: Int!, $enable_video_by_provider: Boolean!, $allow_enable_video_by_requester: Boolean!, $allow_name_surname: Field!, $allow_profession_check: Field!, $allow_age_check: Field!, $allow_gender_check: Field!, $allow_previous_consultancy_experience_check: Field!, $allow_email_check: Field!, $allow_ongoing_support_check: Field!, $allow_expectations_check: Field!, $allow_time_spent_issue_resolution_check: Field!, $allow_expertise_in_problem_field_check: Field!, $isActive: Boolean!, $tags: [TagInputType!]!) {
   updateConsultancy(
     id: $id
     data: {title: $title, short_description: $short_description, long_description: $long_description, max_time_minuets: $max_time_minuets, max_attachment_count: $max_attachment_count, enable_video_by_provider: $enable_video_by_provider, allow_enable_video_by_requester: $allow_enable_video_by_requester, allow_name_surname: $allow_name_surname, allow_profession_check: $allow_profession_check, allow_age_check: $allow_age_check, allow_gender_check: $allow_gender_check, allow_previous_consultancy_experience_check: $allow_previous_consultancy_experience_check, allow_email_check: $allow_email_check, isActive: $isActive, allow_ongoing_support_check: $allow_ongoing_support_check, allow_expectations_check: $allow_expectations_check, allow_time_spent_issue_resolution_check: $allow_time_spent_issue_resolution_check, allow_expertise_in_problem_field_check: $allow_expertise_in_problem_field_check, tags: $tags}

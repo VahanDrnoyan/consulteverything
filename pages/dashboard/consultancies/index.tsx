@@ -15,7 +15,7 @@ import { initializeApollo } from "../../../lib/client";
 import { InferGetServerSidePropsType } from "next";
 import LastSeen from "../../../components/LastSeen";
 import { Reference } from "@apollo/client";
-
+import slugify from 'react-slugify';
 export type NextPageWithAuth = NextPage & {
   auth?: {
     role: string

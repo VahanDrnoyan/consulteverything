@@ -5,7 +5,7 @@ import CustomPagination from "./CustomPagination"
 import CustomConfigure from "./Configure"
 import styles from "../styles/Home.module.css"
 import { Badge, Card, Grid, Text } from "@nextui-org/react"
-
+import slugify from 'react-slugify';
 import {
   InstantSearch,
   SearchBox,
@@ -34,7 +34,7 @@ const CustomHits = ({ hits }: { hits: any }) => (
     {hits.map((hit: any) => (
       <Card css={{ mb: 10 }} key={hit.objectID} variant={"bordered"}>
         <Card.Body>
-          <div style={{ display:'flex' }}><Text h4>{hit.title}</Text><Link href={"/consultancies/"+hit.id}> <FontAwesomeIcon
+          <div style={{ display:'flex' }}><Text h4>{hit.title}</Text><Link href={"/consultancies/"+slugify(hit.title)+'/'+hit.id}> <FontAwesomeIcon
    style={{ width: "24px", height: "24px", marginLeft: '12px' }}
    color="#111"
    icon={faLink}
