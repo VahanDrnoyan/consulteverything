@@ -1,0 +1,8 @@
+mutation UpdateAvailability($id: ID!, $is_reserved: Boolean!, $start: String!, $end: String!) {
+  updateAvailability(
+    id: $id,
+    data: {is_reserved: $is_reserved, start:$start, end:$end}
+  ) {
+    id
+  }
+}

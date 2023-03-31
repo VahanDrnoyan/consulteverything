@@ -1,0 +1,7 @@
+query GetMyAvailabilities {
+  getMyAvailabilities {
+    id
+    start
+    end
+  }
+}

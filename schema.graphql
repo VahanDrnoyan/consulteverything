@@ -9,6 +9,20 @@ type Account {
   user: User!
 }
 
+type Availability {
+  User: User!
+  end: String!
+  id: ID!
+  is_reserved: Boolean!
+  start: String!
+}
+
+input AvailabilityDataType {
+  end: String!
+  is_reserved: Boolean!
+  start: String!
+}
+
 type Consultancy {
   User: User!
   allow_age_check: Field!
@@ -90,9 +104,12 @@ enum Field {
 }
 
 type Mutation {
+  DeleteAvailability(id: ID!): Availability
+  createAvailability(data: AvailabilityDataType!): Availability
   createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
   deleteConsultancy(id: Int!): Consultancy
+  updateAvailability(data: AvailabilityDataType!, id: ID!): Availability
   updateConsultancy(data: ConsultancyDataType!, id: Int!): Consultancy
 }
 
@@ -104,6 +121,7 @@ type PageInfo {
 type Query {
   consultancies(pagination: ConsultancyPaginationInput): ConsultancyConnection
   getConsultancyById(id: Int!): ConsultancyById
+  getMyAvailabilities: [Availability]
   getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
   totalConsultancies: TotalConsultanciesObject
 }

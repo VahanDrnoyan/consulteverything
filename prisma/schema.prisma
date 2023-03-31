@@ -109,12 +109,13 @@ model Consultancy {
   User                                        User     @relation(fields: [userId], references: [id])
   last_requested_at                           DateTime @default(now())
 }
-
+// Availability
 model Availability {
-  id          Int      @id @default(autoincrement())
+  id           String         @id @default(cuid())
   userId      String
   User        User     @relation(fields: [userId], references: [id])
-  start_data  DateTime
+  start       String
+  end         String
   is_reserved Boolean  @default(true)
 }
 

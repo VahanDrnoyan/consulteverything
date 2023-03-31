@@ -24,6 +24,21 @@ export type Account = {
   user: User;
 };
 
+export type Availability = {
+  __typename?: 'Availability';
+  User: User;
+  end: Scalars['String'];
+  id: Scalars['ID'];
+  is_reserved: Scalars['Boolean'];
+  start: Scalars['String'];
+};
+
+export type AvailabilityDataType = {
+  end: Scalars['String'];
+  is_reserved: Scalars['Boolean'];
+  start: Scalars['String'];
+};
+
 export type Consultancy = {
   __typename?: 'Consultancy';
   User: User;
@@ -111,10 +126,23 @@ export enum Field {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  DeleteAvailability?: Maybe<Availability>;
+  createAvailability?: Maybe<Availability>;
   createConsultancy?: Maybe<Consultancy>;
   createUser: User;
   deleteConsultancy?: Maybe<Consultancy>;
+  updateAvailability?: Maybe<Availability>;
   updateConsultancy?: Maybe<Consultancy>;
+};
+
+
+export type MutationDeleteAvailabilityArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationCreateAvailabilityArgs = {
+  data: AvailabilityDataType;
 };
 
 
@@ -133,6 +161,12 @@ export type MutationDeleteConsultancyArgs = {
 };
 
 
+export type MutationUpdateAvailabilityArgs = {
+  data: AvailabilityDataType;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateConsultancyArgs = {
   data: ConsultancyDataType;
   id: Scalars['Int'];
@@ -148,6 +182,7 @@ export type Query = {
   __typename?: 'Query';
   consultancies?: Maybe<ConsultancyConnection>;
   getConsultancyById?: Maybe<ConsultancyById>;
+  getMyAvailabilities?: Maybe<Array<Maybe<Availability>>>;
   getMyConsultancies?: Maybe<Array<Maybe<Consultancy>>>;
   totalConsultancies?: Maybe<TotalConsultanciesObject>;
 };
@@ -202,6 +237,37 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   role: Role;
 };
+
+export type CreateAvailabilityMutationVariables = Exact<{
+  is_reserved: Scalars['Boolean'];
+  start: Scalars['String'];
+  end: Scalars['String'];
+}>;
+
+
+export type CreateAvailabilityMutation = { __typename?: 'Mutation', createAvailability?: { __typename?: 'Availability', id: string, start: string, end: string } | null };
+
+export type DeleteAvailabilityMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteAvailabilityMutation = { __typename?: 'Mutation', DeleteAvailability?: { __typename?: 'Availability', id: string, start: string, end: string, is_reserved: boolean } | null };
+
+export type GetMyAvailabilitiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyAvailabilitiesQuery = { __typename?: 'Query', getMyAvailabilities?: Array<{ __typename?: 'Availability', id: string, start: string, end: string } | null> | null };
+
+export type UpdateAvailabilityMutationVariables = Exact<{
+  id: Scalars['ID'];
+  is_reserved: Scalars['Boolean'];
+  start: Scalars['String'];
+  end: Scalars['String'];
+}>;
+
+
+export type UpdateAvailabilityMutation = { __typename?: 'Mutation', updateAvailability?: { __typename?: 'Availability', id: string } | null };
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -297,6 +363,154 @@ export type UpdateConsultancyMutationVariables = Exact<{
 export type UpdateConsultancyMutation = { __typename?: 'Mutation', updateConsultancy?: { __typename?: 'Consultancy', id: number, title: string } | null };
 
 
+export const CreateAvailabilityDocument = gql`
+    mutation CreateAvailability($is_reserved: Boolean!, $start: String!, $end: String!) {
+  createAvailability(data: {is_reserved: $is_reserved, start: $start, end: $end}) {
+    id
+    start
+    end
+  }
+}
+    `;
+export type CreateAvailabilityMutationFn = Apollo.MutationFunction<CreateAvailabilityMutation, CreateAvailabilityMutationVariables>;
+
+/**
+ * __useCreateAvailabilityMutation__
+ *
+ * To run a mutation, you first call `useCreateAvailabilityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateAvailabilityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createAvailabilityMutation, { data, loading, error }] = useCreateAvailabilityMutation({
+ *   variables: {
+ *      is_reserved: // value for 'is_reserved'
+ *      start: // value for 'start'
+ *      end: // value for 'end'
+ *   },
+ * });
+ */
+export function useCreateAvailabilityMutation(baseOptions?: Apollo.MutationHookOptions<CreateAvailabilityMutation, CreateAvailabilityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateAvailabilityMutation, CreateAvailabilityMutationVariables>(CreateAvailabilityDocument, options);
+      }
+export type CreateAvailabilityMutationHookResult = ReturnType<typeof useCreateAvailabilityMutation>;
+export type CreateAvailabilityMutationResult = Apollo.MutationResult<CreateAvailabilityMutation>;
+export type CreateAvailabilityMutationOptions = Apollo.BaseMutationOptions<CreateAvailabilityMutation, CreateAvailabilityMutationVariables>;
+export const DeleteAvailabilityDocument = gql`
+    mutation DeleteAvailability($id: ID!) {
+  DeleteAvailability(id: $id) {
+    id
+    start
+    end
+    is_reserved
+  }
+}
+    `;
+export type DeleteAvailabilityMutationFn = Apollo.MutationFunction<DeleteAvailabilityMutation, DeleteAvailabilityMutationVariables>;
+
+/**
+ * __useDeleteAvailabilityMutation__
+ *
+ * To run a mutation, you first call `useDeleteAvailabilityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAvailabilityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteAvailabilityMutation, { data, loading, error }] = useDeleteAvailabilityMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteAvailabilityMutation(baseOptions?: Apollo.MutationHookOptions<DeleteAvailabilityMutation, DeleteAvailabilityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteAvailabilityMutation, DeleteAvailabilityMutationVariables>(DeleteAvailabilityDocument, options);
+      }
+export type DeleteAvailabilityMutationHookResult = ReturnType<typeof useDeleteAvailabilityMutation>;
+export type DeleteAvailabilityMutationResult = Apollo.MutationResult<DeleteAvailabilityMutation>;
+export type DeleteAvailabilityMutationOptions = Apollo.BaseMutationOptions<DeleteAvailabilityMutation, DeleteAvailabilityMutationVariables>;
+export const GetMyAvailabilitiesDocument = gql`
+    query GetMyAvailabilities {
+  getMyAvailabilities {
+    id
+    start
+    end
+  }
+}
+    `;
+
+/**
+ * __useGetMyAvailabilitiesQuery__
+ *
+ * To run a query within a React component, call `useGetMyAvailabilitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyAvailabilitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMyAvailabilitiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetMyAvailabilitiesQuery(baseOptions?: Apollo.QueryHookOptions<GetMyAvailabilitiesQuery, GetMyAvailabilitiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMyAvailabilitiesQuery, GetMyAvailabilitiesQueryVariables>(GetMyAvailabilitiesDocument, options);
+      }
+export function useGetMyAvailabilitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMyAvailabilitiesQuery, GetMyAvailabilitiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMyAvailabilitiesQuery, GetMyAvailabilitiesQueryVariables>(GetMyAvailabilitiesDocument, options);
+        }
+export type GetMyAvailabilitiesQueryHookResult = ReturnType<typeof useGetMyAvailabilitiesQuery>;
+export type GetMyAvailabilitiesLazyQueryHookResult = ReturnType<typeof useGetMyAvailabilitiesLazyQuery>;
+export type GetMyAvailabilitiesQueryResult = Apollo.QueryResult<GetMyAvailabilitiesQuery, GetMyAvailabilitiesQueryVariables>;
+export const UpdateAvailabilityDocument = gql`
+    mutation UpdateAvailability($id: ID!, $is_reserved: Boolean!, $start: String!, $end: String!) {
+  updateAvailability(
+    id: $id
+    data: {is_reserved: $is_reserved, start: $start, end: $end}
+  ) {
+    id
+  }
+}
+    `;
+export type UpdateAvailabilityMutationFn = Apollo.MutationFunction<UpdateAvailabilityMutation, UpdateAvailabilityMutationVariables>;
+
+/**
+ * __useUpdateAvailabilityMutation__
+ *
+ * To run a mutation, you first call `useUpdateAvailabilityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAvailabilityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAvailabilityMutation, { data, loading, error }] = useUpdateAvailabilityMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      is_reserved: // value for 'is_reserved'
+ *      start: // value for 'start'
+ *      end: // value for 'end'
+ *   },
+ * });
+ */
+export function useUpdateAvailabilityMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAvailabilityMutation, UpdateAvailabilityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAvailabilityMutation, UpdateAvailabilityMutationVariables>(UpdateAvailabilityDocument, options);
+      }
+export type UpdateAvailabilityMutationHookResult = ReturnType<typeof useUpdateAvailabilityMutation>;
+export type UpdateAvailabilityMutationResult = Apollo.MutationResult<UpdateAvailabilityMutation>;
+export type UpdateAvailabilityMutationOptions = Apollo.BaseMutationOptions<UpdateAvailabilityMutation, UpdateAvailabilityMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!) {
   createUser(email: $email) {

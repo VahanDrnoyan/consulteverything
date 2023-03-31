@@ -1,5 +1,5 @@
 
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Grid, Text, Button, Table, Row, Col, Tooltip, User, Pagination, Badge, Loading } from "@nextui-org/react";
 import router from "next/router";
@@ -16,6 +16,7 @@ import { InferGetServerSidePropsType } from "next";
 import LastSeen from "../../../components/LastSeen";
 import { Reference } from "@apollo/client";
 import slugify from 'react-slugify';
+import { getServerSideProps } from "../../consultancies"
 export type NextPageWithAuth = NextPage & {
   auth?: {
     role: string
@@ -40,6 +41,10 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
   const navigateToEdit = () => {
     router.push('/dashboard/edit')
   }
+  const navigateToAvailability = () => {
+    router.push('/dashboard/availability')
+  }
+
   const [deleteErrors, setDeleteErrors] = useState<string>('')
   const limit = 10
   const [offset, setOffset] = useState(0)
@@ -186,6 +191,10 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
         <Text h2>My Consultancies</Text>
       </Grid>
       <Grid css={{ alignItems: 'center', d: 'flex', justifyContent: 'flex-end' }}>
+      <Button onClick={navigateToAvailability} color="gradient" css={{ 'bg': '$accents7', mr: 10 }} auto icon={<FontAwesomeIcon size={"xl"} color="#fff)" icon={faCalendar} />}>
+          Manage availability
+        </Button>
+
         <Button onClick={navigateToEdit} color="gradient" css={{ 'bg': '$accents7' }} auto icon={<FontAwesomeIcon size={"xl"} color="#fff)" icon={faAdd} />}>
           Create new Consultancy
         </Button>

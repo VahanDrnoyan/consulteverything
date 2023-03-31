@@ -29,6 +29,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AvailabilityDataType: { // input type
+    end: string; // String!
+    is_reserved: boolean; // Boolean!
+    start: string; // String!
+  }
   ConsultancyDataType: { // input type
     allow_age_check: NexusGenEnums['Field']; // Field!
     allow_email_check: NexusGenEnums['Field']; // Field!
@@ -79,6 +84,12 @@ export interface NexusGenObjects {
   Account: { // root type
     id: string; // ID!
     session_state?: string | null; // String
+  }
+  Availability: { // root type
+    end: string; // String!
+    id: string; // ID!
+    is_reserved: boolean; // Boolean!
+    start: string; // String!
   }
   Consultancy: { // root type
     allow_age_check: NexusGenEnums['Field']; // Field!
@@ -155,6 +166,13 @@ export interface NexusGenFieldTypes {
     session_state: string | null; // String
     user: NexusGenRootTypes['User']; // User!
   }
+  Availability: { // field return type
+    User: NexusGenRootTypes['User']; // User!
+    end: string; // String!
+    id: string; // ID!
+    is_reserved: boolean; // Boolean!
+    start: string; // String!
+  }
   Consultancy: { // field return type
     User: NexusGenRootTypes['User']; // User!
     allow_age_check: NexusGenEnums['Field']; // Field!
@@ -196,9 +214,12 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
   }
   Mutation: { // field return type
+    DeleteAvailability: NexusGenRootTypes['Availability'] | null; // Availability
+    createAvailability: NexusGenRootTypes['Availability'] | null; // Availability
     createConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     createUser: NexusGenRootTypes['User']; // User!
     deleteConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
+    updateAvailability: NexusGenRootTypes['Availability'] | null; // Availability
     updateConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
   }
   PageInfo: { // field return type
@@ -208,6 +229,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     consultancies: NexusGenRootTypes['ConsultancyConnection'] | null; // ConsultancyConnection
     getConsultancyById: NexusGenRootTypes['ConsultancyById'] | null; // ConsultancyById
+    getMyAvailabilities: Array<NexusGenRootTypes['Availability'] | null> | null; // [Availability]
     getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
     totalConsultancies: NexusGenRootTypes['TotalConsultanciesObject'] | null; // TotalConsultanciesObject
   }
@@ -232,6 +254,13 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     session_state: 'String'
     user: 'User'
+  }
+  Availability: { // field return type name
+    User: 'User'
+    end: 'String'
+    id: 'ID'
+    is_reserved: 'Boolean'
+    start: 'String'
   }
   Consultancy: { // field return type name
     User: 'User'
@@ -274,9 +303,12 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
   }
   Mutation: { // field return type name
+    DeleteAvailability: 'Availability'
+    createAvailability: 'Availability'
     createConsultancy: 'Consultancy'
     createUser: 'User'
     deleteConsultancy: 'Consultancy'
+    updateAvailability: 'Availability'
     updateConsultancy: 'Consultancy'
   }
   PageInfo: { // field return type name
@@ -286,6 +318,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     consultancies: 'ConsultancyConnection'
     getConsultancyById: 'ConsultancyById'
+    getMyAvailabilities: 'Availability'
     getMyConsultancies: 'Consultancy'
     totalConsultancies: 'TotalConsultanciesObject'
   }
@@ -307,6 +340,12 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    DeleteAvailability: { // args
+      id: string; // ID!
+    }
+    createAvailability: { // args
+      data: NexusGenInputs['AvailabilityDataType']; // AvailabilityDataType!
+    }
     createConsultancy: { // args
       data: NexusGenInputs['ConsultancyDataType']; // ConsultancyDataType!
     }
@@ -315,6 +354,10 @@ export interface NexusGenArgTypes {
     }
     deleteConsultancy: { // args
       id: number; // Int!
+    }
+    updateAvailability: { // args
+      data: NexusGenInputs['AvailabilityDataType']; // AvailabilityDataType!
+      id: string; // ID!
     }
     updateConsultancy: { // args
       data: NexusGenInputs['ConsultancyDataType']; // ConsultancyDataType!

@@ -52,7 +52,7 @@ const ConsultancyEdit: NextPageWithAuth = (props) => {
     }
     const [values, setValues] = useState<ConsultancyDataType>(initialValues);
     const [getByIdErrors, setGetByIdErrors] = useState<string>('')
-    const [id, setId] = useState<Number>(0)
+    const [id, setId] = useState<number>(0)
     const [serverErrors, setServerErrors] = useState<string[]>([])
     const[tagInputChanged, setTagInputChanged] = useState(false)
     const { errors: consultancyTagErrors } = useConsultancyTagValidator({tags: values.tags}, tagInputChanged)

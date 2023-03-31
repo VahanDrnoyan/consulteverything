@@ -1,0 +1,8 @@
+mutation DeleteAvailability($id: ID!) {
+  DeleteAvailability(id: $id) {
+    id
+    start
+    end
+    is_reserved
+  }
+}
