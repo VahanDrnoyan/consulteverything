@@ -43,12 +43,12 @@ export const ConsultancyType = objectType({
   name: Consultancy.$name,
   description: Consultancy.$description,
   definition(t) {
+    t.field(Consultancy.id)
     t.field(Consultancy.title)
     t.field(Consultancy.short_description)
     t.field(Consultancy.long_description)
     t.field(Consultancy.max_attachment_count)
     t.field(Consultancy.max_time_minuets)
-    t.field(Consultancy.id)
     t.field(Consultancy.allow_age_check)
     t.field(Consultancy.allow_email_check),
       t.field(Consultancy.allow_enable_video_by_requester)
@@ -401,6 +401,14 @@ export const TotalConsultancies = extendType({
     })
   },
 })
+export const ConsultancyById = objectType({
+  name: "ConsultancyById",
+  definition(t) {
+    t.nonNull.int("id")
+    t.field("data", { type: nonNull(ConsultancyType) })
+  },
+})
+
 export const GetConsultancyById = extendType({
   type: "Query",
   definition(t) {
@@ -424,17 +432,14 @@ export const GetConsultancyById = extendType({
           )
     
         }
-        if (consultancy.userId !== user.id) {
-          return Promise.reject(
-            new GraphQLError(`No permission}`)
-          )
-    
-        }
-        const consultancy_id: Number = consultancy.id
+        if(consultancy.id){
+        const consultancyId = consultancy.id
         return {
-          id: consultancy_id,
+          id: consultancyId,
           data: consultancy,
         }
+      }
+      return null;
       },
     })
   },
@@ -446,13 +451,6 @@ export const TotalConsultanciesObject = objectType({
   },
 })
 
-export const ConsultancyById = objectType({
-  name: "ConsultancyById",
-  definition(t) {
-    t.nonNull.int("id")
-    t.field("data", { type: nonNull(ConsultancyType) })
-  },
-})
 //
 export const DeleteConsultancy = extendType({
   type: "Mutation",
@@ -474,12 +472,6 @@ export const DeleteConsultancy = extendType({
         if (!consultancy) {
           return Promise.reject(
             new GraphQLError(`Not found`)
-          )
-    
-        }
-        if (consultancy.userId !== user.id) {
-          return Promise.reject(
-            new GraphQLError(`No permisssion`)
           )
     
         }

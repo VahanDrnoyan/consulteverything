@@ -21,6 +21,7 @@ import {
 import { GraphQLError } from "graphql"
 
 import { Availability } from "../generated/nexus-prisma"
+import { AvailabilityArgsValidator } from "../Validators/BackendValidators/AvailabilityArgsValidator"
 
 export const AvailabilityType = objectType({
   name: Availability.$name,
@@ -39,11 +40,11 @@ export const AvailabilityResolver = mutationField("createAvailability", {
    data: nonNull("AvailabilityDataType"),
   },
   resolve: async (_root, args, { prisma, user }) => {
-    // await ConsultancyArgsValidator(args.data).catch((err) => {
-      // return Promise.reject(
-        // new GraphQLError(`User input error ${err.errors[0]}`)
-      // )
-    // })
+    await AvailabilityArgsValidator(args.data).catch((err) => {
+      return Promise.reject(
+        new GraphQLError(`User input error ${err.errors[0]}`)
+      )
+    })
     const availabilityParams: Prisma.AvailabilityCreateArgs = {
       data: {
         ...args.data,
@@ -141,12 +142,12 @@ export const AvailabilityUpdateResolver = extendType({
         data: nonNull("AvailabilityDataType"),
       },
       resolve: async (_root, args, { prisma, user }) => {
-        // await ConsultancyArgsValidator(args.data).catch((err) => {
-          // return Promise.reject(
-            // new GraphQLError(`User input error ${err.errors[0]}`)
-          // )
-    // 
-        // })
+        await AvailabilityArgsValidator(args.data).catch((err) => {
+          return Promise.reject(
+            new GraphQLError(`User input error ${err.errors[0]}`)
+          )
+        })
+    
         const selectAvailability: Prisma.AvailabilityFindUniqueArgs = {
           where: {
             id: args.id,

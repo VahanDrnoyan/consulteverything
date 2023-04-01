@@ -6,6 +6,7 @@ class MyDocument extends Document {
   static async getInitialProps(ctx:DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     return {
+      context: ctx,
       ...initialProps,
       styles: React.Children.toArray([initialProps.styles])
     };
@@ -23,5 +24,4 @@ class MyDocument extends Document {
     );
   }
 }
-
 export default MyDocument;

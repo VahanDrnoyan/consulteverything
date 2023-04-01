@@ -28,6 +28,7 @@ type NextPageWithAuth = NextPage & {
 
 
 const ConsultancyEdit: NextPageWithAuth = (props) => {
+
     const initialValues: ConsultancyDataType = {
         title: '',
         allow_age_check: Field.Exclude,

@@ -16,7 +16,6 @@ import { InferGetServerSidePropsType } from "next";
 import LastSeen from "../../../components/LastSeen";
 import { Reference } from "@apollo/client";
 import slugify from 'react-slugify';
-import { getServerSideProps } from "../../consultancies"
 export type NextPageWithAuth = NextPage & {
   auth?: {
     role: string
@@ -38,6 +37,7 @@ type Column = {
 }
 
 const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+
   const navigateToEdit = () => {
     router.push('/dashboard/edit')
   }
@@ -256,21 +256,21 @@ const Consultancies: NextPageWithAuth = (props: InferGetServerSidePropsType<type
 Consultancies.auth = {
   role: 'USER'
 }
-// export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // const id =
     // typeof context.params?.id === 'string'
       // ? parseInt(context.params.id, 10)
       // : NaN;
-  // 
-    // const apolloClient = initializeApollo();
-    // await apolloClient.query<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>({
-      // query: GetMyConsultanciesDocument,
-      // variables: { offset: 0, limit: 4 },
-    // });
-    // await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
-      // query: TotalConsultanciesDocument,
-      // variables: {},
-    // });
-    // return { props: { initialApolloState: apolloClient.cache.extract() } };
-// };
+  
+    const apolloClient = initializeApollo();
+    await apolloClient.query<GetMyConsultanciesQuery, GetMyConsultanciesQueryVariables>({
+      query: GetMyConsultanciesDocument,
+      variables: { offset: 0, limit: 4 },
+    });
+    await apolloClient.query<TotalConsultanciesQuery, TotalConsultanciesQueryVariables>({
+      query: TotalConsultanciesDocument,
+      variables: {},
+    });
+    return { props: { initialApolloState: apolloClient.cache.extract() } };
+};
 export default Consultancies
