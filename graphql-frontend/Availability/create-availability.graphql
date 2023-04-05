@@ -1,9 +1,5 @@
-mutation CreateAvailability($is_reserved: Boolean!, $start: String!, $end: String! ){
+mutation CreateAvailability($data:[AvailabilityDataType!]! ){
   createAvailability(
-    data: {is_reserved: $is_reserved, start:$start, end:$end}
-  ) {
-    id
-    start
-    end
-  }
+    data: $data
+  ) 
 }

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { InferGetServerSidePropsType } from "next/types"
 import { getServerSideProps } from "../../consultancies"
 import interactionPlugin from "@fullcalendar/interaction"
+import styles from '../styles/Home.module.css'
 import {
   EventApi,
   EventInput,
@@ -15,7 +16,7 @@ import {
   EventChangeArg,
   formatDate,
 } from "@fullcalendar/core"
-import { Button, Container, Text } from "@nextui-org/react"
+import { Button, Container, Modal, Text } from "@nextui-org/react"
 import {
   Availability,
   useCreateAvailabilityMutation,
@@ -24,9 +25,10 @@ import {
   useUpdateAvailabilityMutation,
 } from "../../../generated/graphql-frontend"
 import { useIsReservedValidator } from "../../../Validators/IsReservedvalidator"
-
+import { NullableAvailability } from "../../consultancies/[slug]/[...id]"
+import DatePicker, { DateObject } from "react-multi-date-picker"
 type CalendarEventstate = Availability[] | any[]
-
+type TodayEvents = Pick<Availability, "start" | "end" | "is_reserved"> | null | undefined
 const Availability: NextPageWithAuth = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
@@ -34,6 +36,11 @@ const Availability: NextPageWithAuth = (
   const [serverErrors, setServerErrors] = useState<string[]>([])
   const [id, setId] = useState<number>(0)
   const [isReserved, setIsReserved] = useState<boolean>(false)
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+  const [selectedDates, setSelectedDates] = useState< DateObject | DateObject[] | null>([]);
+
+  //use today evenets to duplicate tem across new dates
+  const [todayEvents, setTodayEvents] = useState<TodayEvents[] | undefined>([])
   const { errors: IsRservedErrors, helper: isReservedHelper } =
     useIsReservedValidator(isReserved)
   const [createAvailability, { loading, error }] =
@@ -43,8 +50,40 @@ const Availability: NextPageWithAuth = (
         setServerErrors(err.graphQLErrors[0].extensions as unknown as string[])
       },
     })
+    const handelDuplicateEvents = ()=> {
+      setIsModalVisible(true)
+    }
+    const closeModalHandler =()=> {
+      setIsModalVisible(false)
+    }
+    const setDuplicateHandler = ()=> {
+      setIsModalVisible(false)
+    }
   const { data, refetch } = useGetMyAvailabilitiesQuery()
+  useEffect(() => {
+    const todaysEventData =
+      data && 
+      data.getMyAvailabilities?.map((item: NullableAvailability) => {
+        let dateString = item?.start
+        if (dateString && item?.start && item?.end) {
+          let date = new Date(dateString)
+          let today = new Date()
 
+          if (
+            date.getFullYear() === today.getFullYear() &&
+            date.getMonth() === today.getMonth() &&
+            date.getDate() === today.getDate()
+          ) {
+            return { start: item?.start, end: item?.end, is_reserved: false }
+          }
+        }
+        return null;
+      })
+      const todaysEventDataFiltered = todaysEventData?.filter((item)=> {
+        return !!item;
+      })
+    setTodayEvents(todaysEventDataFiltered)
+  }, [data])
   const [updateAvailability] = useUpdateAvailabilityMutation({
     onCompleted: (data) => {},
     onError: (err) => {
@@ -61,7 +100,6 @@ const Availability: NextPageWithAuth = (
   const defaultEvents: CalendarEventstate = []
   const [events, setEvents] = useState<CalendarEventstate>(defaultEvents)
 
-
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     let calendarApi = selectInfo.view.calendar
 
@@ -73,7 +111,7 @@ const Availability: NextPageWithAuth = (
     }
     setIsReserved(false)
 
-    createAvailability({ variables: { ...values } })
+    createAvailability({ variables: { data:[values] } })
       .then((response: any) => {
         refetch({})
       })
@@ -93,7 +131,6 @@ const Availability: NextPageWithAuth = (
       .catch((err: any) => {})
   }
   const eventChange = (args: EventChangeArg) => {
-    
     if (args.event.start && args.event.end && args.event.id) {
       console.log(args.event.end, 333)
       updateAvailability({
@@ -135,8 +172,8 @@ const Availability: NextPageWithAuth = (
               center: "title",
               right: "",
             }}
-            eventBackgroundColor= 'var(--nextui-colors-secondary)'
-            eventBorderColor= '#fff'
+            eventBackgroundColor="var(--nextui-colors-secondary)"
+            eventBorderColor="#fff"
             selectOverlap={false}
             // Check if the selected time range overlaps with any events
             slotDuration="00:15"
@@ -152,6 +189,34 @@ const Availability: NextPageWithAuth = (
             eventClick={handleEventClick}
             eventChange={eventChange}
           />
+                    <Text css={{mt:20}}id="modal-title" size={18}>
+            Duplicate todays events to following dates
+          </Text>
+
+          <DatePicker 
+          style={{
+            height: "34px",
+            fontSize: "14px",
+            padding: "10px 12px",
+            borderRadius: "12px",
+            width: "100%"
+          }}
+          containerStyle={{
+            width: "100%"
+          }}
+      multiple
+      value={selectedDates} 
+      onChange={(dates)=>setSelectedDates(dates)}
+    /><div style={{ display: 'flex' }}>
+          <Button css={{mt: 20}}auto flat color="secondary" onPress={setDuplicateHandler}>
+            Duplicate
+          </Button>
+          <Button css={{mt: 20, ml:10}}auto flat color="secondary" onPress={()=>{setSelectedDates([])}}>
+            Clear
+          </Button>
+          </div>
+
+
         </Container>
       </div>
     </div>

@@ -174,7 +174,7 @@ export const consultancies = queryField("consultancies", {
               id: true,
             },
           },
-          tags: true
+          tags: true,
         },
       }
       if (cursor) {
@@ -278,7 +278,6 @@ export const ConsultancyUpdateResolver = extendType({
           return Promise.reject(
             new GraphQLError(`User input error ${err.errors[0]}`)
           )
-    
         })
         const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
           where: {
@@ -289,10 +288,7 @@ export const ConsultancyUpdateResolver = extendType({
           selectConsultancy
         )
         if (!consultancyUnique || consultancyUnique.userId !== user.id) {
-          return Promise.reject(
-            new GraphQLError(`Could not find consultancy.`)
-          )
-    
+          return Promise.reject(new GraphQLError(`Could not find consultancy.`))
         }
         const tags = args.data.tags
         const consultancyUpdateParams: Prisma.ConsultancyUpdateArgs = {
@@ -329,31 +325,47 @@ export const ConsultancyUpdateResolver = extendType({
           where: { id: consultancy.id },
           include: { tags: true, User: true },
         })
-        if(selectedConsultancy){
-        const client = algoliasearch(
-          process.env.NEXT_PUBLIC_SEARCH_APP_ID,
-          process.env.SEARCH_APP_ADMIN_KEY
-        )
-        const index = client.initIndex(process.env.SEARCH_APP_INDEX)
-  
-        index.partialUpdateObject({
-          objectID: consultancy.id,
-          id: selectedConsultancy.id,
-          title: selectedConsultancy.title,
-          long_description: selectedConsultancy.long_description,
-          short_description: selectedConsultancy.short_description,
-          tags: selectedConsultancy.tags,
-          user: selectedConsultancy.User,
+        if (selectedConsultancy && selectedConsultancy.isActive) {
+          const client = algoliasearch(
+            process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+            process.env.SEARCH_APP_ADMIN_KEY
+          )
+          const index = client.initIndex(process.env.SEARCH_APP_INDEX)
 
-        }, (err:any, content:any) => {
-          //if (err) throw err;
-          //console.log(content);
-        });
-      }
+          index.partialUpdateObject(
+            {
+              objectID: consultancy.id,
+              id: selectedConsultancy.id,
+              title: selectedConsultancy.title,
+              long_description: selectedConsultancy.long_description,
+              short_description: selectedConsultancy.short_description,
+              tags: selectedConsultancy.tags,
+              user: selectedConsultancy.User,
+            },
+            (err: any, content: any) => {
+              //if (err) throw err;
+              //console.log(content);
+            }
+          )
+        }
+        if(selectedConsultancy && !selectedConsultancy.isActive){
+          const client = algoliasearch(
+            process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+            process.env.SEARCH_APP_ADMIN_KEY
+          )
+          const index = client.initIndex(process.env.SEARCH_APP_INDEX)
+
+          index.deleteObject(
+            selectedConsultancy.id,
+            (err: any, content: any) => {
+              //if (err) throw err;
+              //console.log(content);
+            }
+          )
+        }
+
         
-        
-        
-        
+
         return consultancy
       },
     })
@@ -416,6 +428,7 @@ export const GetConsultancyById = extendType({
       type: ConsultancyById,
       args: {
         id: nonNull(intArg()),
+        isActive: booleanArg(),
       },
       resolve: async (_root, args, { prisma, user }) => {
         const selectConsultancy: Prisma.ConsultancyFindUniqueArgs = {
@@ -426,20 +439,17 @@ export const GetConsultancyById = extendType({
         const consultancy = await prisma.consultancy.findUnique(
           selectConsultancy
         )
-        if (!consultancy) {
-          return Promise.reject(
-            new GraphQLError(`Not found`)
-          )
-    
+        if (!consultancy || (args.isActive && consultancy.isActive === false)) {
+          return Promise.reject(new GraphQLError(`Not found`))
         }
-        if(consultancy.id){
-        const consultancyId = consultancy.id
-        return {
-          id: consultancyId,
-          data: consultancy,
+        if (consultancy.id) {
+          const consultancyId = consultancy.id
+          return {
+            id: consultancyId,
+            data: consultancy,
+          }
         }
-      }
-      return null;
+        return null
       },
     })
   },
@@ -470,29 +480,31 @@ export const DeleteConsultancy = extendType({
           selectConsultancy
         )
         if (!consultancy) {
-          return Promise.reject(
-            new GraphQLError(`Not found`)
-          )
-    
+          return Promise.reject(new GraphQLError(`Not found`))
         }
         const consultancyDeleteArgs: Prisma.ConsultancyDeleteArgs = {
           where: {
             id: consultancy.id,
           },
         }
-        const deletedConsultancy = await prisma.consultancy.delete({ ...consultancyDeleteArgs })
-        if(deletedConsultancy){
-        const client = algoliasearch(
-          process.env.NEXT_PUBLIC_SEARCH_APP_ID,
-          process.env.SEARCH_APP_ADMIN_KEY
-        )
-        const index = client.initIndex(process.env.SEARCH_APP_INDEX)
+        const deletedConsultancy = await prisma.consultancy.delete({
+          ...consultancyDeleteArgs,
+        })
+        if (deletedConsultancy) {
+          const client = algoliasearch(
+            process.env.NEXT_PUBLIC_SEARCH_APP_ID,
+            process.env.SEARCH_APP_ADMIN_KEY
+          )
+          const index = client.initIndex(process.env.SEARCH_APP_INDEX)
 
-        index.deleteObject(deletedConsultancy.id, (err:any, content:any) => {
-          //if (err) throw err;
-          //console.log(content);
-        });
-      }
+          index.deleteObject(
+            deletedConsultancy.id,
+            (err: any, content: any) => {
+              //if (err) throw err;
+              //console.log(content);
+            }
+          )
+        }
         return consultancy
       },
     })

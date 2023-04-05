@@ -1,5 +1,5 @@
-query GetConsultancyById($id:Int!){
-  getConsultancyById(id: $id){
+query GetConsultancyById($id:Int!, $isActive: Boolean){
+  getConsultancyById(id: $id, isActive: $isActive){
   	id
     data {
       title

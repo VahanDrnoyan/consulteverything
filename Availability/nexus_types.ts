@@ -35,31 +35,33 @@ export const AvailabilityType = objectType({
   },
 })
 export const AvailabilityResolver = mutationField("createAvailability", {
-  type: AvailabilityType,
+  type: "Boolean",
   args: {
-   data: nonNull("AvailabilityDataType"),
+    data: nonNull(list(nonNull("AvailabilityDataType"))),
   },
   resolve: async (_root, args, { prisma, user }) => {
-    await AvailabilityArgsValidator(args.data).catch((err) => {
-      return Promise.reject(
-        new GraphQLError(`User input error ${err.errors[0]}`)
-      )
+    args.data.map(async (i) => {
+      await AvailabilityArgsValidator(i).catch((err) => {
+        return Promise.reject(
+          new GraphQLError(`User input error ${err.errors[0]}`)
+        )
+      })
     })
-    const availabilityParams: Prisma.AvailabilityCreateArgs = {
-      data: {
-        ...args.data,
 
-        User: {
-          connect: { id: user.id },
+    const result = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        availability: {
+          createMany: {
+            data: [ ...args.data ],
+          },
         },
       },
-    }
-    const result = await prisma.availability.create({
-      ...availabilityParams,
     })
-    return result
+    return true
   },
-
 })
 
 export const AvailabilityDataType = extendInputType({
@@ -68,7 +70,6 @@ export const AvailabilityDataType = extendInputType({
     t.field(Availability.is_reserved)
     t.field(Availability.start)
     t.field(Availability.end)
-    
   },
 })
 export const DeleteAvailability = extendType({
@@ -89,24 +90,20 @@ export const DeleteAvailability = extendType({
           selectAvailability
         )
         if (!availability) {
-          return Promise.reject(
-            new GraphQLError(`Not found`)
-          )
-    
+          return Promise.reject(new GraphQLError(`Not found`))
         }
         if (availability.userId !== user.id) {
-          return Promise.reject(
-            new GraphQLError(`No permisssion`)
-          )
-    
+          return Promise.reject(new GraphQLError(`No permisssion`))
         }
         const availabilityDeleteArgs: Prisma.AvailabilityDeleteArgs = {
           where: {
             id: availability.id,
           },
         }
-        const deletedAvailability = await prisma.availability.delete({ ...availabilityDeleteArgs })
-      
+        const deletedAvailability = await prisma.availability.delete({
+          ...availabilityDeleteArgs,
+        })
+
         return deletedAvailability
       },
     })
@@ -147,7 +144,7 @@ export const AvailabilityUpdateResolver = extendType({
             new GraphQLError(`User input error ${err.errors[0]}`)
           )
         })
-    
+
         const selectAvailability: Prisma.AvailabilityFindUniqueArgs = {
           where: {
             id: args.id,
@@ -160,7 +157,6 @@ export const AvailabilityUpdateResolver = extendType({
           return Promise.reject(
             new GraphQLError(`Could not find availability.`)
           )
-    
         }
         const availabilityUpdateParams: Prisma.AvailabilityUpdateArgs = {
           where: {

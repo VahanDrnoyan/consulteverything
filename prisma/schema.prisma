@@ -46,16 +46,18 @@ model Session {
 
 /// this is User
 model User {
-  id            String         @id @default(cuid())
-  name          String?
-  email         String?        @unique
-  emailVerified DateTime?
-  image         String?
-  role          Role           @default(USER)
-  accounts      Account[]
-  sessions      Session[]
-  consultancies Consultancy[]
-  availability  Availability[]
+  id             String         @id @default(cuid())
+  name           String?
+  email          String?        @unique
+  emailVerified  DateTime?
+  image          String?
+  role           Role           @default(USER)
+  accounts       Account[]
+  sessions       Session[]
+  consultancies  Consultancy[]
+  availability   Availability[]
+  requestsUser   Request[]      @relation("RequestUser")
+  consultantUser Request?       @relation("ConsultantUser")
 }
 
 /// Lorem ipsum dolor sit amet.
@@ -81,42 +83,51 @@ enum Field {
   REQUIRED
 }
 
+/// enum Gender
+enum Gender {
+  MAIL
+  FEMAIL
+  OTHER
+}
+
 // /Consultancy
 
 model Consultancy {
-  id                                          Int      @id @default(autoincrement())
+  id                                          Int       @id @default(autoincrement())
   title                                       String
   short_description                           String
-  long_description                            String?  @db.Text
-  max_time_minuets                            Int      @default(20)
-  max_attachment_count                        Int      @default(3)
-  enable_video_by_provider                    Boolean  @default(true)
-  allow_enable_video_by_requester             Boolean  @default(true)
-  allow_name_surname                          Field    @default(INCLUDE)
-  allow_profession_check                      Field    @default(INCLUDE)
-  allow_age_check                             Field    @default(INCLUDE)
-  allow_gender_check                          Field    @default(INCLUDE)
-  allow_previous_consultancy_experience_check Field    @default(INCLUDE)
-  allow_email_check                           Field    @default(INCLUDE)
-  allow_ongoing_support_check                 Field    @default(INCLUDE)
-  allow_expectations_check                    Field    @default(INCLUDE)
-  allow_time_spent_issue_resolution_check     Field    @default(INCLUDE)
-  allow_expertise_in_problem_field_check      Field    @default(INCLUDE)
-  created_at                                  DateTime @default(now())
-  isActive                                    Boolean  @default(true)
+  long_description                            String?   @db.Text
+  max_time_minuets                            Int       @default(20)
+  max_attachment_count                        Int       @default(3)
+  enable_video_by_provider                    Boolean   @default(true)
+  allow_enable_video_by_requester             Boolean   @default(true)
+  allow_name_surname                          Field     @default(INCLUDE)
+  allow_profession_check                      Field     @default(INCLUDE)
+  allow_age_check                             Field     @default(INCLUDE)
+  allow_gender_check                          Field     @default(INCLUDE)
+  allow_previous_consultancy_experience_check Field     @default(INCLUDE)
+  allow_email_check                           Field     @default(INCLUDE)
+  allow_ongoing_support_check                 Field     @default(INCLUDE)
+  allow_expectations_check                    Field     @default(INCLUDE)
+  allow_time_spent_issue_resolution_check     Field     @default(INCLUDE)
+  allow_expertise_in_problem_field_check      Field     @default(INCLUDE)
+  created_at                                  DateTime  @default(now())
+  isActive                                    Boolean   @default(true)
   userId                                      String
   tags                                        Tag[]
-  User                                        User     @relation(fields: [userId], references: [id])
-  last_requested_at                           DateTime @default(now())
+  User                                        User      @relation(fields: [userId], references: [id])
+  last_requested_at                           DateTime  @default(now())
+  requests                                    Request[]
 }
+
 // Availability
 model Availability {
-  id           String         @id @default(cuid())
+  id          String  @id @default(cuid())
   userId      String
-  User        User     @relation(fields: [userId], references: [id])
+  User        User    @relation(fields: [userId], references: [id])
   start       String
   end         String
-  is_reserved Boolean  @default(true)
+  is_reserved Boolean @default(true)
 }
 
 /// Tag
@@ -125,4 +136,42 @@ model Tag {
   name          String
   consultancy   Consultancy @relation(fields: [consultancyId], references: [id], onDelete: Cascade)
   consultancyId Int
+}
+
+// Request
+
+model Request {
+  id               String @id @default(cuid())
+  requestUserId    String
+  requestUser      User   @relation("RequestUser", fields: [requestUserId], references: [id])
+  consultantUserId String @unique
+  consultantUser   User   @relation("ConsultantUser", fields: [consultantUserId], references: [id])
+
+  consultancy   Consultancy @relation(fields: [consultancyId], references: [id], onDelete: Cascade)
+  consultancyId Int
+
+  created_at             DateTime @default(now())
+  isCompleted            Boolean  @default(true)
+  isCanceled             Boolean  @default(true)
+  chatId                 String
+  chat                   Chat     @relation(fields: [chatId], references: [id])
+  name_surname           String?
+  age                    Int?
+  email                  String?
+  expertise              String?
+  profession             String?
+  time_spent_on_issue    String?
+  expectations           String?  @db.Text
+  prevoiuos_experience   String?  @db.Text
+  allow_live_video       Boolean?
+  ongoing_support_needed Boolean?
+  gender                 Gender?
+  start                  String
+  end                    String
+}
+
+//Chat
+model Chat {
+  id      String    @id @default(cuid())
+  request Request[]
 }

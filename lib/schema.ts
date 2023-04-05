@@ -4,6 +4,7 @@ import { User, Account, Consultancy, Field, Role } from '../generated/nexus-pris
 import path from "path";
 import * as ConsultancyTypes from "../Consultancy/nexus_types"
 import * as AvailabilityTypes from "../Availability/nexus_types"
+import * as RequestTypes from "../Request/nexus_types"
 import { Kind } from "graphql";
 const RoleEnum = enumType({
   name: 'Role',
@@ -123,7 +124,8 @@ export const schema = makeSchema({
     RoleEnum,
    Time,
   ConsultancyTypes,
-  AvailabilityTypes
+  AvailabilityTypes,
+  RequestTypes
 ],
   outputs: {
     schema: path.join(process.cwd(), 'schema.graphql'),

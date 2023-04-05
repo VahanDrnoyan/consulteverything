@@ -60,6 +60,23 @@ export interface NexusGenInputs {
     cursor?: number | null; // Int
     limit: number; // Int!
   }
+  RequestDataType: { // input type
+    age?: number | null; // Int
+    allow_live_video?: boolean | null; // Boolean
+    email?: string | null; // String
+    end: string; // String!
+    expectations?: string | null; // String
+    expertise?: string | null; // String
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    isCanceled: boolean; // Boolean!
+    isCompleted: boolean; // Boolean!
+    name_surname?: string | null; // String
+    ongoing_support_needed?: boolean | null; // Boolean
+    prevoiuos_experience?: string | null; // String
+    profession?: string | null; // String
+    start: string; // String!
+    time_spent_on_issue?: string | null; // String
+  }
   TagInputType: { // input type
     id: number; // Int!
     name: string; // String!
@@ -68,6 +85,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   Field: "EXCLUDE" | "INCLUDE" | "REQUIRED"
+  Gender: "FEMAIL" | "MAIL" | "OTHER"
   Role: "ADMIN" | "MODERATOR" | "SUPERADMIN" | "USER"
 }
 
@@ -135,6 +153,24 @@ export interface NexusGenObjects {
     hasNextPage?: number | null; // Int
   }
   Query: {};
+  Request: { // root type
+    age?: number | null; // Int
+    allow_live_video?: boolean | null; // Boolean
+    created_at?: NexusGenScalars['Time'] | null; // Time
+    email?: string | null; // String
+    expectations?: string | null; // String
+    expertise?: string | null; // String
+    gender?: NexusGenEnums['Gender'] | null; // Gender
+    id: string; // ID!
+    isCanceled: boolean; // Boolean!
+    isCompleted: boolean; // Boolean!
+    name_surname?: string | null; // String
+    ongoing_support_needed?: boolean | null; // Boolean
+    prevoiuos_experience?: string | null; // String
+    profession?: string | null; // String
+    scheduled_at?: NexusGenScalars['Time'] | null; // Time
+    time_spent_on_issue?: string | null; // String
+  }
   Tag: { // root type
     id: number; // Int!
     name: string; // String!
@@ -215,7 +251,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     DeleteAvailability: NexusGenRootTypes['Availability'] | null; // Availability
-    createAvailability: NexusGenRootTypes['Availability'] | null; // Availability
+    createAvailability: boolean | null; // Boolean
     createConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
     createUser: NexusGenRootTypes['User']; // User!
     deleteConsultancy: NexusGenRootTypes['Consultancy'] | null; // Consultancy
@@ -232,6 +268,27 @@ export interface NexusGenFieldTypes {
     getMyAvailabilities: Array<NexusGenRootTypes['Availability'] | null> | null; // [Availability]
     getMyConsultancies: Array<NexusGenRootTypes['Consultancy'] | null> | null; // [Consultancy]
     totalConsultancies: NexusGenRootTypes['TotalConsultanciesObject'] | null; // TotalConsultanciesObject
+  }
+  Request: { // field return type
+    age: number | null; // Int
+    allow_live_video: boolean | null; // Boolean
+    consultancy: NexusGenRootTypes['Consultancy']; // Consultancy!
+    consultantUser: NexusGenRootTypes['User']; // User!
+    created_at: NexusGenScalars['Time'] | null; // Time
+    email: string | null; // String
+    expectations: string | null; // String
+    expertise: string | null; // String
+    gender: NexusGenEnums['Gender'] | null; // Gender
+    id: string; // ID!
+    isCanceled: boolean; // Boolean!
+    isCompleted: boolean; // Boolean!
+    name_surname: string | null; // String
+    ongoing_support_needed: boolean | null; // Boolean
+    prevoiuos_experience: string | null; // String
+    profession: string | null; // String
+    requestUser: NexusGenRootTypes['User']; // User!
+    scheduled_at: NexusGenScalars['Time'] | null; // Time
+    time_spent_on_issue: string | null; // String
   }
   Tag: { // field return type
     id: number; // Int!
@@ -304,7 +361,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     DeleteAvailability: 'Availability'
-    createAvailability: 'Availability'
+    createAvailability: 'Boolean'
     createConsultancy: 'Consultancy'
     createUser: 'User'
     deleteConsultancy: 'Consultancy'
@@ -321,6 +378,27 @@ export interface NexusGenFieldTypeNames {
     getMyAvailabilities: 'Availability'
     getMyConsultancies: 'Consultancy'
     totalConsultancies: 'TotalConsultanciesObject'
+  }
+  Request: { // field return type name
+    age: 'Int'
+    allow_live_video: 'Boolean'
+    consultancy: 'Consultancy'
+    consultantUser: 'User'
+    created_at: 'Time'
+    email: 'String'
+    expectations: 'String'
+    expertise: 'String'
+    gender: 'Gender'
+    id: 'ID'
+    isCanceled: 'Boolean'
+    isCompleted: 'Boolean'
+    name_surname: 'String'
+    ongoing_support_needed: 'Boolean'
+    prevoiuos_experience: 'String'
+    profession: 'String'
+    requestUser: 'User'
+    scheduled_at: 'Time'
+    time_spent_on_issue: 'String'
   }
   Tag: { // field return type name
     id: 'Int'
@@ -344,7 +422,7 @@ export interface NexusGenArgTypes {
       id: string; // ID!
     }
     createAvailability: { // args
-      data: NexusGenInputs['AvailabilityDataType']; // AvailabilityDataType!
+      data: NexusGenInputs['AvailabilityDataType'][]; // [AvailabilityDataType!]!
     }
     createConsultancy: { // args
       data: NexusGenInputs['ConsultancyDataType']; // ConsultancyDataType!
@@ -370,6 +448,7 @@ export interface NexusGenArgTypes {
     }
     getConsultancyById: { // args
       id: number; // Int!
+      isActive?: boolean | null; // Boolean
     }
     getMyConsultancies: { // args
       limit: number; // Int!

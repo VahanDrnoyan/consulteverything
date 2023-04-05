@@ -103,9 +103,16 @@ enum Field {
   REQUIRED
 }
 
+"""Gender types"""
+enum Gender {
+  FEMAIL
+  MAIL
+  OTHER
+}
+
 type Mutation {
   DeleteAvailability(id: ID!): Availability
-  createAvailability(data: AvailabilityDataType!): Availability
+  createAvailability(data: [AvailabilityDataType!]!): Boolean
   createConsultancy(data: ConsultancyDataType!): Consultancy
   createUser(email: String!): User!
   deleteConsultancy(id: Int!): Consultancy
@@ -120,10 +127,50 @@ type PageInfo {
 
 type Query {
   consultancies(pagination: ConsultancyPaginationInput): ConsultancyConnection
-  getConsultancyById(id: Int!): ConsultancyById
+  getConsultancyById(id: Int!, isActive: Boolean): ConsultancyById
   getMyAvailabilities: [Availability]
   getMyConsultancies(limit: Int!, offset: Int!): [Consultancy]
   totalConsultancies: TotalConsultanciesObject
+}
+
+type Request {
+  age: Int
+  allow_live_video: Boolean
+  consultancy: Consultancy!
+  consultantUser: User!
+  created_at: Time
+  email: String
+  expectations: String
+  expertise: String
+  gender: Gender
+  id: ID!
+  isCanceled: Boolean!
+  isCompleted: Boolean!
+  name_surname: String
+  ongoing_support_needed: Boolean
+  prevoiuos_experience: String
+  profession: String
+  requestUser: User!
+  scheduled_at: Time
+  time_spent_on_issue: String
+}
+
+input RequestDataType {
+  age: Int
+  allow_live_video: Boolean
+  email: String
+  end: String!
+  expectations: String
+  expertise: String
+  gender: Gender
+  isCanceled: Boolean!
+  isCompleted: Boolean!
+  name_surname: String
+  ongoing_support_needed: Boolean
+  prevoiuos_experience: String
+  profession: String
+  start: String!
+  time_spent_on_issue: String
 }
 
 """User Roles"""

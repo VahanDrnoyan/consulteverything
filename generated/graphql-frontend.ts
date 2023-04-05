@@ -124,10 +124,17 @@ export enum Field {
   Required = 'REQUIRED'
 }
 
+/** Gender types */
+export enum Gender {
+  Femail = 'FEMAIL',
+  Mail = 'MAIL',
+  Other = 'OTHER'
+}
+
 export type Mutation = {
   __typename?: 'Mutation';
   DeleteAvailability?: Maybe<Availability>;
-  createAvailability?: Maybe<Availability>;
+  createAvailability?: Maybe<Scalars['Boolean']>;
   createConsultancy?: Maybe<Consultancy>;
   createUser: User;
   deleteConsultancy?: Maybe<Consultancy>;
@@ -142,7 +149,7 @@ export type MutationDeleteAvailabilityArgs = {
 
 
 export type MutationCreateAvailabilityArgs = {
-  data: AvailabilityDataType;
+  data: Array<AvailabilityDataType>;
 };
 
 
@@ -195,12 +202,54 @@ export type QueryConsultanciesArgs = {
 
 export type QueryGetConsultancyByIdArgs = {
   id: Scalars['Int'];
+  isActive?: InputMaybe<Scalars['Boolean']>;
 };
 
 
 export type QueryGetMyConsultanciesArgs = {
   limit: Scalars['Int'];
   offset: Scalars['Int'];
+};
+
+export type Request = {
+  __typename?: 'Request';
+  age?: Maybe<Scalars['Int']>;
+  allow_live_video?: Maybe<Scalars['Boolean']>;
+  consultancy: Consultancy;
+  consultantUser: User;
+  created_at?: Maybe<Scalars['Time']>;
+  email?: Maybe<Scalars['String']>;
+  expectations?: Maybe<Scalars['String']>;
+  expertise?: Maybe<Scalars['String']>;
+  gender?: Maybe<Gender>;
+  id: Scalars['ID'];
+  isCanceled: Scalars['Boolean'];
+  isCompleted: Scalars['Boolean'];
+  name_surname?: Maybe<Scalars['String']>;
+  ongoing_support_needed?: Maybe<Scalars['Boolean']>;
+  prevoiuos_experience?: Maybe<Scalars['String']>;
+  profession?: Maybe<Scalars['String']>;
+  requestUser: User;
+  scheduled_at?: Maybe<Scalars['Time']>;
+  time_spent_on_issue?: Maybe<Scalars['String']>;
+};
+
+export type RequestDataType = {
+  age?: InputMaybe<Scalars['Int']>;
+  allow_live_video?: InputMaybe<Scalars['Boolean']>;
+  email?: InputMaybe<Scalars['String']>;
+  end: Scalars['String'];
+  expectations?: InputMaybe<Scalars['String']>;
+  expertise?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Gender>;
+  isCanceled: Scalars['Boolean'];
+  isCompleted: Scalars['Boolean'];
+  name_surname?: InputMaybe<Scalars['String']>;
+  ongoing_support_needed?: InputMaybe<Scalars['Boolean']>;
+  prevoiuos_experience?: InputMaybe<Scalars['String']>;
+  profession?: InputMaybe<Scalars['String']>;
+  start: Scalars['String'];
+  time_spent_on_issue?: InputMaybe<Scalars['String']>;
 };
 
 /** User Roles */
@@ -239,13 +288,11 @@ export type User = {
 };
 
 export type CreateAvailabilityMutationVariables = Exact<{
-  is_reserved: Scalars['Boolean'];
-  start: Scalars['String'];
-  end: Scalars['String'];
+  data: Array<AvailabilityDataType> | AvailabilityDataType;
 }>;
 
 
-export type CreateAvailabilityMutation = { __typename?: 'Mutation', createAvailability?: { __typename?: 'Availability', id: string, start: string, end: string } | null };
+export type CreateAvailabilityMutation = { __typename?: 'Mutation', createAvailability?: boolean | null };
 
 export type DeleteAvailabilityMutationVariables = Exact<{
   id: Scalars['ID'];
@@ -318,6 +365,7 @@ export type ConsultanciesQuery = { __typename?: 'Query', consultancies?: { __typ
 
 export type GetConsultancyByIdQueryVariables = Exact<{
   id: Scalars['Int'];
+  isActive?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
@@ -364,12 +412,8 @@ export type UpdateConsultancyMutation = { __typename?: 'Mutation', updateConsult
 
 
 export const CreateAvailabilityDocument = gql`
-    mutation CreateAvailability($is_reserved: Boolean!, $start: String!, $end: String!) {
-  createAvailability(data: {is_reserved: $is_reserved, start: $start, end: $end}) {
-    id
-    start
-    end
-  }
+    mutation CreateAvailability($data: [AvailabilityDataType!]!) {
+  createAvailability(data: $data)
 }
     `;
 export type CreateAvailabilityMutationFn = Apollo.MutationFunction<CreateAvailabilityMutation, CreateAvailabilityMutationVariables>;
@@ -387,9 +431,7 @@ export type CreateAvailabilityMutationFn = Apollo.MutationFunction<CreateAvailab
  * @example
  * const [createAvailabilityMutation, { data, loading, error }] = useCreateAvailabilityMutation({
  *   variables: {
- *      is_reserved: // value for 'is_reserved'
- *      start: // value for 'start'
- *      end: // value for 'end'
+ *      data: // value for 'data'
  *   },
  * });
  */
@@ -693,8 +735,8 @@ export type ConsultanciesQueryHookResult = ReturnType<typeof useConsultanciesQue
 export type ConsultanciesLazyQueryHookResult = ReturnType<typeof useConsultanciesLazyQuery>;
 export type ConsultanciesQueryResult = Apollo.QueryResult<ConsultanciesQuery, ConsultanciesQueryVariables>;
 export const GetConsultancyByIdDocument = gql`
-    query GetConsultancyById($id: Int!) {
-  getConsultancyById(id: $id) {
+    query GetConsultancyById($id: Int!, $isActive: Boolean) {
+  getConsultancyById(id: $id, isActive: $isActive) {
     id
     data {
       title
@@ -737,6 +779,7 @@ export const GetConsultancyByIdDocument = gql`
  * const { data, loading, error } = useGetConsultancyByIdQuery({
  *   variables: {
  *      id: // value for 'id'
+ *      isActive: // value for 'isActive'
  *   },
  * });
  */
