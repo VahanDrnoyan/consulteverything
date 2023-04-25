@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { InferGetServerSidePropsType } from "next/types"
 import { getServerSideProps } from "../../consultancies"
 import interactionPlugin from "@fullcalendar/interaction"
-import styles from '../styles/Home.module.css'
+import styles from "../styles/Home.module.css"
 import {
   EventApi,
   EventInput,
@@ -19,6 +19,7 @@ import {
 import { Button, Container, Modal, Text } from "@nextui-org/react"
 import {
   Availability,
+  AvailabilityDataType,
   useCreateAvailabilityMutation,
   useDeleteAvailabilityMutation,
   useGetMyAvailabilitiesQuery,
@@ -28,7 +29,10 @@ import { useIsReservedValidator } from "../../../Validators/IsReservedvalidator"
 import { NullableAvailability } from "../../consultancies/[slug]/[...id]"
 import DatePicker, { DateObject } from "react-multi-date-picker"
 type CalendarEventstate = Availability[] | any[]
-type TodayEvents = Pick<Availability, "start" | "end" | "is_reserved"> | null | undefined
+type TodayEvents =
+  | Pick<Availability, "start" | "end" | "is_reserved">
+  | null
+  | undefined
 const Availability: NextPageWithAuth = (
   props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) => {
@@ -37,7 +41,9 @@ const Availability: NextPageWithAuth = (
   const [id, setId] = useState<number>(0)
   const [isReserved, setIsReserved] = useState<boolean>(false)
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
-  const [selectedDates, setSelectedDates] = useState< DateObject | DateObject[] | null>([]);
+  const [selectedDates, setSelectedDates] = useState<
+    DateObject | DateObject[] | null
+  >([])
 
   //use today evenets to duplicate tem across new dates
   const [todayEvents, setTodayEvents] = useState<TodayEvents[] | undefined>([])
@@ -50,19 +56,87 @@ const Availability: NextPageWithAuth = (
         setServerErrors(err.graphQLErrors[0].extensions as unknown as string[])
       },
     })
-    const handelDuplicateEvents = ()=> {
-      setIsModalVisible(true)
+  const handelDuplicateEvents = () => {
+    setIsModalVisible(true)
+  }
+  const closeModalHandler = () => {
+    setIsModalVisible(false)
+  }
+  const getTransformedEventObject = (date: DateObject) => {
+    const jsDateStart = new Date(date.format("YYYY/MM/DD"))
+    const jsDateEnd = new Date(date.format("YYYY/MM/DD"))
+    console.log(jsDateEnd, 777)
+
+    const events = todayEvents?.map((event: TodayEvents) => {
+      const start = event?.start
+      const end = event?.end
+      if (start && end) {
+        const startDateObject = new Date(start)
+        const startHours = startDateObject.getHours()
+        const startMinutes = startDateObject.getMinutes()
+        jsDateStart.setHours(startHours)
+        jsDateStart.setMinutes(startMinutes)
+        const startDate = jsDateStart.toISOString().slice(0, 19)
+        const endDateObject = new Date(end)
+        const endHours = endDateObject.getHours()
+        const endMinutes = endDateObject.getMinutes()
+
+        jsDateEnd.setHours(endHours)
+        jsDateEnd.setMinutes(endMinutes)
+
+        
+        const endDate = jsDateEnd.toISOString().slice(0, 19)
+        const date = new Date()
+        const timezoneOffsetInMinutes = date.getTimezoneOffset()
+        const hoursOffset = Math.abs(Math.floor(timezoneOffsetInMinutes / 60))
+        const minutesOffset = Math.abs(timezoneOffsetInMinutes % 60)
+        const formattedOffset = `${
+          timezoneOffsetInMinutes < 0 ? "+" : "-"
+        }${hoursOffset.toString().padStart(2, "0")}:${minutesOffset
+          .toString()
+          .padStart(2, "0")}`
+        console.log(formattedOffset)
+        return {
+          start: startDate + formattedOffset,
+          end: endDate + formattedOffset,
+          is_reserved: event.is_reserved,
+        }
+      }
+    })
+
+    if (events) {
+      const filteredNonEmpty = events.filter(
+        (n) => n !== undefined
+      ) as AvailabilityDataType[]
+      return filteredNonEmpty
     }
-    const closeModalHandler =()=> {
-      setIsModalVisible(false)
+    ;[]
+  }
+  const setDuplicateHandler = () => {
+    if (selectedDates) {
+      let eventsForUpdate: AvailabilityDataType[] = []
+      if (Array.isArray(selectedDates)) {
+        selectedDates.map((date) => {
+          let eventArray = [...(getTransformedEventObject(date) || [])]
+          if (eventArray) {
+            eventsForUpdate = [...eventsForUpdate, ...eventArray]
+          }
+        })
+      } else if (selectedDates) {
+        eventsForUpdate = [...(getTransformedEventObject(selectedDates) || [])]
+      }
+      createAvailability({ variables: { data: eventsForUpdate } })
+        .then((response: any) => {
+          refetch({})
+        })
+        .catch((err: any) => {})
     }
-    const setDuplicateHandler = ()=> {
-      setIsModalVisible(false)
-    }
+    setIsModalVisible(false)
+  }
   const { data, refetch } = useGetMyAvailabilitiesQuery()
   useEffect(() => {
     const todaysEventData =
-      data && 
+      data &&
       data.getMyAvailabilities?.map((item: NullableAvailability) => {
         let dateString = item?.start
         if (dateString && item?.start && item?.end) {
@@ -77,11 +151,11 @@ const Availability: NextPageWithAuth = (
             return { start: item?.start, end: item?.end, is_reserved: false }
           }
         }
-        return null;
+        return null
       })
-      const todaysEventDataFiltered = todaysEventData?.filter((item)=> {
-        return !!item;
-      })
+    const todaysEventDataFiltered = todaysEventData?.filter((item) => {
+      return !!item
+    })
     setTodayEvents(todaysEventDataFiltered)
   }, [data])
   const [updateAvailability] = useUpdateAvailabilityMutation({
@@ -99,7 +173,7 @@ const Availability: NextPageWithAuth = (
   })
   const defaultEvents: CalendarEventstate = []
   const [events, setEvents] = useState<CalendarEventstate>(defaultEvents)
-
+  console.log(events, 6666)
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     let calendarApi = selectInfo.view.calendar
 
@@ -111,7 +185,7 @@ const Availability: NextPageWithAuth = (
     }
     setIsReserved(false)
 
-    createAvailability({ variables: { data:[values] } })
+    createAvailability({ variables: { data: [values] } })
       .then((response: any) => {
         refetch({})
       })
@@ -189,34 +263,47 @@ const Availability: NextPageWithAuth = (
             eventClick={handleEventClick}
             eventChange={eventChange}
           />
-                    <Text css={{mt:20}}id="modal-title" size={18}>
+          <Text css={{ mt: 20 }} id="modal-title" size={18}>
             Duplicate todays events to following dates
           </Text>
 
-          <DatePicker 
-          style={{
-            height: "34px",
-            fontSize: "14px",
-            padding: "10px 12px",
-            borderRadius: "12px",
-            width: "100%"
-          }}
-          containerStyle={{
-            width: "100%"
-          }}
-      multiple
-      value={selectedDates} 
-      onChange={(dates)=>setSelectedDates(dates)}
-    /><div style={{ display: 'flex' }}>
-          <Button css={{mt: 20}}auto flat color="secondary" onPress={setDuplicateHandler}>
-            Duplicate
-          </Button>
-          <Button css={{mt: 20, ml:10}}auto flat color="secondary" onPress={()=>{setSelectedDates([])}}>
-            Clear
-          </Button>
+          <DatePicker
+            style={{
+              height: "34px",
+              fontSize: "14px",
+              padding: "10px 12px",
+              borderRadius: "12px",
+              width: "100%",
+            }}
+            containerStyle={{
+              width: "100%",
+            }}
+            multiple
+            value={selectedDates}
+            onChange={(dates) => setSelectedDates(dates)}
+          />
+          <div style={{ display: "flex" }}>
+            <Button
+              css={{ mt: 20 }}
+              auto
+              flat
+              color="secondary"
+              onPress={setDuplicateHandler}
+            >
+              Duplicate
+            </Button>
+            <Button
+              css={{ mt: 20, ml: 10 }}
+              auto
+              flat
+              color="secondary"
+              onPress={() => {
+                setSelectedDates([])
+              }}
+            >
+              Clear
+            </Button>
           </div>
-
-
         </Container>
       </div>
     </div>
